@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 780" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-grad-infog" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0E4870"/>
+      <stop offset="35%" stop-color="#195B8A"/>
+      <stop offset="100%" stop-color="#0A314E"/>
+    </linearGradient>
+    <linearGradient id="box-card" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2472A8"/>
+      <stop offset="100%" stop-color="#16517B"/>
+    </linearGradient>
+    <filter id="card-shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- FONDO PRINCIPAL -->
+  <rect width="600" height="780" rx="16" fill="url(#bg-grad-infog)"/>
+
+  <!-- CABECERA INSTITUCIONAL -->
+  <g transform="translate(30, 20)">
+    <text x="0" y="16" font-family="'Montserrat', sans-serif" font-weight="800" font-size="11" fill="#A4D8FF" letter-spacing="1">GOBIERNO DEL ESTADO DE AGUASCALIENTES</text>
+    <text x="0" y="30" font-family="'Montserrat', sans-serif" font-weight="600" font-size="10" fill="#E2F1FF">PROESPA &bull; MEDIO AMBIENTE Y SALUD ANIMAL</text>
+  </g>
+
+  <!-- TÍTULO PRINCIPAL -->
+  <g transform="translate(30, 75)">
+    <rect x="-10" y="-5" width="560" height="72" rx="12" fill="#062238" opacity="0.6"/>
+    <text x="0" y="26" font-family="'Montserrat', sans-serif" font-weight="900" font-size="22" fill="#FFFFFF" letter-spacing="0.5">
+      ¡Protege a tu mascota
+    </text>
+    <text x="0" y="54" font-family="'Montserrat', sans-serif" font-weight="900" font-size="24" fill="#6EE7B7">
+      del gusano barrenador!
+    </text>
+  </g>
+
+  <!-- SECCIÓN SUPERIOR: ILUSTRACIÓN Y PREVENCIÓN -->
+  <g transform="translate(30, 160)">
+    <!-- ILUSTRACIÓN MASCOTA (PERRITO) -->
+    <g transform="translate(0, 0)">
+      <!-- Círculo de fondo para la mascota -->
+      <circle cx="85" cy="85" r="75" fill="#14466B" stroke="#2B7CAD" stroke-width="3"/>
+      
+      <!-- Cuerpo del perrito -->
+      <path d="M 60 110 C 50 85 65 60 90 60 C 115 60 130 85 120 110 C 120 130 60 130 60 110 Z" fill="#D97706"/>
+      <!-- Cabeza -->
+      <circle cx="90" cy="55" r="28" fill="#F59E0B"/>
+      <!-- Oreja izquierda -->
+      <path d="M 68 45 C 55 45 55 75 68 70 Z" fill="#B45309"/>
+      <!-- Oreja derecha -->
+      <path d="M 112 45 C 125 45 125 75 112 70 Z" fill="#B45309"/>
+      <!-- Ojos y hocico -->
+      <circle cx="82" cy="52" r="3.5" fill="#1E293B"/>
+      <circle cx="98" cy="52" r="3.5" fill="#1E293B"/>
+      <ellipse cx="90" cy="62" rx="8" ry="5" fill="#FEF3C7"/>
+      <ellipse cx="90" cy="60" rx="3.5" ry="2.5" fill="#1E293B"/>
+      
+      <!-- Puntos de alerta (Mosca) -->
+      <g transform="translate(115, 65)">
+        <circle cx="10" cy="10" r="14" fill="#EF4444" opacity="0.85"/>
+        <text x="10" y="14" font-family="sans-serif" font-weight="bold" font-size="12" fill="#FFFFFF" text-anchor="middle">!</text>
+      </g>
+    </g>
+
+    <!-- BLOQUE: ¿CÓMO PREVENIRLO? -->
+    <g transform="translate(190, 0)">
+      <rect width="350" height="175" rx="14" fill="#0F3B5F" stroke="#1E6599" stroke-width="1.5" filter="url(#card-shadow)"/>
+      <rect x="0" y="0" width="350" height="32" rx="14" fill="#0284C7"/>
+      <text x="15" y="21" font-family="'Montserrat', sans-serif" font-weight="800" font-size="13" fill="#FFFFFF">¿CÓMO PREVENIRLO?</text>
+
+      <g transform="translate(16, 48)">
+        <circle cx="8" cy="8" r="6" fill="#10B981"/>
+        <text x="22" y="12" font-family="sans-serif" font-weight="700" font-size="12" fill="#FFFFFF">Revisa a tu mascota todos los días.</text>
+
+        <circle cx="8" cy="42" r="6" fill="#10B981"/>
+        <text x="22" y="40" font-family="sans-serif" font-weight="700" font-size="12" fill="#FFFFFF">Si tiene una herida, mantenla</text>
+        <text x="22" y="54" font-family="sans-serif" font-weight="700" font-size="12" fill="#7DD3FC">limpia y debidamente protegida.</text>
+
+        <circle cx="8" cy="84" r="6" fill="#10B981"/>
+        <text x="22" y="82" font-family="sans-serif" font-weight="700" font-size="12" fill="#FFFFFF">No dejes pasar heridas abiertas,</text>
+        <text x="22" y="96" font-family="sans-serif" font-weight="700" font-size="12" fill="#FCD34D">aunque parezcan pequeñas o leves.</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- EXPLICACIÓN CENTRAL: ¿QUÉ ES EL GUSANO BARRENADOR? -->
+  <g transform="translate(30, 355)">
+    <rect width="540" height="95" rx="14" fill="#021E36" stroke="#2563EB" stroke-width="1.2"/>
+    <text x="18" y="24" font-family="'Montserrat', sans-serif" font-weight="800" font-size="12" fill="#38BDF8">¿QUÉ ES Y CÓMO AFECTA?</text>
+    <text x="18" y="44" font-family="sans-serif" font-size="11.5" fill="#E2E8F0" width="500">
+      El gusano barrenador aparece cuando una mosca deposita sus huevos en una herida.
+    </text>
+    <text x="18" y="62" font-family="sans-serif" font-size="11.5" fill="#E2E8F0">
+      Al salir, las larvas se alimentan del tejido del animal, provocando lesiones severas
+    </text>
+    <text x="18" y="80" font-family="sans-serif" font-weight="bold" font-size="11.5" fill="#F87171">
+      que pueden poner en riesgo la vida de perros, gatos y ganado.
+    </text>
+  </g>
+
+  <!-- SEÑALES DE ALERTA (CUADRÍCULA 4 TARJETAS) -->
+  <g transform="translate(30, 465)">
+    <text x="0" y="16" font-family="'Montserrat', sans-serif" font-weight="800" font-size="14" fill="#FBBF24">
+      ⚠️ SEÑALES DE ALERTA
+    </text>
+
+    <!-- Tarjeta 1 -->
+    <g transform="translate(0, 28)">
+      <rect width="125" height="85" rx="10" fill="#0B304E" stroke="#1E4E75"/>
+      <circle cx="62" cy="28" r="14" fill="#DC2626"/>
+      <text x="62" y="32" font-family="sans-serif" font-weight="bold" font-size="13" fill="#FFFFFF" text-anchor="middle">1</text>
+      <text x="62" y="58" font-family="sans-serif" font-weight="bold" font-size="10" fill="#FFFFFF" text-anchor="middle">Heridas que</text>
+      <text x="62" y="70" font-family="sans-serif" font-weight="bold" font-size="10" fill="#FDA4AF" text-anchor="middle">no sanan</text>
+    </g>
+
+    <!-- Tarjeta 2 -->
+    <g transform="translate(138, 28)">
+      <rect width="125" height="85" rx="10" fill="#0B304E" stroke="#1E4E75"/>
+      <circle cx="62" cy="28" r="14" fill="#DC2626"/>
+      <text x="62" y="32" font-family="sans-serif" font-weight="bold" font-size="13" fill="#FFFFFF" text-anchor="middle">2</text>
+      <text x="62" y="58" font-family="sans-serif" font-weight="bold" font-size="10" fill="#FFFFFF" text-anchor="middle">Mal olor o</text>
+      <text x="62" y="70" font-family="sans-serif" font-weight="bold" font-size="10" fill="#FDA4AF" text-anchor="middle">salida de líquido</text>
+    </g>
+
+    <!-- Tarjeta 3 -->
+    <g transform="translate(276, 28)">
+      <rect width="125" height="85" rx="10" fill="#0B304E" stroke="#1E4E75"/>
+      <circle cx="62" cy="28" r="14" fill="#DC2626"/>
+      <text x="62" y="32" font-family="sans-serif" font-weight="bold" font-size="13" fill="#FFFFFF" text-anchor="middle">3</text>
+      <text x="62" y="58" font-family="sans-serif" font-weight="bold" font-size="10" fill="#FFFFFF" text-anchor="middle">Inflamación</text>
+      <text x="62" y="70" font-family="sans-serif" font-weight="bold" font-size="10" fill="#FDA4AF" text-anchor="middle">o dolor agudo</text>
+    </g>
+
+    <!-- Tarjeta 4 -->
+    <g transform="translate(414, 28)">
+      <rect width="125" height="85" rx="10" fill="#0B304E" stroke="#1E4E75"/>
+      <circle cx="62" cy="28" r="14" fill="#DC2626"/>
+      <text x="62" y="32" font-family="sans-serif" font-weight="bold" font-size="13" fill="#FFFFFF" text-anchor="middle">4</text>
+      <text x="62" y="58" font-family="sans-serif" font-weight="bold" font-size="10" fill="#FFFFFF" text-anchor="middle">Presencia de</text>
+      <text x="62" y="70" font-family="sans-serif" font-weight="bold" font-size="10" fill="#F87171" text-anchor="middle">larvas/gusanos</text>
+    </g>
+  </g>
+
+  <!-- LLAMADO DE URGENCIA Y TELÉFONOS DE REPORTE -->
+  <g transform="translate(30, 600)">
+    <!-- Mensaje Urgente -->
+    <rect width="540" height="50" rx="10" fill="#0284C7"/>
+    <text x="270" y="24" font-family="'Montserrat', sans-serif" font-weight="800" font-size="12" fill="#FFFFFF" text-anchor="middle">
+      ¡NO ESPERES! LLÉVALO DE INMEDIATO AL VETERINARIO
+    </text>
+    <text x="270" y="39" font-family="sans-serif" font-weight="600" font-size="11" fill="#E0F2FE" text-anchor="middle">
+      Actuar a tiempo puede salvar la vida de tu mascota.
+    </text>
+
+    <!-- Teléfonos Oficiales de Reporte -->
+    <g transform="translate(0, 60)">
+      <rect width="540" height="60" rx="10" fill="#041B2D" stroke="#059669" stroke-width="1.5"/>
+      <text x="270" y="22" font-family="'Montserrat', sans-serif" font-weight="800" font-size="10.5" fill="#34D399" text-anchor="middle" letter-spacing="0.5">
+        REPORTA A REGULACIÓN SANITARIA EN AGUASCALIENTES:
+      </text>
+      <text x="270" y="44" font-family="'Montserrat', sans-serif" font-weight="900" font-size="14" fill="#FFFFFF" text-anchor="middle">
+        📞 449 688 4162  &bull;  449 392 4441 (Ext. 1017)
+      </text>
+    </g>
+  </g>
+
+  <!-- FOOTER -->
+  <text x="300" y="750" font-family="sans-serif" font-size="10" fill="#64748B" text-anchor="middle">
+    Plataforma de Información Municipal PIMAgs &bull; IMPLAN Aguascalientes 2026
+  </text>
+</svg>
