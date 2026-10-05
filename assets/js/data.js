@@ -84,18 +84,660 @@ var PIMAGS_DATA = {
     }
   ],
 
-  // Biblioteca Digital - 10 Ejes Temáticos
+  // Biblioteca Digital - 10 Ejes Temáticos con Fichas Completas, Indicadores y Catálogo Documental
   ejesBiblioteca: [
-    { id: "municipio", nombre: "Nuestro Municipio", icono: "globe", count: 18, color: "text-blue-600", descripcion: "Historia, límites territoriales, división delegacional y marco legal." },
-    { id: "culdep", nombre: "Cultura y Deporte", icono: "trophy", count: 12, color: "text-amber-600", descripcion: "Centros deportivos, casas de cultura, eventos y patrimonio histórico." },
-    { id: "desoc", nombre: "Desarrollo Social", icono: "heart-handshake", count: 15, color: "text-rose-600", descripcion: "Programas de apoyo social, grupos vulnerables y bienestar comunitario." },
-    { id: "economia", nombre: "Economía y Empleo", icono: "trending-up", count: 24, color: "text-emerald-600", descripcion: "Actividad industrial, comercio, servicios, empleo e inversión." },
-    { id: "educacion", nombre: "Educación", icono: "graduation-cap", count: 14, color: "text-indigo-600", descripcion: "Nivel de escolaridad, cobertura educativa e instituciones en el municipio." },
-    { id: "ambiente", nombre: "Medio Ambiente", icono: "leaf", count: 20, color: "text-green-600", descripcion: "Áreas naturales protegidas, calidad del aire, arbolado y recursos hídricos." },
-    { id: "salud", nombre: "Salud", icono: "activity", count: 11, color: "text-red-600", descripcion: "Centros de salud, clínicas municipales, prevención y cobertura médica." },
-    { id: "seguridad", nombre: "Seguridad Pública", icono: "shield-check", count: 16, color: "text-slate-700", descripcion: "Sectores de vigilancia, programas de prevención y justicia cívica." },
-    { id: "serviciospub", nombre: "Servicios Públicos", icono: "zap", count: 19, color: "text-yellow-600", descripcion: "Alumbrado público, limpia y recolección, parques y jardines." },
-    { id: "urbanos", nombre: "Servicios Urbanos y Movilidad", icono: "truck", count: 22, color: "text-cyan-600", descripcion: "Vialidades, transporte, ciclovías, uso de suelo y desarrollo urbano." }
+    {
+      id: "municipio",
+      nombre: "Nuestro Municipio",
+      icono: "globe",
+      count: 18,
+      color: "text-blue-600",
+      bgGradient: "from-blue-700 to-indigo-900",
+      badge: "Marco Institucional & Territorial",
+      descripcion: "Historia, límites territoriales, división delegacional y marco legal del municipio.",
+      resumenCompleto: "Compilación de instrumentos normativos, diagnósticos territoriales, reglamentación interior y el Plan Municipal de Desarrollo que rige la planeación estratégica y el crecimiento ordenado del Municipio de Aguascalientes.",
+      indicadores: [
+        { etiqueta: "Superficie Municipal", valor: "1,178.85 km²", icono: "map" },
+        { etiqueta: "Delegaciones", valor: "8 Demarcaciones", icono: "compass" },
+        { etiqueta: "Población Total", valor: "948,990 hab.", icono: "users" },
+        { etiqueta: "Grado de Urbanización", valor: "89.2% Urbano", icono: "building" }
+      ],
+      documentos: [
+        {
+          id: "doc-pmd-2024",
+          titulo: "Plan Municipal de Desarrollo Aguascalientes 2024-2027",
+          tipo: "Plan Rector",
+          anio: "2024",
+          formato: "PDF",
+          tamano: "18.5 MB",
+          descripcion: "Instrumento rector de planeación que define los ejes estratégicos, objetivos, metas e indicadores de la administración municipal.",
+          dependencia: "H. Ayuntamiento de Aguascalientes",
+          enlace: "https://www.ags.gob.mx/"
+        },
+        {
+          id: "doc-pduca-2040",
+          titulo: "Programa de Desarrollo Urbano de la Ciudad de Aguascalientes (PDUCA 2040)",
+          tipo: "Programa Urbano",
+          anio: "2024",
+          formato: "PDF / SHP",
+          tamano: "42.0 MB",
+          descripcion: "Directrices de ordenamiento territorial, densificación urbana, zonificación secundaria, usos de suelo y reservas territoriales metropolitanas.",
+          dependencia: "IMPLAN Aguascalientes",
+          enlace: "http://www.implanags.gob.mx/"
+        },
+        {
+          id: "doc-atlas-riesgos",
+          titulo: "Atlas Municipal de Peligros y Riesgos Naturales y Antropogénicos",
+          tipo: "Atlas / Cartografía",
+          anio: "2025",
+          formato: "PDF / SIG",
+          tamano: "65.0 MB",
+          descripcion: "Identificación y zonificación georreferenciada de fallas geológicas, zonas inundables, sismicidad y riesgos químicos del municipio.",
+          dependencia: "Protección Civil Municipal & IMPLAN",
+          enlace: "http://www.implanags.gob.mx/"
+        },
+        {
+          id: "doc-bando-gobierno",
+          titulo: "Bando de Policía y Gobierno del Municipio de Aguascalientes",
+          tipo: "Marco Jurídico",
+          anio: "2024",
+          formato: "PDF",
+          tamano: "4.2 MB",
+          descripcion: "Normatividad rectora de la convivencia cívica, atribuciones de las dependencias municipales y derechos y obligaciones de la ciudadanía.",
+          dependencia: "Secretaría del H. Ayuntamiento",
+          enlace: "https://transparencia.ags.gob.mx/"
+        },
+        {
+          id: "doc-marco-delegacional",
+          titulo: "Delimitación y Marco Geoestadístico de las 8 Delegaciones Municipales",
+          tipo: "Cartografía / Estudio",
+          anio: "2025",
+          formato: "PDF / SHP",
+          tamano: "12.0 MB",
+          descripcion: "Límites oficiales, colonias integradas, cartografía y estadísticas poblacionales de cada una de las 8 delegaciones urbanas y rurales.",
+          dependencia: "IMPLAN Aguascalientes",
+          enlace: "http://www.implanags.gob.mx/"
+        },
+        {
+          id: "doc-reglamento-implan",
+          titulo: "Reglamento Interior del Instituto Municipal de Planeación (IMPLAN)",
+          tipo: "Reglamento",
+          anio: "2024",
+          formato: "PDF",
+          tamano: "2.1 MB",
+          descripcion: "Estructura orgánica, facultades técnicas, comisiones y atribuciones legales del IMPLAN para la planeación urbana de Aguascalientes.",
+          dependencia: "IMPLAN Aguascalientes",
+          enlace: "http://www.implanags.gob.mx/"
+        }
+      ]
+    },
+    {
+      id: "culdep",
+      nombre: "Cultura y Deporte",
+      icono: "trophy",
+      count: 12,
+      color: "text-amber-600",
+      bgGradient: "from-amber-600 to-orange-800",
+      badge: "Patrimonio & Recreación",
+      descripcion: "Centros deportivos, casas de cultura, eventos y patrimonio histórico.",
+      resumenCompleto: "Diagnósticos de infraestructura deportiva comunitaria, catálogo del patrimonio arquitectónico de la ciudad, preservación de monumentos y oferta cultural por delegación.",
+      indicadores: [
+        { etiqueta: "Centros Deportivos", valor: "142 Espacios", icono: "activity" },
+        { etiqueta: "Casas de Cultura y Museos", valor: "38 Recintos", icono: "landmark" },
+        { etiqueta: "Eventos Anuales", valor: "450+ Actividades", icono: "calendar" },
+        { etiqueta: "Inversión Deporte", valor: "$45.8 MDP", icono: "dollar-sign" }
+      ],
+      documentos: [
+        {
+          id: "doc-infra-deportiva",
+          titulo: "Diagnóstico de Infraestructura y Cobertura Deportiva Municipal",
+          tipo: "Diagnóstico",
+          anio: "2025",
+          formato: "PDF",
+          tamano: "14.8 MB",
+          descripcion: "Evaluación del estado físico, equipamiento, canchas de pasto sintético, albercas municipales y radios de cobertura por colonia.",
+          dependencia: "IDEA & IMPLAN",
+          enlace: "http://www.implanags.gob.mx/"
+        },
+        {
+          id: "doc-patrimonio-refugio",
+          titulo: "Catálogo del Patrimonio Arquitectónico y Obras de Refugio Reyes Rivas",
+          tipo: "Catálogo Histórico",
+          anio: "2024",
+          formato: "PDF",
+          tamano: "38.0 MB",
+          descripcion: "Inventario gráfico y arquitectónico de templos, casonas y monumentos emblemáticos del ilustre arquitecto empírico hidrocálido.",
+          dependencia: "IMAC & IMPLAN",
+          enlace: "https://ags.gob.mx/turismo/"
+        },
+        {
+          id: "doc-red-bibliotecas",
+          titulo: "Programa Municipal de Fomento a la Lectura y Red de Bibliotecas",
+          tipo: "Programa Social",
+          anio: "2025",
+          formato: "PDF",
+          tamano: "6.4 MB",
+          descripcion: "Estrategias de modernización digital, acervo bibliográfico y talleres en las 16 bibliotecas públicas municipales.",
+          dependencia: "Instituto Municipal Aguascalentense para la Cultura",
+          enlace: "https://ags.gob.mx/imac/"
+        },
+        {
+          id: "doc-guia-museos",
+          titulo: "Guía y Mapa del Circuito de Museos del Centro Histórico",
+          tipo: "Guía Turística",
+          anio: "2025",
+          formato: "PDF / JPG",
+          tamano: "8.5 MB",
+          descripcion: "Rutas peatonales por museos, galerías, salas de exposición y centros culturales del primer cuadro de la ciudad.",
+          dependencia: "Secretaría de Economía Social y Turismo",
+          enlace: "https://www.ags.gob.mx/turismo/"
+        }
+      ]
+    },
+    {
+      id: "desoc",
+      nombre: "Desarrollo Social",
+      icono: "heart-handshake",
+      count: 15,
+      color: "text-rose-600",
+      bgGradient: "from-rose-600 to-pink-800",
+      badge: "Bienestar & Cohesión Social",
+      descripcion: "Programas de apoyo social, grupos vulnerables y bienestar comunitario.",
+      resumenCompleto: "Focalización territorial de zonas de atención prioritaria (ZAP), diagnósticos de pobreza multidimensional, apoyo alimentario y centros comunitarios.",
+      indicadores: [
+        { etiqueta: "Zonas ZAP 2026", valor: "68 Secciones", icono: "alert-circle" },
+        { etiqueta: "Centros CEDECO", valor: "24 Centros", icono: "home" },
+        { etiqueta: "Adultos Mayores", valor: "78,400 hab.", icono: "users" },
+        { etiqueta: "Beneficiarios", valor: "125,000 personas", icono: "smile" }
+      ],
+      documentos: [
+        {
+          id: "doc-zap-2026",
+          titulo: "Diagnóstico Territorial de Zonas de Atención Prioritaria ZAP 2025-2026",
+          tipo: "Diagnóstico Oficial",
+          anio: "2025",
+          formato: "PDF / Excel",
+          tamano: "22.0 MB",
+          descripcion: "Identificación de secciones electorales y polígonos con mayor rezago en servicios, ingresos y marginación urbana y rural.",
+          dependencia: "IMPLAN Aguascalientes",
+          enlace: "http://www.implanags.gob.mx/"
+        },
+        {
+          id: "doc-pobreza-multidim",
+          titulo: "Estudio de Pobreza Multidimensional y Rezago Social por Colonia",
+          tipo: "Estudio Estadístico",
+          anio: "2024",
+          formato: "PDF",
+          tamano: "15.6 MB",
+          descripcion: "Análisis basado en datos CONEVAL e INEGI sobre carencias de vivienda, salud, educación y servicios básicos en el municipio.",
+          dependencia: "CONEVAL & IMPLAN",
+          enlace: "http://www.implanags.gob.mx/"
+        },
+        {
+          id: "doc-inclusion-adultos",
+          titulo: "Diagnóstico Integral de Inclusión y Accesibilidad Universal",
+          tipo: "Estudio de Inclusión",
+          anio: "2025",
+          formato: "PDF",
+          tamano: "18.2 MB",
+          descripcion: "Diagnóstico de personas con discapacidad, personas de la tercera edad y adecuaciones requeridas en espacio público.",
+          dependencia: "DIF Municipal de Aguascalientes",
+          enlace: "https://ags.gob.mx/dif/"
+        },
+        {
+          id: "doc-padron-programas",
+          titulo: "Padrón y Reglas de Operación de Programas Sociales Municipales",
+          tipo: "Normativa / Padrón",
+          anio: "2025",
+          formato: "PDF",
+          tamano: "7.8 MB",
+          descripcion: "Lineamientos de entrega de becas, despensas, tinacos, calentadores solares y apoyos productivos directos.",
+          dependencia: "SEDESOM",
+          enlace: "https://transparencia.ags.gob.mx/"
+        }
+      ]
+    },
+    {
+      id: "economia",
+      nombre: "Economía y Empleo",
+      icono: "trending-up",
+      count: 24,
+      color: "text-emerald-600",
+      bgGradient: "from-emerald-600 to-teal-800",
+      badge: "Inversión & Competitividad",
+      descripcion: "Actividad industrial, comercio, servicios, empleo e inversión.",
+      resumenCompleto: "Información sobre el dinamismo industrial, parques tecnológicos, comercio local, mercados públicos, unidades económicas registradas y empleo formal.",
+      indicadores: [
+        { etiqueta: "Unidades Económicas", valor: "48,250 Empresas", icono: "briefcase" },
+        { etiqueta: "Población Activa (PEA)", valor: "462,800 hab.", icono: "user-check" },
+        { etiqueta: "Parques Industriales", valor: "16 Parques", icono: "factory" },
+        { etiqueta: "Tasa Desocupación", valor: "2.8% (Baja)", icono: "trending-down" }
+      ],
+      documentos: [
+        {
+          id: "doc-anuario-economico",
+          titulo: "Anuario Estadístico y Económico del Municipio de Aguascalientes 2025-2026",
+          tipo: "Anuario Estadístico",
+          anio: "2025",
+          formato: "PDF / Excel",
+          tamano: "28.5 MB",
+          descripcion: "Compendio de variables macroeconómicas, empleo, inversión extranjera directa, manufactura y servicios en la capital.",
+          dependencia: "SEDECYT & IMPLAN",
+          enlace: "http://www.implanags.gob.mx/"
+        },
+        {
+          id: "doc-censo-economico",
+          titulo: "Censo y Diagnóstico de Unidades Económicas por Delegación",
+          tipo: "Censo / SIG",
+          anio: "2024",
+          formato: "PDF / SHP",
+          tamano: "34.0 MB",
+          descripcion: "Distribución territorial del comercio al por menor, industrias, servicios profesionales y microempresas hidrocálidas.",
+          dependencia: "INEGI & IMPLAN",
+          enlace: "http://www.implanags.gob.mx/"
+        },
+        {
+          id: "doc-vocaciones-productivas",
+          titulo: "Estudio de Vocaciones Productivas, Clústeres y Atracción de Inversiones",
+          tipo: "Estudio de Competitividad",
+          anio: "2025",
+          formato: "PDF",
+          tamano: "19.4 MB",
+          descripcion: "Análisis del sector automotriz, tecnologías de información, dispositivos médicos, agroindustria y logística.",
+          dependencia: "Secretaría de Economía Social y Turismo",
+          enlace: "https://ags.gob.mx/turismo/"
+        },
+        {
+          id: "doc-mercados-abastos",
+          titulo: "Diagnóstico y Plan de Modernización de Mercados Municipales",
+          tipo: "Diagnóstico Urbano",
+          anio: "2025",
+          formato: "PDF",
+          tamano: "14.2 MB",
+          descripcion: "Evaluación de los 9 mercados municipales, infraestructura de locales, servicios y abasto alimentario de la ciudad.",
+          dependencia: "Dirección de Mercados & IMPLAN",
+          enlace: "https://www.ags.gob.mx/"
+        }
+      ]
+    },
+    {
+      id: "educacion",
+      nombre: "Educación",
+      icono: "graduation-cap",
+      count: 14,
+      color: "text-indigo-600",
+      bgGradient: "from-indigo-600 to-blue-800",
+      badge: "Formación & Cobertura Escolar",
+      descripcion: "Nivel de escolaridad, cobertura educativa e instituciones en el municipio.",
+      resumenCompleto: "Censo georreferenciado de escuelas desde nivel preescolar hasta universidades, diagnósticos de cobertura peatonal, deserción y programas de becas.",
+      indicadores: [
+        { etiqueta: "Planteles Educativos", valor: "1,180 Escuelas", icono: "book" },
+        { etiqueta: "Escolaridad Media", valor: "10.8 Años (Prepa)", icono: "award" },
+        { etiqueta: "Tasa de Alfabetismo", valor: "98.6%", icono: "check-circle" },
+        { etiqueta: "Matrícula Total", valor: "285,400 Estudiantes", icono: "users" }
+      ],
+      documentos: [
+        {
+          id: "doc-cobertura-educativa",
+          titulo: "Diagnóstico de Cobertura y Rezago Educativo por Sección Electoral",
+          tipo: "Diagnóstico SIG",
+          anio: "2025",
+          formato: "PDF / Excel",
+          tamano: "16.5 MB",
+          descripcion: "Análisis de oferta y demanda educativa, identificación de secciones sin cobertura de secundaria y media superior.",
+          dependencia: "IEA & IMPLAN",
+          enlace: "http://www.implanags.gob.mx/"
+        },
+        {
+          id: "doc-directorio-escuelas",
+          titulo: "Directorio Georreferenciado y Radios de Cobertura de Planteles",
+          tipo: "Cartografía / Base de Datos",
+          anio: "2025",
+          formato: "PDF / SHP",
+          tamano: "25.0 MB",
+          descripcion: "Ubicación geográfica precisa de cada jardín de niños, primaria, secundaria, bachillerato y universidad en el municipio.",
+          dependencia: "IMPLAN Aguascalientes",
+          enlace: "http://www.implanags.gob.mx/"
+        },
+        {
+          id: "doc-rutas-escolares",
+          titulo: "Estudio de Accesibilidad Peatonal y Rutas Seguras a Escuelas Públicas",
+          tipo: "Estudio de Movilidad",
+          anio: "2024",
+          formato: "PDF",
+          tamano: "12.8 MB",
+          descripcion: "Auditorías de seguridad vial en entornos escolares, banquetas accesibles y señalización en polígonos de alta afluencia.",
+          dependencia: "Movilidad Municipal & IMPLAN",
+          enlace: "http://www.implanags.gob.mx/"
+        }
+      ]
+    },
+    {
+      id: "ambiente",
+      nombre: "Medio Ambiente",
+      icono: "leaf",
+      count: 20,
+      color: "text-green-600",
+      bgGradient: "from-green-600 to-emerald-800",
+      badge: "Sustentabilidad & Recursos",
+      descripcion: "Áreas naturales protegidas, calidad del aire, arbolado y recursos hídricos.",
+      resumenCompleto: "Programas de mitigación climática, censo del arbolado urbano, protección de microcuencas, áreas naturales protegidas y diagnóstico del acuífero.",
+      indicadores: [
+        { etiqueta: "Áreas Protegidas", valor: "4 Reservas (Cobos)", icono: "shield" },
+        { etiqueta: "Árboles Urbanos", valor: "320,000 Censados", icono: "trees" },
+        { etiqueta: "Área Verde / Hab.", valor: "6.8 m² / persona", icono: "maximize-2" },
+        { etiqueta: "Calidad del Aire", valor: "Monitoreo 24/7", icono: "wind" }
+      ],
+      documentos: [
+        {
+          id: "doc-paccm-clima",
+          titulo: "Programa Municipal de Acción ante el Cambio Climático (PACCM)",
+          tipo: "Programa Rector",
+          anio: "2025",
+          formato: "PDF",
+          tamano: "26.4 MB",
+          descripcion: "Inventario de emisiones de gases de efecto invernadero, metas de descarbonización y medidas de adaptación municipal.",
+          dependencia: "SEMADESU & IMPLAN",
+          enlace: "https://ags.gob.mx/semadesu/"
+        },
+        {
+          id: "doc-censo-arbolado",
+          titulo: "Inventario y Censo del Arbolado Urbano de Aguascalientes",
+          tipo: "Censo Ambiental / SIG",
+          anio: "2025",
+          formato: "PDF / SHP",
+          tamano: "45.0 MB",
+          descripcion: "Especies nativas, estado fitosanitario, paleta vegetal recomendada y servicios ambientales del arbolado de la ciudad.",
+          dependencia: "SEMADESU",
+          enlace: "https://ags.gob.mx/semadesu/"
+        },
+        {
+          id: "doc-anp-cobos",
+          titulo: "Plan de Manejo del Área Natural Protegida Municipal Cobos-Parga",
+          tipo: "Plan de Manejo",
+          anio: "2024",
+          formato: "PDF",
+          tamano: "32.0 MB",
+          descripcion: "Zonificación de conservación, flora y fauna endémica, yacimientos paleontológicos y reglas de uso del suelo.",
+          dependencia: "SEMADESU & PROESPA",
+          enlace: "https://ags.gob.mx/semadesu/"
+        },
+        {
+          id: "doc-balance-hidrico",
+          titulo: "Balance Hídrico Municipal y Estrategias de Conservación del Acuífero",
+          tipo: "Estudio Hídrico",
+          anio: "2025",
+          formato: "PDF",
+          tamano: "21.5 MB",
+          descripcion: "Diagnóstico de recarga del acuífero del Valle de Aguascalientes, reúso de aguas tratadas e infraestructura hidráulica MIAA.",
+          dependencia: "MIAA & IMPLAN",
+          enlace: "http://www.implanags.gob.mx/"
+        }
+      ]
+    },
+    {
+      id: "salud",
+      nombre: "Salud",
+      icono: "activity",
+      count: 11,
+      color: "text-red-600",
+      bgGradient: "from-red-600 to-rose-800",
+      badge: "Salud Pública & Bienestar",
+      descripcion: "Centros de salud, clínicas municipales, prevención y cobertura médica.",
+      resumenCompleto: "Infraestructura hospitalaria pública y privada, unidades médicas móviles, salud mental, prevención de adicciones y atención veterinaria pública.",
+      indicadores: [
+        { etiqueta: "Centros de Salud", valor: "112 Unidades", icono: "cross" },
+        { etiqueta: "Derechohabiencia", valor: "81.4% Cobertura", icono: "shield-check" },
+        { etiqueta: "Hospital Veterinario", valor: "1er Hospital Público", icono: "heart" },
+        { etiqueta: "Consultorios DIF", valor: "32 Módulos", icono: "home" }
+      ],
+      documentos: [
+        {
+          id: "doc-infra-salud",
+          titulo: "Diagnóstico de Infraestructura y Cobertura de Servicios de Salud",
+          tipo: "Diagnóstico",
+          anio: "2025",
+          formato: "PDF / SIG",
+          tamano: "19.8 MB",
+          descripcion: "Evaluación de camas hospitalarias, médicos por cada mil habitantes y tiempos de traslado en urgencias por delegación.",
+          dependencia: "ISSEA & IMPLAN",
+          enlace: "http://www.implanags.gob.mx/"
+        },
+        {
+          id: "doc-directorio-salud",
+          titulo: "Directorio Georreferenciado de Unidades Médicas Públicas y Privadas",
+          tipo: "Directorio / SIG",
+          anio: "2025",
+          formato: "PDF / SHP",
+          tamano: "16.0 MB",
+          descripcion: "Localización precisa de clínicas IMSS, ISSSTE, ISSEA, centros de salud comunitarios y hospitales privados.",
+          dependencia: "IMPLAN Aguascalientes",
+          enlace: "http://www.implanags.gob.mx/"
+        },
+        {
+          id: "doc-salud-mental",
+          titulo: "Plan Municipal de Salud Mental y Prevención de Conductas de Riesgo",
+          tipo: "Programa Preventivo",
+          anio: "2025",
+          formato: "PDF",
+          tamano: "11.5 MB",
+          descripcion: "Líneas de atención psicológica 24 horas, módulos en secundarias y preparatorias, y brigadas comunitarias de orientación.",
+          dependencia: "DIF Municipal & IMAC",
+          enlace: "https://ags.gob.mx/dif/"
+        },
+        {
+          id: "doc-manual-hospital-vet",
+          titulo: "Protocolo de Operatividad y Servicios del Hospital Veterinario Municipal",
+          tipo: "Manual Operativo",
+          anio: "2025",
+          formato: "PDF",
+          tamano: "8.4 MB",
+          descripcion: "Cartera de servicios, esterilizaciones gratuitas, quirófanos, vacunas y adopciones responsables de animales de compañía.",
+          dependencia: "Coordinación General de Salud Municipal",
+          enlace: "https://ags.gob.mx/hospitalveterinario/"
+        }
+      ]
+    },
+    {
+      id: "seguridad",
+      nombre: "Seguridad Pública",
+      icono: "shield-check",
+      count: 16,
+      color: "text-slate-700",
+      bgGradient: "from-slate-800 to-blue-950",
+      badge: "Justicia Cívica & Prevención",
+      descripcion: "Sectores de vigilancia, programas de prevención y justicia cívica.",
+      resumenCompleto: "Sectores policiales, mapas de calor de incidencia delictiva, tiempos de respuesta del C4 Municipal, juzgados cívicos y profesionalización en el ISSP.",
+      indicadores: [
+        { etiqueta: "Sectores Operativos", valor: "5 Sectores", icono: "compass" },
+        { etiqueta: "Policía Municipal", valor: "1,650 Oficiales", icono: "users" },
+        { etiqueta: "Cámaras C4 Municipal", valor: "1,200+ Puntos", icono: "video" },
+        { etiqueta: "Juzgados Cívicos", valor: "4 Sedes", icono: "scale" }
+      ],
+      documentos: [
+        {
+          id: "doc-programa-seguridad",
+          titulo: "Programa Sectorial de Seguridad Pública y Prevención del Delito",
+          tipo: "Programa Sectorial",
+          anio: "2025",
+          formato: "PDF",
+          tamano: "24.0 MB",
+          descripcion: "Estrategias de policía de proximidad, comités de vecinos vigilantes, patrullaje inteligente y coordinación metropolitana.",
+          dependencia: "Secretaría de Seguridad Pública Municipal (SSPM)",
+          enlace: "https://ags.gob.mx/issp/"
+        },
+        {
+          id: "doc-justicia-civica",
+          titulo: "Modelo de Justicia Cívica y Mediación Comunitaria de Aguascalientes",
+          tipo: "Modelo Operativo",
+          anio: "2024",
+          formato: "PDF",
+          tamano: "14.5 MB",
+          descripcion: "Audiencias públicas orales, trabajo en favor de la comunidad, mediación vecinal y prevención de faltas administrativas.",
+          dependencia: "Dirección de Justicia Cívica",
+          enlace: "https://www.ags.gob.mx/"
+        },
+        {
+          id: "doc-atlas-incidencia",
+          titulo: "Atlas de Incidencia Urbana y Mapas de Calor Preventivos",
+          tipo: "Atlas / SIG",
+          anio: "2025",
+          formato: "PDF / SIG",
+          tamano: "36.0 MB",
+          descripcion: "Georreferenciación de llamadas al 911 y 072, zonas prioritarias de patrullaje e iluminación disuasiva.",
+          dependencia: "C4 Municipal & IMPLAN",
+          enlace: "http://www.implanags.gob.mx/"
+        },
+        {
+          id: "doc-curricula-issp",
+          titulo: "Plan Curricular y Formación del Instituto Superior en Seguridad Pública",
+          tipo: "Plan Educativo Policial",
+          anio: "2025",
+          formato: "PDF",
+          tamano: "6.8 MB",
+          descripcion: "Programa de Técnico Superior Universitario en Policía de Proximidad y Licenciatura en Seguridad Ciudadana.",
+          dependencia: "ISSP Aguascalientes",
+          enlace: "https://ags.gob.mx/issp/"
+        }
+      ]
+    },
+    {
+      id: "serviciospub",
+      nombre: "Servicios Públicos",
+      icono: "zap",
+      count: 19,
+      color: "text-yellow-600",
+      bgGradient: "from-amber-600 to-yellow-800",
+      badge: "Limpia, Alumbrado & Parques",
+      descripcion: "Alumbrado público, limpia y recolección, parques y jardines.",
+      resumenCompleto: "Modernización del alumbrado público a tecnología LED, rutas diarias de recolección de basura, mantenimiento de áreas verdes y panteones.",
+      indicadores: [
+        { etiqueta: "Luminarias LED", valor: "78,500 Puntos (85%)", icono: "sun" },
+        { etiqueta: "Basura Recolectada", valor: "650 Ton/Día", icono: "trash-2" },
+        { etiqueta: "Contenedores", valor: "4,500 Unidades", icono: "box" },
+        { etiqueta: "Áreas Verdes Mant.", valor: "3.8 Millones m²", icono: "scissors" }
+      ],
+      documentos: [
+        {
+          id: "doc-alumbrado-led",
+          titulo: "Plan Maestro de Modernización de Alumbrado Público y Eficiencia Energética",
+          tipo: "Plan Técnico",
+          anio: "2025",
+          formato: "PDF",
+          tamano: "17.5 MB",
+          descripcion: "Sustitución de tecnología de vapor de sodio por luminarias LED inteligentes de bajo consumo y telemetría.",
+          dependencia: "Secretaría de Servicios Públicos (SSP)",
+          enlace: "https://www.ags.gob.mx/"
+        },
+        {
+          id: "doc-rutas-recoleccion",
+          titulo: "Diagnóstico de Rutas, Frecuencias y Cobertura de Limpia y Aseo Público",
+          tipo: "Diagnóstico Logístico",
+          anio: "2025",
+          formato: "PDF / Excel",
+          tamano: "22.0 MB",
+          descripcion: "Mapeo de rutas de camiones recolectores, barrido mecánico y disposición en el Relleno Sanitario San Nicolás.",
+          dependencia: "Dirección de Limpia y Aseo Público",
+          enlace: "https://www.ags.gob.mx/"
+        },
+        {
+          id: "doc-censo-contenedores",
+          titulo: "Censo Georreferenciado de Contenedores y Puntos Limpios",
+          tipo: "Censo / SIG",
+          anio: "2025",
+          formato: "PDF / SHP",
+          tamano: "28.0 MB",
+          descripcion: "Localización GPS de los 4,500 contenedores y estaciones de reciclaje en el municipio de Aguascalientes.",
+          dependencia: "IMPLAN & SSP",
+          enlace: "http://www.implanags.gob.mx/"
+        },
+        {
+          id: "doc-panteones-municipales",
+          titulo: "Reglamento y Operatividad de Panteones Municipales y Rastro",
+          tipo: "Normativa / Manual",
+          anio: "2024",
+          formato: "PDF",
+          tamano: "8.9 MB",
+          descripcion: "Lineamientos del Panteón de la Cruz, Los Ángeles y Asunción, así como procesos sanitarios Tipo Inspección Federal (TIF).",
+          dependencia: "Secretaría de Servicios Públicos",
+          enlace: "https://www.ags.gob.mx/"
+        }
+      ]
+    },
+    {
+      id: "urbanos",
+      nombre: "Servicios Urbanos y Movilidad",
+      icono: "truck",
+      count: 22,
+      color: "text-cyan-600",
+      bgGradient: "from-cyan-600 to-blue-900",
+      badge: "Movilidad & Conectividad",
+      descripcion: "Vialidades, transporte, ciclovías, uso de suelo y desarrollo urbano.",
+      resumenCompleto: "Red vial municipal de 3,250 km, movilidad no motorizada, ciclovías protegidas, pasos a desnivel en anillos periféricos y pavimentación.",
+      indicadores: [
+        { etiqueta: "Red Vial Total", valor: "3,250 km", icono: "navigation" },
+        { etiqueta: "Anillos Periféricos", valor: "3 Circuitos", icono: "disc" },
+        { etiqueta: "Ciclovías Seguras", valor: "85 km Conectados", icono: "bike" },
+        { etiqueta: "Cruces Semafóricos", valor: "340 Intersecciones", icono: "traffic-cone" }
+      ],
+      documentos: [
+        {
+          id: "doc-pimus-movilidad",
+          titulo: "Plan Integral de Movilidad Urbana Sustentable (PIMUS Aguascalientes)",
+          tipo: "Plan Maestro",
+          anio: "2025",
+          formato: "PDF / SIG",
+          tamano: "48.0 MB",
+          descripcion: "Estrategias de jerarquía de movilidad, transporte público integrado, movilidad activa y reducción de emisiones.",
+          dependencia: "IMPLAN & Movilidad",
+          enlace: "http://www.implanags.gob.mx/"
+        },
+        {
+          id: "doc-manual-calles",
+          titulo: "Manual de Criterios de Diseño de Calles, Banquetas y Ciclovías",
+          tipo: "Manual de Diseño",
+          anio: "2024",
+          formato: "PDF",
+          tamano: "35.0 MB",
+          descripcion: "Especificaciones técnicas para secciones viales, banquetas accesibles, arbolado en camellones y ciclocarriles.",
+          dependencia: "IMPLAN Aguascalientes",
+          enlace: "http://www.implanags.gob.mx/"
+        },
+        {
+          id: "doc-aforos-anillos",
+          titulo: "Estudio de Aforos Vehiculares, Velocidades y Capacidad en los 3 Anillos",
+          tipo: "Estudio de Tránsito",
+          anio: "2025",
+          formato: "PDF / Excel",
+          tamano: "26.8 MB",
+          descripcion: "Conteo de volumen vehicular, cuellos de botella y modelación de flujo en Av. Convención, Aguascalientes y Siglo XXI.",
+          dependencia: "IMPLAN Aguascalientes",
+          enlace: "http://www.implanags.gob.mx/"
+        },
+        {
+          id: "doc-red-ciclovias",
+          titulo: "Red de Ciclovías: Diagnóstico de Conectividad y Nuevos Tramos",
+          tipo: "Diagnóstico / SIG",
+          anio: "2025",
+          formato: "PDF / SHP",
+          tamano: "21.0 MB",
+          descripcion: "Evaluación de los 85 km de ciclovías existentes y propuesta de conectividad oriente-poniente y norte-sur.",
+          dependencia: "IMPLAN & SEDESOM",
+          enlace: "http://www.implanags.gob.mx/"
+        },
+        {
+          id: "doc-indice-rodadura",
+          titulo: "Diagnóstico de Pavimentación, Índice de Rodadura y Priorización de Bacheo",
+          tipo: "Diagnóstico de Pavimentos",
+          anio: "2025",
+          formato: "PDF / SIG",
+          tamano: "19.5 MB",
+          descripcion: "Evaluación técnica del estado del pavimento asfáltico e hidráulico en las principales avenidas y colonias.",
+          dependencia: "SOPMA & IMPLAN",
+          enlace: "https://www.ags.gob.mx/"
+        }
+      ]
+    }
   ],
 
   // Catálogo Completo de Infografías y Campañas Oficiales (H. Ayuntamiento de Aguascalientes & IMPLAN)

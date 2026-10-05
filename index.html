@@ -1989,6 +1989,110 @@
     </div>
   </div>
 
+  <!-- MODAL / FICHA TÉCNICA DE BIBLIOTECA DIGITAL (10 EJES TEMÁTICOS) -->
+  <div id="modalBibliotecaEje" class="hidden fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto" style="display: none;">
+    <div class="bg-white rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-hidden shadow-2xl border border-slate-100 flex flex-col animate-in fade-in zoom-in-95 duration-200">
+      
+      <!-- Cabecera del Modal con Gradiente Dinámico -->
+      <div id="modalBibHeader" class="p-4 sm:p-5 bg-gradient-to-r from-[#072B4B] via-brand-navy to-[#009FB9] text-white flex items-center justify-between rounded-t-3xl border-b border-white/10 shrink-0">
+        <div class="flex items-center gap-3">
+          <div id="modalBibIconContainer" class="w-11 h-11 rounded-2xl bg-white/15 backdrop-blur-sm flex items-center justify-center text-brand-cyan shadow-inner shrink-0 text-xl border border-white/20">
+            <i id="modalBibIcono" data-lucide="book-open" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span id="modalBibBadge" class="text-[10px] uppercase tracking-wider font-extrabold px-2.5 py-0.5 bg-brand-cyan text-brand-navy rounded-full shadow-sm">Eje Estratégico</span>
+              <span id="modalBibDocsCount" class="text-[11px] text-cyan-200 font-semibold">18 documentos técnicos</span>
+            </div>
+            <h3 id="modalBibTitulo" class="font-extrabold text-base sm:text-xl leading-tight text-white font-display mt-0.5">Nuestro Municipio</h3>
+          </div>
+        </div>
+        <button onclick="cerrarModalBiblioteca()" class="p-2 hover:bg-white/10 rounded-full transition text-slate-300 hover:text-white cursor-pointer" title="Cerrar Ficha Técnica">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Contenido Principal: Scrollable -->
+      <div class="flex-1 overflow-y-auto p-4 sm:p-6 bg-slate-50 space-y-6">
+        
+        <!-- Bloque 1: Resumen y Diagnóstico Institucional -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-brand-navy flex items-center gap-2">
+              <i data-lucide="info" class="w-4 h-4 text-brand-cyan"></i>
+              <span>Diagnóstico Institucional y Marco Técnico</span>
+            </span>
+            <span class="text-[11px] text-slate-400 font-medium">IMPLAN Aguascalientes</span>
+          </div>
+          <p id="modalBibResumen" class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Compilación de estudios, diagnósticos territoriales y proyectos estratégicos del municipio de Aguascalientes.
+          </p>
+        </div>
+
+        <!-- Bloque 2: Indicadores Clave del Eje (KPIs) -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-600 flex items-center gap-2 mb-3">
+            <i data-lucide="bar-chart-2" class="w-4 h-4 text-brand-magenta"></i>
+            <span>Indicadores y Estadísticas Clave</span>
+          </h4>
+          <div id="modalBibIndicadoresGrid" class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <!-- Renderizado dinámicamente -->
+          </div>
+        </div>
+
+        <!-- Bloque 3: Catálogo de Documentos y Estudios con Filtro Rápido -->
+        <div class="space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
+                <i data-lucide="folder-git-2" class="w-4 h-4 text-brand-navy"></i>
+                <span>Documentos, Estudios y Planes Disponibles</span>
+              </h4>
+              <p class="text-[11px] text-slate-400">Descarga directa de publicaciones oficiales o consulta de instrumentos normativos.</p>
+            </div>
+
+            <!-- Buscador interno de documentos en el modal -->
+            <div class="relative w-full sm:w-64">
+              <input 
+                type="text" 
+                id="modalBibBuscador" 
+                placeholder="Buscar estudio o plan..." 
+                oninput="filtrarDocumentosBibliotecaModal(this.value)" 
+                class="w-full pl-8 pr-7 py-1.5 bg-white border border-slate-200 rounded-xl text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-cyan"
+              />
+              <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5"></i>
+              <button onclick="limpiarBuscadorBibModal()" id="btnLimpiarBibModal" class="hidden absolute right-2.5 top-2 text-slate-400 hover:text-slate-600 text-xs">✕</button>
+            </div>
+          </div>
+
+          <!-- Listado de Documentos Cards -->
+          <div id="modalBibDocsList" class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+            <!-- Renderizado dinámicamente -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Pie del Modal con Acciones -->
+      <div class="p-4 bg-white rounded-b-3xl border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0">
+        <div class="text-xs text-slate-500 flex items-center gap-2">
+          <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i>
+          <span>Información de Interés Público Municipal &bull; IMPLAN</span>
+        </div>
+        <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+          <button onclick="cerrarModalBiblioteca()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition cursor-pointer">
+            Cerrar Ficha
+          </button>
+          <button onclick="solicitarInformacionEjeDesdeModal()" class="px-4 py-2 bg-brand-navy hover:bg-blue-900 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-md cursor-pointer">
+            <i data-lucide="send" class="w-3.5 h-3.5 text-brand-cyan"></i>
+            <span>Solicitar Datos / Capas de este Eje</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- PIE DE PÁGINA INSTITUCIONAL (FOOTER) -->
   <footer class="bg-brand-navyDark text-slate-300 text-sm mt-auto border-t border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -2361,28 +2465,240 @@
       lucide.createIcons();
     }
 
+    // =======================================================
+    // BIBLIOTECA DIGITAL - 10 EJES TEMÁTICOS Y MODAL DE FICHAS TÉCNICAS
+    // =======================================================
+    let ejeSeleccionadoBibActual = null;
+
     function renderizarBiblioteca() {
       const cont = document.getElementById('contenedorEjesBiblioteca');
-      if (!cont || !PIMAGS_DATA.ejesBiblioteca) return;
-      cont.innerHTML = PIMAGS_DATA.ejesBiblioteca.map(e => `
-        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-brand-cyan transition flex flex-col justify-between cursor-pointer group">
+      const ejes = (window.PIMAGS_DATA && window.PIMAGS_DATA.ejesBiblioteca) 
+        ? window.PIMAGS_DATA.ejesBiblioteca 
+        : (typeof PIMAGS_DATA !== 'undefined' && PIMAGS_DATA.ejesBiblioteca ? PIMAGS_DATA.ejesBiblioteca : []);
+      if (!cont || ejes.length === 0) return;
+
+      cont.innerHTML = ejes.map(e => `
+        <div onclick="abrirModalBiblioteca('${e.id}')" class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-brand-cyan transition-all duration-200 flex flex-col justify-between cursor-pointer group hover:-translate-y-0.5">
           <div>
             <div class="flex items-center justify-between mb-3">
-              <div class="w-10 h-10 rounded-xl bg-slate-50 ${e.color} flex items-center justify-center font-bold">
-                <i data-lucide="${e.icono}" class="w-5 h-5"></i>
+              <div class="w-10 h-10 rounded-xl bg-slate-50 ${e.color} flex items-center justify-center font-bold shadow-inner">
+                <i data-lucide="${e.icono || 'book-open'}" class="w-5 h-5"></i>
               </div>
-              <span class="text-[11px] font-bold px-2 py-0.5 bg-blue-50 text-brand-navy rounded-full">${e.count} docs</span>
+              <span class="text-[11px] font-bold px-2 py-0.5 bg-blue-50 text-brand-navy rounded-full border border-blue-100">${(e.documentos && e.documentos.length) || e.count || 0} docs</span>
             </div>
-            <h4 class="font-bold text-sm text-slate-900 group-hover:text-brand-navy transition">${e.nombre}</h4>
-            <p class="text-[11px] text-slate-500 mt-1 leading-relaxed">${e.descripcion}</p>
+            <h4 class="font-bold text-sm text-slate-900 group-hover:text-brand-navy transition leading-snug">${e.nombre}</h4>
+            <p class="text-[11px] text-slate-500 mt-1 leading-relaxed line-clamp-3">${e.descripcion}</p>
           </div>
-          <div class="mt-4 pt-2 flex items-center justify-between text-[11px] font-semibold text-brand-navy">
-            <span>Ver documentos</span>
-            <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] font-bold text-brand-navy group-hover:text-brand-cyan transition">
+            <span>Ver ficha y documentos</span>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
           </div>
         </div>
       `).join('');
-      lucide.createIcons();
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function abrirModalBiblioteca(ejeId) {
+      const ejes = (window.PIMAGS_DATA && window.PIMAGS_DATA.ejesBiblioteca) 
+        ? window.PIMAGS_DATA.ejesBiblioteca 
+        : (typeof PIMAGS_DATA !== 'undefined' && PIMAGS_DATA.ejesBiblioteca ? PIMAGS_DATA.ejesBiblioteca : []);
+      
+      const eje = ejes.find(item => item.id === ejeId);
+      if (!eje) return;
+
+      ejeSeleccionadoBibActual = eje;
+
+      const modal = document.getElementById('modalBibliotecaEje');
+      const tituloEl = document.getElementById('modalBibTitulo');
+      const badgeEl = document.getElementById('modalBibBadge');
+      const docsCountEl = document.getElementById('modalBibDocsCount');
+      const resumenEl = document.getElementById('modalBibResumen');
+      const iconEl = document.getElementById('modalBibIcono');
+      const indGrid = document.getElementById('modalBibIndicadoresGrid');
+      const buscadorEl = document.getElementById('modalBibBuscador');
+      const btnLimpiar = document.getElementById('btnLimpiarBibModal');
+
+      if (tituloEl) tituloEl.textContent = eje.nombre;
+      if (badgeEl) badgeEl.textContent = eje.badge || 'Eje Estratégico Municipal';
+      if (docsCountEl) {
+        const totalDocs = (eje.documentos && eje.documentos.length) || eje.count || 0;
+        docsCountEl.textContent = `${totalDocs} documentos técnicos`;
+      }
+      if (resumenEl) resumenEl.textContent = eje.resumenCompleto || eje.descripcion || 'Diagnóstico y compilación de instrumentos técnicos municipales.';
+      if (iconEl && eje.icono) {
+        iconEl.setAttribute('data-lucide', eje.icono);
+      }
+
+      // Renderizar Indicadores Clave del Eje
+      if (indGrid) {
+        if (eje.indicadores && Array.isArray(eje.indicadores) && eje.indicadores.length > 0) {
+          indGrid.innerHTML = eje.indicadores.map(ind => `
+            <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+              <div>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">${ind.etiqueta}</span>
+                <div class="text-sm sm:text-base font-extrabold text-slate-900 font-display mt-0.5">${ind.valor}</div>
+              </div>
+              <div class="w-8 h-8 rounded-xl bg-blue-50 text-brand-navy flex items-center justify-center shrink-0 shadow-inner">
+                <i data-lucide="${ind.icono || 'bar-chart'}" class="w-4 h-4 text-brand-cyan"></i>
+              </div>
+            </div>
+          `).join('');
+        } else {
+          indGrid.innerHTML = `
+            <div class="col-span-full p-3 bg-white rounded-xl border border-slate-200 text-xs text-slate-500 text-center">
+              Indicadores consolidados en el Plan Municipal de Desarrollo y Atlas de Información.
+            </div>
+          `;
+        }
+      }
+
+      // Resetear buscador interno
+      if (buscadorEl) buscadorEl.value = '';
+      if (btnLimpiar) btnLimpiar.classList.add('hidden');
+
+      // Renderizar lista completa de documentos
+      renderizarDocumentosBibliotecaModal(eje.documentos || []);
+
+      // Mostrar modal
+      if (modal) {
+        modal.style.display = 'flex';
+        modal.classList.remove('hidden');
+      }
+
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function cerrarModalBiblioteca() {
+      const modal = document.getElementById('modalBibliotecaEje');
+      if (modal) {
+        modal.style.display = 'none';
+        modal.classList.add('hidden');
+      }
+    }
+
+    function renderizarDocumentosBibliotecaModal(docs) {
+      const listEl = document.getElementById('modalBibDocsList');
+      if (!listEl) return;
+
+      if (!docs || docs.length === 0) {
+        listEl.innerHTML = `
+          <div class="col-span-full py-8 text-center text-slate-400 text-xs bg-white rounded-2xl border border-slate-200 p-6 space-y-2">
+            <i data-lucide="file-x" class="w-8 h-8 mx-auto text-slate-300"></i>
+            <div class="font-bold text-slate-700">No se encontraron documentos</div>
+            <p class="text-slate-400">Intenta con otro término o solicita la información mediante la bandeja de peticiones.</p>
+          </div>
+        `;
+        if (window.lucide) lucide.createIcons();
+        return;
+      }
+
+      listEl.innerHTML = docs.map(d => {
+        const safeTitle = (d.titulo || '').replace(/'/g, "\\'");
+        const isShp = (d.formato || '').toUpperCase().includes('SHP') || (d.formato || '').toUpperCase().includes('SIG');
+        const badgeColor = isShp ? 'bg-amber-100 text-amber-800 border-amber-200' : 'bg-blue-100 text-brand-navy border-blue-200';
+        
+        return `
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col justify-between space-y-3">
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-md ${badgeColor} border uppercase tracking-wider">
+                  ${d.formato || 'PDF'}
+                </span>
+                <span class="text-[10px] font-bold text-slate-400">${d.anio || '2025'} &bull; ${d.tamano || 'Oficial'}</span>
+              </div>
+              <h5 class="font-bold text-xs sm:text-sm text-slate-900 leading-snug">${d.titulo}</h5>
+              <p class="text-[11px] text-slate-500 leading-relaxed line-clamp-2">${d.descripcion || ''}</p>
+            </div>
+
+            <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-xs gap-2">
+              <span class="text-[10px] text-slate-400 font-semibold truncate max-w-[150px]">${d.dependencia || 'IMPLAN Aguascalientes'}</span>
+              <div class="flex items-center gap-1.5 shrink-0">
+                <a href="${d.enlace || 'http://www.implanags.gob.mx/'}" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-lg text-[11px] flex items-center gap-1 transition" title="Consultar o Descargar Instrumento">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5 text-brand-navy"></i>
+                  <span>Consultar</span>
+                </a>
+                <button onclick="solicitarDocDesdeModal('${safeTitle}')" class="px-2.5 py-1.5 bg-brand-navy hover:bg-blue-900 text-white font-bold rounded-lg text-[11px] flex items-center gap-1 transition shadow-sm cursor-pointer" title="Solicitar capas SIG o archivo completo">
+                  <i data-lucide="send" class="w-3.5 h-3.5 text-cyan-300"></i>
+                  <span>Pedir</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function filtrarDocumentosBibliotecaModal(query) {
+      if (!ejeSeleccionadoBibActual) return;
+      const q = (query || '').toLowerCase().trim();
+      const btnLimpiar = document.getElementById('btnLimpiarBibModal');
+      
+      if (btnLimpiar) {
+        if (q.length > 0) {
+          btnLimpiar.classList.remove('hidden');
+        } else {
+          btnLimpiar.classList.add('hidden');
+        }
+      }
+
+      const docs = ejeSeleccionadoBibActual.documentos || [];
+      if (!q) {
+        renderizarDocumentosBibliotecaModal(docs);
+        return;
+      }
+
+      const filtrados = docs.filter(d => {
+        return (
+          (d.titulo && d.titulo.toLowerCase().includes(q)) ||
+          (d.descripcion && d.descripcion.toLowerCase().includes(q)) ||
+          (d.tipo && d.tipo.toLowerCase().includes(q)) ||
+          (d.dependencia && d.dependencia.toLowerCase().includes(q)) ||
+          (d.formato && d.formato.toLowerCase().includes(q)) ||
+          (d.anio && d.anio.toLowerCase().includes(q))
+        );
+      });
+
+      renderizarDocumentosBibliotecaModal(filtrados);
+    }
+
+    function limpiarBuscadorBibModal() {
+      const buscadorEl = document.getElementById('modalBibBuscador');
+      const btnLimpiar = document.getElementById('btnLimpiarBibModal');
+      if (buscadorEl) buscadorEl.value = '';
+      if (btnLimpiar) btnLimpiar.classList.add('hidden');
+      if (ejeSeleccionadoBibActual) {
+        renderizarDocumentosBibliotecaModal(ejeSeleccionadoBibActual.documentos || []);
+      }
+    }
+
+    function solicitarInformacionEjeDesdeModal() {
+      if (!ejeSeleccionadoBibActual) return;
+      const nombreEje = ejeSeleccionadoBibActual.nombre;
+      cerrarModalBiblioteca();
+      cambiarSeccion('solicitudes');
+      
+      const tipoSel = document.getElementById('solicitudTipo');
+      const msgArea = document.getElementById('solicitudMensaje');
+      if (tipoSel) tipoSel.value = 'Biblioteca Digital / Estudios y Planes';
+      if (msgArea) {
+        msgArea.value = `Hola, solicito información técnica, estadísticas y capas cartográficas relacionadas con el Eje: ${nombreEje}.`;
+        msgArea.focus();
+      }
+    }
+
+    function solicitarDocDesdeModal(tituloDoc) {
+      cerrarModalBiblioteca();
+      cambiarSeccion('solicitudes');
+      
+      const tipoSel = document.getElementById('solicitudTipo');
+      const msgArea = document.getElementById('solicitudMensaje');
+      if (tipoSel) tipoSel.value = 'Biblioteca Digital / Estudios y Planes';
+      if (msgArea) {
+        msgArea.value = `Hola, solicito copia oficial / capas geográficas (SHP, Excel, PDF) del estudio: "${tituloDoc}".`;
+        msgArea.focus();
+      }
     }
 
     function renderizarInfografias() {
@@ -4594,6 +4910,12 @@ Enviado a través de la Plataforma de Información Municipal PIMAgs`
     window.abrirModalGusano = abrirModalGusano;
     window.cerrarModalGusano = cerrarModalGusano;
     window.enviarSolicitud = enviarSolicitud;
+    window.abrirModalBiblioteca = abrirModalBiblioteca;
+    window.cerrarModalBiblioteca = cerrarModalBiblioteca;
+    window.filtrarDocumentosBibliotecaModal = filtrarDocumentosBibliotecaModal;
+    window.limpiarBuscadorBibModal = limpiarBuscadorBibModal;
+    window.solicitarInformacionEjeDesdeModal = solicitarInformacionEjeDesdeModal;
+    window.solicitarDocDesdeModal = solicitarDocDesdeModal;
   </script>
 
       <!-- MODAL DE FICHA TÉCNICA DE OBRA PÚBLICA -->
