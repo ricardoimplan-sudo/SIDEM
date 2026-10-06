@@ -34,7 +34,7 @@ const CENSO_MUNICIPAL = {
     "pct_inter":  68.8,
     "pob0_14":  239003,
     "pob15_64":  null,
-    "pob65_mas":  566925,
+    "pob65_mas":  null,
     "p60ymas":  876167
 };
 
@@ -75,35 +75,35 @@ const CENSO_DELEGACIONES = {
     "Cañada Honda":  {
                          "nombre":  "Cañada Honda",
                          "nombre_oficial":  "CAÑADA HONDA",
-                         "pobtot":  0,
-                         "pobfem":  0,
-                         "pobmas":  0,
-                         "pct_fem":  50,
-                         "pct_mas":  50,
-                         "pob0_14":  0,
-                         "pob15_64":  0,
-                         "pob65_mas":  0,
-                         "p60ymas":  0,
-                         "pea":  0,
-                         "pocupada":  0,
-                         "pdesocup":  0,
-                         "pct_pea":  50,
-                         "pder_ss":  0,
-                         "pder_imss":  0,
-                         "pder_iste":  0,
-                         "psinder":  0,
-                         "pct_salud":  80,
-                         "vivtot":  0,
-                         "vivpar_hab":  0,
-                         "prom_ocup":  3.6,
-                         "vph_c_elec":  0,
-                         "vph_aguadv":  0,
-                         "vph_drenaj":  0,
-                         "vph_inter":  0,
-                         "vph_cel":  0,
-                         "vph_pc":  0,
-                         "vph_autom":  0,
-                         "pct_inter":  60
+                         "pobtot":  20830,
+                         "pobfem":  10447,
+                         "pobmas":  10131,
+                         "pct_fem":  50.2,
+                         "pct_mas":  48.6,
+                         "pob0_14":  6347,
+                         "pob15_64":  13029,
+                         "pob65_mas":  5393,
+                         "p60ymas":  9514,
+                         "pea":  9567,
+                         "pocupada":  9366,
+                         "pdesocup":  633,
+                         "pct_pea":  45.9,
+                         "pder_ss":  16508,
+                         "pder_imss":  8286,
+                         "pder_iste":  8737,
+                         "psinder":  3961,
+                         "pct_salud":  79.3,
+                         "vivtot":  6054,
+                         "vivpar_hab":  4684,
+                         "prom_ocup":  4.45,
+                         "vph_c_elec":  4728,
+                         "vph_aguadv":  4639,
+                         "vph_drenaj":  4677,
+                         "vph_inter":  1616,
+                         "vph_cel":  4195,
+                         "vph_pc":  985,
+                         "vph_autom":  2584,
+                         "pct_inter":  34.5
                      },
     "Centro Oriente":  {
                            "nombre":  "Centro Oriente",
@@ -339,35 +339,35 @@ const CENSO_DELEGACIONES = {
     "Peñuelas":  {
                      "nombre":  "Peñuelas",
                      "nombre_oficial":  "PEÑUELAS",
-                     "pobtot":  0,
-                     "pobfem":  0,
-                     "pobmas":  0,
-                     "pct_fem":  50,
-                     "pct_mas":  50,
-                     "pob0_14":  0,
-                     "pob15_64":  0,
-                     "pob65_mas":  0,
-                     "p60ymas":  0,
-                     "pea":  0,
-                     "pocupada":  0,
-                     "pdesocup":  0,
-                     "pct_pea":  50,
-                     "pder_ss":  0,
-                     "pder_imss":  0,
-                     "pder_iste":  0,
-                     "psinder":  0,
-                     "pct_salud":  80,
-                     "vivtot":  0,
-                     "vivpar_hab":  0,
-                     "prom_ocup":  3.6,
-                     "vph_c_elec":  0,
-                     "vph_aguadv":  0,
-                     "vph_drenaj":  0,
-                     "vph_inter":  0,
-                     "vph_cel":  0,
-                     "vph_pc":  0,
-                     "vph_autom":  0,
-                     "pct_inter":  60
+                     "pobtot":  18099,
+                     "pobfem":  9022,
+                     "pobmas":  9014,
+                     "pct_fem":  49.8,
+                     "pct_mas":  49.8,
+                     "pob0_14":  5492,
+                     "pob15_64":  11498,
+                     "pob65_mas":  2000,
+                     "p60ymas":  2822,
+                     "pea":  8329,
+                     "pocupada":  8183,
+                     "pdesocup":  133,
+                     "pct_pea":  46,
+                     "pder_ss":  15216,
+                     "pder_imss":  12669,
+                     "pder_iste":  192,
+                     "psinder":  2790,
+                     "pct_salud":  84.1,
+                     "vivtot":  5375,
+                     "vivpar_hab":  4177,
+                     "prom_ocup":  4.33,
+                     "vph_c_elec":  4189,
+                     "vph_aguadv":  4169,
+                     "vph_drenaj":  4080,
+                     "vph_inter":  1531,
+                     "vph_cel":  3929,
+                     "vph_pc":  1010,
+                     "vph_autom":  2647,
+                     "pct_inter":  36.7
                  },
     "Pocitos":  {
                     "nombre":  "Pocitos",
@@ -573,7 +573,7 @@ const CENSO_LOCALIDADES = [
     {
         "nombre":  "NORIAS DE OJOCALIENTE",
         "tipo_asentamiento":  "RURAL AMANZANADA",
-        "delegacion":  "CaÃ±ada Honda",
+        "delegacion":  "Cañada Honda",
         "tipo":  "Rural",
         "pobtot":  3669,
         "pobfem":  1794,
@@ -613,7 +613,7 @@ const CENSO_LOCALIDADES = [
     {
         "nombre":  "TIERRA Y LIBERTAD",
         "tipo_asentamiento":  "FRACCIONAMIENTO",
-        "delegacion":  "CaÃ±ada Honda",
+        "delegacion":  "Cañada Honda",
         "tipo":  "Rural",
         "pobtot":  1644,
         "pobfem":  803,
@@ -693,7 +693,7 @@ const CENSO_LOCALIDADES = [
     {
         "nombre":  "2 DE OCTUBRE",
         "tipo_asentamiento":  "FRACCIONAMIENTO",
-        "delegacion":  "CaÃ±ada Honda",
+        "delegacion":  "Cañada Honda",
         "tipo":  "Rural",
         "pobtot":  732,
         "pobfem":  362,
@@ -733,7 +733,7 @@ const CENSO_LOCALIDADES = [
     {
         "nombre":  "NORIAS DE PASO HONDO",
         "tipo_asentamiento":  "FRACCIONAMIENTO",
-        "delegacion":  "CaÃ±ada Honda",
+        "delegacion":  "Cañada Honda",
         "tipo":  "Rural",
         "pobtot":  1394,
         "pobfem":  641,
@@ -773,7 +773,7 @@ const CENSO_LOCALIDADES = [
     {
         "nombre":  "VALLE DEL BICENTENARIO",
         "tipo_asentamiento":  "FRACCIONAMIENTO",
-        "delegacion":  "CaÃ±ada Honda",
+        "delegacion":  "Cañada Honda",
         "tipo":  "Rural",
         "pobtot":  324,
         "pobfem":  148,
@@ -813,7 +813,7 @@ const CENSO_LOCALIDADES = [
     {
         "nombre":  "VISTA HERMOSA",
         "tipo_asentamiento":  "FRACCIONAMIENTO",
-        "delegacion":  "CaÃ±ada Honda",
+        "delegacion":  "Cañada Honda",
         "tipo":  "Rural",
         "pobtot":  0,
         "pobfem":  0,
@@ -853,7 +853,7 @@ const CENSO_LOCALIDADES = [
     {
         "nombre":  "JALTOMATE",
         "tipo_asentamiento":  "RURAL",
-        "delegacion":  "CaÃ±ada Honda",
+        "delegacion":  "Cañada Honda",
         "tipo":  "Rural",
         "pobtot":  2739,
         "pobfem":  1368,
@@ -891,9 +891,9 @@ const CENSO_LOCALIDADES = [
         "vph_autom":  374
     },
     {
-        "nombre":  "LAS CAÃADAS",
+        "nombre":  "LAS CAÑADAS",
         "tipo_asentamiento":  "FRACCIONAMIENTO",
-        "delegacion":  "CaÃ±ada Honda",
+        "delegacion":  "Cañada Honda",
         "tipo":  "Rural",
         "pobtot":  1358,
         "pobfem":  689,
@@ -933,7 +933,7 @@ const CENSO_LOCALIDADES = [
     {
         "nombre":  "LA HUERTA",
         "tipo_asentamiento":  "RURAL AMANZANADA",
-        "delegacion":  "CaÃ±ada Honda",
+        "delegacion":  "Cañada Honda",
         "tipo":  "Rural",
         "pobtot":  2464,
         "pobfem":  1362,
@@ -1253,7 +1253,7 @@ const CENSO_LOCALIDADES = [
     {
         "nombre":  "POZO EL TRIGO",
         "tipo_asentamiento":  "RURAL",
-        "delegacion":  "CaÃ±ada Honda",
+        "delegacion":  "Cañada Honda",
         "tipo":  "Rural",
         "pobtot":  96,
         "pobfem":  45,
@@ -1293,7 +1293,7 @@ const CENSO_LOCALIDADES = [
     {
         "nombre":  "SAN ANTONIO PRIMERO DE LOS PEDROZA [CONGREGACION]",
         "tipo_asentamiento":  "RURAL",
-        "delegacion":  "CaÃ±ada Honda",
+        "delegacion":  "Cañada Honda",
         "tipo":  "Rural",
         "pobtot":  102,
         "pobfem":  51,
@@ -1333,7 +1333,7 @@ const CENSO_LOCALIDADES = [
     {
         "nombre":  "AMPLIACION DE CALVILLITO (COLONIA LA HERRADA)",
         "tipo_asentamiento":  "RURAL AMANZANADA",
-        "delegacion":  "CaÃ±ada Honda",
+        "delegacion":  "Cañada Honda",
         "tipo":  "Rural",
         "pobtot":  114,
         "pobfem":  53,
@@ -1373,7 +1373,7 @@ const CENSO_LOCALIDADES = [
     {
         "nombre":  "EJIDO SAN ANTONIO DE LOS PEDROZA",
         "tipo_asentamiento":  "RURAL",
-        "delegacion":  "CaÃ±ada Honda",
+        "delegacion":  "Cañada Honda",
         "tipo":  "Rural",
         "pobtot":  174,
         "pobfem":  85,
@@ -1413,7 +1413,7 @@ const CENSO_LOCALIDADES = [
     {
         "nombre":  "TANQUE EL TRIGO",
         "tipo_asentamiento":  "RURAL",
-        "delegacion":  "CaÃ±ada Honda",
+        "delegacion":  "Cañada Honda",
         "tipo":  "Rural",
         "pobtot":  319,
         "pobfem":  167,
@@ -1493,7 +1493,7 @@ const CENSO_LOCALIDADES = [
     {
         "nombre":  "CHE GUEVARA [COLONIA]",
         "tipo_asentamiento":  "RURAL AMANZANADA",
-        "delegacion":  "CaÃ±ada Honda",
+        "delegacion":  "Cañada Honda",
         "tipo":  "Rural",
         "pobtot":  439,
         "pobfem":  214,
@@ -1531,9 +1531,9 @@ const CENSO_LOCALIDADES = [
         "vph_autom":  33
     },
     {
-        "nombre":  "SAN JOSE DE LA ORDEÃA",
+        "nombre":  "SAN JOSE DE LA ORDEÑA",
         "tipo_asentamiento":  "RURAL",
-        "delegacion":  "CaÃ±ada Honda",
+        "delegacion":  "Cañada Honda",
         "tipo":  "Rural",
         "pobtot":  509,
         "pobfem":  244,
@@ -1573,7 +1573,7 @@ const CENSO_LOCALIDADES = [
     {
         "nombre":  "EL COLORADO (EL SOYATAL)",
         "tipo_asentamiento":  "RURAL",
-        "delegacion":  "CaÃ±ada Honda",
+        "delegacion":  "Cañada Honda",
         "tipo":  "Rural",
         "pobtot":  468,
         "pobfem":  251,
@@ -1613,7 +1613,7 @@ const CENSO_LOCALIDADES = [
     {
         "nombre":  "BORROTES",
         "tipo_asentamiento":  "RURAL AMANZANADA",
-        "delegacion":  "CaÃ±ada Honda",
+        "delegacion":  "Cañada Honda",
         "tipo":  "Rural",
         "pobtot":  536,
         "pobfem":  261,
@@ -1651,9 +1651,9 @@ const CENSO_LOCALIDADES = [
         "vph_autom":  87
     },
     {
-        "nombre":  "CAÃADA HONDA [ESTACION]",
+        "nombre":  "CAÑADA HONDA [ESTACION]",
         "tipo_asentamiento":  "RURAL",
-        "delegacion":  "CaÃ±ada Honda",
+        "delegacion":  "Cañada Honda",
         "tipo":  "Rural",
         "pobtot":  536,
         "pobfem":  261,
@@ -1693,7 +1693,7 @@ const CENSO_LOCALIDADES = [
     {
         "nombre":  "EL CONEJAL",
         "tipo_asentamiento":  "RURAL",
-        "delegacion":  "CaÃ±ada Honda",
+        "delegacion":  "Cañada Honda",
         "tipo":  "Rural",
         "pobtot":  1081,
         "pobfem":  538,
@@ -1733,7 +1733,7 @@ const CENSO_LOCALIDADES = [
     {
         "nombre":  "SANTA MARIA DE GALLARDO",
         "tipo_asentamiento":  "RURAL",
-        "delegacion":  "CaÃ±ada Honda",
+        "delegacion":  "Cañada Honda",
         "tipo":  "Rural",
         "pobtot":  1066,
         "pobfem":  555,
@@ -1773,7 +1773,7 @@ const CENSO_LOCALIDADES = [
     {
         "nombre":  "AMAPOLAS DEL RIO",
         "tipo_asentamiento":  "RURAL",
-        "delegacion":  "CaÃ±ada Honda",
+        "delegacion":  "Cañada Honda",
         "tipo":  "Rural",
         "pobtot":  1066,
         "pobfem":  555,
@@ -2011,7 +2011,7 @@ const CENSO_LOCALIDADES = [
         "vph_autom":  76
     },
     {
-        "nombre":  "TISCAREÃO",
+        "nombre":  "TISCAREÑO",
         "tipo_asentamiento":  "BARRIO",
         "delegacion":  "Calvillito",
         "tipo":  "Rural",
@@ -2771,7 +2771,7 @@ const CENSO_LOCALIDADES = [
         "vph_autom":  71
     },
     {
-        "nombre":  "CAÃADA GRANDE DE COTORINA",
+        "nombre":  "CAÑADA GRANDE DE COTORINA",
         "tipo_asentamiento":  "RURAL AMANZANADA",
         "delegacion":  "Calvillito",
         "tipo":  "Rural",
@@ -2891,9 +2891,9 @@ const CENSO_LOCALIDADES = [
         "vph_autom":  197
     },
     {
-        "nombre":  "SAN ANTONIO DE PEÃUELAS",
+        "nombre":  "SAN ANTONIO DE PEÑUELAS",
         "tipo_asentamiento":  "RURAL",
-        "delegacion":  "PeÃ±uelas",
+        "delegacion":  "Peñuelas",
         "tipo":  "Rural",
         "pobtot":  2458,
         "pobfem":  1213,
@@ -3013,7 +3013,7 @@ const CENSO_LOCALIDADES = [
     {
         "nombre":  "NORIAS DE CEDAZO (CEDAZO NORIAS DE MONTORO)",
         "tipo_asentamiento":  "RURAL",
-        "delegacion":  "PeÃ±uelas",
+        "delegacion":  "Peñuelas",
         "tipo":  "Rural",
         "pobtot":  265,
         "pobfem":  113,
@@ -3053,7 +3053,7 @@ const CENSO_LOCALIDADES = [
     {
         "nombre":  "EL CEDAZO (CEDAZO DE SAN ANTONIO)",
         "tipo_asentamiento":  "RURAL",
-        "delegacion":  "PeÃ±uelas",
+        "delegacion":  "Peñuelas",
         "tipo":  "Rural",
         "pobtot":  322,
         "pobfem":  155,
@@ -3093,7 +3093,7 @@ const CENSO_LOCALIDADES = [
     {
         "nombre":  "EL GIGANTE (ARELLANO)",
         "tipo_asentamiento":  "RURAL",
-        "delegacion":  "PeÃ±uelas",
+        "delegacion":  "Peñuelas",
         "tipo":  "Rural",
         "pobtot":  370,
         "pobfem":  192,
@@ -3133,7 +3133,7 @@ const CENSO_LOCALIDADES = [
     {
         "nombre":  "NUEVAS GRANJAS FATIMA",
         "tipo_asentamiento":  "RURAL AMANZANADA",
-        "delegacion":  "PeÃ±uelas",
+        "delegacion":  "Peñuelas",
         "tipo":  "Rural",
         "pobtot":  570,
         "pobfem":  265,
@@ -3173,7 +3173,7 @@ const CENSO_LOCALIDADES = [
     {
         "nombre":  "EL TANQUE DE LOS JIMENEZ",
         "tipo_asentamiento":  "RURAL",
-        "delegacion":  "PeÃ±uelas",
+        "delegacion":  "Peñuelas",
         "tipo":  "Rural",
         "pobtot":  700,
         "pobfem":  336,
@@ -3211,9 +3211,9 @@ const CENSO_LOCALIDADES = [
         "vph_autom":  120
     },
     {
-        "nombre":  "BUENAVISTA DE PEÃUELAS",
+        "nombre":  "BUENAVISTA DE PEÑUELAS",
         "tipo_asentamiento":  "RURAL",
-        "delegacion":  "PeÃ±uelas",
+        "delegacion":  "Peñuelas",
         "tipo":  "Rural",
         "pobtot":  1054,
         "pobfem":  512,
@@ -3253,7 +3253,7 @@ const CENSO_LOCALIDADES = [
     {
         "nombre":  "PARQUE INDUSTRIAL DE LOGISTICA AUTOMOTRIZ (PILA)",
         "tipo_asentamiento":  "RURAL",
-        "delegacion":  "PeÃ±uelas",
+        "delegacion":  "Peñuelas",
         "tipo":  "Rural",
         "pobtot":  1054,
         "pobfem":  512,
@@ -3293,7 +3293,7 @@ const CENSO_LOCALIDADES = [
     {
         "nombre":  "NISSAN MEXICANA [PLANTA NISSAN II]",
         "tipo_asentamiento":  "RURAL",
-        "delegacion":  "PeÃ±uelas",
+        "delegacion":  "Peñuelas",
         "tipo":  "Rural",
         "pobtot":  1054,
         "pobfem":  512,
@@ -3333,7 +3333,7 @@ const CENSO_LOCALIDADES = [
     {
         "nombre":  "PARQUE FUNERAL LA ASUNCION",
         "tipo_asentamiento":  "ESPECIAL",
-        "delegacion":  "PeÃ±uelas",
+        "delegacion":  "Peñuelas",
         "tipo":  "Rural",
         "pobtot":  1533,
         "pobfem":  778,
@@ -3371,9 +3371,9 @@ const CENSO_LOCALIDADES = [
         "vph_autom":  197
     },
     {
-        "nombre":  "EL REFUGIO DE PEÃUELAS",
+        "nombre":  "EL REFUGIO DE PEÑUELAS",
         "tipo_asentamiento":  "RURAL",
-        "delegacion":  "PeÃ±uelas",
+        "delegacion":  "Peñuelas",
         "tipo":  "Rural",
         "pobtot":  1638,
         "pobfem":  835,
@@ -3413,7 +3413,7 @@ const CENSO_LOCALIDADES = [
     {
         "nombre":  "PARQUE INDUSTRIAL DOUKI SEISAN PARK (DSP)",
         "tipo_asentamiento":  "RURAL",
-        "delegacion":  "PeÃ±uelas",
+        "delegacion":  "Peñuelas",
         "tipo":  "Rural",
         "pobtot":  1776,
         "pobfem":  899,
@@ -3453,7 +3453,7 @@ const CENSO_LOCALIDADES = [
     {
         "nombre":  "PARQUE INDUSTRIAL FINSA",
         "tipo_asentamiento":  "RURAL",
-        "delegacion":  "PeÃ±uelas",
+        "delegacion":  "Peñuelas",
         "tipo":  "Rural",
         "pobtot":  1776,
         "pobfem":  899,
@@ -3493,7 +3493,7 @@ const CENSO_LOCALIDADES = [
     {
         "nombre":  "MONTORO (MESA DEL SALTO)",
         "tipo_asentamiento":  "RURAL",
-        "delegacion":  "PeÃ±uelas",
+        "delegacion":  "Peñuelas",
         "tipo":  "Rural",
         "pobtot":  1776,
         "pobfem":  899,
@@ -3531,9 +3531,9 @@ const CENSO_LOCALIDADES = [
         "vph_autom":  246
     },
     {
-        "nombre":  "PEÃUELAS (EL CIENEGAL)",
+        "nombre":  "PEÑUELAS (EL CIENEGAL)",
         "tipo_asentamiento":  "RURAL",
-        "delegacion":  "PeÃ±uelas",
+        "delegacion":  "Peñuelas",
         "tipo":  "Rural",
         "pobtot":  1753,
         "pobfem":  902,
@@ -3611,7 +3611,7 @@ const CENSO_LOCALIDADES = [
         "vph_autom":  26
     },
     {
-        "nombre":  "CIUDAD DE LOS NIÃOS",
+        "nombre":  "CIUDAD DE LOS NIÑOS",
         "tipo_asentamiento":  "RURAL",
         "delegacion":  "Salto de los Salado",
         "tipo":  "Rural",
@@ -3771,7 +3771,7 @@ const CENSO_LOCALIDADES = [
         "vph_autom":  48
     },
     {
-        "nombre":  "EL CARIÃAN",
+        "nombre":  "EL CARIÑAN",
         "tipo_asentamiento":  "RURAL",
         "delegacion":  "San Marcos",
         "tipo":  "Rural",
@@ -3931,7 +3931,7 @@ const CENSO_LOCALIDADES = [
         "vph_autom":  67
     },
     {
-        "nombre":  "EL NIÃGARA",
+        "nombre":  "EL NIÁGARA",
         "tipo_asentamiento":  "RURAL",
         "delegacion":  "Salto de los Salado",
         "tipo":  "Rural",
@@ -4211,7 +4211,7 @@ const CENSO_LOCALIDADES = [
         "vph_autom":  159
     },
     {
-        "nombre":  "LOS CAÃOS",
+        "nombre":  "LOS CAÑOS",
         "tipo_asentamiento":  "RURAL",
         "delegacion":  "Salto de los Salado",
         "tipo":  "Rural",
@@ -4571,7 +4571,7 @@ const CENSO_LOCALIDADES = [
         "vph_autom":  81
     },
     {
-        "nombre":  "LAS VIÃAS",
+        "nombre":  "LAS VIÑAS",
         "tipo_asentamiento":  "FRACCIONAMIENTO",
         "delegacion":  "Centro Oriente",
         "tipo":  "Urbano",
@@ -7731,7 +7731,7 @@ const CENSO_LOCALIDADES = [
         "vph_autom":  772
     },
     {
-        "nombre":  "ESPAÃA",
+        "nombre":  "ESPAÑA",
         "tipo_asentamiento":  "FRACCIONAMIENTO",
         "delegacion":  "Centro Poniente",
         "tipo":  "Urbano",
@@ -8491,7 +8491,7 @@ const CENSO_LOCALIDADES = [
         "vph_autom":  1020
     },
     {
-        "nombre":  "NUEVA ESPAÃA",
+        "nombre":  "NUEVA ESPAÑA",
         "tipo_asentamiento":  "COLONIA",
         "delegacion":  "San Marcos",
         "tipo":  "Urbano",
@@ -14691,7 +14691,7 @@ const CENSO_LOCALIDADES = [
         "vph_autom":  164
     },
     {
-        "nombre":  "VIÃEDOS DEL SUR",
+        "nombre":  "VIÑEDOS DEL SUR",
         "tipo_asentamiento":  "FRACCIONAMIENTO",
         "delegacion":  "Mujeres Ilustres",
         "tipo":  "Urbano",
@@ -18411,7 +18411,7 @@ const CENSO_LOCALIDADES = [
         "vph_autom":  817
     },
     {
-        "nombre":  "RESIDENCIAL SAN NICOLAS [BAÃOS LA CANTERA]",
+        "nombre":  "RESIDENCIAL SAN NICOLAS [BAÑOS LA CANTERA]",
         "tipo_asentamiento":  "RURAL AMANZANADA",
         "delegacion":  "San Marcos",
         "tipo":  "Rural",
@@ -18931,7 +18931,7 @@ const CENSO_LOCALIDADES = [
         "vph_autom":  10
     },
     {
-        "nombre":  "VETERANOS DE LA REVOLUCIÃN",
+        "nombre":  "VETERANOS DE LA REVOLUCIÓN",
         "tipo_asentamiento":  "RURAL AMANZANADA",
         "delegacion":  "San Marcos",
         "tipo":  "Rural",
@@ -19171,7 +19171,7 @@ const CENSO_LOCALIDADES = [
         "vph_autom":  51
     },
     {
-        "nombre":  "SAN FELIPE [VIÃEDOS]",
+        "nombre":  "SAN FELIPE [VIÑEDOS]",
         "tipo_asentamiento":  "RURAL AMANZANADA",
         "delegacion":  "San Marcos",
         "tipo":  "Rural",
@@ -25211,7 +25211,7 @@ const CENSO_LOCALIDADES = [
         "vph_autom":  794
     },
     {
-        "nombre":  "VILLA DE NUESTRA SEÃORA DE LA ASUNCION SECTOR SAN MARCOS",
+        "nombre":  "VILLA DE NUESTRA SEÑORA DE LA ASUNCION SECTOR SAN MARCOS",
         "tipo_asentamiento":  "FRACCIONAMIENTO",
         "delegacion":  "Pozo Bravo",
         "tipo":  "Urbano",
@@ -25851,7 +25851,7 @@ const CENSO_LOCALIDADES = [
         "vph_autom":  68
     },
     {
-        "nombre":  "VILLA DE NUESTRA SEÃORA DE LA ASUNCION SECTOR ENCINO",
+        "nombre":  "VILLA DE NUESTRA SEÑORA DE LA ASUNCION SECTOR ENCINO",
         "tipo_asentamiento":  "FRACCIONAMIENTO",
         "delegacion":  "Pozo Bravo",
         "tipo":  "Urbano",
@@ -25971,7 +25971,7 @@ const CENSO_LOCALIDADES = [
         "vph_autom":  188
     },
     {
-        "nombre":  "VILLA DE NUESTRA SEÃORA DE LA ASUNCION SECTOR ALAMEDA",
+        "nombre":  "VILLA DE NUESTRA SEÑORA DE LA ASUNCION SECTOR ALAMEDA",
         "tipo_asentamiento":  "FRACCIONAMIENTO",
         "delegacion":  "Pozo Bravo",
         "tipo":  "Urbano",
@@ -26251,7 +26251,7 @@ const CENSO_LOCALIDADES = [
         "vph_autom":  559
     },
     {
-        "nombre":  "VILLA DE NUESTRA SEÃORA DE LA ASUNCION SECTOR ESTACION",
+        "nombre":  "VILLA DE NUESTRA SEÑORA DE LA ASUNCION SECTOR ESTACION",
         "tipo_asentamiento":  "FRACCIONAMIENTO",
         "delegacion":  "Villas de Nuestra Señora de la Asunción",
         "tipo":  "Urbano",
@@ -26291,7 +26291,7 @@ const CENSO_LOCALIDADES = [
         "vph_autom":  1438
     },
     {
-        "nombre":  "VILLA DE NUESTRA SEÃORA DE LA ASUNCION SECTOR GUADALUPE",
+        "nombre":  "VILLA DE NUESTRA SEÑORA DE LA ASUNCION SECTOR GUADALUPE",
         "tipo_asentamiento":  "FRACCIONAMIENTO",
         "delegacion":  "Villas de Nuestra Señora de la Asunción",
         "tipo":  "Urbano",
@@ -26571,7 +26571,7 @@ const CENSO_LOCALIDADES = [
         "vph_autom":  940
     },
     {
-        "nombre":  "VILLA MONTAÃA",
+        "nombre":  "VILLA MONTAÑA",
         "tipo_asentamiento":  "FRACCIONAMIENTO",
         "delegacion":  "Pozo Bravo",
         "tipo":  "Urbano",
