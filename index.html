@@ -127,7 +127,6 @@
           <button onclick="cambiarSeccion('censal')" class="nav-item hover:text-cyan-300 transition py-2" data-target="censal">Censal</button>
           <button onclick="cambiarSeccion('equipamiento')" class="nav-item hover:text-cyan-300 transition py-2" data-target="equipamiento">Equipamiento</button>
           <button onclick="cambiarSeccion('obra')" class="nav-item hover:text-cyan-300 transition py-2" data-target="obra">Obra Pública</button>
-          <button onclick="cambiarSeccion('biblioteca')" class="nav-item hover:text-cyan-300 transition py-2" data-target="biblioteca">Biblioteca</button>
           <button onclick="cambiarSeccion('visor')" class="nav-item hover:text-cyan-300 transition py-2" data-target="visor">Visor IDEAgs</button>
           <button onclick="cambiarSeccion('infografias')" class="nav-item hover:text-cyan-300 transition py-2" data-target="infografias">Infografías</button>
           
@@ -162,7 +161,6 @@
         <button onclick="cambiarSeccion('censal')" class="text-left px-3 py-2.5 rounded-lg bg-white/10 hover:bg-white/20 flex items-center gap-2">Censal</button>
         <button onclick="cambiarSeccion('equipamiento')" class="text-left px-3 py-2.5 rounded-lg bg-white/10 hover:bg-white/20 flex items-center gap-2">Equipamiento</button>
         <button onclick="cambiarSeccion('obra')" class="text-left px-3 py-2.5 rounded-lg bg-white/10 hover:bg-white/20 flex items-center gap-2">Obra Pública</button>
-        <button onclick="cambiarSeccion('biblioteca')" class="text-left px-3 py-2.5 rounded-lg bg-white/10 hover:bg-white/20 flex items-center gap-2">Biblioteca</button>
         <button onclick="cambiarSeccion('visor')" class="text-left px-3 py-2.5 rounded-lg bg-white/10 hover:bg-white/20 flex items-center gap-2">Visor IDEAgs</button>
         <button onclick="cambiarSeccion('infografias')" class="text-left px-3 py-2.5 rounded-lg bg-white/10 hover:bg-white/20 flex items-center gap-2">Infografías</button>
         <button onclick="cambiarSeccion('solicitudes')" class="text-left px-3 py-2.5 rounded-lg bg-brand-magenta text-white font-bold flex items-center gap-2">Solicitudes</button>
@@ -223,9 +221,9 @@
                 <i data-lucide="map-pin" class="w-4 h-4"></i>
                 Visor IDEAgs
               </button>
-              <button onclick="cambiarSeccion('biblioteca')" class="px-5 py-2.5 bg-white/15 hover:bg-white/25 text-white rounded-xl text-xs font-bold border border-white/20 transition flex items-center gap-2 shadow-sm">
-                <i data-lucide="book-open" class="w-4 h-4"></i>
-                Biblioteca Digital
+              <button onclick="cambiarSeccion('censal')" class="px-5 py-2.5 bg-white/15 hover:bg-white/25 text-white rounded-xl text-xs font-bold border border-white/20 transition flex items-center gap-2 shadow-sm">
+                <i data-lucide="bar-chart-2" class="w-4 h-4"></i>
+                Información Censal
               </button>
             </div>
           </div>
@@ -1510,8 +1508,8 @@
       </section>
 
     <!-- ========================================== -->
-    <!-- SECCIÓN 5: BIBLIOTECA DIGITAL -->
-    <!-- ========================================== -->
+    <!-- SECCIÓN 5: BIBLIOTECA DIGITAL (DESACTIVADA TEMPORALMENTE - PRESERVADA PARA REACTIVACIÓN) -->
+    <!--
     <section id="sec-biblioteca" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
       <div class="border-b border-slate-200 pb-4">
         <span class="text-xs font-bold uppercase tracking-wider text-blue-600">Repositorio Documental</span>
@@ -1520,9 +1518,9 @@
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4" id="contenedorEjesBiblioteca">
-        <!-- Generado dinámicamente desde data.js -->
       </div>
     </section>
+    -->
 
     <!-- ========================================== -->
     <!-- SECCIÓN 6: VISOR IDEAGS CARTOGRÁFICO -->
@@ -2123,7 +2121,6 @@
             <li><a href="#censal" onclick="cambiarSeccion('censal')" class="hover:text-white transition">Información Censal</a></li>
             <li><a href="#equipamiento" onclick="cambiarSeccion('equipamiento')" class="hover:text-white transition">Equipamiento Urbano</a></li>
             <li><a href="#obra" onclick="cambiarSeccion('obra')" class="hover:text-white transition">Obra Pública</a></li>
-            <li><a href="#biblioteca" onclick="cambiarSeccion('biblioteca')" class="hover:text-white transition">Biblioteca Digital</a></li>
             <li><a href="#visor" onclick="cambiarSeccion('visor')" class="hover:text-white transition">Visor IDEAgs</a></li>
             <li><a href="#infografias" onclick="cambiarSeccion('infografias')" class="hover:text-white transition">Infografías</a></li>
           </ul>
@@ -4774,11 +4771,11 @@
         }
       });
 
-      PIMAGS_DATA.ejesBiblioteca.forEach(e => {
-        if (e.nombre.toLowerCase().includes(q) || e.descripcion.toLowerCase().includes(q)) {
-          resultados.push({ tipo: 'Biblioteca', titulo: e.nombre, id: 'biblioteca' });
-        }
-      });
+      // PIMAGS_DATA.ejesBiblioteca.forEach(e => {
+      //   if (e.nombre.toLowerCase().includes(q) || e.descripcion.toLowerCase().includes(q)) {
+      //     resultados.push({ tipo: 'Biblioteca', titulo: e.nombre, id: 'biblioteca' });
+      //   }
+      // });
 
       if (resultados.length === 0) {
         resCont.innerHTML = `<div class="p-3 text-xs text-slate-500 text-center">No se encontraron resultados para "${query}"</div>`;
