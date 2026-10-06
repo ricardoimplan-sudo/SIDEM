@@ -1,5 +1,5 @@
 /**
- * PIMAgs - Controlador del Módulo de Equipamiento Urbano
+ * PIMAgs - Controlador del Módulo de Equipamiento Urbano (48,908 Establecimientos)
  * Integra mapa interactivo Leaflet con clusters, filtros multidimensionales,
  * gráficos estadísticos dinámicos y directorio paginado con geolocalización de alta precisión.
  */
@@ -13,6 +13,7 @@ const EquipamientoApp = {
   graficoRegimen: null,
   graficoTopCategorias: null,
   graficoDelegaciones: null,
+  inicializado: false,
   
   itemSeleccionadoId: null,
   marcadorSeleccionado: null,
@@ -52,6 +53,7 @@ const EquipamientoApp = {
     this.iniciarMapa();
     this.iniciarGraficos();
     this.aplicarFiltros();
+    this.inicializado = true;
   },
 
   poblarSelectores() {
@@ -59,7 +61,7 @@ const EquipamientoApp = {
     const selDel = document.getElementById('eqFiltroDelegacion');
 
     if (selCat) {
-      const cats = window.EQUIPAMIENTO_METRICAS.categorias || [];
+      const cats = (window.EQUIPAMIENTO_METRICAS && window.EQUIPAMIENTO_METRICAS.categorias) || [];
       const sortedCats = [...cats].sort((a, b) => b.total - a.total);
       
       let html = '<option value="todas">Todas las Categorías (33 clasificaciones)</option>';
@@ -70,7 +72,7 @@ const EquipamientoApp = {
     }
 
     if (selDel) {
-      const dels = window.EQUIPAMIENTO_METRICAS.delegaciones || [];
+      const dels = (window.EQUIPAMIENTO_METRICAS && window.EQUIPAMIENTO_METRICAS.delegaciones) || [];
       const sortedDels = [...dels].sort((a, b) => b.total - a.total);
 
       let html = '<option value="todas">Todas las Delegaciones (Municipio)</option>';
@@ -235,24 +237,43 @@ const EquipamientoApp = {
 
   aplicarFiltros() {
     const raw = window.EQUIPAMIENTO_ITEMS || [];
-    const fm = this.filtros.macro;
-    const fc = this.filtros.categoria;
-    const fd = this.filtros.delegacion;
-    const fr = this.filtros.regimen;
-    const ft = this.filtros.texto;
+    const fm = (this.filtros.macro || 'todos').toLowerCase().trim();
+    const fc = (this.filtros.categoria || 'todas').toLowerCase().trim();
+    const fd = (this.filtros.delegacion || 'todas').toLowerCase().trim();
+    const fr = (this.filtros.regimen || 'todos').toLowerCase().trim();
+    const ft = (this.filtros.texto || '').toLowerCase().trim();
 
     this.itemsFiltrados = raw.filter(item => {
-      if (fm !== 'todos' && item.m !== fm) return false;
-      if (fc !== 'todas' && item.c !== fc) return false;
-      if (fd !== 'todas' && item.d !== fd) return false;
-      if (fr === 'publico' && !item.p.includes('Público')) return false;
-      if (fr === 'privado' && !item.p.includes('Privado')) return false;
-      if (fr === 'social' && !item.p.includes('Social')) return false;
+      const itemMacro = (item.macroCategoria || item.m || '').toLowerCase().trim();
+      const itemCat = (item.categoria || item.c || '').toLowerCase().trim();
+      const itemDel = (item.delegacion || item.d || '').toLowerCase().trim();
+      const itemReg = (item.regimen || item.p || '').toLowerCase().trim();
 
+      // Filtro Macro-Sector
+      if (fm !== 'todos' && itemMacro !== fm) return false;
+
+      // Filtro Categoría
+      if (fc !== 'todas' && itemCat !== fc) return false;
+
+      // Filtro Delegación
+      if (fd !== 'todas' && itemDel !== fd) return false;
+
+      // Filtro Régimen
+      if (fr === 'publico' && !itemReg.includes('público') && !itemReg.includes('publico')) return false;
+      if (fr === 'privado' && !itemReg.includes('privado')) return false;
+      if (fr === 'social' && !itemReg.includes('social')) return false;
+
+      // Filtro Texto Libre (Búsqueda por nombre, giro, calle, colonia, etc.)
       if (ft) {
-        const busq = (item.n + ' ' + item.sc + ' ' + item.c + ' ' + item.d + ' ' + item.a + ' ' + item.col).toLowerCase();
-        if (!busq.includes(ft)) return false;
+        const nom = (item.nombre || item.n || '').toLowerCase();
+        const sub = (item.subtipo || item.sc || '').toLowerCase();
+        const act = (item.actividad || item.a || '').toLowerCase();
+        const dom = (item.domicilio || item.a || '').toLowerCase();
+        const col = (item.asentamiento || item.col || '').toLowerCase();
+        const haystack = `${nom} ${sub} ${itemCat} ${itemDel} ${act} ${col} ${dom}`;
+        if (!haystack.includes(ft)) return false;
       }
+
       return true;
     });
 
@@ -268,11 +289,14 @@ const EquipamientoApp = {
     const catCounts = {};
 
     this.itemsFiltrados.forEach(it => {
-      if (it.p.includes('Público')) pub++;
-      else if (it.p.includes('Privado')) priv++;
+      const reg = (it.regimen || it.p || '').toLowerCase();
+      const cat = it.categoria || it.c || 'Sin categoría';
+
+      if (reg.includes('público') || reg.includes('publico')) pub++;
+      else if (reg.includes('privado')) priv++;
       else soc++;
 
-      catCounts[it.c] = (catCounts[it.c] || 0) + 1;
+      catCounts[cat] = (catCounts[cat] || 0) + 1;
     });
 
     let topCat = 'N/A';
@@ -312,7 +336,7 @@ const EquipamientoApp = {
         data: {
           labels: ['Público', 'Privado', 'Social'],
           datasets: [{
-            data: [1838, 46171, 755],
+            data: [2613, 46295, 0],
             backgroundColor: ['#0A3B66', '#E11482', '#F5A800'],
             borderWidth: 2,
             borderColor: '#ffffff'
@@ -338,7 +362,7 @@ const EquipamientoApp = {
           labels: ['Comercio', 'Servicios Urbanos', 'Abasto', 'Salud', 'Educación', 'Otros'],
           datasets: [{
             label: 'Establecimientos',
-            data: [25928, 9519, 3409, 2363, 1963, 5582],
+            data: [25928, 9698, 3409, 2363, 2145, 5365],
             backgroundColor: '#009FB9',
             borderRadius: 6
           }]
@@ -365,7 +389,7 @@ const EquipamientoApp = {
           labels: ['Centro Pte', 'Pocitos', 'Centro Ote', 'San Marcos', 'Ojocaliente', 'Santa Anita'],
           datasets: [{
             label: 'Equipamientos',
-            data: [8014, 7941, 7501, 3238, 3126, 3020],
+            data: [8047, 7969, 7470, 3252, 3134, 3023],
             backgroundColor: '#0A3B66',
             borderRadius: 6
           }]
@@ -389,12 +413,16 @@ const EquipamientoApp = {
     const delMap = {};
 
     this.itemsFiltrados.forEach(it => {
-      if (it.p.includes('Público')) pub++;
-      else if (it.p.includes('Privado')) priv++;
+      const reg = (it.regimen || it.p || '').toLowerCase();
+      const cat = it.categoria || it.c || 'Sin categoría';
+      const del = it.delegacion || it.d || 'Aguascalientes';
+
+      if (reg.includes('público') || reg.includes('publico')) pub++;
+      else if (reg.includes('privado')) priv++;
       else soc++;
 
-      catMap[it.c] = (catMap[it.c] || 0) + 1;
-      delMap[it.d] = (delMap[it.d] || 0) + 1;
+      catMap[cat] = (catMap[cat] || 0) + 1;
+      delMap[del] = (delMap[del] || 0) + 1;
     });
 
     if (this.graficoRegimen) {
@@ -433,12 +461,23 @@ const EquipamientoApp = {
       } else {
         mapBadge.innerHTML = `<i data-lucide="check-circle" class="w-3.5 h-3.5"></i> ${puntosValidos.length.toLocaleString('es-MX')} ubicaciones en mapa`;
       }
-      lucide.createIcons();
+      if (window.lucide) lucide.createIcons();
     }
 
     const markers = [];
     puntos.forEach(item => {
-      let markerColor = this.obtenerColorCat(item.m);
+      const nombre = item.nombre || item.n || 'Equipamiento';
+      const cat = item.categoria || item.c || 'Equipamiento';
+      const macro = item.macroCategoria || item.m || '';
+      const subtipo = item.subtipo || item.sc || '';
+      const delegacion = item.delegacion || item.d || 'Aguascalientes';
+      const domicilio = item.domicilio || item.a || '';
+      const colonia = item.asentamiento || item.col || 'Aguascalientes';
+      const tel = item.telefono || item.tel || '';
+      const reg = item.regimen || item.p || 'Privado';
+      const zufo = item.zufo || item.z || '';
+
+      const markerColor = this.obtenerColorCat(macro);
 
       const customIcon = L.divIcon({
         className: 'custom-equip-pin',
@@ -449,24 +488,25 @@ const EquipamientoApp = {
 
       const m = L.marker([item.lat, item.lng], { icon: customIcon });
 
-      const badgeRegimen = item.p.includes('Público') 
+      const isPub = reg.toLowerCase().includes('público') || reg.toLowerCase().includes('publico');
+      const badgeRegimen = isPub 
         ? `<span style="background: #E0F2FE; color: #0369A1; padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: bold;">Público</span>`
         : `<span style="background: #FDF2F8; color: #BE185D; padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: bold;">Privado</span>`;
 
       const popupHtml = `
         <div style="font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-size: 12px; line-height: 1.4; min-width: 240px;">
           <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
-            <span style="font-size: 10px; font-weight: 800; text-transform: uppercase; color: ${markerColor}; letter-spacing: 0.5px;">${item.c}</span>
+            <span style="font-size: 10px; font-weight: 800; text-transform: uppercase; color: ${markerColor}; letter-spacing: 0.5px;">${cat}</span>
             ${badgeRegimen}
           </div>
-          <h4 style="font-size: 13px; font-weight: 800; color: #072B4B; margin: 0 0 4px 0;">${item.n}</h4>
-          <p style="font-size: 11px; color: #64748B; margin: 0 0 6px 0;">${item.sc}</p>
+          <h4 style="font-size: 13px; font-weight: 800; color: #072B4B; margin: 0 0 4px 0;">${nombre}</h4>
+          <p style="font-size: 11px; color: #64748B; margin: 0 0 6px 0;">${subtipo}</p>
           <div style="border-top: 1px solid #E2E8F0; padding-top: 6px; margin-top: 4px; font-size: 11px; color: #334155;">
-            <div><strong>Delegación:</strong> ${item.d}</div>
-            ${item.z ? `<div><strong>Región/ZUFO:</strong> ${item.z}</div>` : ''}
-            <div><strong>Colonia:</strong> ${item.col || 'Sin especificar'}</div>
-            <div><strong>Dirección:</strong> ${item.a}</div>
-            ${item.tel && item.tel !== '0' ? `<div><strong>Tel:</strong> <a href="tel:${item.tel}" style="color: #009FB9; font-weight: bold;">${item.tel}</a></div>` : ''}
+            <div><strong>Delegación:</strong> ${delegacion}</div>
+            ${zufo ? `<div><strong>Región/ZUFO:</strong> ${zufo}</div>` : ''}
+            <div><strong>Colonia:</strong> ${colonia}</div>
+            <div><strong>Dirección:</strong> ${domicilio}</div>
+            ${tel && tel !== '0' ? `<div><strong>Tel:</strong> <a href="tel:${tel}" style="color: #009FB9; font-weight: bold;">${tel}</a></div>` : ''}
           </div>
           <div style="margin-top: 8px; display: flex; gap: 4px;">
             <button onclick="EquipamientoApp.abrirFicha(${item.id})" style="flex: 1; padding: 5px 8px; background: #0A3B66; color: white; border: none; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer;">Ver Ficha</button>
@@ -513,30 +553,41 @@ const EquipamientoApp = {
       `;
     } else {
       tbody.innerHTML = itemsPagina.map(it => {
-        const badgeReg = it.p.includes('Público')
+        const nombre = it.nombre || it.n || 'Sin nombre';
+        const subtipo = it.subtipo || it.sc || '';
+        const cat = it.categoria || it.c || 'Equipamiento';
+        const macro = it.macroCategoria || it.m || '';
+        const reg = it.regimen || it.p || 'Privado';
+        const delegacion = it.delegacion || it.d || 'Aguascalientes';
+        const zufo = it.zufo || it.z || '-';
+        const domicilio = it.domicilio || it.a || '';
+        const colonia = it.asentamiento || it.col || 'Aguascalientes';
+
+        const isPub = reg.toLowerCase().includes('público') || reg.toLowerCase().includes('publico');
+        const badgeReg = isPub
           ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-brand-navy border border-blue-100">Público</span>`
           : `<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-pink-50 text-brand-magenta border border-pink-100">Privado</span>`;
 
         return `
           <tr class="hover:bg-slate-50/80 transition text-xs border-b border-slate-100">
             <td class="px-4 py-3 font-medium text-slate-900">
-              <div class="font-bold text-brand-navyDark">${it.n}</div>
-              <div class="text-[11px] text-slate-500 font-normal line-clamp-1">${it.sc}</div>
+              <div class="font-bold text-brand-navyDark">${nombre}</div>
+              <div class="text-[11px] text-slate-500 font-normal line-clamp-1">${subtipo}</div>
             </td>
             <td class="px-4 py-3">
               <span class="inline-flex items-center gap-1 font-semibold text-slate-700">
-                <span class="w-2 h-2 rounded-full" style="background-color: ${EquipamientoApp.obtenerColorCat(it.m)}"></span>
-                ${it.c}
+                <span class="w-2 h-2 rounded-full" style="background-color: ${EquipamientoApp.obtenerColorCat(macro)}"></span>
+                ${cat}
               </span>
             </td>
             <td class="px-4 py-3">${badgeReg}</td>
             <td class="px-4 py-3">
-              <div class="font-semibold text-slate-800">${it.d}</div>
-              <div class="text-[10px] text-slate-400">${it.z || '-'}</div>
+              <div class="font-semibold text-slate-800">${delegacion}</div>
+              <div class="text-[10px] text-slate-400">${zufo}</div>
             </td>
             <td class="px-4 py-3">
-              <div class="text-slate-700">${it.a}</div>
-              <div class="text-[11px] text-slate-400 font-medium">${it.col || 'Aguascalientes'}</div>
+              <div class="text-slate-700">${domicilio}</div>
+              <div class="text-[11px] text-slate-400 font-medium">${colonia}</div>
             </td>
             <td class="px-4 py-3 text-right whitespace-nowrap">
               <div class="flex items-center justify-end gap-1.5">
@@ -565,7 +616,7 @@ const EquipamientoApp = {
       btnSig.disabled = this.paginacion.paginaActual >= this.paginacion.totalPaginas;
     }
 
-    lucide.createIcons();
+    if (window.lucide) lucide.createIcons();
   },
 
   paginaAnterior() {
@@ -591,15 +642,26 @@ const EquipamientoApp = {
 
     this.itemSeleccionadoId = it.id;
 
+    const nombre = it.nombre || it.n || 'Equipamiento';
+    const cat = it.categoria || it.c || 'Equipamiento';
+    const macro = it.macroCategoria || it.m || '';
+    const subtipo = it.subtipo || it.sc || '';
+    const delegacion = it.delegacion || it.d || 'Aguascalientes';
+    const domicilio = it.domicilio || it.a || '';
+    const colonia = it.asentamiento || it.col || 'Aguascalientes';
+    const tel = it.telefono || it.tel || '';
+    const reg = it.regimen || it.p || 'Privado';
+    const zufo = it.zufo || it.z || '';
+
     // Actualizar y mostrar el banner de selección activa sobre el mapa
     const banner = document.getElementById('eqBannerSeleccionado');
     const bNombre = document.getElementById('eqBannerNombre');
     const bDetalle = document.getElementById('eqBannerDetalle');
     if (banner && bNombre && bDetalle) {
-      bNombre.innerText = it.n;
-      bDetalle.innerHTML = `<span class="font-semibold text-brand-navy">${it.c}</span> &bull; ${it.d} &bull; ${it.a}`;
+      bNombre.innerText = nombre;
+      bDetalle.innerHTML = `<span class="font-semibold text-brand-navy">${cat}</span> &bull; ${delegacion} &bull; ${domicilio}`;
       banner.classList.remove('hidden');
-      lucide.createIcons();
+      if (window.lucide) lucide.createIcons();
     }
 
     // Scroll suave hacia el contenedor del mapa
@@ -627,7 +689,7 @@ const EquipamientoApp = {
       easeLinearity: 0.25
     });
 
-    const markerColor = this.obtenerColorCat(it.m);
+    const markerColor = this.obtenerColorCat(macro);
     
     // Pin destacado con radar animado
     const pinIcon = L.divIcon({
@@ -657,25 +719,26 @@ const EquipamientoApp = {
       zIndexOffset: 25000
     }).addTo(this.mapa);
 
-    const badgeRegimen = it.p.includes('Público') 
+    const isPub = reg.toLowerCase().includes('público') || reg.toLowerCase().includes('publico');
+    const badgeRegimen = isPub 
       ? `<span style="background: #E0F2FE; color: #0369A1; padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 800;">PÚBLICO</span>`
       : `<span style="background: #FDF2F8; color: #BE185D; padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 800;">PRIVADO</span>`;
 
     const popupHtml = `
       <div style="font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-size: 12px; line-height: 1.4; min-width: 260px; padding: 4px 2px;">
         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; border-bottom: 1px solid #E2E8F0; padding-bottom: 6px;">
-          <span style="font-size: 10px; font-weight: 800; text-transform: uppercase; color: ${markerColor}; letter-spacing: 0.5px;">📍 ${it.c}</span>
+          <span style="font-size: 10px; font-weight: 800; text-transform: uppercase; color: ${markerColor}; letter-spacing: 0.5px;">📍 ${cat}</span>
           ${badgeRegimen}
         </div>
-        <h4 style="font-size: 14px; font-weight: 800; color: #072B4B; margin: 0 0 4px 0; line-height: 1.25;">${it.n}</h4>
-        <p style="font-size: 11px; color: #64748B; margin: 0 0 8px 0; font-weight: 500;">${it.sc}</p>
+        <h4 style="font-size: 14px; font-weight: 800; color: #072B4B; margin: 0 0 4px 0; line-height: 1.25;">${nombre}</h4>
+        <p style="font-size: 11px; color: #64748B; margin: 0 0 8px 0; font-weight: 500;">${subtipo}</p>
         
         <div style="background: #F8FAFC; border-radius: 8px; padding: 8px; border: 1px solid #E2E8F0; font-size: 11px; color: #334155; margin-bottom: 8px;">
-          <div style="margin-bottom: 3px;"><strong>Delegación:</strong> ${it.d}</div>
-          ${it.z ? `<div style="margin-bottom: 3px;"><strong>Región/ZUFO:</strong> ${it.z}</div>` : ''}
-          <div style="margin-bottom: 3px;"><strong>Colonia:</strong> ${it.col || 'Aguascalientes'}</div>
-          <div style="margin-bottom: 3px;"><strong>Dirección:</strong> ${it.a}</div>
-          ${it.tel && it.tel !== '0' ? `<div><strong>Teléfono:</strong> <a href="tel:${it.tel}" style="color: #009FB9; font-weight: bold;">${it.tel}</a></div>` : ''}
+          <div style="margin-bottom: 3px;"><strong>Delegación:</strong> ${delegacion}</div>
+          ${zufo ? `<div style="margin-bottom: 3px;"><strong>Región/ZUFO:</strong> ${zufo}</div>` : ''}
+          <div style="margin-bottom: 3px;"><strong>Colonia:</strong> ${colonia}</div>
+          <div style="margin-bottom: 3px;"><strong>Dirección:</strong> ${domicilio}</div>
+          ${tel && tel !== '0' ? `<div><strong>Teléfono:</strong> <a href="tel:${tel}" style="color: #009FB9; font-weight: bold;">${tel}</a></div>` : ''}
         </div>
 
         <div style="display: flex; gap: 6px;">
@@ -696,14 +759,12 @@ const EquipamientoApp = {
       offset: [0, -10]
     });
 
-    // Abrir el popup exactamente al finalizar el desplazamiento
     setTimeout(() => {
       if (this.marcadorSeleccionado) {
         this.marcadorSeleccionado.openPopup();
       }
     }, 500);
 
-    // Expandir cluster si estuviera agrupado
     if (this.clusterGroup) {
       this.clusterGroup.eachLayer(layer => {
         const pos = layer.getLatLng();
@@ -738,7 +799,19 @@ const EquipamientoApp = {
     const cont = document.getElementById('modalFichaContenido');
     if (!modal || !cont) return;
 
-    const badgeReg = it.p.includes('Público')
+    const nombre = it.nombre || it.n || 'Equipamiento';
+    const cat = it.categoria || it.c || 'Equipamiento';
+    const macro = it.macroCategoria || it.m || 'Equipamiento Urbano';
+    const subtipo = it.subtipo || it.sc || '';
+    const delegacion = it.delegacion || it.d || 'Aguascalientes';
+    const domicilio = it.domicilio || it.a || 'Sin especificar';
+    const colonia = it.asentamiento || it.col || 'Municipio de Aguascalientes';
+    const tel = it.telefono || it.tel || '';
+    const reg = it.regimen || it.p || 'Privado';
+    const zufo = it.zufo || it.z || '';
+
+    const isPub = reg.toLowerCase().includes('público') || reg.toLowerCase().includes('publico');
+    const badgeReg = isPub
       ? `<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-blue-100 text-brand-navy">Público</span>`
       : `<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-pink-100 text-brand-magenta">Privado</span>`;
 
@@ -746,35 +819,35 @@ const EquipamientoApp = {
       <div class="space-y-6">
         <div class="p-6 rounded-2xl text-white relative overflow-hidden" style="background: linear-gradient(135deg, #072B4B 0%, #0A3B66 100%);">
           <div class="flex items-center justify-between gap-4 mb-2">
-            <span class="text-xs font-bold uppercase tracking-wider text-cyan-300">${it.m} &bull; ${it.c}</span>
+            <span class="text-xs font-bold uppercase tracking-wider text-cyan-300">${macro} &bull; ${cat}</span>
             ${badgeReg}
           </div>
-          <h3 class="text-xl sm:text-2xl font-black font-display tracking-tight text-white">${it.n}</h3>
-          <p class="text-xs text-slate-300 mt-1">${it.sc}</p>
+          <h3 class="text-xl sm:text-2xl font-black font-display tracking-tight text-white">${nombre}</h3>
+          <p class="text-xs text-slate-300 mt-1">${subtipo}</p>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
           <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
             <span class="text-slate-400 block text-[10px] font-bold uppercase tracking-wider mb-1">Ubicación y Delegación</span>
-            <div class="font-bold text-slate-800 text-sm">${it.d}</div>
-            <div class="text-slate-500 mt-0.5">${it.z ? 'Región / ZUFO: ' + it.z : 'Zona Urbana Aguascalientes'}</div>
+            <div class="font-bold text-slate-800 text-sm">${delegacion}</div>
+            <div class="text-slate-500 mt-0.5">${zufo ? 'Región / ZUFO: ' + zufo : 'Zona Urbana Aguascalientes'}</div>
           </div>
 
           <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
             <span class="text-slate-400 block text-[10px] font-bold uppercase tracking-wider mb-1">Colonia / Asentamiento</span>
-            <div class="font-bold text-slate-800 text-sm">${it.col || 'Municipio de Aguascalientes'}</div>
-            <div class="text-slate-500 mt-0.5">Dirección: ${it.a}</div>
+            <div class="font-bold text-slate-800 text-sm">${colonia}</div>
+            <div class="text-slate-500 mt-0.5">Dirección: ${domicilio}</div>
           </div>
 
           <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
             <span class="text-slate-400 block text-[10px] font-bold uppercase tracking-wider mb-1">Contacto y Comunicación</span>
-            <div class="font-bold text-slate-800 text-sm">${it.tel && it.tel !== '0' ? it.tel : 'Sin teléfono directo'}</div>
+            <div class="font-bold text-slate-800 text-sm">${tel && tel !== '0' ? tel : 'Sin teléfono directo'}</div>
             <div class="text-slate-500 mt-0.5">Atención municipal: Línea 072</div>
           </div>
 
           <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
             <span class="text-slate-400 block text-[10px] font-bold uppercase tracking-wider mb-1">Coordenadas Georreferenciadas</span>
-            <div class="font-bold font-mono text-slate-800">${it.lat.toFixed(5)}, ${it.lng.toFixed(5)}</div>
+            <div class="font-bold font-mono text-slate-800">${Number(it.lat).toFixed(5)}, ${Number(it.lng).toFixed(5)}</div>
             <div class="text-slate-500 mt-0.5">Datum WGS84 / UTM 13N</div>
           </div>
         </div>
@@ -794,7 +867,7 @@ const EquipamientoApp = {
     `;
 
     modal.classList.remove('hidden');
-    lucide.createIcons();
+    if (window.lucide) lucide.createIcons();
   },
 
   cerrarFicha() {
@@ -813,18 +886,29 @@ const EquipamientoApp = {
     let csvContent = "\uFEFF" + headers.join(",") + "\n";
 
     this.itemsFiltrados.forEach(it => {
+      const nombre = it.nombre || it.n || '';
+      const cat = it.categoria || it.c || '';
+      const macro = it.macroCategoria || it.m || '';
+      const subtipo = it.subtipo || it.sc || '';
+      const reg = it.regimen || it.p || '';
+      const delegacion = it.delegacion || it.d || '';
+      const zufo = it.zufo || it.z || '';
+      const colonia = it.asentamiento || it.col || '';
+      const domicilio = it.domicilio || it.a || '';
+      const tel = it.telefono || it.tel || '';
+
       const row = [
         it.id,
-        `"${(it.c || '').replace(/"/g, '""')}"`,
-        `"${(it.m || '').replace(/"/g, '""')}"`,
-        `"${(it.sc || '').replace(/"/g, '""')}"`,
-        `"${(it.n || '').replace(/"/g, '""')}"`,
-        `"${(it.p || '').replace(/"/g, '""')}"`,
-        `"${(it.d || '').replace(/"/g, '""')}"`,
-        `"${(it.z || '').replace(/"/g, '""')}"`,
-        `"${(it.col || '').replace(/"/g, '""')}"`,
-        `"${(it.a || '').replace(/"/g, '""')}"`,
-        `"${(it.tel || '').replace(/"/g, '""')}"`,
+        `"${cat.replace(/"/g, '""')}"`,
+        `"${macro.replace(/"/g, '""')}"`,
+        `"${subtipo.replace(/"/g, '""')}"`,
+        `"${nombre.replace(/"/g, '""')}"`,
+        `"${reg.replace(/"/g, '""')}"`,
+        `"${delegacion.replace(/"/g, '""')}"`,
+        `"${zufo.replace(/"/g, '""')}"`,
+        `"${colonia.replace(/"/g, '""')}"`,
+        `"${domicilio.replace(/"/g, '""')}"`,
+        `"${tel.replace(/"/g, '""')}"`,
         it.lat,
         it.lng
       ];
@@ -844,7 +928,7 @@ const EquipamientoApp = {
   obtenerColorCat(macro) {
     if (!macro) return '#009FB9';
     if (macro.includes('Salud')) return '#E11482';
-    if (macro.includes('Educación')) return '#0A3B66';
+    if (macro.includes('Educación') || macro.includes('Educacion')) return '#0A3B66';
     if (macro.includes('Cultura')) return '#7C3AED';
     if (macro.includes('Deporte')) return '#72B626';
     if (macro.includes('Comercio')) return '#F5A800';
