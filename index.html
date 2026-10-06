@@ -617,11 +617,11 @@
                 <i data-lucide="users" class="w-4 h-4 text-brand-navy"></i>
               </div>
             </div>
-            <div id="kpiPobTot" class="text-2xl sm:text-3xl font-extrabold text-brand-navy font-display mt-2">540,552</div>
+            <div id="kpiPobTot" class="text-2xl sm:text-3xl font-extrabold text-brand-navy font-display mt-2">948,990</div>
           </div>
           <div class="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-[11px]">
-            <span id="kpiPobFem" class="text-pink-600 font-semibold">51.4% Mujeres</span>
-            <span id="kpiPobMas" class="text-cyan-700 font-semibold">48.3% Hombres</span>
+            <span id="kpiPobFem" class="text-pink-600 font-semibold">51.5% Mujeres</span>
+            <span id="kpiPobMas" class="text-cyan-700 font-semibold">48.5% Hombres</span>
           </div>
         </div>
 
@@ -634,11 +634,11 @@
                 <i data-lucide="home" class="w-4 h-4"></i>
               </div>
             </div>
-            <div id="kpiVivHab" class="text-2xl sm:text-3xl font-extrabold text-emerald-700 font-display mt-2">147,516</div>
+            <div id="kpiVivHab" class="text-2xl sm:text-3xl font-extrabold text-emerald-700 font-display mt-2">263,952</div>
           </div>
           <div class="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-[11px]">
             <span class="text-slate-500">Promedio de ocupantes:</span>
-            <span id="kpiPromOcup" class="font-bold text-slate-800">3.66 hab/viv</span>
+            <span id="kpiPromOcup" class="font-bold text-slate-800">3.60 hab/viv</span>
           </div>
         </div>
 
@@ -651,11 +651,11 @@
                 <i data-lucide="briefcase" class="w-4 h-4"></i>
               </div>
             </div>
-            <div id="kpiPEA" class="text-2xl sm:text-3xl font-extrabold text-amber-700 font-display mt-2">275,661</div>
+            <div id="kpiPEA" class="text-2xl sm:text-3xl font-extrabold text-amber-700 font-display mt-2">483,217</div>
           </div>
           <div class="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-[11px]">
-            <span id="kpiPEAPct" class="text-slate-600 font-medium">51.0% de la población</span>
-            <span id="kpiPocupada" class="font-bold text-emerald-600">97.8% Ocupada</span>
+            <span id="kpiPEAPct" class="text-slate-600 font-medium">50.9% de la población</span>
+            <span id="kpiPocupada" class="font-bold text-emerald-600">97.9% Ocupada</span>
           </div>
         </div>
 
@@ -668,11 +668,11 @@
                 <i data-lucide="heart-pulse" class="w-4 h-4"></i>
               </div>
             </div>
-            <div id="kpiSalud" class="text-2xl sm:text-3xl font-extrabold text-indigo-700 font-display mt-2">441,603</div>
+            <div id="kpiSalud" class="text-2xl sm:text-3xl font-extrabold text-indigo-700 font-display mt-2">771,321</div>
           </div>
           <div class="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-[11px]">
-            <span id="kpiSaludPct" class="text-indigo-600 font-bold">81.7% Cobertura</span>
-            <span id="kpiInternetPct" class="text-slate-500 font-medium">69.6% Internet</span>
+            <span id="kpiSaludPct" class="text-indigo-600 font-bold">81.3% Cobertura</span>
+            <span id="kpiInternetPct" class="text-slate-500 font-medium">66.8% Internet</span>
           </div>
         </div>
       </div>
@@ -2457,11 +2457,16 @@
     function renderizarMetricas() {
       const cont = document.getElementById('contenedorMetricas');
       if (!cont || !PIMAGS_DATA.metricas) return;
-      cont.innerHTML = PIMAGS_DATA.metricas.map(m => `
+      cont.innerHTML = PIMAGS_DATA.metricas.map(m => {
+        let valorDisplay = m.valor;
+        if (m.id === 'poblacion' && typeof CENSO_MUNICIPAL !== 'undefined' && CENSO_MUNICIPAL.pobtot) {
+          valorDisplay = Number(CENSO_MUNICIPAL.pobtot).toLocaleString('es-MX');
+        }
+        return `
         <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm hover:shadow-md transition flex items-center justify-between">
           <div>
             <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">${m.etiqueta}</span>
-            <div class="text-2xl sm:text-3xl font-extrabold text-brand-navy mt-1 font-display">${m.valor}</div>
+            <div class="text-2xl sm:text-3xl font-extrabold text-brand-navy mt-1 font-display">${valorDisplay}</div>
             <span class="text-[11px] font-semibold text-emerald-600 flex items-center gap-1 mt-1">
               <i data-lucide="trending-up" class="w-3 h-3"></i> ${m.cambio}
             </span>
@@ -2470,7 +2475,8 @@
             <i data-lucide="${m.icono}" class="w-6 h-6 text-brand-cyan"></i>
           </div>
         </div>
-      `).join('');
+      `;
+      }).join('');
       lucide.createIcons();
     }
 
