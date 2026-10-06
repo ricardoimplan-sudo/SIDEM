@@ -253,17 +253,24 @@
                 <div class="flex flex-wrap items-center gap-2">
                   <!-- Selector de Delegaciones -->
                   <div class="relative">
-                    <select id="heroSelectDelegacion" onchange="irADelegacionHero(this.value)" class="bg-black/60 hover:bg-black/80 text-white text-xs font-semibold border border-white/20 rounded-xl px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition cursor-pointer">
-                      <option value="">📍 Explorar Delegación...</option>
-                      <option value="centro">Delegación Centro (142,000 hab.)</option>
-                      <option value="pocitos">Delegación Pocitos (168,000 hab.)</option>
-                      <option value="villas">Delegación Villas de N.S.A. (195,000 hab.)</option>
-                      <option value="insurgentes">Delegación Insurgentes (125,000 hab.)</option>
-                      <option value="morelos">Delegación Morelos (110,000 hab.)</option>
-                      <option value="teran">Delegación Jesús Terán (68,000 hab.)</option>
-                      <option value="calvillito">Delegación Calvillito (48,990 hab.)</option>
-                      <option value="salto">Delegación Salto de los Salado (32,500 hab.)</option>
-                      <option value="penuelas">Delegación Peñuelas (28,400 hab.)</option>
+                    <select id="heroSelectDelegacion" onchange="irADelegacionHero(this.value)" class="bg-black/60 hover:bg-black/80 text-white text-xs font-semibold border border-white/20 rounded-xl px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition cursor-pointer max-w-[200px] sm:max-w-none truncate">
+                      <option value="">📍 Explorar las 16 Delegaciones...</option>
+                      <option value="Calvillito">Delegación Calvillito</option>
+                      <option value="Cañada Honda">Delegación Cañada Honda</option>
+                      <option value="Centro Oriente">Delegación Centro Oriente</option>
+                      <option value="Centro Poniente">Delegación Centro Poniente</option>
+                      <option value="Guadalupe Peralta">Delegación Guadalupe Peralta</option>
+                      <option value="Insurgentes">Delegación Insurgentes</option>
+                      <option value="Morelos">Delegación Morelos</option>
+                      <option value="Mujeres Ilustres">Delegación Mujeres Ilustres</option>
+                      <option value="Ojocaliente">Delegación Ojocaliente</option>
+                      <option value="Peñuelas">Delegación Peñuelas</option>
+                      <option value="Pocitos">Delegación Pocitos</option>
+                      <option value="Pozo Bravo">Delegación Pozo Bravo</option>
+                      <option value="Salto de los Salado">Delegación Salto de los Salado</option>
+                      <option value="San Marcos">Delegación San Marcos</option>
+                      <option value="Santa Anita">Delegación Santa Anita</option>
+                      <option value="Villas de Nuestra Señora de la Asunción">Delegación Villas de N.S.A.</option>
                     </select>
                   </div>
 
@@ -545,18 +552,23 @@
               Filtrar por Delegación Municipal:
             </label>
             <select id="selectDelegacionCensal" onchange="filtrarCensoDelegacion(this.value)" class="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-xl text-xs font-bold text-brand-navy focus:ring-2 focus:ring-brand-cyan focus:outline-none transition shadow-sm cursor-pointer">
-              <option value="todas">📍 Todo el Municipio (Consolidado - 236 Colonias/Localidades)</option>
-              <option value="Calvillito">Delegación Calvillito (11 Localidades)</option>
-              <option value="Cañada Honda">Delegación Cañada Honda (8 Localidades)</option>
-              <option value="Centro Oriente">Delegación Centro Oriente (44 Colonias/Localidades)</option>
-              <option value="Centro Poniente">Delegación Centro Poniente (29 Colonias/Localidades)</option>
-              <option value="Guadalupe Peralta">Delegación Guadalupe Peralta (27 Colonias/Localidades)</option>
-              <option value="Insurgentes">Delegación Insurgentes (31 Colonias/Localidades)</option>
-              <option value="Morelos">Delegación Morelos (25 Colonias/Localidades)</option>
-              <option value="Mujeres Ilustres">Delegación Mujeres Ilustres (31 Colonias/Localidades)</option>
-              <option value="Ojocaliente">Delegación Ojocaliente (24 Colonias/Localidades)</option>
-              <option value="Peñuelas">Delegación Peñuelas (Localidades Rurales)</option>
-              <option value="Pocitos">Delegación Pocitos (5 Colonias/Localidades)</option>
+              <option value="todas">📍 Todo el Municipio (16 Delegaciones &bull; 390 Colonias/Localidades)</option>
+              <option value="Calvillito">Delegación Calvillito</option>
+              <option value="Cañada Honda">Delegación Cañada Honda</option>
+              <option value="Centro Oriente">Delegación Centro Oriente</option>
+              <option value="Centro Poniente">Delegación Centro Poniente</option>
+              <option value="Guadalupe Peralta">Delegación Guadalupe Peralta</option>
+              <option value="Insurgentes">Delegación Insurgentes</option>
+              <option value="Morelos">Delegación Morelos</option>
+              <option value="Mujeres Ilustres">Delegación Mujeres Ilustres</option>
+              <option value="Ojocaliente">Delegación Ojocaliente</option>
+              <option value="Peñuelas">Delegación Peñuelas</option>
+              <option value="Pocitos">Delegación Pocitos</option>
+              <option value="Pozo Bravo">Delegación Pozo Bravo</option>
+              <option value="Salto de los Salado">Delegación Salto de los Salado</option>
+              <option value="San Marcos">Delegación San Marcos</option>
+              <option value="Santa Anita">Delegación Santa Anita</option>
+              <option value="Villas de Nuestra Señora de la Asunción">Delegación Villas de N.S.A.</option>
             </select>
           </div>
 
@@ -2877,15 +2889,22 @@
     let heroDelegacionesMarkers = {};
 
     const DELEGACIONES_AGS = [
-      { id: "centro", nombre: "Delegación Centro", lat: 21.8820, lng: -102.2960, poblacion: "142,000 hab.", color: "#E11482", icono: "landmark", desc: "Corazón histórico y administrativo de Aguascalientes." },
-      { id: "pocitos", nombre: "Delegación Pocitos", lat: 21.9180, lng: -102.3250, poblacion: "168,000 hab.", color: "#0A3B66", icono: "compass", desc: "Zona norte residencial, comercial y educativa de alta plusvalía." },
-      { id: "villas", nombre: "Delegación Villas de N.S.A.", lat: 21.9350, lng: -102.2580, poblacion: "195,000 hab.", color: "#009FB9", icono: "home", desc: "Zona nororiente de mayor densidad y crecimiento habitacional." },
-      { id: "insurgentes", nombre: "Delegación Insurgentes", lat: 21.8550, lng: -102.3200, poblacion: "125,000 hab.", color: "#72B626", icono: "activity", desc: "Zona poniente con vocación mixta y equipamientos comunitarios." },
-      { id: "morelos", nombre: "Delegación Morelos", lat: 21.8590, lng: -102.2650, poblacion: "110,000 hab.", color: "#F5A800", icono: "truck", desc: "Zona sur industrial, comercial y de servicios de transporte." },
-      { id: "teran", nombre: "Delegación Jesús Terán", lat: 21.8950, lng: -102.2450, poblacion: "68,000 hab.", color: "#6366F1", icono: "sun", desc: "Zona oriente con desarrollo urbano y comunidades tradicionales." },
-      { id: "calvillito", nombre: "Delegación Calvillito", lat: 21.8150, lng: -102.2050, poblacion: "48,990 hab.", color: "#EC4899", icono: "mountain", desc: "Sector suroriente suburbano y de producción agropecuaria." },
-      { id: "salto", nombre: "Delegación Salto de los Salado", lat: 21.7580, lng: -102.3450, poblacion: "32,500 hab.", color: "#14B8A6", icono: "trees", desc: "Comunidad del surponiente con gran valor natural y ejidal." },
-      { id: "penuelas", nombre: "Delegación Peñuelas", lat: 21.7250, lng: -102.2780, poblacion: "28,400 hab.", color: "#8B5CF6", icono: "map-pin", desc: "Sector sur conectado con el Aeropuerto y parques industriales." }
+      { id: "Calvillito", nombre: "Delegación Calvillito", lat: 21.8150, lng: -102.2050, poblacion: "48,990 hab.", color: "#EC4899", icono: "mountain", desc: "Demarcación suroriente suburbana con vocación agropecuaria y comunidades tradicionales." },
+      { id: "Cañada Honda", nombre: "Delegación Cañada Honda", lat: 21.9950, lng: -102.1980, poblacion: "14,148 hab.", color: "#10B981", icono: "trees", desc: "Comunidad del nororiente municipal con vocación ejidal, educativa y agrícola." },
+      { id: "Centro Oriente", nombre: "Delegación Centro Oriente", lat: 21.8845, lng: -102.2850, poblacion: "78,500 hab.", color: "#E11482", icono: "landmark", desc: "Sector tradicional que abarca La Purísima, San Pablo, Gremial y corredor Alameda." },
+      { id: "Centro Poniente", nombre: "Delegación Centro Poniente", lat: 21.8820, lng: -102.2990, poblacion: "63,500 hab.", color: "#E11482", icono: "landmark", desc: "Corazón histórico, comercial y administrativo de Aguascalientes y Plaza de la Patria." },
+      { id: "Guadalupe Peralta", nombre: "Delegación Guadalupe Peralta", lat: 21.8830, lng: -102.2410, poblacion: "85,400 hab.", color: "#009FB9", icono: "home", desc: "Importante sector habitacional y comercial del oriente con rápido crecimiento." },
+      { id: "Insurgentes", nombre: "Delegación Insurgentes", lat: 21.8550, lng: -102.3200, poblacion: "125,000 hab.", color: "#72B626", icono: "activity", desc: "Zona poniente y surponiente con vocación mixta, vivienda y equipamientos comunitarios." },
+      { id: "Morelos", nombre: "Delegación Morelos", lat: 21.8590, lng: -102.2650, poblacion: "110,000 hab.", color: "#F5A800", icono: "truck", desc: "Zona sur industrial, comercial y de servicios de transporte e infraestructura." },
+      { id: "Mujeres Ilustres", nombre: "Delegación Mujeres Ilustres", lat: 21.8480, lng: -102.2530, poblacion: "74,200 hab.", color: "#8B5CF6", icono: "heart", desc: "Sector habitacional del suroriente con desarrollos modernos y centros comunitarios." },
+      { id: "Ojocaliente", nombre: "Delegación Ojocaliente", lat: 21.8920, lng: -102.2560, poblacion: "92,000 hab.", color: "#3B82F6", icono: "layers", desc: "Demarcación oriente con amplia zona residencial, parques y corredores de servicios." },
+      { id: "Peñuelas", nombre: "Delegación Peñuelas", lat: 21.7250, lng: -102.2780, poblacion: "28,400 hab.", color: "#6366F1", icono: "map-pin", desc: "Sector sur conectado con el Aeropuerto Internacional y parques industriales automotrices." },
+      { id: "Pocitos", nombre: "Delegación Pocitos", lat: 21.9180, lng: -102.3250, poblacion: "168,000 hab.", color: "#0A3B66", icono: "compass", desc: "Zona norte residencial, corporativa y universitaria (UAA) de alta plusvalía." },
+      { id: "Pozo Bravo", nombre: "Delegación Pozo Bravo", lat: 21.9280, lng: -102.2790, poblacion: "68,000 hab.", color: "#0284C7", icono: "compass", desc: "Sector norte habitacional conectado con Av. Constitución y Tercer Anillo." },
+      { id: "Salto de los Salado", nombre: "Delegación Salto de los Salado", lat: 21.7580, lng: -102.3450, poblacion: "32,500 hab.", color: "#14B8A6", icono: "trees", desc: "Comunidad del surponiente con gran valor natural, reservas ejidales y paisaje rural." },
+      { id: "San Marcos", nombre: "Delegación San Marcos", lat: 21.8790, lng: -102.3120, poblacion: "82,000 hab.", color: "#D97706", icono: "award", desc: "Sector poniente tradicional, sede de la Feria Nacional de San Marcos e Isla San Marcos." },
+      { id: "Santa Anita", nombre: "Delegación Santa Anita", lat: 21.8980, lng: -102.2690, poblacion: "58,000 hab.", color: "#059669", icono: "sun", desc: "Demarcación nororiente con gran arraigo, comercios locales e infraestructura deportiva." },
+      { id: "Villas de Nuestra Señora de la Asunción", nombre: "Delegación Villas de N.S.A.", lat: 21.9350, lng: -102.2580, poblacion: "195,000 hab.", color: "#009FB9", icono: "home", desc: "Zona nororiente de mayor densidad poblacional y desarrollo habitacional del municipio." }
     ];
 
     const HITOS_URBANOS_AGS = [
@@ -2978,18 +2997,18 @@
           }).addTo(mapHero);
 
           marker.bindPopup(`
-            <div class="p-2 space-y-1.5 min-w-[200px]">
+            <div class="p-2 space-y-1.5 min-w-[210px]">
               <div class="flex items-center justify-between gap-2 border-b border-slate-100 pb-1.5">
                 <span class="font-bold text-slate-900 text-sm">${d.nombre}</span>
                 <span class="w-3 h-3 rounded-full" style="background:${d.color}"></span>
               </div>
-              <p class="text-xs text-slate-600">${d.desc}</p>
+              <p class="text-xs text-slate-600 leading-snug">${d.desc}</p>
               <div class="flex items-center justify-between text-xs pt-1">
                 <span class="text-slate-400">Población:</span>
                 <strong class="text-brand-navy font-bold">${d.poblacion}</strong>
               </div>
-              <div class="pt-1">
-                <button onclick="cambiarSeccion('censal')" class="w-full py-1 text-center bg-slate-100 hover:bg-slate-200 text-brand-navy font-bold rounded-lg text-[11px] transition">
+              <div class="pt-1.5">
+                <button onclick="irACensoDelegacionDirecto('${d.id}')" class="w-full py-1.5 text-center bg-brand-navy hover:bg-blue-900 text-white font-bold rounded-lg text-[11px] transition shadow-sm cursor-pointer">
                   Ver estadísticas censales &rarr;
                 </button>
               </div>
@@ -3101,6 +3120,16 @@
         });
       }
     }
+
+    function irACensoDelegacionDirecto(delId) {
+      cambiarSeccion('censal');
+      setTimeout(() => {
+        filtrarCensoDelegacion(delId);
+        const sel = document.getElementById('selectDelegacionCensal');
+        if (sel) sel.value = delId;
+      }, 250);
+    }
+    window.irACensoDelegacionDirecto = irACensoDelegacionDirecto;
 
     // =======================================================
     // GEOVISOR IDEAGS CARTOGRAFICO (SECCION 6)
