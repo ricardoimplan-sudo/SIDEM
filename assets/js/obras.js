@@ -300,7 +300,7 @@ window.ObrasApp = {
         return false;
       }
       if (this.filtros.texto) {
-        const fullTxt = `${item.nombre} ${item.descripcion} ${item.clave} ${item.colonia} ${item.rubro} ${item.fuente}`.toLowerCase();
+        const fullTxt = `${item.nombre} ${item.descripcion} ${item.clave} ${item.colonia} ${item.rubro} ${item.fuente} ${item.resumen_tecnico || ''}`.toLowerCase();
         if (!fullTxt.includes(this.filtros.texto)) {
           return false;
         }
@@ -389,7 +389,7 @@ window.ObrasApp = {
           </div>
           ${fotoHtml}
           <h4 class="font-bold text-xs text-slate-900 leading-tight mb-1">${item.nombre}</h4>
-          <p class="text-[11px] text-slate-500 mb-2 line-clamp-2">${item.descripcion}</p>
+          <p class="text-[11px] text-slate-600 mb-2 line-clamp-3 leading-snug">${item.resumen_tecnico || item.descripcion}</p>
           <div class="bg-slate-50 p-2 rounded-lg border border-slate-100 mb-2.5 space-y-1 text-[11px]">
             <div class="flex justify-between">
               <span class="text-slate-400">Inversión:</span>
@@ -733,6 +733,47 @@ window.ObrasApp = {
           <h3 class="text-lg font-black text-slate-900 leading-snug font-display">${item.nombre}</h3>
           <p class="text-xs text-slate-600 mt-2 bg-slate-50 p-3 rounded-xl border border-slate-200/80 leading-relaxed">${item.descripcion}</p>
         </div>
+
+        ${item.resumen_tecnico ? `
+          <div class="p-4 bg-gradient-to-br from-blue-50/90 via-sky-50/50 to-slate-50 rounded-2xl border border-blue-200/90 shadow-sm space-y-2.5">
+            <div class="flex items-center justify-between gap-2 flex-wrap">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-brand-cyan animate-pulse"></span>
+                <span class="text-xs font-black text-brand-navy uppercase tracking-wider font-display">Resumen Técnico de la Obra (Expediente Oficial 2022)</span>
+              </div>
+              ${item.departamento ? `
+                <span class="px-2.5 py-0.5 bg-blue-100 text-blue-900 text-[10px] font-bold rounded-full border border-blue-200">
+                  ${item.departamento}
+                </span>
+              ` : ''}
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed text-justify font-sans bg-white/80 p-3.5 rounded-xl border border-blue-100/80 shadow-xs">
+              ${item.resumen_tecnico}
+            </p>
+            ${(item.avance_fisico || item.avance_financiero || item.fecha_inicio) ? `
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 text-[11px]">
+                <div class="p-2.5 bg-white rounded-xl border border-slate-200/80 shadow-xs">
+                  <span class="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">Avance Físico</span>
+                  <div class="flex items-center gap-1.5 mt-0.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    <span class="font-black text-emerald-700 text-xs">${item.avance_fisico ? item.avance_fisico + '%' : '100%'}</span>
+                  </div>
+                </div>
+                <div class="p-2.5 bg-white rounded-xl border border-slate-200/80 shadow-xs">
+                  <span class="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">Avance Financiero</span>
+                  <div class="flex items-center gap-1.5 mt-0.5">
+                    <span class="w-2 h-2 rounded-full bg-cyan-500"></span>
+                    <span class="font-black text-brand-cyan text-xs">${item.avance_financiero ? item.avance_financiero + '%' : '100%'}</span>
+                  </div>
+                </div>
+                <div class="p-2.5 bg-white rounded-xl border border-slate-200/80 col-span-2 shadow-xs">
+                  <span class="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">Periodo de Ejecución</span>
+                  <span class="font-bold text-slate-800 text-xs mt-0.5 block">${(item.fecha_inicio && item.fecha_fin) ? `${item.fecha_inicio} al ${item.fecha_fin}` : 'Ejercicio Fiscal 2022'}</span>
+                </div>
+              </div>
+            ` : ''}
+          </div>
+        ` : ''}
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
           <div class="p-3 bg-gradient-to-br from-slate-50 to-blue-50/40 rounded-xl border border-slate-200">
