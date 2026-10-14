@@ -76,6 +76,16 @@ window.ObrasApp = {
       });
       selRubro.innerHTML = html;
     }
+
+    // Actualizar conteos dinámicos en las pestañas de años
+    if (window.OBRAS_METRICAS) {
+      const tabTodos = document.querySelector('#tabObraAnioTodos span:last-child');
+      if (tabTodos) tabTodos.textContent = `Todos los Proyectos (${window.OBRAS_METRICAS.totalObras || 531})`;
+      (window.OBRAS_METRICAS.porAnio || []).forEach(pa => {
+        const tabAnio = document.querySelector(`#tabObraAnio${pa.anio} span:last-child`);
+        if (tabAnio) tabAnio.textContent = `${pa.anio} (${pa.total})`;
+      });
+    }
   },
 
   iniciarMapa() {
