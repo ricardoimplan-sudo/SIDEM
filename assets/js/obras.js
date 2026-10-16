@@ -946,7 +946,7 @@ window.ObrasApp = {
             <div class="flex items-center justify-between gap-2 flex-wrap">
               <div class="flex items-center gap-2">
                 <span class="w-2.5 h-2.5 rounded-full bg-brand-cyan animate-pulse"></span>
-                <span class="text-xs font-black text-brand-navy uppercase tracking-wider font-display">Resumen Técnico de la Obra (Expediente Oficial 2022)</span>
+                <span class="text-xs font-black text-brand-navy uppercase tracking-wider font-display">Resumen Técnico de la Obra (Expediente Oficial ${item.anio})</span>
               </div>
               ${item.departamento ? `
                 <span class="px-2.5 py-0.5 bg-blue-100 text-blue-900 text-[10px] font-bold rounded-full border border-blue-200">
@@ -975,7 +975,7 @@ window.ObrasApp = {
                 </div>
                 <div class="p-2.5 bg-white rounded-xl border border-slate-200/80 col-span-2 shadow-xs">
                   <span class="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">Periodo de Ejecución</span>
-                  <span class="font-bold text-slate-800 text-xs mt-0.5 block">${(item.fecha_inicio && item.fecha_fin) ? `${item.fecha_inicio} al ${item.fecha_fin}` : 'Ejercicio Fiscal 2022'}</span>
+                  <span class="font-bold text-slate-800 text-xs mt-0.5 block">${(item.fecha_inicio && item.fecha_fin) ? `${item.fecha_inicio} al ${item.fecha_fin}` : (item.plazo_ejecucion || ('Ejercicio Fiscal ' + item.anio))}</span>
                 </div>
               </div>
             ` : ''}
@@ -986,6 +986,14 @@ window.ObrasApp = {
           <div class="p-3 bg-gradient-to-br from-slate-50 to-blue-50/40 rounded-xl border border-slate-200">
             <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Inversión Registrada</span>
             <span class="text-base font-black text-brand-navy mt-0.5 block">${this.formatearMonedaCompleta(item.monto)}</span>
+          </div>
+          <div class="p-3 bg-gradient-to-br from-emerald-50 to-teal-50/50 rounded-xl border border-emerald-200">
+            <span class="text-[10px] font-bold text-emerald-700 uppercase tracking-wider block flex items-center gap-1">
+              <i data-lucide="users" class="w-3.5 h-3.5"></i>
+              <span>Número de Beneficiarios</span>
+            </span>
+            <span class="text-base font-black text-emerald-800 mt-0.5 block">${item.beneficiarios || 'Impacto Municipal'}</span>
+            <span class="text-[10px] text-emerald-600 block mt-0.5 font-medium">${item.beneficiarios_directos ? `${item.beneficiarios_directos} directos` : 'Habitantes'}</span>
           </div>
           <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
             <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Clave / Contrato</span>
@@ -1023,6 +1031,104 @@ window.ObrasApp = {
           </div>
         </div>
 
+        <!-- Área de Influencia, Colonias Aledañas e Impacto Territorial -->
+        <div class="p-4 bg-gradient-to-br from-slate-50 via-sky-50/20 to-blue-50/30 rounded-2xl border border-slate-200/90 shadow-sm space-y-3">
+          <div class="flex items-center justify-between gap-2 flex-wrap border-b border-slate-200 pb-2.5">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span class="text-xs font-black text-brand-navy uppercase tracking-wider font-display">Área de Influencia, Colonias Aledañas e Impacto Territorial</span>
+            </div>
+            <span class="px-2.5 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] font-bold rounded-full border border-emerald-200">
+              ${item.cobertura_territorial || 'Cobertura Zonal'}
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+            <!-- Colonias Aledañas -->
+            <div class="p-3 bg-white rounded-xl border border-slate-200/80 shadow-xs space-y-1.5">
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1">
+                <i data-lucide="home" class="w-3.5 h-3.5 text-brand-navy"></i>
+                <span>Colonias y Fraccionamientos Aledaños Beneficiados</span>
+              </span>
+              <div class="flex flex-wrap gap-1.5 pt-0.5">
+                ${(item.colonias_aledanas && item.colonias_aledanas.length > 0) ? item.colonias_aledanas.map(col => `
+                  <span class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-[11px] rounded-lg transition border border-slate-200/60">
+                    ${col}
+                  </span>
+                `).join('') : `
+                  <span class="px-2.5 py-1 bg-slate-100 text-slate-700 font-bold text-[11px] rounded-lg border border-slate-200/60">
+                    ${item.colonia || 'Municipio de Aguascalientes'}
+                  </span>
+                `}
+              </div>
+              <p class="text-[10px] text-slate-500 pt-1">Comunidades colindantes con impacto positivo directo en conectividad y servicios.</p>
+            </div>
+
+            <!-- Secciones Censales e INE -->
+            <div class="p-3 bg-white rounded-xl border border-slate-200/80 shadow-xs space-y-1.5">
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1">
+                <i data-lucide="map" class="w-3.5 h-3.5 text-brand-navy"></i>
+                <span>Secciones Censales e INE de Impacto Directo</span>
+              </span>
+              <div class="flex flex-wrap gap-1.5 pt-0.5">
+                ${(item.secciones_impacto && item.secciones_impacto.length > 0) ? item.secciones_impacto.map(sec => `
+                  <span class="px-2.5 py-1 bg-blue-50 text-brand-navy font-bold text-[11px] rounded-lg border border-blue-200/80">
+                    ${sec}
+                  </span>
+                `).join('') : `
+                  <span class="px-2.5 py-1 bg-blue-50 text-brand-navy font-bold text-[11px] rounded-lg border border-blue-200/80">
+                    Sección Censal Oficial
+                  </span>
+                `}
+                <span class="px-2 py-1 bg-slate-50 text-slate-600 text-[10px] font-medium rounded-lg">
+                  Distrito ${item.distrito || 'Local'}
+                </span>
+              </div>
+              <p class="text-[10px] text-slate-500 pt-1">Delimitación territorial oficial según marco geoestadístico INEGI / IMPLAN.</p>
+            </div>
+
+            <!-- Población y Número de Beneficiarios -->
+            <div class="p-3 bg-white rounded-xl border border-slate-200/80 shadow-xs space-y-1.5">
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1">
+                <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-600"></i>
+                <span>Población y Beneficiarios Estimados (INEGI 2020)</span>
+              </span>
+              <div class="grid grid-cols-2 gap-2 pt-1 text-[11px]">
+                <div class="p-2 bg-emerald-50/70 rounded-lg border border-emerald-200/70">
+                  <span class="text-[9px] font-bold text-emerald-800 uppercase block">Beneficiarios Directos</span>
+                  <span class="text-sm font-black text-emerald-700 block">${item.beneficiarios_directos || (item.poblacion_beneficiada ? item.poblacion_beneficiada.directa : 'N/D')}</span>
+                </div>
+                <div class="p-2 bg-sky-50/70 rounded-lg border border-sky-200/70">
+                  <span class="text-[9px] font-bold text-sky-800 uppercase block">Beneficiarios Indirectos</span>
+                  <span class="text-sm font-black text-brand-navy block">${item.beneficiarios_indirectos || (item.poblacion_beneficiada ? item.poblacion_beneficiada.indirecta : 'N/D')}</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between text-[11px] font-bold text-slate-700 pt-1 px-1">
+                <span>Total Impacto Social:</span>
+                <span class="text-brand-navy font-black text-xs">${item.beneficiarios || (item.poblacion_beneficiada ? item.poblacion_beneficiada.total : 'Consolidado')}</span>
+              </div>
+            </div>
+
+            <!-- Alineación con PDM y Beneficio Urbano -->
+            <div class="p-3 bg-white rounded-xl border border-slate-200/80 shadow-xs space-y-1.5">
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1">
+                <i data-lucide="target" class="w-3.5 h-3.5 text-brand-navy"></i>
+                <span>Alineación Estratégica (Plan Municipal de Desarrollo)</span>
+              </span>
+              <div class="space-y-1 pt-0.5">
+                <div class="text-[11px] font-bold text-slate-800">${item.eje_pdm || 'Eje 1: Ordenamiento Urbano y Dignificación Barrial'}</div>
+                <div class="text-[10px] text-slate-600 bg-slate-50 p-2 rounded-lg border border-slate-100">
+                  <span class="font-bold text-slate-700">Tipo de Beneficio: </span>${item.tipo_impacto || 'Dignificación del Entorno Urbano'}
+                </div>
+                <div class="text-[10px] text-slate-500 flex items-center justify-between pt-0.5">
+                  <span>Plazo Estimado:</span>
+                  <span class="font-bold text-slate-700">${item.plazo_ejecucion || '45 a 90 días naturales'}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Desglose Presupuestal y Financiero de la Cantidad Total -->
         <div class="space-y-2.5 pt-1">
           <div class="flex items-center gap-2">
@@ -1032,35 +1138,60 @@ window.ObrasApp = {
           ${this.generarDesgloseInversion(item)}
         </div>
 
+        <!-- Vista a Nivel de Calle (Google Street View 360°) -->
         ${(item.lat && item.lng && (item.lat !== 0 || item.lng !== 0)) ? `
-          <div class="p-4 bg-slate-900 text-white rounded-2xl flex flex-wrap items-center justify-between gap-3 shadow-md">
-            <div class="space-y-0.5">
-              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Coordenadas Geográficas (WGS84)</span>
-              <div class="font-mono text-xs font-bold text-cyan-400">${item.lat.toFixed(6)}, ${item.lng.toFixed(6)}</div>
+          <div class="rounded-2xl overflow-hidden border border-slate-200 shadow-md bg-slate-900 text-white">
+            <div class="px-4 py-3 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 flex flex-wrap items-center justify-between gap-2 border-b border-slate-700/80">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center border border-cyan-500/30">
+                  <i data-lucide="camera" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <h4 class="text-xs font-black text-white uppercase tracking-wider font-display">Vista a Nivel de Calle (Google Street View 360°)</h4>
+                  <p class="text-[10px] text-slate-300">Exploración visual a nivel de calle en el punto exacto de la obra</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-2">
+                ${streetViewUrl ? `
+                  <a href="${streetViewUrl}" target="_blank" rel="noopener" class="px-3 py-1.5 bg-cyan-500 hover:bg-cyan-600 text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5 shadow-sm" title="Abrir Street View 360° en Google Maps">
+                    <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+                    <span>Ver 360° Completo</span>
+                  </a>
+                ` : ''}
+              </div>
             </div>
-            <div class="flex items-center gap-2 flex-wrap">
-              <button onclick="ObrasApp.cerrarFicha(); ObrasApp.centrarEnMapa(${item.id});" class="px-3 py-1.5 bg-brand-cyan hover:bg-cyan-600 text-white font-bold rounded-xl text-xs transition flex items-center gap-1.5 cursor-pointer shadow-sm">
-                <i data-lucide="map" class="w-3.5 h-3.5"></i>
-                <span>Ver en Visor</span>
-              </button>
-              ${googleMapsUrl ? `
-                <a href="${googleMapsUrl}" target="_blank" rel="noopener" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl text-xs transition flex items-center gap-1.5" title="Abrir en Google Maps">
-                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                  <span>Google Maps</span>
-                </a>
-              ` : ''}
-              ${streetViewUrl ? `
-                <a href="${streetViewUrl}" target="_blank" rel="noopener" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl text-xs transition flex items-center gap-1.5" title="Abrir Street View 360°">
-                  <i data-lucide="eye" class="w-3.5 h-3.5"></i>
-                  <span>Street View</span>
-                </a>
-              ` : ''}
-              ${dirUrl ? `
-                <a href="${dirUrl}" target="_blank" rel="noopener" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl text-xs transition flex items-center gap-1.5" title="Cómo Llegar con GPS">
-                  <i data-lucide="navigation" class="w-3.5 h-3.5"></i>
-                  <span>Ruta GPS</span>
-                </a>
-              ` : ''}
+            <div class="relative w-full h-72 bg-slate-950">
+              <iframe
+                src="https://maps.google.com/maps?q=&layer=c&cbll=${item.lat},${item.lng}&cbp=11,0,0,0,0&output=svembed"
+                class="w-full h-full border-0"
+                loading="lazy"
+                allowfullscreen
+                title="Google Street View 360">
+              </iframe>
+            </div>
+            <div class="p-3 bg-slate-900 flex flex-wrap items-center justify-between gap-2 text-xs border-t border-slate-800">
+              <div class="flex items-center gap-2">
+                <div class="font-mono text-cyan-400 font-bold">${item.lat.toFixed(6)}, ${item.lng.toFixed(6)}</div>
+                <span class="text-slate-400">• ${item.calle || item.colonia || 'Municipio de Aguascalientes'}</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <button onclick="ObrasApp.cerrarFicha(); ObrasApp.centrarEnMapa(${item.id});" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-cyan-300 font-bold rounded-xl text-xs transition flex items-center gap-1.5 cursor-pointer border border-slate-700">
+                  <i data-lucide="map" class="w-3.5 h-3.5"></i>
+                  <span>Centrar en Visor</span>
+                </button>
+                ${googleMapsUrl ? `
+                  <a href="${googleMapsUrl}" target="_blank" rel="noopener" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl text-xs transition flex items-center gap-1.5" title="Abrir en Google Maps">
+                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                    <span>Google Maps</span>
+                  </a>
+                ` : ''}
+                ${dirUrl ? `
+                  <a href="${dirUrl}" target="_blank" rel="noopener" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl text-xs transition flex items-center gap-1.5" title="Cómo Llegar con GPS">
+                    <i data-lucide="navigation" class="w-3.5 h-3.5"></i>
+                    <span>Ruta GPS</span>
+                  </a>
+                ` : ''}
+              </div>
             </div>
           </div>
         ` : ''}
