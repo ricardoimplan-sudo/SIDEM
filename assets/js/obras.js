@@ -1196,17 +1196,17 @@ window.ObrasApp = {
                 <div class="flex items-center bg-slate-800/90 p-0.5 rounded-xl border border-slate-700">
                   <button id="btnFichaModoSatelite" onclick="ObrasApp.cambiarModoVisorFicha('satelite')" class="px-2.5 py-1 text-xs font-bold rounded-lg transition bg-cyan-500 text-white shadow-sm flex items-center gap-1 cursor-pointer">
                     <i data-lucide="satellite" class="w-3.5 h-3.5"></i>
-                    <span>Satélite HD</span>
+                    <span>Satélite Ortofoto HD</span>
                   </button>
                   <button id="btnFichaModoStreetView" onclick="ObrasApp.cambiarModoVisorFicha('streetview')" class="px-2.5 py-1 text-xs font-bold rounded-lg transition text-slate-300 hover:text-white flex items-center gap-1 cursor-pointer">
-                    <i data-lucide="eye" class="w-3.5 h-3.5"></i>
-                    <span>Street View 360°</span>
+                    <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+                    <span>Google Maps Satélite</span>
                   </button>
                 </div>
                 ${streetViewUrl ? `
-                  <a href="${streetViewUrl}" target="_blank" rel="noopener" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-cyan-400 text-xs font-bold rounded-xl transition flex items-center gap-1 border border-slate-700" title="Abrir Street View en Google Maps">
-                    <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
-                    <span class="hidden sm:inline">360° Externo</span>
+                  <a href="${streetViewUrl}" target="_blank" rel="noopener" class="px-2.5 py-1.5 bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 text-xs font-bold rounded-xl transition flex items-center gap-1 border border-cyan-500/40" title="Abrir Street View 360° en Google Maps (busca toma más cercana)">
+                    <i data-lucide="camera" class="w-3.5 h-3.5"></i>
+                    <span>Street View 360°</span>
                   </a>
                 ` : ''}
               </div>
@@ -1217,23 +1217,31 @@ window.ObrasApp = {
               <div id="miniMapaSatelitalFicha" class="w-full h-full"></div>
               <div class="absolute top-2 left-2 z-[400] bg-slate-900/85 backdrop-blur-sm px-2.5 py-1 rounded-lg text-[10px] font-bold text-cyan-300 border border-slate-700/80 flex items-center gap-1.5 shadow">
                 <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-                <span>Fotografía Aérea Satelital HD • 100% Cobertura Garantizada</span>
+                <span>Fotografía Aérea Satelital HD • Cobertura 100% Garantizada</span>
               </div>
             </div>
 
-            <!-- Contenedor Street View 360 (Google Maps) -->
+            <!-- Contenedor Google Maps Satelital (Garantizado sin pantallas negras) -->
             <div id="contenedorVistaStreetView" class="relative w-full h-72 bg-slate-950 hidden">
               <iframe
                 id="iframeStreetViewFicha"
-                src="https://maps.google.com/maps?q=&layer=c&cbll=${item.lat},${item.lng}&cbp=11,0,0,0,0&output=svembed"
+                src="https://maps.google.com/maps?q=${item.lat},${item.lng}&t=k&z=17&ie=UTF8&iwloc=&output=embed"
                 class="w-full h-full border-0"
                 loading="lazy"
                 allowfullscreen
-                title="Google Street View 360">
+                title="Google Maps Satelital">
               </iframe>
               <div class="absolute bottom-2 left-2 right-2 bg-slate-900/95 backdrop-blur-sm p-2 rounded-lg text-[10px] text-slate-300 flex items-center justify-between border border-slate-700/60 z-10">
-                <span>¿Google indica "No hay imágenes disponibles"? Ocurre en predios o caminos interiores sin recorrido vehicular.</span>
-                <button onclick="ObrasApp.cambiarModoVisorFicha('satelite')" class="px-2 py-1 bg-cyan-500 hover:bg-cyan-600 text-white rounded font-bold cursor-pointer shrink-0 ml-2">Ver Foto Satelital HD</button>
+                <span class="flex items-center gap-1.5">
+                  <i data-lucide="satellite" class="w-3.5 h-3.5 text-cyan-400"></i>
+                  <span>Vista Satelital Oficial Google Maps centrada en las coordenadas de la obra.</span>
+                </span>
+                ${streetViewUrl ? `
+                  <a href="${streetViewUrl}" target="_blank" rel="noopener" class="px-2.5 py-1 bg-cyan-500 hover:bg-cyan-600 text-white rounded font-bold cursor-pointer shrink-0 ml-2 flex items-center gap-1 shadow-sm">
+                    <i data-lucide="external-link" class="w-3 h-3"></i>
+                    <span>Abrir Panorámica 360°</span>
+                  </a>
+                ` : ''}
               </div>
             </div>
 
