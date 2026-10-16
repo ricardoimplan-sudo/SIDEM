@@ -22,6 +22,8 @@ window.ObrasApp = {
   itemSeleccionadoId: null,
   marcadorSeleccionado: null,
   inicializado: false,
+  miniMapaSatelital: null,
+  modoVisorFicha: 'satelite',
 
   filtros: {
     anio: 'todos',
@@ -1176,7 +1178,7 @@ window.ObrasApp = {
           ${this.generarDesgloseInversion(item)}
         </div>
 
-        <!-- Vista a Nivel de Calle (Google Street View 360°) -->
+        <!-- Exploración Visual y Fotográfica (Satélite HD + Street View 360°) -->
         ${(item.lat && item.lng && (item.lat !== 0 || item.lng !== 0)) ? `
           <div class="rounded-2xl overflow-hidden border border-slate-200 shadow-md bg-slate-900 text-white">
             <div class="px-4 py-3 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 flex flex-wrap items-center justify-between gap-2 border-b border-slate-700/80">
@@ -1185,28 +1187,56 @@ window.ObrasApp = {
                   <i data-lucide="camera" class="w-4 h-4"></i>
                 </div>
                 <div>
-                  <h4 class="text-xs font-black text-white uppercase tracking-wider font-display">Vista a Nivel de Calle (Google Street View 360°)</h4>
-                  <p class="text-[10px] text-slate-300">Exploración visual a nivel de calle en el punto exacto de la obra</p>
+                  <h4 class="text-xs font-black text-white uppercase tracking-wider font-display">Exploración Visual de la Obra</h4>
+                  <p class="text-[10px] text-slate-300">Fotografía satelital aérea en alta resolución y vista 360° a nivel de calle</p>
                 </div>
               </div>
               <div class="flex items-center gap-2">
+                <!-- Selector de Modo de Imagen -->
+                <div class="flex items-center bg-slate-800/90 p-0.5 rounded-xl border border-slate-700">
+                  <button id="btnFichaModoSatelite" onclick="ObrasApp.cambiarModoVisorFicha('satelite')" class="px-2.5 py-1 text-xs font-bold rounded-lg transition bg-cyan-500 text-white shadow-sm flex items-center gap-1 cursor-pointer">
+                    <i data-lucide="satellite" class="w-3.5 h-3.5"></i>
+                    <span>Satélite HD</span>
+                  </button>
+                  <button id="btnFichaModoStreetView" onclick="ObrasApp.cambiarModoVisorFicha('streetview')" class="px-2.5 py-1 text-xs font-bold rounded-lg transition text-slate-300 hover:text-white flex items-center gap-1 cursor-pointer">
+                    <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+                    <span>Street View 360°</span>
+                  </button>
+                </div>
                 ${streetViewUrl ? `
-                  <a href="${streetViewUrl}" target="_blank" rel="noopener" class="px-3 py-1.5 bg-cyan-500 hover:bg-cyan-600 text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5 shadow-sm" title="Abrir Street View 360° en Google Maps">
+                  <a href="${streetViewUrl}" target="_blank" rel="noopener" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-cyan-400 text-xs font-bold rounded-xl transition flex items-center gap-1 border border-slate-700" title="Abrir Street View en Google Maps">
                     <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
-                    <span>Ver 360° Completo</span>
+                    <span class="hidden sm:inline">360° Externo</span>
                   </a>
                 ` : ''}
               </div>
             </div>
-            <div class="relative w-full h-72 bg-slate-950">
+
+            <!-- Contenedor Satélite HD (Foto Aérea Real Garantizada para el 100% de las obras) -->
+            <div id="contenedorVistaSatelital" class="relative w-full h-72 bg-slate-950">
+              <div id="miniMapaSatelitalFicha" class="w-full h-full"></div>
+              <div class="absolute top-2 left-2 z-[400] bg-slate-900/85 backdrop-blur-sm px-2.5 py-1 rounded-lg text-[10px] font-bold text-cyan-300 border border-slate-700/80 flex items-center gap-1.5 shadow">
+                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                <span>Fotografía Aérea Satelital HD • 100% Cobertura Garantizada</span>
+              </div>
+            </div>
+
+            <!-- Contenedor Street View 360 (Google Maps) -->
+            <div id="contenedorVistaStreetView" class="relative w-full h-72 bg-slate-950 hidden">
               <iframe
+                id="iframeStreetViewFicha"
                 src="https://maps.google.com/maps?q=&layer=c&cbll=${item.lat},${item.lng}&cbp=11,0,0,0,0&output=svembed"
                 class="w-full h-full border-0"
                 loading="lazy"
                 allowfullscreen
                 title="Google Street View 360">
               </iframe>
+              <div class="absolute bottom-2 left-2 right-2 bg-slate-900/95 backdrop-blur-sm p-2 rounded-lg text-[10px] text-slate-300 flex items-center justify-between border border-slate-700/60 z-10">
+                <span>¿Google indica "No hay imágenes disponibles"? Ocurre en predios o caminos interiores sin recorrido vehicular.</span>
+                <button onclick="ObrasApp.cambiarModoVisorFicha('satelite')" class="px-2 py-1 bg-cyan-500 hover:bg-cyan-600 text-white rounded font-bold cursor-pointer shrink-0 ml-2">Ver Foto Satelital HD</button>
+              </div>
             </div>
+
             <div class="p-3 bg-slate-900 flex flex-wrap items-center justify-between gap-2 text-xs border-t border-slate-800">
               <div class="flex items-center gap-2">
                 <div class="font-mono text-cyan-400 font-bold">${item.lat.toFixed(6)}, ${item.lng.toFixed(6)}</div>
@@ -1244,9 +1274,112 @@ window.ObrasApp = {
 
     modal.classList.remove('hidden');
     if (window.lucide) lucide.createIcons();
+
+    // Iniciar mini mapa satelital HD de inmediato
+    this.modoVisorFicha = 'satelite';
+    setTimeout(() => {
+      this.iniciarMiniMapaSatelital(item);
+      if (window.lucide) lucide.createIcons();
+    }, 150);
+  },
+
+  iniciarMiniMapaSatelital(item) {
+    const contenedor = document.getElementById('miniMapaSatelitalFicha');
+    if (!contenedor) return;
+
+    if (this.miniMapaSatelital) {
+      try { this.miniMapaSatelital.remove(); } catch(e) {}
+      this.miniMapaSatelital = null;
+    }
+
+    if (!item.lat || !item.lng) return;
+
+    try {
+      const miniMapa = L.map('miniMapaSatelitalFicha', {
+        center: [item.lat, item.lng],
+        zoom: 17,
+        zoomControl: true,
+        scrollWheelZoom: true,
+        attributionControl: false
+      });
+
+      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        maxZoom: 19
+      }).addTo(miniMapa);
+
+      L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {
+        maxZoom: 19
+      }).addTo(miniMapa);
+
+      if (item.tipoGeom === 'LineString' && item.linea && item.linea.length > 0) {
+        const poly = L.polyline(item.linea, {
+          color: '#00F0FF',
+          weight: 6,
+          opacity: 0.95,
+          lineCap: 'round',
+          lineJoin: 'round'
+        }).addTo(miniMapa);
+        miniMapa.fitBounds(poly.getBounds(), { padding: [35, 35], maxZoom: 18 });
+      } else {
+        const markerHtml = `
+          <div style="position:relative;display:flex;align-items:center;justify-content:center;width:28px;height:28px;">
+            <div style="position:absolute;width:28px;height:28px;border-radius:50%;background:rgba(0,240,255,0.4);animation:ping 1.5s cubic-bezier(0,0,0.2,1) infinite;"></div>
+            <div style="width:20px;height:20px;border-radius:50%;background:#00F0FF;border:3px solid white;box-shadow:0 0 10px rgba(0,0,0,0.6);"></div>
+          </div>
+        `;
+        const icon = L.divIcon({
+          className: 'custom-satellite-pin',
+          html: markerHtml,
+          iconSize: [28, 28],
+          iconAnchor: [14, 14]
+        });
+        L.marker([item.lat, item.lng], { icon: icon }).addTo(miniMapa);
+      }
+
+      this.miniMapaSatelital = miniMapa;
+      setTimeout(() => miniMapa.invalidateSize(), 200);
+    } catch(err) {
+      console.warn('Error iniciando mini mapa satelital:', err);
+    }
+  },
+
+  cambiarModoVisorFicha(modo) {
+    this.modoVisorFicha = modo;
+    const contSat = document.getElementById('contenedorVistaSatelital');
+    const contStreet = document.getElementById('contenedorVistaStreetView');
+    const btnSat = document.getElementById('btnFichaModoSatelite');
+    const btnStreet = document.getElementById('btnFichaModoStreetView');
+
+    if (modo === 'streetview') {
+      if (contSat) contSat.classList.add('hidden');
+      if (contStreet) contStreet.classList.remove('hidden');
+      if (btnSat) {
+        btnSat.className = "px-2.5 py-1 text-xs font-bold rounded-lg transition text-slate-300 hover:text-white flex items-center gap-1 cursor-pointer";
+      }
+      if (btnStreet) {
+        btnStreet.className = "px-2.5 py-1 text-xs font-bold rounded-lg transition bg-cyan-500 text-white shadow-sm flex items-center gap-1 cursor-pointer";
+      }
+    } else {
+      if (contStreet) contStreet.classList.add('hidden');
+      if (contSat) contSat.classList.remove('hidden');
+      if (btnStreet) {
+        btnStreet.className = "px-2.5 py-1 text-xs font-bold rounded-lg transition text-slate-300 hover:text-white flex items-center gap-1 cursor-pointer";
+      }
+      if (btnSat) {
+        btnSat.className = "px-2.5 py-1 text-xs font-bold rounded-lg transition bg-cyan-500 text-white shadow-sm flex items-center gap-1 cursor-pointer";
+      }
+      if (this.miniMapaSatelital) {
+        setTimeout(() => this.miniMapaSatelital.invalidateSize(), 60);
+      }
+    }
+    if (window.lucide) lucide.createIcons();
   },
 
   cerrarFicha() {
+    if (this.miniMapaSatelital) {
+      try { this.miniMapaSatelital.remove(); } catch(e) {}
+      this.miniMapaSatelital = null;
+    }
     const modal = document.getElementById('modalFichaObra');
     if (modal) modal.classList.add('hidden');
   },
