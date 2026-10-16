@@ -412,7 +412,7 @@ window.ObrasApp = {
   },
 
   formatearMonedaCompleta(monto) {
-    if (!monto || monto === 0) return 'Sin monto registrado en KML';
+    if (!monto || monto === 0) return 'Por determinar en asignación presupuestal';
     return `$${monto.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} MXN`;
   },
 
