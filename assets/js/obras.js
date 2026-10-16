@@ -49,6 +49,12 @@ window.ObrasApp = {
   },
 
   iniciar() {
+    if (!window.OBRAS_ITEMS && window.OBRAS_DATA) {
+      window.OBRAS_ITEMS = window.OBRAS_DATA;
+    }
+    if (!window.OBRAS_DATA && window.OBRAS_ITEMS) {
+      window.OBRAS_DATA = window.OBRAS_ITEMS;
+    }
     if (!window.OBRAS_METRICAS || !window.OBRAS_ITEMS) {
       console.warn('Datos de Obra Pública no disponibles.');
       return;
