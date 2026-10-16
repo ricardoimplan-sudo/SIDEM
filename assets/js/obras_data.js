@@ -1,99 +1,4 @@
-/**
- * PIMAgs - Datos Maestros de Obra Pública Consolidada (2022 - 2026)
- * Total Oficial: 378 Obras validadas con Cédulas y Expedientes Técnicos Digitales
- * - 2022: 107 obras
- * - 2023: 95 obras
- * - 2024: 34 obras
- * - 2025: 132 obras
- * - 2026: 10 obras
- * Enriquecido con: Street View, Colonias Aledañas, Secciones INEGI, Número de Beneficiarios, Eje PDM e Impacto Social.
- * Datos 100% normalizados y auditados sin mojibake ni cadenas OCR residuales.
- */
-
-window.OBRAS_METRICAS = {
-  "totalObras": 378,
-  "inversionTotal": 1552751478.16,
-  "totalBeneficiarios": 3104583,
-  "totalConFoto": 6,
-  "totalTramos": 83,
-  "porAnio": [
-    {
-      "anio": 2022,
-      "total": 107,
-      "inversion": 1106372363.39,
-      "beneficiarios": 741884
-    },
-    {
-      "anio": 2023,
-      "total": 95,
-      "inversion": 187294515.19,
-      "beneficiarios": 837626
-    },
-    {
-      "anio": 2024,
-      "total": 34,
-      "inversion": 98937574.9,
-      "beneficiarios": 332609
-    },
-    {
-      "anio": 2025,
-      "total": 132,
-      "inversion": 129754918.43,
-      "beneficiarios": 1126477
-    },
-    {
-      "anio": 2026,
-      "total": 10,
-      "inversion": 30392106.25,
-      "beneficiarios": 65987
-    }
-  ],
-  "porRubro": [
-    {
-      "nombre": "Agua y Saneamiento",
-      "total": 52,
-      "inversion": 226326873.64,
-      "color": "#0A3B66",
-      "icono": "droplets"
-    },
-    {
-      "nombre": "Vialidades y Pavimentación",
-      "total": 67,
-      "inversion": 279149167.71,
-      "color": "#009FB9",
-      "icono": "navigation"
-    },
-    {
-      "nombre": "Espacios Públicos y Deporte",
-      "total": 28,
-      "inversion": 27569639.51,
-      "color": "#2EC4B6",
-      "icono": "trees"
-    },
-    {
-      "nombre": "Edificación y Equipamiento",
-      "total": 22,
-      "inversion": 749508191.25,
-      "color": "#E11482",
-      "icono": "building-2"
-    },
-    {
-      "nombre": "Alumbrado y Electrificación",
-      "total": 1,
-      "inversion": 745789.79,
-      "color": "#F5A800",
-      "icono": "zap"
-    },
-    {
-      "nombre": "Infraestructura Urbana",
-      "total": 208,
-      "inversion": 269451816.26,
-      "color": "#7C3AED",
-      "icono": "hammer"
-    }
-  ]
-};
-
+// Datos consolidados de obras públicas del Municipio de Aguascalientes (2022-2026)
 window.OBRAS_DATA = [
   {
     "id": 1,
@@ -12436,14 +12341,1542 @@ window.OBRAS_DATA = [
     "id": 203,
     "anio": 2024,
     "clave": "2024-FAISMUN-MIAA-0050-AS-ETMF",
-    "nombre": "Construcción DE SOBRECARPETA Asfáltica, CALLE Vázquez DEL MERCADO, T-1",
-    "descripcion": "Construcción DE SOBRECARPETA Asfáltica, CALLE Vázquez DEL MERCADO, T-1. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
-    "rubro": "Vialidades y Pavimentación",
+    "nombre": "Construcción de Línea de Conducción de Agua Potable Pozo El Malacate, Zona Mujeres Ilustres",
+    "descripcion": "Construcción de la línea de conducción de agua potable para interconectar el pozo El Malacate y reforzar el suministro en el sector oriente.",
+    "rubro": "Agua Potable y Saneamiento",
     "monto": 2023734.6,
-    "colonia": "Aguascalientes",
+    "colonia": "Mujeres Ilustres",
     "distrito": "Municipio de Aguascalientes",
     "zap2026": "",
     "folio": "2024-FAISMUN-MIAA-0050-AS-ETMF",
+    "tipo": "",
+    "peticion": "",
+    "distancia": "",
+    "calle": "",
+    "foto": "",
+    "fotoRemota": "",
+    "tipoGeom": "LineString",
+    "lat": 21.848218,
+    "lng": -102.2685,
+    "linea": [
+      [
+        21.848218,
+        -102.2685
+      ],
+      [
+        21.8465,
+        -102.2652
+      ]
+    ],
+    "fuente": "PAOP 2024 - SOPMA",
+    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
+    "avance_fisico": "100",
+    "avance_financiero": "100",
+    "estatus": "Concluida",
+    "fecha_inicio": "2024-03-01",
+    "fecha_fin": "2024-11-15",
+    "resumen_tecnico": "Instalación de tubería de conducción de alta resistencia, piezas especiales de fontanería, válvulas de seccionamiento y expulsión de aire, interconexiones hidráulicas y reposición de pavimentos en el trazo de la línea.",
+    "num_beneficiarios": 11582,
+    "beneficiarios": 2142,
+    "beneficiarios_directos": "2,142 hab.",
+    "beneficiarios_indirectos": "9,440 hab.",
+    "poblacion_beneficiada": {
+      "directa": "2,142 hab.",
+      "indirecta": "9,440 hab.",
+      "total": "11,582 hab."
+    },
+    "colonias_aledanas": [
+      "Morelos I, Morelos Ii",
+      "Morelos Ii, Lomas Del Mirador",
+      "Casa Blanca, Morelos Ii, Morelos I, Jardines De Casa Blanca"
+    ],
+    "secciones_impacto": [
+      "Sección 169",
+      "Sección 619",
+      "Sección 168",
+      "Sección 170"
+    ],
+    "eje_pdm": "Eje 2: Movilidad Urbana Segura y Conectividad Eficiente",
+    "tipo_impacto": "Conectividad Urbana, Reducción de Tiempos de Traslado y Seguridad Vial",
+    "cobertura_territorial": "Cobertura Zonal / Delegacional",
+    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Vialidades y Pavimentación, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "169",
+    "area_influencia": {
+      "seccion_principal": "169",
+      "secciones_aledanas": [
+        "619",
+        "168",
+        "170"
+      ],
+      "colonias_impactadas": [
+        "Morelos I, Morelos Ii",
+        "Morelos Ii, Lomas Del Mirador",
+        "Casa Blanca, Morelos Ii, Morelos I, Jardines De Casa Blanca"
+      ],
+      "delegacion": "DELG. URB.MORELOS-JOSE ALBERTO PURECO",
+      "poblacion_directa": 2142,
+      "poblacion_indirecta": 9440
+    }
+  },
+  {
+    "id": 204,
+    "anio": 2024,
+    "clave": "2024-FAISMUN-MIAA-0055-GI-ETMF",
+    "nombre": "Gastos Indirectos FAISMUN 2024 - Servicios para la Proyección de Obras (MIAA)",
+    "descripcion": "Estudios técnicos, levantamientos topográficos y proyectos ejecutivos para la infraestructura hidráulica y sanitaria FAISMUN.",
+    "rubro": "Fortalecimiento Institucional y Gestión",
+    "monto": 1543657.99,
+    "colonia": "Aguascalientes",
+    "distrito": "Municipio de Aguascalientes",
+    "zap2026": "",
+    "folio": "2024-FAISMUN-MIAA-0055-GI-ETMF",
+    "tipo": "",
+    "peticion": "",
+    "distancia": "",
+    "calle": "",
+    "foto": "",
+    "fotoRemota": "",
+    "tipoGeom": "Point",
+    "lat": 21.8808,
+    "lng": -102.2965,
+    "linea": [],
+    "fuente": "PAOP 2024 - SOPMA",
+    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
+    "avance_fisico": "100",
+    "avance_financiero": "100",
+    "estatus": "Concluida",
+    "fecha_inicio": "2024-03-01",
+    "fecha_fin": "2024-11-15",
+    "resumen_tecnico": "Elaboración de proyectos ejecutivos de agua potable, alcantarillado sanitario y saneamiento, incluyendo memorias de cálculo, mecánica de suelos, especificaciones técnicas y presupuestación conforme a normatividad vigente.",
+    "num_beneficiarios": 5413,
+    "beneficiarios": 3662,
+    "beneficiarios_directos": "3,662 hab.",
+    "beneficiarios_indirectos": "1,751 hab.",
+    "poblacion_beneficiada": {
+      "directa": "3,662 hab.",
+      "indirecta": "1,751 hab.",
+      "total": "5,413 hab."
+    },
+    "colonias_aledanas": [
+      "Zona Centro, Barrio San Marcos",
+      "Zona Centro, Obraje",
+      "Zona Centro, El Encino"
+    ],
+    "secciones_impacto": [
+      "Sección 177",
+      "Sección 179",
+      "Sección 180",
+      "Sección 74"
+    ],
+    "eje_pdm": "Eje 2: Movilidad Urbana Segura y Conectividad Eficiente",
+    "tipo_impacto": "Conectividad Urbana, Reducción de Tiempos de Traslado y Seguridad Vial",
+    "cobertura_territorial": "Cobertura Zonal / Delegacional",
+    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Vialidades y Pavimentación, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "177",
+    "area_influencia": {
+      "seccion_principal": "177",
+      "secciones_aledanas": [
+        "179",
+        "180",
+        "74"
+      ],
+      "colonias_impactadas": [
+        "Zona Centro, Barrio San Marcos",
+        "Zona Centro, Obraje",
+        "Zona Centro, El Encino"
+      ],
+      "delegacion": "DELG. URB.CENTRO PONIENTE-SIN NOMBRE",
+      "poblacion_directa": 3662,
+      "poblacion_indirecta": 1751
+    }
+  },
+  {
+    "id": 205,
+    "anio": 2024,
+    "clave": "2024-FAISMUN-MIAA-0056-GI-ETMF",
+    "nombre": "Gastos Indirectos FAISMUN 2024 - Mantenimiento Vehicular de Operación (MIAA)",
+    "descripcion": "Mantenimiento preventivo y correctivo de unidades vehiculares operativas para supervisión de obras hidrosanitarias.",
+    "rubro": "Fortalecimiento Institucional y Gestión",
+    "monto": 1062666.81,
+    "colonia": "Aguascalientes",
+    "distrito": "Municipio de Aguascalientes",
+    "zap2026": "",
+    "folio": "2024-FAISMUN-MIAA-0056-GI-ETMF",
+    "tipo": "",
+    "peticion": "",
+    "distancia": "",
+    "calle": "",
+    "foto": "",
+    "fotoRemota": "",
+    "tipoGeom": "Point",
+    "lat": 21.8815,
+    "lng": -102.297,
+    "linea": [],
+    "fuente": "PAOP 2024 - SOPMA",
+    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
+    "avance_fisico": "100",
+    "avance_financiero": "100",
+    "estatus": "Concluida",
+    "fecha_inicio": "2024-03-01",
+    "fecha_fin": "2024-11-15",
+    "resumen_tecnico": "Servicios mecánicos especializados, afinación, cambio de refacciones y mantenimiento de flota vehicular operativa destinada a la inspección y supervisión técnica de obras en zonas prioritarias del municipio.",
+    "num_beneficiarios": 4952,
+    "beneficiarios": 3662,
+    "beneficiarios_directos": "3,662 hab.",
+    "beneficiarios_indirectos": "1,290 hab.",
+    "poblacion_beneficiada": {
+      "directa": "3,662 hab.",
+      "indirecta": "1,290 hab.",
+      "total": "4,952 hab."
+    },
+    "colonias_aledanas": [
+      "Zona Centro, Barrio San Marcos",
+      "Zona Centro, Guadalupe",
+      "Zona Centro, Obraje"
+    ],
+    "secciones_impacto": [
+      "Sección 177",
+      "Sección 173",
+      "Sección 179",
+      "Sección 180"
+    ],
+    "eje_pdm": "Eje 2: Movilidad Urbana Segura y Conectividad Eficiente",
+    "tipo_impacto": "Conectividad Urbana, Reducción de Tiempos de Traslado y Seguridad Vial",
+    "cobertura_territorial": "Cobertura Barrial Directa",
+    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Vialidades y Pavimentación, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "177",
+    "area_influencia": {
+      "seccion_principal": "177",
+      "secciones_aledanas": [
+        "173",
+        "179",
+        "180"
+      ],
+      "colonias_impactadas": [
+        "Zona Centro, Barrio San Marcos",
+        "Zona Centro, Guadalupe",
+        "Zona Centro, Obraje"
+      ],
+      "delegacion": "DELG. URB.CENTRO PONIENTE-SIN NOMBRE",
+      "poblacion_directa": 3662,
+      "poblacion_indirecta": 1290
+    }
+  },
+  {
+    "id": 206,
+    "anio": 2024,
+    "clave": "2024-FAISMUN-SEDESOM-0059-PV-ETMF",
+    "nombre": "Programa Tu Casa Crece - Suministro e Instalación de Calentadores Solares (Fondo III)",
+    "descripcion": "Instalación de sistemas de calentamiento solar de agua para mejorar las condiciones de habitabilidad y ahorro energético familiar.",
+    "rubro": "Edificación e Infraestructura Comunitaria",
+    "monto": 2694880.12,
+    "colonia": "Aguascalientes",
+    "distrito": "Municipio de Aguascalientes",
+    "zap2026": "",
+    "folio": "2024-FAISMUN-SEDESOM-0059-PV-ETMF",
+    "tipo": "",
+    "peticion": "",
+    "distancia": "",
+    "calle": "",
+    "foto": "",
+    "fotoRemota": "",
+    "tipoGeom": "Point",
+    "lat": 21.882,
+    "lng": -102.296,
+    "linea": [],
+    "fuente": "PAOP 2024 - SOPMA",
+    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
+    "avance_fisico": "100",
+    "avance_financiero": "100",
+    "estatus": "Concluida",
+    "fecha_inicio": "2024-03-01",
+    "fecha_fin": "2024-11-15",
+    "resumen_tecnico": "Suministro e instalación de equipos termosolares de tubos de vacío de alta eficiencia con tanque térmico de acero inoxidable, interconexión a redes hidráulicas existentes y pruebas de hermeticidad en viviendas vulnerables.",
+    "num_beneficiarios": 4621,
+    "beneficiarios": 3662,
+    "beneficiarios_directos": "3,662 hab.",
+    "beneficiarios_indirectos": "959 hab.",
+    "poblacion_beneficiada": {
+      "directa": "3,662 hab.",
+      "indirecta": "959 hab.",
+      "total": "4,621 hab."
+    },
+    "colonias_aledanas": [
+      "Zona Centro, Barrio San Marcos",
+      "Zona Centro",
+      "Zona Centro, El Encino"
+    ],
+    "secciones_impacto": [
+      "Sección 177",
+      "Sección 74",
+      "Sección 180",
+      "Sección 173"
+    ],
+    "eje_pdm": "Eje 2: Movilidad Urbana Segura y Conectividad Eficiente",
+    "tipo_impacto": "Conectividad Urbana, Reducción de Tiempos de Traslado y Seguridad Vial",
+    "cobertura_territorial": "Cobertura Zonal / Delegacional",
+    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Vialidades y Pavimentación, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "177",
+    "area_influencia": {
+      "seccion_principal": "177",
+      "secciones_aledanas": [
+        "74",
+        "180",
+        "173"
+      ],
+      "colonias_impactadas": [
+        "Zona Centro, Barrio San Marcos",
+        "Zona Centro",
+        "Zona Centro, El Encino"
+      ],
+      "delegacion": "DELG. URB.CENTRO PONIENTE-SIN NOMBRE",
+      "poblacion_directa": 3662,
+      "poblacion_indirecta": 959
+    }
+  },
+  {
+    "id": 207,
+    "anio": 2024,
+    "clave": "2024-FAISMUN-SOPMA-0028-IU-ETMF",
+    "nombre": "Construcción de Pavimento Asfáltico e Hidráulico en Av. Mariano Hidalgo (ambas calzadas)",
+    "descripcion": "Construcción y mejoramiento de vialidad en Av. Mariano Hidalgo, tramo entre Av. Poliducto Oriente y Calle Dolores Castro en Fracc. Mujeres Ilustres.",
+    "rubro": "Vialidades y Pavimentación",
+    "monto": 1751816.99,
+    "colonia": "Mujeres Ilustres",
+    "distrito": "Municipio de Aguascalientes",
+    "zap2026": "",
+    "folio": "2024-FAISMUN-SOPMA-0028-IU-ETMF",
+    "tipo": "",
+    "peticion": "",
+    "distancia": "",
+    "calle": "",
+    "foto": "",
+    "fotoRemota": "",
+    "tipoGeom": "LineString",
+    "lat": 21.8485,
+    "lng": -102.268,
+    "linea": [
+      [
+        21.8485,
+        -102.268
+      ],
+      [
+        21.8492,
+        -102.2645
+      ]
+    ],
+    "fuente": "PAOP 2024 - SOPMA",
+    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
+    "avance_fisico": "100",
+    "avance_financiero": "100",
+    "estatus": "Concluida",
+    "fecha_inicio": "2024-03-01",
+    "fecha_fin": "2024-11-15",
+    "resumen_tecnico": "Demolición de pavimento deteriorado, mejoramiento de terracerías con base hidráulica, colocación de losas de concreto hidráulico y carpeta asfáltica en tramos correspondientes, renivelación de pozos de visita y señalización vial horizontal.",
+    "num_beneficiarios": 11582,
+    "beneficiarios": 2142,
+    "beneficiarios_directos": "2,142 hab.",
+    "beneficiarios_indirectos": "9,440 hab.",
+    "poblacion_beneficiada": {
+      "directa": "2,142 hab.",
+      "indirecta": "9,440 hab.",
+      "total": "11,582 hab."
+    },
+    "colonias_aledanas": [
+      "Morelos I, Morelos Ii",
+      "Morelos Ii, Lomas Del Mirador",
+      "Morelos Ii"
+    ],
+    "secciones_impacto": [
+      "Sección 169",
+      "Sección 619",
+      "Sección 170",
+      "Sección 168"
+    ],
+    "eje_pdm": "Eje 2: Movilidad Urbana Segura y Conectividad Eficiente",
+    "tipo_impacto": "Conectividad Urbana, Reducción de Tiempos de Traslado y Seguridad Vial",
+    "cobertura_territorial": "Cobertura Zonal / Delegacional",
+    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Vialidades y Pavimentación, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "169",
+    "area_influencia": {
+      "seccion_principal": "169",
+      "secciones_aledanas": [
+        "619",
+        "170",
+        "168"
+      ],
+      "colonias_impactadas": [
+        "Morelos I, Morelos Ii",
+        "Morelos Ii, Lomas Del Mirador",
+        "Morelos Ii"
+      ],
+      "delegacion": "DELG. URB.MORELOS-JOSE ALBERTO PURECO",
+      "poblacion_directa": 2142,
+      "poblacion_indirecta": 9440
+    }
+  },
+  {
+    "id": 208,
+    "anio": 2024,
+    "clave": "2024-FAISMUN-SOPMA-0034-SS-ETMF",
+    "nombre": "Construcción de Parque Recreativo Cultura Yumana, 1a Etapa",
+    "descripcion": "Construcción de parque y espacio público integral en Calle Cultura Yumana esquina Calle Cultura Nazca en Fracc. Mirador de las Culturas II.",
+    "rubro": "Espacios Públicos y Recreación",
+    "monto": 2960672.66,
+    "colonia": "Mirador de las Culturas II",
+    "distrito": "Municipio de Aguascalientes",
+    "zap2026": "",
+    "folio": "2024-FAISMUN-SOPMA-0034-SS-ETMF",
+    "tipo": "",
+    "peticion": "",
+    "distancia": "",
+    "calle": "",
+    "foto": "",
+    "fotoRemota": "",
+    "tipoGeom": "Point",
+    "lat": 21.9056,
+    "lng": -102.2478,
+    "linea": [],
+    "fuente": "PAOP 2024 - SOPMA",
+    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
+    "avance_fisico": "100",
+    "avance_financiero": "100",
+    "estatus": "Concluida",
+    "fecha_inicio": "2024-03-01",
+    "fecha_fin": "2024-11-15",
+    "resumen_tecnico": "Trazo y nivelación, andadores peatonales de concreto estampado, áreas verdes con vegetación endémica y sistema de riego, instalación de juegos infantiles con piso amortiguante, mobiliario urbano y luminarias LED solares.",
+    "num_beneficiarios": 6371,
+    "beneficiarios": 1222,
+    "beneficiarios_directos": "1,222 hab.",
+    "beneficiarios_indirectos": "5,149 hab.",
+    "poblacion_beneficiada": {
+      "directa": "1,222 hab.",
+      "indirecta": "5,149 hab.",
+      "total": "6,371 hab."
+    },
+    "colonias_aledanas": [
+      "Rodolfo Landeros Gallegos",
+      "Los Pericos",
+      "Rodolfo Landeros Gallegos, Tiara, Los Pericos"
+    ],
+    "secciones_impacto": [
+      "Sección 498",
+      "Sección 493",
+      "Sección 508",
+      "Sección 492"
+    ],
+    "eje_pdm": "Eje 2: Movilidad Urbana Segura y Conectividad Eficiente",
+    "tipo_impacto": "Conectividad Urbana, Reducción de Tiempos de Traslado y Seguridad Vial",
+    "cobertura_territorial": "Cobertura Zonal / Delegacional",
+    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Vialidades y Pavimentación, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "498",
+    "area_influencia": {
+      "seccion_principal": "498",
+      "secciones_aledanas": [
+        "493",
+        "508",
+        "492"
+      ],
+      "colonias_impactadas": [
+        "Rodolfo Landeros Gallegos",
+        "Los Pericos",
+        "Rodolfo Landeros Gallegos, Tiara, Los Pericos"
+      ],
+      "delegacion": "DELG. URB.SANTA ANITA-OSCAR ARTURO GUTIERREZ ACEVEDO",
+      "poblacion_directa": 1222,
+      "poblacion_indirecta": 5149
+    }
+  },
+  {
+    "id": 209,
+    "anio": 2024,
+    "clave": "2024-FAISMUN-SOPMA-0035-IU-ETMF",
+    "nombre": "Construcción de Banquetas y Alumbrado Público en Calle San Lucas, Fracc. Los Pericos",
+    "descripcion": "Construcción de banquetas peatonales y red de alumbrado público en Calle San Lucas (calzada poniente, entre San Patricio y San José).",
+    "rubro": "Urbanización y Pavimentación",
+    "monto": 6444450.86,
+    "colonia": "Los Pericos",
+    "distrito": "Municipio de Aguascalientes",
+    "zap2026": "",
+    "folio": "2024-FAISMUN-SOPMA-0035-IU-ETMF",
+    "tipo": "",
+    "peticion": "",
+    "distancia": "",
+    "calle": "",
+    "foto": "assets/img/obras/obra_251.jpg",
+    "fotoRemota": "",
+    "tipoGeom": "LineString",
+    "lat": 21.9125,
+    "lng": -102.253,
+    "linea": [
+      [
+        21.9125,
+        -102.253
+      ],
+      [
+        21.9142,
+        -102.2535
+      ]
+    ],
+    "fuente": "PAOP 2024 - IMASAM",
+    "departamento": "Instituto Municipal de Salud Mental (IMASAM)",
+    "avance_fisico": "100",
+    "avance_financiero": "100",
+    "estatus": "Concluida",
+    "fecha_inicio": "2024-03-01",
+    "fecha_fin": "2024-11-15",
+    "resumen_tecnico": "Excavación y conformación de terracerías, construcción de banquetas de concreto hidráulico con rampas de accesibilidad universal, colocación de postes cónicos, cableado subterráneo y luminarias LED de alta eficiencia.",
+    "num_beneficiarios": 13248,
+    "beneficiarios": 6354,
+    "beneficiarios_directos": "6,354 hab.",
+    "beneficiarios_indirectos": "6,894 hab.",
+    "poblacion_beneficiada": {
+      "directa": "6,354 hab.",
+      "indirecta": "6,894 hab.",
+      "total": "13,248 hab."
+    },
+    "colonias_aledanas": [
+      "Ejido Cumbres, Guadalupano, La Hojarasca, J. Refugio Esparza Reyes, Luis Ortega Douglas",
+      "Benito Palomino Dena",
+      "Ejido Cumbres, Nazario Ortiz Garza"
+    ],
+    "secciones_impacto": [
+      "Sección 85",
+      "Sección 84",
+      "Sección 491",
+      "Sección 668"
+    ],
+    "eje_pdm": "Eje 5: Infraestructura Comunitaria y Desarrollo Social",
+    "tipo_impacto": "Acceso a Servicios Comunitarios, Educación y Salud Digna",
+    "cobertura_territorial": "Cobertura Municipal Estratégica",
+    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Edificación y Equipamiento, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "85",
+    "area_influencia": {
+      "seccion_principal": "85",
+      "secciones_aledanas": [
+        "84",
+        "491",
+        "668"
+      ],
+      "colonias_impactadas": [
+        "Ejido Cumbres, Guadalupano, La Hojarasca, J. Refugio Esparza Reyes, Luis Ortega Douglas",
+        "Benito Palomino Dena",
+        "Ejido Cumbres, Nazario Ortiz Garza"
+      ],
+      "delegacion": "DELG. URB.VILLAS-EDGAR ARMANDO IBARRA GUTIERREZ",
+      "poblacion_directa": 6354,
+      "poblacion_indirecta": 6894
+    }
+  },
+  {
+    "id": 210,
+    "anio": 2024,
+    "clave": "2024-FAISMUN-SOPMA-0041-IU-ETMF",
+    "nombre": "Construcción de Sobrecarpeta Asfáltica en Calle Juan José Arreola, Fracc. Lomas de Oriente",
+    "descripcion": "Rehabilitación de superficie de rodamiento en Calle Juan José Arreola, tramo entre Sierra Tepehuanes y Av. Poliducto.",
+    "rubro": "Vialidades y Pavimentación",
+    "monto": 1954915.75,
+    "colonia": "Lomas de Oriente",
+    "distrito": "Municipio de Aguascalientes",
+    "zap2026": "",
+    "folio": "2024-FAISMUN-SOPMA-0041-IU-ETMF",
+    "tipo": "",
+    "peticion": "",
+    "distancia": "",
+    "calle": "",
+    "foto": "",
+    "fotoRemota": "",
+    "tipoGeom": "LineString",
+    "lat": 21.892,
+    "lng": -102.255,
+    "linea": [
+      [
+        21.892,
+        -102.255
+      ],
+      [
+        21.8935,
+        -102.2515
+      ]
+    ],
+    "fuente": "PAOP 2024 - SOPMA",
+    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
+    "avance_fisico": "100",
+    "avance_financiero": "100",
+    "estatus": "Concluida",
+    "fecha_inicio": "2024-03-01",
+    "fecha_fin": "2024-11-15",
+    "resumen_tecnico": "Fresado de carpeta asfáltica degradada, bacheo profundo, aplicación de riego de liga con emulsión catiónica, tendido y compactación de sobrecarpeta asfáltica en caliente y balizamiento con pintura termoplástica.",
+    "num_beneficiarios": 15236,
+    "beneficiarios": 957,
+    "beneficiarios_directos": "957 hab.",
+    "beneficiarios_indirectos": "14,279 hab.",
+    "poblacion_beneficiada": {
+      "directa": "957 hab.",
+      "indirecta": "14,279 hab.",
+      "total": "15,236 hab."
+    },
+    "colonias_aledanas": [
+      "El Riego, Ojocaliente I",
+      "Fidel Velazquez",
+      "Municipio Libre, Fidel Velazquez, El Riego"
+    ],
+    "secciones_impacto": [
+      "Sección 128",
+      "Sección 117",
+      "Sección 116",
+      "Sección 129"
+    ],
+    "eje_pdm": "Eje 2: Movilidad Urbana Segura y Conectividad Eficiente",
+    "tipo_impacto": "Conectividad Urbana, Reducción de Tiempos de Traslado y Seguridad Vial",
+    "cobertura_territorial": "Cobertura Zonal / Delegacional",
+    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Vialidades y Pavimentación, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "128",
+    "area_influencia": {
+      "seccion_principal": "128",
+      "secciones_aledanas": [
+        "117",
+        "116",
+        "129"
+      ],
+      "colonias_impactadas": [
+        "El Riego, Ojocaliente I",
+        "Fidel Velazquez",
+        "Municipio Libre, Fidel Velazquez, El Riego"
+      ],
+      "delegacion": "DELG. URB.OJOCALIENTE-ANAIN YESENIA ACOSTA MERCADO",
+      "poblacion_directa": 957,
+      "poblacion_indirecta": 14279
+    }
+  },
+  {
+    "id": 211,
+    "anio": 2024,
+    "clave": "2024-FAISMUN-SOPMA-0042-IU-ETMF",
+    "nombre": "Construcción de Pavimento Hidráulico y Banquetas en Prolongación Banderilla y Calle Lluvia",
+    "descripcion": "Pavimentación con concreto hidráulico y banquetas en Prol. Banderilla y Calle Lluvia, entre La Espiga y Av. Ojocaliente en El Riego / Santa Anita.",
+    "rubro": "Vialidades y Pavimentación",
+    "monto": 7000000,
+    "colonia": "El Riego / Santa Anita",
+    "distrito": "Municipio de Aguascalientes",
+    "zap2026": "",
+    "folio": "2024-FAISMUN-SOPMA-0042-IU-ETMF",
+    "tipo": "",
+    "peticion": "",
+    "distancia": "",
+    "calle": "",
+    "foto": "",
+    "fotoRemota": "",
+    "tipoGeom": "LineString",
+    "lat": 21.8965,
+    "lng": -102.271,
+    "linea": [
+      [
+        21.8965,
+        -102.271
+      ],
+      [
+        21.898,
+        -102.268
+      ]
+    ],
+    "fuente": "PAOP 2024 - SOPMA",
+    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
+    "avance_fisico": "100",
+    "avance_financiero": "100",
+    "estatus": "Concluida",
+    "fecha_inicio": "2024-03-01",
+    "fecha_fin": "2024-11-15",
+    "resumen_tecnico": "Sustitución de líneas de agua y drenaje sanitario, terracerías con base hidráulica estabilizada, losas de concreto hidráulico premezclado MR-42, guarniciones, banquetas con guías podotáctiles y señalización vial.",
+    "num_beneficiarios": 10144,
+    "beneficiarios": 1278,
+    "beneficiarios_directos": "1,278 hab.",
+    "beneficiarios_indirectos": "8,866 hab.",
+    "poblacion_beneficiada": {
+      "directa": "1,278 hab.",
+      "indirecta": "8,866 hab.",
+      "total": "10,144 hab."
+    },
+    "colonias_aledanas": [
+      "Stema",
+      "Santa Anita",
+      "Santa Anita Iv Seccion, Benito Juarez"
+    ],
+    "secciones_impacto": [
+      "Sección 115",
+      "Sección 114",
+      "Sección 101",
+      "Sección 119"
+    ],
+    "eje_pdm": "Eje 2: Movilidad Urbana Segura y Conectividad Eficiente",
+    "tipo_impacto": "Conectividad Urbana, Reducción de Tiempos de Traslado y Seguridad Vial",
+    "cobertura_territorial": "Cobertura Municipal Estratégica",
+    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Vialidades y Pavimentación, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "115",
+    "area_influencia": {
+      "seccion_principal": "115",
+      "secciones_aledanas": [
+        "114",
+        "101",
+        "119"
+      ],
+      "colonias_impactadas": [
+        "Stema",
+        "Santa Anita",
+        "Santa Anita Iv Seccion, Benito Juarez"
+      ],
+      "delegacion": "DELG. URB.SANTA ANITA-OSCAR ARTURO GUTIERREZ ACEVEDO",
+      "poblacion_directa": 1278,
+      "poblacion_indirecta": 8866
+    }
+  },
+  {
+    "id": 212,
+    "anio": 2024,
+    "clave": "2024-FAISMUN-SOPMA-0052-SS-ETMF",
+    "nombre": "Construcción de Parque Recreativo Laureles II, 1a Etapa (Chuleta y Talud)",
+    "descripcion": "Rescate y adecuación de espacio público en Circuito El Laurel Norte esquina Calle Grano en Fracc. Los Laureles II.",
+    "rubro": "Espacios Públicos y Recreación",
+    "monto": 20000000,
+    "colonia": "Los Laureles II",
+    "distrito": "Municipio de Aguascalientes",
+    "zap2026": "",
+    "folio": "2024-FAISMUN-SOPMA-0052-SS-ETMF",
+    "tipo": "",
+    "peticion": "",
+    "distancia": "",
+    "calle": "",
+    "foto": "",
+    "fotoRemota": "",
+    "tipoGeom": "Point",
+    "lat": 21.893,
+    "lng": -102.242,
+    "linea": [],
+    "fuente": "PAOP 2024 - SOPMA",
+    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
+    "avance_fisico": "100",
+    "avance_financiero": "100",
+    "estatus": "Concluida",
+    "fecha_inicio": "2024-03-01",
+    "fecha_fin": "2024-11-15",
+    "resumen_tecnico": "Estabilización de taludes, conformación de terrazas y plataformas recreativas, andadores de concreto, colocación de juegos infantiles modulares, aparatos de gimnasio al aire libre y luminarias de tecnología LED.",
+    "num_beneficiarios": 19678,
+    "beneficiarios": 4576,
+    "beneficiarios_directos": "4,576 hab.",
+    "beneficiarios_indirectos": "15,102 hab.",
+    "poblacion_beneficiada": {
+      "directa": "4,576 hab.",
+      "indirecta": "15,102 hab.",
+      "total": "19,678 hab."
+    },
+    "colonias_aledanas": [
+      "El Riego, Vista De Las Cumbres, Paseos Del Sol",
+      "Haciendas De Aguascalientes",
+      "Real Del Sol, Real De Haciendas, Colinas De San Patricio"
+    ],
+    "secciones_impacto": [
+      "Sección 549",
+      "Sección 551",
+      "Sección 554",
+      "Sección 555"
+    ],
+    "eje_pdm": "Eje 2: Movilidad Urbana Segura y Conectividad Eficiente",
+    "tipo_impacto": "Conectividad Urbana, Reducción de Tiempos de Traslado y Seguridad Vial",
+    "cobertura_territorial": "Cobertura Municipal Estratégica",
+    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Vialidades y Pavimentación, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "549",
+    "area_influencia": {
+      "seccion_principal": "549",
+      "secciones_aledanas": [
+        "551",
+        "554",
+        "555"
+      ],
+      "colonias_impactadas": [
+        "El Riego, Vista De Las Cumbres, Paseos Del Sol",
+        "Haciendas De Aguascalientes",
+        "Real Del Sol, Real De Haciendas, Colinas De San Patricio"
+      ],
+      "delegacion": "DELG. URB.GUADALUPE PERALTA-ARMANDO LEON LOPEZ",
+      "poblacion_directa": 4576,
+      "poblacion_indirecta": 15102
+    }
+  },
+  {
+    "id": 213,
+    "anio": 2024,
+    "clave": "2024-FAISMUN-SOPMA-0058-IU-ETMF",
+    "nombre": "Rehabilitación de Puente Peatonal en Calle Orquídea, Norias de Paso Hondo",
+    "descripcion": "Mantenimiento estructural y modernización del puente peatonal sobre Calle Orquídea en la comunidad de Norias de Paso Hondo.",
+    "rubro": "Vialidades y Pavimentación",
+    "monto": 5000000,
+    "colonia": "Norias de Paso Hondo",
+    "distrito": "Municipio de Aguascalientes",
+    "zap2026": "",
+    "folio": "2024-FAISMUN-SOPMA-0058-IU-ETMF",
+    "tipo": "",
+    "peticion": "",
+    "distancia": "",
+    "calle": "Fracc. Gómez Portugal",
+    "foto": "",
+    "fotoRemota": "",
+    "tipoGeom": "Point",
+    "lat": 21.859852,
+    "lng": -102.255321,
+    "linea": [],
+    "fuente": "PAOP 2024 - SSPM",
+    "departamento": "Secretaría de Seguridad Pública Municipal (SSPM)",
+    "avance_fisico": "100",
+    "avance_financiero": "100",
+    "estatus": "Concluida",
+    "fecha_inicio": "2024-03-01",
+    "fecha_fin": "2024-11-15",
+    "resumen_tecnico": "Inspección estructural, reparación de elementos metálicos y barandales con pintura anticorrosiva de alta durabilidad, restitución de losa de piso antiderrapante, rampas de acceso peatonal y luminarias solares de seguridad.",
+    "num_beneficiarios": 5250,
+    "beneficiarios": 1085,
+    "beneficiarios_directos": "1,085 hab.",
+    "beneficiarios_indirectos": "4,165 hab.",
+    "poblacion_beneficiada": {
+      "directa": "1,085 hab.",
+      "indirecta": "4,165 hab.",
+      "total": "5,250 hab."
+    },
+    "colonias_aledanas": [
+      "Morelos, Morelos I, La Terraza",
+      "Morelos",
+      "Morelos, Morelos I, Valle Del Cedazo"
+    ],
+    "secciones_impacto": [
+      "Sección 516",
+      "Sección 645",
+      "Sección 515",
+      "Sección 517"
+    ],
+    "eje_pdm": "Eje 1: Ordenamiento Urbano y Dignificación Barrial",
+    "tipo_impacto": "Dignificación del Entorno Vecinal y Mitigación de Vulnerabilidad",
+    "cobertura_territorial": "Cobertura Municipal Estratégica",
+    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Infraestructura Urbana, orientada a optimizar la calidad de vida de las familias en Fracc. Gómez Portugal, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "516",
+    "area_influencia": {
+      "seccion_principal": "516",
+      "secciones_aledanas": [
+        "645",
+        "515",
+        "517"
+      ],
+      "colonias_impactadas": [
+        "Morelos, Morelos I, La Terraza",
+        "Morelos",
+        "Morelos, Morelos I, Valle Del Cedazo"
+      ],
+      "delegacion": "DELG. URB.OJOCALIENTE-ANAIN YESENIA ACOSTA MERCADO",
+      "poblacion_directa": 1085,
+      "poblacion_indirecta": 4165
+    }
+  },
+  {
+    "id": 214,
+    "anio": 2024,
+    "clave": "2024-FAISMUN-SOPMA-0063-MM-ETMF",
+    "nombre": "Rehabilitación Integral del Mercado Guillermo Prieto, Fracc. Altavista",
+    "descripcion": "Mantenimiento y mejoramiento de instalaciones comerciales en Calle Guillermo Prieto esq. Rafael Arellano en Fracc. Altavista.",
+    "rubro": "Edificación e Infraestructura Comunitaria",
+    "monto": 3123481.56,
+    "colonia": "Altavista",
+    "distrito": "Municipio de Aguascalientes",
+    "zap2026": "",
+    "folio": "2024-FAISMUN-SOPMA-0063-MM-ETMF",
+    "tipo": "",
+    "peticion": "",
+    "distancia": "",
+    "calle": "",
+    "foto": "",
+    "fotoRemota": "",
+    "tipoGeom": "Point",
+    "lat": 21.8962,
+    "lng": -102.3025,
+    "linea": [],
+    "fuente": "PAOP 2024 - SOPMA",
+    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
+    "avance_fisico": "100",
+    "avance_financiero": "100",
+    "estatus": "Concluida",
+    "fecha_inicio": "2024-03-01",
+    "fecha_fin": "2024-11-15",
+    "resumen_tecnico": "Rehabilitación de módulos sanitarios públicos, sustitución de instalaciones eléctricas e iluminación general por LED, impermeabilización de techumbres, pintura vinílica en fachadas e interiores y reposición de pisos.",
+    "num_beneficiarios": 4106,
+    "beneficiarios": 1212,
+    "beneficiarios_directos": "1,212 hab.",
+    "beneficiarios_indirectos": "2,894 hab.",
+    "poblacion_beneficiada": {
+      "directa": "1,212 hab.",
+      "indirecta": "2,894 hab.",
+      "total": "4,106 hab."
+    },
+    "colonias_aledanas": [
+      "Circunvalacion Norte, San Pablo",
+      "Circunvalacion Norte",
+      "Buenos Aires"
+    ],
+    "secciones_impacto": [
+      "Sección 54",
+      "Sección 55",
+      "Sección 23",
+      "Sección 16"
+    ],
+    "eje_pdm": "Eje 1: Ordenamiento Urbano y Dignificación Barrial",
+    "tipo_impacto": "Dignificación del Entorno Vecinal y Mitigación de Vulnerabilidad",
+    "cobertura_territorial": "Cobertura Zonal / Delegacional",
+    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Infraestructura Urbana, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "54",
+    "area_influencia": {
+      "seccion_principal": "54",
+      "secciones_aledanas": [
+        "55",
+        "23",
+        "16"
+      ],
+      "colonias_impactadas": [
+        "Circunvalacion Norte, San Pablo",
+        "Circunvalacion Norte",
+        "Buenos Aires"
+      ],
+      "delegacion": "DELG. URB. POCITOS-CARLOS DANIEL BADILLO MORALES",
+      "poblacion_directa": 1212,
+      "poblacion_indirecta": 2894
+    }
+  },
+  {
+    "id": 215,
+    "anio": 2024,
+    "clave": "2024-FAISMUN-SOPMA-0070-ID-ETMF",
+    "nombre": "Construcción de Cancha de Pasto Sintético en Plazoleta R (1a Etapa), Fracc. Ojocaliente I",
+    "descripcion": "Construcción de espacio deportivo con pasto sintético en Calle Jaltomate esquina Calle Peñuelas en Fracc. Ojocaliente I.",
+    "rubro": "Espacios Públicos y Recreación",
+    "monto": 1953119.89,
+    "colonia": "Ojocaliente I",
+    "distrito": "Municipio de Aguascalientes",
+    "zap2026": "",
+    "folio": "2024-FAISMUN-SOPMA-0070-ID-ETMF",
+    "tipo": "",
+    "peticion": "",
+    "distancia": "",
+    "calle": "",
+    "foto": "",
+    "fotoRemota": "",
+    "tipoGeom": "Point",
+    "lat": 21.8845,
+    "lng": -102.262,
+    "linea": [],
+    "fuente": "PAOP 2024 - SOPMA",
+    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
+    "avance_fisico": "100",
+    "avance_financiero": "100",
+    "estatus": "Concluida",
+    "fecha_inicio": "2024-03-01",
+    "fecha_fin": "2024-11-15",
+    "resumen_tecnico": "Nivelación y base drenante de grava compactada, suministro e instalación de pasto sintético monofilamento de alta resistencia, porterías con red, cerca perimetral con malla ciclónica y reflectores LED para horario nocturno.",
+    "num_beneficiarios": 6148,
+    "beneficiarios": 2508,
+    "beneficiarios_directos": "2,508 hab.",
+    "beneficiarios_indirectos": "3,640 hab.",
+    "poblacion_beneficiada": {
+      "directa": "2,508 hab.",
+      "indirecta": "3,640 hab.",
+      "total": "6,148 hab."
+    },
+    "colonias_aledanas": [
+      "Mision Alameda, Ejido Ojocaliente, Ex-Hacienda Ojocaliente"
+    ],
+    "secciones_impacto": [
+      "Sección 126",
+      "Sección 127",
+      "Sección 133",
+      "Sección 132"
+    ],
+    "eje_pdm": "Eje 1: Ordenamiento Urbano y Dignificación Barrial",
+    "tipo_impacto": "Dignificación del Entorno Vecinal y Mitigación de Vulnerabilidad",
+    "cobertura_territorial": "Cobertura Zonal / Delegacional",
+    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Infraestructura Urbana, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "126",
+    "area_influencia": {
+      "seccion_principal": "126",
+      "secciones_aledanas": [
+        "127",
+        "133",
+        "132"
+      ],
+      "colonias_impactadas": [
+        "Mision Alameda, Ejido Ojocaliente, Ex-Hacienda Ojocaliente"
+      ],
+      "delegacion": "DELG. URB.OJOCALIENTE-ANAIN YESENIA ACOSTA MERCADO",
+      "poblacion_directa": 2508,
+      "poblacion_indirecta": 3640
+    }
+  },
+  {
+    "id": 216,
+    "anio": 2024,
+    "clave": "2024-FAISMUN-SOPMA-0079-IU-ETMF",
+    "nombre": "Rehabilitación de Alumbrado Público en Calle Soberana Convención Militar Revolucionaria Pte.",
+    "descripcion": "Modernización del sistema de alumbrado público en Calle Soberana Convención (entre Miguel Aparicio y José Calvillo) en Fracc. Lic. José López Portillo.",
+    "rubro": "Alumbrado Público y Electrificación",
+    "monto": 18999999.99,
+    "colonia": "José López Portillo",
+    "distrito": "Municipio de Aguascalientes",
+    "zap2026": "",
+    "folio": "2024-FAISMUN-SOPMA-0079-IU-ETMF",
+    "tipo": "",
+    "peticion": "",
+    "distancia": "",
+    "calle": "",
+    "foto": "",
+    "fotoRemota": "",
+    "tipoGeom": "LineString",
+    "lat": 21.868,
+    "lng": -102.312,
+    "linea": [
+      [
+        21.868,
+        -102.312
+      ],
+      [
+        21.8695,
+        -102.3145
+      ]
+    ],
+    "fuente": "PAOP 2024 - SOPMA",
+    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
+    "avance_fisico": "100",
+    "avance_financiero": "100",
+    "estatus": "Concluida",
+    "fecha_inicio": "2024-03-01",
+    "fecha_fin": "2024-11-15",
+    "resumen_tecnico": "Retiro de luminarias obsoletas, tendido de cableado aéreo y subterráneo normalizado, instalación de postes metálicos y luminarias LED de 100W con fotocelda integrada para mayor seguridad comunitaria y ahorro energético.",
+    "num_beneficiarios": 4624,
+    "beneficiarios": 1255,
+    "beneficiarios_directos": "1,255 hab.",
+    "beneficiarios_indirectos": "3,369 hab.",
+    "poblacion_beneficiada": {
+      "directa": "1,255 hab.",
+      "indirecta": "3,369 hab.",
+      "total": "4,624 hab."
+    },
+    "colonias_aledanas": [
+      "La Barranca De Guadalupe, Hermanos Carreon, La España",
+      "La España",
+      "La España, La Barranca De Guadalupe"
+    ],
+    "secciones_impacto": [
+      "Sección 291",
+      "Sección 296",
+      "Sección 295",
+      "Sección 292"
+    ],
+    "eje_pdm": "Eje 1: Ordenamiento Urbano y Dignificación Barrial",
+    "tipo_impacto": "Dignificación del Entorno Vecinal y Mitigación de Vulnerabilidad",
+    "cobertura_territorial": "Cobertura Municipal Estratégica",
+    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Infraestructura Urbana, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "291",
+    "area_influencia": {
+      "seccion_principal": "291",
+      "secciones_aledanas": [
+        "296",
+        "295",
+        "292"
+      ],
+      "colonias_impactadas": [
+        "La Barranca De Guadalupe, Hermanos Carreon, La España",
+        "La España",
+        "La España, La Barranca De Guadalupe"
+      ],
+      "delegacion": "DELG. URB.CENTRO PONIENTE-SIN NOMBRE",
+      "poblacion_directa": 1255,
+      "poblacion_indirecta": 3369
+    }
+  },
+  {
+    "id": 217,
+    "anio": 2024,
+    "clave": "2024-FAISMUN-SOPMA-0123-IU-ETF",
+    "nombre": "Construcción de Banquetas y Guarniciones en Calle San Cosme, Fracc. Los Pericos",
+    "descripcion": "Construcción de infraestructura peatonal en Calle San Cosme, tramo entre San Marcos y San Jorge en Fracc. Los Pericos.",
+    "rubro": "Urbanización y Pavimentación",
+    "monto": 367064.3,
+    "colonia": "Los Pericos",
+    "distrito": "Municipio de Aguascalientes",
+    "zap2026": "",
+    "folio": "2024-FAISMUN-SOPMA-0123-IU-ETF",
+    "tipo": "",
+    "peticion": "",
+    "distancia": "",
+    "calle": "",
+    "foto": "",
+    "fotoRemota": "",
+    "tipoGeom": "LineString",
+    "lat": 21.913,
+    "lng": -102.254,
+    "linea": [
+      [
+        21.913,
+        -102.254
+      ],
+      [
+        21.915,
+        -102.255
+      ]
+    ],
+    "fuente": "PAOP 2024 - SOPMA",
+    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
+    "avance_fisico": "100",
+    "avance_financiero": "100",
+    "estatus": "Concluida",
+    "fecha_inicio": "2024-03-01",
+    "fecha_fin": "2024-11-15",
+    "resumen_tecnico": "Excavación en caja, colocación de base hidráulica de 15 cm, colado de guarniciones trapezoidales de concreto f'c=200 kg/cm2 y banquetas de 10 cm con acabado escobillado, rampas para personas con discapacidad y pintura de tránsito.",
+    "num_beneficiarios": 13248,
+    "beneficiarios": 6354,
+    "beneficiarios_directos": "6,354 hab.",
+    "beneficiarios_indirectos": "6,894 hab.",
+    "poblacion_beneficiada": {
+      "directa": "6,354 hab.",
+      "indirecta": "6,894 hab.",
+      "total": "13,248 hab."
+    },
+    "colonias_aledanas": [
+      "Ejido Cumbres, Guadalupano, La Hojarasca, J. Refugio Esparza Reyes, Luis Ortega Douglas",
+      "Benito Palomino Dena",
+      "Ejido Cumbres, Nazario Ortiz Garza"
+    ],
+    "secciones_impacto": [
+      "Sección 85",
+      "Sección 84",
+      "Sección 491",
+      "Sección 668"
+    ],
+    "eje_pdm": "Eje 2: Movilidad Urbana Segura y Conectividad Eficiente",
+    "tipo_impacto": "Conectividad Urbana, Reducción de Tiempos de Traslado y Seguridad Vial",
+    "cobertura_territorial": "Cobertura Barrial Directa",
+    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Vialidades y Pavimentación, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "85",
+    "area_influencia": {
+      "seccion_principal": "85",
+      "secciones_aledanas": [
+        "84",
+        "491",
+        "668"
+      ],
+      "colonias_impactadas": [
+        "Ejido Cumbres, Guadalupano, La Hojarasca, J. Refugio Esparza Reyes, Luis Ortega Douglas",
+        "Benito Palomino Dena",
+        "Ejido Cumbres, Nazario Ortiz Garza"
+      ],
+      "delegacion": "DELG. URB.VILLAS-EDGAR ARMANDO IBARRA GUTIERREZ",
+      "poblacion_directa": 6354,
+      "poblacion_indirecta": 6894
+    }
+  },
+  {
+    "id": 218,
+    "anio": 2024,
+    "clave": "2024-FAISMUN-SOPMA-0124-IU-ETMF",
+    "nombre": "Construcción de Banquetas y Guarniciones en Calle San Marcos, Fracc. Los Pericos",
+    "descripcion": "Construcción de infraestructura peatonal en Calle San Marcos, tramo entre San Cosme y San Lucas en Fracc. Los Pericos.",
+    "rubro": "Urbanización y Pavimentación",
+    "monto": 1137697.98,
+    "colonia": "Los Pericos",
+    "distrito": "Municipio de Aguascalientes",
+    "zap2026": "",
+    "folio": "2024-FAISMUN-SOPMA-0124-IU-ETMF",
+    "tipo": "",
+    "peticion": "",
+    "distancia": "",
+    "calle": "",
+    "foto": "",
+    "fotoRemota": "",
+    "tipoGeom": "LineString",
+    "lat": 21.914,
+    "lng": -102.2532,
+    "linea": [
+      [
+        21.914,
+        -102.2532
+      ],
+      [
+        21.916,
+        -102.2541
+      ]
+    ],
+    "fuente": "PAOP 2024 - SOPMA",
+    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
+    "avance_fisico": "100",
+    "avance_financiero": "100",
+    "estatus": "Concluida",
+    "fecha_inicio": "2024-03-01",
+    "fecha_fin": "2024-11-15",
+    "resumen_tecnico": "Nivelación de terracerías, construcción de guarniciones y banquetas de concreto hidráulico en ambas calzadas, renivelación de registros de agua potable y tomas domiciliarias, garantizando accesibilidad y seguridad para peatones.",
+    "num_beneficiarios": 13248,
+    "beneficiarios": 2575,
+    "beneficiarios_directos": "2,575 hab.",
+    "beneficiarios_indirectos": "10,673 hab.",
+    "poblacion_beneficiada": {
+      "directa": "2,575 hab.",
+      "indirecta": "10,673 hab.",
+      "total": "13,248 hab."
+    },
+    "colonias_aledanas": [
+      "Benito Palomino Dena",
+      "Ejido Cumbres, Guadalupano, La Hojarasca, J. Refugio Esparza Reyes, Luis Ortega Douglas",
+      "Ejido Cumbres, Nazario Ortiz Garza"
+    ],
+    "secciones_impacto": [
+      "Sección 84",
+      "Sección 85",
+      "Sección 668",
+      "Sección 491"
+    ],
+    "eje_pdm": "Eje 2: Movilidad Urbana Segura y Conectividad Eficiente",
+    "tipo_impacto": "Conectividad Urbana, Reducción de Tiempos de Traslado y Seguridad Vial",
+    "cobertura_territorial": "Cobertura Barrial Directa",
+    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Vialidades y Pavimentación, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "84",
+    "area_influencia": {
+      "seccion_principal": "84",
+      "secciones_aledanas": [
+        "85",
+        "668",
+        "491"
+      ],
+      "colonias_impactadas": [
+        "Benito Palomino Dena",
+        "Ejido Cumbres, Guadalupano, La Hojarasca, J. Refugio Esparza Reyes, Luis Ortega Douglas",
+        "Ejido Cumbres, Nazario Ortiz Garza"
+      ],
+      "delegacion": "DELG. URB.VILLAS-EDGAR ARMANDO IBARRA GUTIERREZ",
+      "poblacion_directa": 2575,
+      "poblacion_indirecta": 10673
+    }
+  },
+  {
+    "id": 219,
+    "anio": 2024,
+    "clave": "2024-FORTAMUN-IMASAM-0029-ADQUISICION-ETMF",
+    "nombre": "Adquisición de Equipamiento Institucional para IMASAM (Salud Mental)",
+    "descripcion": "Equipamiento especializado y mobiliario para atención psicológica y de salud mental en las instalaciones de IMASAM en Fracc. Mujeres Ilustres.",
+    "rubro": "Edificación e Infraestructura Comunitaria",
+    "monto": 300000,
+    "colonia": "Mujeres Ilustres",
+    "distrito": "Municipio de Aguascalientes",
+    "zap2026": "",
+    "folio": "2024-FORTAMUN-IMASAM-0029-ADQUISICION-ETMF",
+    "tipo": "",
+    "peticion": "",
+    "distancia": "",
+    "calle": "",
+    "foto": "",
+    "fotoRemota": "",
+    "tipoGeom": "Point",
+    "lat": 21.8475,
+    "lng": -102.269,
+    "linea": [],
+    "fuente": "PAOP 2024 - SOPMA",
+    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
+    "avance_fisico": "100",
+    "avance_financiero": "100",
+    "estatus": "Concluida",
+    "fecha_inicio": "2024-03-01",
+    "fecha_fin": "2024-11-15",
+    "resumen_tecnico": "Adquisición e instalación de equipo especializado de cómputo, mobiliario ergonómico para consultorios de terapia psicológica, material didáctico terapéutico e infraestructura tecnológica para la atención integral comunitaria.",
+    "num_beneficiarios": 10984,
+    "beneficiarios": 2142,
+    "beneficiarios_directos": "2,142 hab.",
+    "beneficiarios_indirectos": "8,842 hab.",
+    "poblacion_beneficiada": {
+      "directa": "2,142 hab.",
+      "indirecta": "8,842 hab.",
+      "total": "10,984 hab."
+    },
+    "colonias_aledanas": [
+      "Morelos I, Morelos Ii",
+      "Morelos Ii, Lomas Del Mirador",
+      "Mision De Santa Lucia"
+    ],
+    "secciones_impacto": [
+      "Sección 169",
+      "Sección 619",
+      "Sección 618",
+      "Sección 168"
+    ],
+    "eje_pdm": "Eje 1: Ordenamiento Urbano y Dignificación Barrial",
+    "tipo_impacto": "Dignificación del Entorno Vecinal y Mitigación de Vulnerabilidad",
+    "cobertura_territorial": "Cobertura Barrial Directa",
+    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Infraestructura Urbana, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "169",
+    "area_influencia": {
+      "seccion_principal": "169",
+      "secciones_aledanas": [
+        "619",
+        "618",
+        "168"
+      ],
+      "colonias_impactadas": [
+        "Morelos I, Morelos Ii",
+        "Morelos Ii, Lomas Del Mirador",
+        "Mision De Santa Lucia"
+      ],
+      "delegacion": "DELG. URB.MORELOS-JOSE ALBERTO PURECO",
+      "poblacion_directa": 2142,
+      "poblacion_indirecta": 8842
+    }
+  },
+  {
+    "id": 220,
+    "anio": 2024,
+    "clave": "2024-FORTAMUN-SEFIN-0032-DEUDA-ETMF",
+    "nombre": "Pago al Servicio de la Deuda Pública Municipal (Crédito Quirografario 2024)",
+    "descripcion": "Cumplimiento de compromisos y amortización del servicio de la deuda pública municipal para saneamiento financiero institucional.",
+    "rubro": "Fortalecimiento Institucional y Gestión",
+    "monto": 300000,
+    "colonia": "Aguascalientes",
+    "distrito": "Municipio de Aguascalientes",
+    "zap2026": "",
+    "folio": "2024-FORTAMUN-SEFIN-0032-DEUDA-ETMF",
+    "tipo": "",
+    "peticion": "",
+    "distancia": "",
+    "calle": "",
+    "foto": "",
+    "fotoRemota": "",
+    "tipoGeom": "Point",
+    "lat": 21.881,
+    "lng": -102.2965,
+    "linea": [],
+    "fuente": "PAOP 2024 - SOPMA",
+    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
+    "avance_fisico": "100",
+    "avance_financiero": "100",
+    "estatus": "Concluida",
+    "fecha_inicio": "2024-03-01",
+    "fecha_fin": "2024-11-15",
+    "resumen_tecnico": "Amortización de capital e intereses derivados de obligaciones crediticias municipales vigentes, asegurando estabilidad presupuestal y solvencia financiera institucional del Municipio de Aguascalientes.",
+    "num_beneficiarios": 5413,
+    "beneficiarios": 3662,
+    "beneficiarios_directos": "3,662 hab.",
+    "beneficiarios_indirectos": "1,751 hab.",
+    "poblacion_beneficiada": {
+      "directa": "3,662 hab.",
+      "indirecta": "1,751 hab.",
+      "total": "5,413 hab."
+    },
+    "colonias_aledanas": [
+      "Zona Centro, Barrio San Marcos",
+      "Zona Centro, El Encino",
+      "Zona Centro, Obraje"
+    ],
+    "secciones_impacto": [
+      "Sección 177",
+      "Sección 180",
+      "Sección 179",
+      "Sección 74"
+    ],
+    "eje_pdm": "Eje 1: Ordenamiento Urbano y Dignificación Barrial",
+    "tipo_impacto": "Dignificación del Entorno Vecinal y Mitigación de Vulnerabilidad",
+    "cobertura_territorial": "Cobertura Barrial Directa",
+    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Infraestructura Urbana, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "177",
+    "area_influencia": {
+      "seccion_principal": "177",
+      "secciones_aledanas": [
+        "180",
+        "179",
+        "74"
+      ],
+      "colonias_impactadas": [
+        "Zona Centro, Barrio San Marcos",
+        "Zona Centro, El Encino",
+        "Zona Centro, Obraje"
+      ],
+      "delegacion": "DELG. URB.CENTRO PONIENTE-SIN NOMBRE",
+      "poblacion_directa": 3662,
+      "poblacion_indirecta": 1751
+    }
+  },
+  {
+    "id": 221,
+    "anio": 2024,
+    "clave": "2024-FORTAMUN-SSPM-0102-VEHICULOS-ETMF",
+    "nombre": "Adquisición de Vehículos Operativos para la Secretaría de Seguridad Pública Municipal",
+    "descripcion": "Adquisición de patrullas y unidades operativas para el fortalecimiento de la vigilancia policial y prevención del delito en el municipio.",
+    "rubro": "Seguridad Pública y Equipamiento",
+    "monto": 476906.88,
+    "colonia": "Aguascalientes",
+    "distrito": "Municipio de Aguascalientes",
+    "zap2026": "",
+    "folio": "2024-FORTAMUN-SSPM-0102-VEHICULOS-ETMF",
+    "tipo": "",
+    "peticion": "",
+    "distancia": "",
+    "calle": "",
+    "foto": "assets/img/obras/obra_263.jpg",
+    "fotoRemota": "",
+    "tipoGeom": "Point",
+    "lat": 21.883,
+    "lng": -102.298,
+    "linea": [],
+    "fuente": "PAOP 2024 - SOPMA",
+    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
+    "avance_fisico": "100",
+    "avance_financiero": "100",
+    "estatus": "Concluida",
+    "fecha_inicio": "2024-03-01",
+    "fecha_fin": "2024-11-15",
+    "resumen_tecnico": "Suministro de vehículos policiales tipo patrulla totalmente equipados con torreta LED, sirena, tumbaburros, radiocomunicación digital policial, balizamiento oficial y sistema de posicionamiento satelital GPS.",
+    "num_beneficiarios": 8377,
+    "beneficiarios": 3500,
+    "beneficiarios_directos": "3,500 hab.",
+    "beneficiarios_indirectos": "4,877 hab.",
+    "poblacion_beneficiada": {
+      "directa": "3,500 hab.",
+      "indirecta": "4,877 hab.",
+      "total": "8,377 hab."
+    },
+    "colonias_aledanas": [
+      "Zona Centro, Guadalupe",
+      "Zona Centro, Barrio San Marcos",
+      "Zona Centro"
+    ],
+    "secciones_impacto": [
+      "Sección 173",
+      "Sección 177",
+      "Sección 28",
+      "Sección 172"
+    ],
+    "eje_pdm": "Eje 1: Ordenamiento Urbano y Dignificación Barrial",
+    "tipo_impacto": "Dignificación del Entorno Vecinal y Mitigación de Vulnerabilidad",
+    "cobertura_territorial": "Cobertura Barrial Directa",
+    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Infraestructura Urbana, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "173",
+    "area_influencia": {
+      "seccion_principal": "173",
+      "secciones_aledanas": [
+        "177",
+        "28",
+        "172"
+      ],
+      "colonias_impactadas": [
+        "Zona Centro, Guadalupe",
+        "Zona Centro, Barrio San Marcos",
+        "Zona Centro"
+      ],
+      "delegacion": "DELG. URB.CENTRO PONIENTE-SIN NOMBRE",
+      "poblacion_directa": 3500,
+      "poblacion_indirecta": 4877
+    }
+  },
+  {
+    "id": 222,
+    "anio": 2024,
+    "clave": "2024-PDM-CCAPAMA-0095-POZO-ETMF",
+    "nombre": "Mantenimiento y Limpieza con Aire Comprimido de Pozos Profundos (Molino V, Conejal 1, La Herrada 2)",
+    "descripcion": "Rehabilitación y aforo mediante limpieza con aire comprimido en pozos de agua potable Molino V, Conejal 1 y La Herrada 2.",
+    "rubro": "Agua Potable y Saneamiento",
+    "monto": 1011017.21,
+    "colonia": "El Conejal / Cartagena",
+    "distrito": "Municipio de Aguascalientes",
+    "zap2026": "",
+    "folio": "2024-PDM-CCAPAMA-0095-POZO-ETMF",
+    "tipo": "",
+    "peticion": "",
+    "distancia": "",
+    "calle": "",
+    "foto": "assets/img/obras/obra_264.jpg",
+    "fotoRemota": "",
+    "tipoGeom": "Point",
+    "lat": 21.915,
+    "lng": -102.285,
+    "linea": [],
+    "fuente": "PAOP 2024 - MIAA",
+    "departamento": "Modelo Integral de Aguas de Aguascalientes (MIAA)",
+    "avance_fisico": "100",
+    "avance_financiero": "100",
+    "estatus": "Concluida",
+    "fecha_inicio": "2024-03-01",
+    "fecha_fin": "2024-11-15",
+    "resumen_tecnico": "Desinstalación de columna de bombeo, cepillado de ademe metálico, pistoneo y desazolve con compresor de aire a alta presión, aforo de gasto volumétrico, desinfección y reinstalación de equipo electromecánico de bombeo.",
+    "num_beneficiarios": 9907,
+    "beneficiarios": 4627,
+    "beneficiarios_directos": "4,627 hab.",
+    "beneficiarios_indirectos": "5,280 hab.",
+    "poblacion_beneficiada": {
+      "directa": "4,627 hab.",
+      "indirecta": "5,280 hab.",
+      "total": "9,907 hab."
+    },
+    "colonias_aledanas": [
+      "Trojes Del Cobano, Parras, Bosques Del Prado Oriente, Alianza Ferrocarrilera, Macias Arellano, Valtica, Trento",
+      "Las Hadas, Lo Arcos",
+      "Villa Teresa, Constitucion, Centro Comercial Altaria"
+    ],
+    "secciones_impacto": [
+      "Sección 90",
+      "Sección 91",
+      "Sección 637",
+      "Sección 88"
+    ],
+    "eje_pdm": "Eje 1: Servicios Públicos de Calidad y Sustentabilidad Hídrica",
+    "tipo_impacto": "Salud Pública, Eficiencia Hídrica y Prevención de Encharcamientos",
+    "cobertura_territorial": "Cobertura Barrial Directa",
+    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Agua y Saneamiento, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "90",
+    "area_influencia": {
+      "seccion_principal": "90",
+      "secciones_aledanas": [
+        "91",
+        "637",
+        "88"
+      ],
+      "colonias_impactadas": [
+        "Trojes Del Cobano, Parras, Bosques Del Prado Oriente, Alianza Ferrocarrilera, Macias Arellano, Valtica, Trento",
+        "Las Hadas, Lo Arcos",
+        "Villa Teresa, Constitucion, Centro Comercial Altaria"
+      ],
+      "delegacion": "DELG. URB. POZO BRAVO-MONICA IBARRA JAUREGUI",
+      "poblacion_directa": 4627,
+      "poblacion_indirecta": 5280
+    }
+  },
+  {
+    "id": 223,
+    "anio": 2024,
+    "clave": "2024-PDM-SOPMA-0014-SA-ETMF",
+    "nombre": "Construcción de Sobrecarpeta Asfáltica en Calle Vázquez del Mercado T-1, Zona Centro",
+    "descripcion": "Rehabilitación de carpeta asfáltica en Calle Vázquez del Mercado (tramo entre Ignacio Zaragoza y Gral. Miguel Barragán) en Zona Centro.",
+    "rubro": "Vialidades y Pavimentación",
+    "monto": 3199999.23,
+    "colonia": "Zona Centro",
+    "distrito": "Municipio de Aguascalientes",
+    "zap2026": "",
+    "folio": "2024-PDM-SOPMA-0014-SA-ETMF",
     "tipo": "",
     "peticion": "",
     "distancia": "",
@@ -12470,44 +13903,60 @@ window.OBRAS_DATA = [
     "estatus": "Concluida",
     "fecha_inicio": "2024-03-01",
     "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-FAISMUN-MIAA-0050-AS-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en construcción de sobrecarpeta asfáltica, calle vázquez del mercado, t-1, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Vialidades y Pavimentación, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $2,023,734.60 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 4137,
-    "beneficiarios": "4,137 habitantes",
+    "resumen_tecnico": "Fresado de pavimento asfáltico en espesor de 5 cm, nivelación de registros y bocas de tormenta, riego de liga con emulsión asfáltica superestable, colocación de sobrecarpeta asfáltica compactada y pintura termoplástica de señalamiento.",
+    "num_beneficiarios": 2549,
+    "beneficiarios": 987,
     "beneficiarios_directos": "987 hab.",
-    "beneficiarios_indirectos": "3,150 hab.",
+    "beneficiarios_indirectos": "1,562 hab.",
     "poblacion_beneficiada": {
       "directa": "987 hab.",
-      "indirecta": "3,150 hab.",
-      "total": "4,137 hab."
+      "indirecta": "1,562 hab.",
+      "total": "2,549 hab."
     },
     "colonias_aledanas": [
-      "Zona Centro",
-      "Villas Verdes",
-      "La Purisima"
+      "Zona Centro, Villas Verdes",
+      "Zona Centro, La Purisima"
     ],
     "secciones_impacto": [
       "Sección 71",
       "Sección 75",
-      "Sección 76"
+      "Sección 76",
+      "Sección 74"
     ],
-    "eje_pdm": "Eje 2: Movilidad Urbana Segura y Conectividad Eficiente",
-    "tipo_impacto": "Conectividad Urbana, Reducción de Tiempos de Traslado y Seguridad Vial",
+    "eje_pdm": "Eje 1: Ordenamiento Urbano y Dignificación Barrial",
+    "tipo_impacto": "Dignificación del Entorno Vecinal y Mitigación de Vulnerabilidad",
     "cobertura_territorial": "Cobertura Zonal / Delegacional",
     "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Vialidades y Pavimentación, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Infraestructura Urbana, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "71",
+    "area_influencia": {
+      "seccion_principal": "71",
+      "secciones_aledanas": [
+        "75",
+        "76",
+        "74"
+      ],
+      "colonias_impactadas": [
+        "Zona Centro, Villas Verdes",
+        "Zona Centro, La Purisima"
+      ],
+      "delegacion": "DELG. URB.CENTRO ORIENTE-JESUS ORTIZ TORRES",
+      "poblacion_directa": 987,
+      "poblacion_indirecta": 1562
+    }
   },
   {
-    "id": 204,
+    "id": 224,
     "anio": 2024,
-    "clave": "2024-FAISMUN-MIAA-0055-GI-ETMF",
-    "nombre": "Construcción DE SOBRECARPETA Asfáltica, CALLE 20 DE NOVIEMBRE",
-    "descripcion": "Construcción DE SOBRECARPETA Asfáltica, CALLE 20 DE NOVIEMBRE. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
+    "clave": "2024-PDM-SOPMA-0015-SA-ETMF",
+    "nombre": "Construcción de Sobrecarpeta Asfáltica en Calle 20 de Noviembre, Zona Centro",
+    "descripcion": "Construcción de sobrecarpeta asfáltica en Calle 20 de Noviembre, tramo entre Calle Vázquez del Mercado y Calle Pino Suárez en Zona Centro.",
     "rubro": "Vialidades y Pavimentación",
-    "monto": 1543657.99,
-    "colonia": "Aguascalientes",
+    "monto": 1277000,
+    "colonia": "Zona Centro",
     "distrito": "Municipio de Aguascalientes",
     "zap2026": "",
-    "folio": "2024-FAISMUN-MIAA-0055-GI-ETMF",
+    "folio": "2024-PDM-SOPMA-0015-SA-ETMF",
     "tipo": "",
     "peticion": "",
     "distancia": "",
@@ -12538,44 +13987,62 @@ window.OBRAS_DATA = [
     "estatus": "Concluida",
     "fecha_inicio": "2024-03-01",
     "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-FAISMUN-MIAA-0055-GI-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en construcción de sobrecarpeta asfáltica, calle 20 de noviembre, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Vialidades y Pavimentación, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $1,543,657.99 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 4318,
-    "beneficiarios": "4,318 habitantes",
+    "resumen_tecnico": "Fresado de carpeta asfáltica existente, bacheo profundo, aplicación de riego de liga con emulsión y tendido de sobrecarpeta de concreto asfáltico en caliente con rodillo tándem, además de señalamiento vial horizontal.",
+    "num_beneficiarios": 3198,
+    "beneficiarios": 960,
     "beneficiarios_directos": "960 hab.",
-    "beneficiarios_indirectos": "3,358 hab.",
+    "beneficiarios_indirectos": "2,238 hab.",
     "poblacion_beneficiada": {
       "directa": "960 hab.",
-      "indirecta": "3,358 hab.",
-      "total": "4,318 hab."
+      "indirecta": "2,238 hab.",
+      "total": "3,198 hab."
     },
     "colonias_aledanas": [
       "Gremial",
-      "Zona Centro",
-      "La Purisima"
+      "Zona Centro, La Purisima",
+      "Gremial, Zona Centro"
     ],
     "secciones_impacto": [
       "Sección 69",
       "Sección 70",
-      "Sección 68"
+      "Sección 68",
+      "Sección 78"
     ],
-    "eje_pdm": "Eje 2: Movilidad Urbana Segura y Conectividad Eficiente",
-    "tipo_impacto": "Conectividad Urbana, Reducción de Tiempos de Traslado y Seguridad Vial",
+    "eje_pdm": "Eje 1: Ordenamiento Urbano y Dignificación Barrial",
+    "tipo_impacto": "Dignificación del Entorno Vecinal y Mitigación de Vulnerabilidad",
     "cobertura_territorial": "Cobertura Zonal / Delegacional",
     "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Vialidades y Pavimentación, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Infraestructura Urbana, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "69",
+    "area_influencia": {
+      "seccion_principal": "69",
+      "secciones_aledanas": [
+        "70",
+        "68",
+        "78"
+      ],
+      "colonias_impactadas": [
+        "Gremial",
+        "Zona Centro, La Purisima",
+        "Gremial, Zona Centro"
+      ],
+      "delegacion": "DELG. URB.CENTRO ORIENTE-JESUS ORTIZ TORRES",
+      "poblacion_directa": 960,
+      "poblacion_indirecta": 2238
+    }
   },
   {
-    "id": 205,
+    "id": 225,
     "anio": 2024,
-    "clave": "2024-FAISMUN-MIAA-0056-GI-ETMF",
-    "nombre": "Construcción DE SOBRECARPETA Asfáltica, CALLE RAMÓN López VELARDE",
-    "descripcion": "Construcción DE SOBRECARPETA Asfáltica, CALLE RAMÓN López VELARDE. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
+    "clave": "2024-PDM-SOPMA-0016-SA-ETMF",
+    "nombre": "Construcción de Sobrecarpeta Asfáltica en Calle Ramón López Velarde, Zona Centro",
+    "descripcion": "Rehabilitación de carpeta asfáltica en Calle Ramón López Velarde, tramo entre Álvaro Obregón y Primo Verdad en Zona Centro.",
     "rubro": "Vialidades y Pavimentación",
-    "monto": 1062666.81,
-    "colonia": "Aguascalientes",
+    "monto": 2549999.7,
+    "colonia": "Zona Centro",
     "distrito": "Municipio de Aguascalientes",
     "zap2026": "",
-    "folio": "2024-FAISMUN-MIAA-0056-GI-ETMF",
+    "folio": "2024-PDM-SOPMA-0016-SA-ETMF",
     "tipo": "",
     "peticion": "",
     "distancia": "",
@@ -12602,44 +14069,58 @@ window.OBRAS_DATA = [
     "estatus": "Concluida",
     "fecha_inicio": "2024-03-01",
     "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-FAISMUN-MIAA-0056-GI-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en construcción de sobrecarpeta asfáltica, calle ramón lópez velarde, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Vialidades y Pavimentación, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $1,062,666.81 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 4100,
-    "beneficiarios": "4,100 habitantes",
-    "beneficiarios_directos": "950 hab.",
-    "beneficiarios_indirectos": "3,150 hab.",
+    "resumen_tecnico": "Escarificado y fresado mecánico, bacheo superficial y profundo en zonas fatigadas, riego de adherencia, tendido de mezcla asfáltica en caliente de 5 cm de espesor y pintado de líneas divisorias de carril y pasos peatonales.",
+    "num_beneficiarios": 2240,
+    "beneficiarios": 893,
+    "beneficiarios_directos": "893 hab.",
+    "beneficiarios_indirectos": "1,347 hab.",
     "poblacion_beneficiada": {
-      "directa": "950 hab.",
-      "indirecta": "3,150 hab.",
-      "total": "4,100 hab."
+      "directa": "893 hab.",
+      "indirecta": "1,347 hab.",
+      "total": "2,240 hab."
     },
     "colonias_aledanas": [
-      "Zona Centro",
-      "Villas Verdes",
-      "La Fe"
+      "Zona Centro, Villas Verdes"
     ],
     "secciones_impacto": [
       "Sección 73",
       "Sección 72",
-      "Sección 74"
+      "Sección 74",
+      "Sección 28"
     ],
-    "eje_pdm": "Eje 2: Movilidad Urbana Segura y Conectividad Eficiente",
-    "tipo_impacto": "Conectividad Urbana, Reducción de Tiempos de Traslado y Seguridad Vial",
-    "cobertura_territorial": "Cobertura Barrial Directa",
+    "eje_pdm": "Eje 1: Ordenamiento Urbano y Dignificación Barrial",
+    "tipo_impacto": "Dignificación del Entorno Vecinal y Mitigación de Vulnerabilidad",
+    "cobertura_territorial": "Cobertura Zonal / Delegacional",
     "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Vialidades y Pavimentación, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Infraestructura Urbana, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "73",
+    "area_influencia": {
+      "seccion_principal": "73",
+      "secciones_aledanas": [
+        "72",
+        "74",
+        "28"
+      ],
+      "colonias_impactadas": [
+        "Zona Centro, Villas Verdes"
+      ],
+      "delegacion": "DELG. URB.CENTRO ORIENTE-JESUS ORTIZ TORRES",
+      "poblacion_directa": 893,
+      "poblacion_indirecta": 1347
+    }
   },
   {
-    "id": 206,
+    "id": 226,
     "anio": 2024,
-    "clave": "2024-FAISMUN-SEDESOM-0059-PV-ETMF",
-    "nombre": "Construcción DE SOBRECARPETA Asfáltica, CALLE LIC. FRANCISCO PRIMO VERDAD",
-    "descripcion": "Construcción DE SOBRECARPETA Asfáltica, CALLE LIC. FRANCISCO PRIMO VERDAD. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
+    "clave": "2024-PDM-SOPMA-0017-SA-ETMF",
+    "nombre": "Construcción de Sobrecarpeta Asfáltica en Calle Lic. Francisco Primo Verdad, Zona Centro",
+    "descripcion": "Rehabilitación de vialidad en Calle Primo Verdad, tramo entre Ignacio Zaragoza y Ezequiel A. Chávez en Zona Centro.",
     "rubro": "Vialidades y Pavimentación",
-    "monto": 2694880.12,
-    "colonia": "Aguascalientes",
+    "monto": 163087.11,
+    "colonia": "Zona Centro",
     "distrito": "Municipio de Aguascalientes",
     "zap2026": "",
-    "folio": "2024-FAISMUN-SEDESOM-0059-PV-ETMF",
+    "folio": "2024-PDM-SOPMA-0017-SA-ETMF",
     "tipo": "",
     "peticion": "",
     "distancia": "",
@@ -12666,44 +14147,60 @@ window.OBRAS_DATA = [
     "estatus": "Concluida",
     "fecha_inicio": "2024-03-01",
     "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-FAISMUN-SEDESOM-0059-PV-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en construcción de sobrecarpeta asfáltica, calle lic. francisco primo verdad, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Vialidades y Pavimentación, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $2,694,880.12 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 4289,
-    "beneficiarios": "4,289 habitantes",
-    "beneficiarios_directos": "950 hab.",
-    "beneficiarios_indirectos": "3,339 hab.",
+    "resumen_tecnico": "Fresado de pavimento asfáltico deteriorado, limpieza mecánica de la superficie, aplicación de emulsión catiónica de rompimiento rápido, colocación de sobrecarpeta asfáltica compactada y restitución de señalización vial.",
+    "num_beneficiarios": 2485,
+    "beneficiarios": 481,
+    "beneficiarios_directos": "481 hab.",
+    "beneficiarios_indirectos": "2,004 hab.",
     "poblacion_beneficiada": {
-      "directa": "950 hab.",
-      "indirecta": "3,339 hab.",
-      "total": "4,289 hab."
+      "directa": "481 hab.",
+      "indirecta": "2,004 hab.",
+      "total": "2,485 hab."
     },
     "colonias_aledanas": [
-      "Zona Centro",
-      "La Purisima",
-      "La Estacion"
+      "Zona Centro, La Purisima",
+      "La Purisima"
     ],
     "secciones_impacto": [
       "Sección 76",
       "Sección 77",
-      "Sección 78"
+      "Sección 78",
+      "Sección 75"
     ],
-    "eje_pdm": "Eje 2: Movilidad Urbana Segura y Conectividad Eficiente",
-    "tipo_impacto": "Conectividad Urbana, Reducción de Tiempos de Traslado y Seguridad Vial",
-    "cobertura_territorial": "Cobertura Zonal / Delegacional",
+    "eje_pdm": "Eje 3: Tejido Social Fuerte, Espacios Dignos y Deporte",
+    "tipo_impacto": "Reconstrucción del Tejido Social, Convivencia Familiar y Esparcimiento",
+    "cobertura_territorial": "Cobertura Barrial Directa",
     "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Vialidades y Pavimentación, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Espacios Públicos y Deporte, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "76",
+    "area_influencia": {
+      "seccion_principal": "76",
+      "secciones_aledanas": [
+        "77",
+        "78",
+        "75"
+      ],
+      "colonias_impactadas": [
+        "Zona Centro, La Purisima",
+        "La Purisima"
+      ],
+      "delegacion": "DELG. URB.CENTRO ORIENTE-JESUS ORTIZ TORRES",
+      "poblacion_directa": 481,
+      "poblacion_indirecta": 2004
+    }
   },
   {
-    "id": 207,
+    "id": 227,
     "anio": 2024,
-    "clave": "2024-FAISMUN-SOPMA-0028-IU-ETMF",
-    "nombre": "Construcción DE SOBRECARPETA Asfáltica, CALLE FRANCISCO VILLA",
-    "descripcion": "Construcción DE SOBRECARPETA Asfáltica, CALLE FRANCISCO VILLA. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
+    "clave": "2024-PDM-SOPMA-0018-SA-ETMF",
+    "nombre": "Construcción de Sobrecarpeta Asfáltica en Calle Gral. Francisco Villa, Zona Centro",
+    "descripcion": "Rehabilitación de pavimento en Calle Francisco Villa, tramo entre Vázquez del Mercado y Pino Suárez en Zona Centro.",
     "rubro": "Vialidades y Pavimentación",
-    "monto": 1751816.99,
-    "colonia": "Aguascalientes",
+    "monto": 288818.44,
+    "colonia": "Zona Centro",
     "distrito": "Municipio de Aguascalientes",
     "zap2026": "",
-    "folio": "2024-FAISMUN-SOPMA-0028-IU-ETMF",
+    "folio": "2024-PDM-SOPMA-0018-SA-ETMF",
     "tipo": "",
     "peticion": "",
     "distancia": "",
@@ -12730,44 +14227,62 @@ window.OBRAS_DATA = [
     "estatus": "Concluida",
     "fecha_inicio": "2024-03-01",
     "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-FAISMUN-SOPMA-0028-IU-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en construcción de sobrecarpeta asfáltica, calle francisco villa, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Vialidades y Pavimentación, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $1,751,816.99 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 4698,
-    "beneficiarios": "4,698 habitantes",
-    "beneficiarios_directos": "950 hab.",
-    "beneficiarios_indirectos": "3,748 hab.",
+    "resumen_tecnico": "Corte y fresado de carpeta deteriorada, bacheo en áreas fisuradas, riego de liga asfáltica, tendido uniforme de carpeta asfáltica densa de 5 cm y delimitación de carriles de circulación con pintura de alto tráfico.",
+    "num_beneficiarios": 3198,
+    "beneficiarios": 699,
+    "beneficiarios_directos": "699 hab.",
+    "beneficiarios_indirectos": "2,499 hab.",
     "poblacion_beneficiada": {
-      "directa": "950 hab.",
-      "indirecta": "3,748 hab.",
-      "total": "4,698 hab."
+      "directa": "699 hab.",
+      "indirecta": "2,499 hab.",
+      "total": "3,198 hab."
     },
     "colonias_aledanas": [
-      "Zona Centro",
-      "La Purisima",
+      "Zona Centro, La Purisima",
+      "Gremial, Zona Centro",
       "Gremial"
     ],
     "secciones_impacto": [
       "Sección 70",
       "Sección 68",
-      "Sección 69"
+      "Sección 69",
+      "Sección 78"
     ],
     "eje_pdm": "Eje 2: Movilidad Urbana Segura y Conectividad Eficiente",
     "tipo_impacto": "Conectividad Urbana, Reducción de Tiempos de Traslado y Seguridad Vial",
-    "cobertura_territorial": "Cobertura Zonal / Delegacional",
+    "cobertura_territorial": "Cobertura Barrial Directa",
     "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Vialidades y Pavimentación, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Vialidades y Pavimentación, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "70",
+    "area_influencia": {
+      "seccion_principal": "70",
+      "secciones_aledanas": [
+        "68",
+        "69",
+        "78"
+      ],
+      "colonias_impactadas": [
+        "Zona Centro, La Purisima",
+        "Gremial, Zona Centro",
+        "Gremial"
+      ],
+      "delegacion": "DELG. URB.CENTRO ORIENTE-JESUS ORTIZ TORRES",
+      "poblacion_directa": 699,
+      "poblacion_indirecta": 2499
+    }
   },
   {
-    "id": 208,
+    "id": 228,
     "anio": 2024,
-    "clave": "2024-FAISMUN-SOPMA-0034-SS-ETMF",
-    "nombre": "Construcción DE SOBRECARPETA Asfáltica, CALLE GRAL. GUADALUPE VICTORIA, TRAMO 2 Y TRAMO 3",
-    "descripcion": "Construcción DE SOBRECARPETA Asfáltica, CALLE GRAL. GUADALUPE VICTORIA, TRAMO 2 Y TRAMO 3. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
+    "clave": "2024-PDM-SOPMA-0019-SA-ETMF",
+    "nombre": "Construcción de Sobrecarpeta Asfáltica en Calle Gral. Guadalupe Victoria (Tramos 2 y 3), Zona Centro",
+    "descripcion": "Pavimentación y mantenimiento en Calle Guadalupe Victoria, tramos entre Gómez Farías, Rivero y Gutiérrez y Moctezuma en Zona Centro.",
     "rubro": "Vialidades y Pavimentación",
-    "monto": 2960672.66,
-    "colonia": "Aguascalientes",
+    "monto": 999086.68,
+    "colonia": "Zona Centro",
     "distrito": "Municipio de Aguascalientes",
     "zap2026": "",
-    "folio": "2024-FAISMUN-SOPMA-0034-SS-ETMF",
+    "folio": "2024-PDM-SOPMA-0019-SA-ETMF",
     "tipo": "",
     "peticion": "",
     "distancia": "",
@@ -12794,104 +14309,67 @@ window.OBRAS_DATA = [
     "estatus": "Concluida",
     "fecha_inicio": "2024-03-01",
     "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-FAISMUN-SOPMA-0034-SS-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en construcción de sobrecarpeta asfáltica, calle gral. guadalupe victoria, tramo 2 y tramo 3, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Vialidades y Pavimentación, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $2,960,672.66 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 8727,
-    "beneficiarios": "8,727 habitantes",
-    "beneficiarios_directos": "950 hab.",
-    "beneficiarios_indirectos": "7,777 hab.",
+    "resumen_tecnico": "Fresado de rodadura existente, renivelación de brocales sanitarios y pluviales, colocación de carpeta asfáltica de granulometría densa y aplicación de pintura termoplástica en pasos cebras y líneas de aproximación.",
+    "num_beneficiarios": 8377,
+    "beneficiarios": 3500,
+    "beneficiarios_directos": "3,500 hab.",
+    "beneficiarios_indirectos": "4,877 hab.",
     "poblacion_beneficiada": {
-      "directa": "950 hab.",
-      "indirecta": "7,777 hab.",
-      "total": "8,727 hab."
+      "directa": "3,500 hab.",
+      "indirecta": "4,877 hab.",
+      "total": "8,377 hab."
     },
     "colonias_aledanas": [
-      "Zona Centro",
-      "Guadalupe",
-      "Barrio San Marcos"
+      "Zona Centro, Guadalupe",
+      "Guadalupe, Zona Centro",
+      "Zona Centro, Barrio San Marcos"
     ],
     "secciones_impacto": [
       "Sección 173",
       "Sección 28",
-      "Sección 172"
+      "Sección 172",
+      "Sección 177"
     ],
-    "eje_pdm": "Eje 2: Movilidad Urbana Segura y Conectividad Eficiente",
-    "tipo_impacto": "Conectividad Urbana, Reducción de Tiempos de Traslado y Seguridad Vial",
-    "cobertura_territorial": "Cobertura Zonal / Delegacional",
+    "eje_pdm": "Eje 3: Tejido Social Fuerte, Espacios Dignos y Deporte",
+    "tipo_impacto": "Reconstrucción del Tejido Social, Convivencia Familiar y Esparcimiento",
+    "cobertura_territorial": "Cobertura Barrial Directa",
     "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Vialidades y Pavimentación, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Espacios Públicos y Deporte, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "173",
+    "area_influencia": {
+      "seccion_principal": "173",
+      "secciones_aledanas": [
+        "28",
+        "172",
+        "177"
+      ],
+      "colonias_impactadas": [
+        "Zona Centro, Guadalupe",
+        "Guadalupe, Zona Centro",
+        "Zona Centro, Barrio San Marcos"
+      ],
+      "delegacion": "DELG. URB.CENTRO PONIENTE-SIN NOMBRE",
+      "poblacion_directa": 3500,
+      "poblacion_indirecta": 4877
+    }
   },
   {
-    "id": 209,
+    "id": 229,
     "anio": 2024,
-    "clave": "2024-FAISMUN-SOPMA-0035-IU-ETMF",
-    "nombre": "Construcción DEL HOSPITAL VETERINARIO 2A ETAPA",
-    "descripcion": "Construcción DEL HOSPITAL VETERINARIO 2A ETAPA. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
-    "rubro": "Edificación y Equipamiento",
-    "monto": 6444450.86,
-    "colonia": "Aguascalientes",
-    "distrito": "Municipio de Aguascalientes",
-    "zap2026": "",
-    "folio": "2024-FAISMUN-SOPMA-0035-IU-ETMF",
-    "tipo": "",
-    "peticion": "",
-    "distancia": "",
-    "calle": "",
-    "foto": "assets/img/obras/obra_251.jpg",
-    "fotoRemota": "",
-    "tipoGeom": "Point",
-    "lat": 21.848218,
-    "lng": -102.291528,
-    "linea": {},
-    "fuente": "PAOP 2024 - IMASAM",
-    "departamento": "Instituto Municipal de Salud Mental (IMASAM)",
-    "avance_fisico": "100",
-    "avance_financiero": "100",
-    "estatus": "Concluida",
-    "fecha_inicio": "2024-03-01",
-    "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-FAISMUN-SOPMA-0035-IU-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Instituto Municipal de Salud Mental (IMASAM) en Aguascalientes. Los trabajos consistieron integralmente en construcción del hospital veterinario 2a etapa, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Edificación y Equipamiento, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $6,444,450.86 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 5300,
-    "beneficiarios": "5,300 habitantes",
-    "beneficiarios_directos": "2,204 hab.",
-    "beneficiarios_indirectos": "3,096 hab.",
-    "poblacion_beneficiada": {
-      "directa": "2,204 hab.",
-      "indirecta": "3,096 hab.",
-      "total": "5,300 hab."
-    },
-    "colonias_aledanas": [
-      "Trojes Del Sur",
-      "Prados De Villa Asuncion",
-      "Pilar Blanco"
-    ],
-    "secciones_impacto": [
-      "Sección 260",
-      "Sección 243",
-      "Sección 259"
-    ],
-    "eje_pdm": "Eje 5: Infraestructura Comunitaria y Desarrollo Social",
-    "tipo_impacto": "Acceso a Servicios Comunitarios, Educación y Salud Digna",
-    "cobertura_territorial": "Cobertura Municipal Estratégica",
-    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Edificación y Equipamiento, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
-  },
-  {
-    "id": 210,
-    "anio": 2024,
-    "clave": "2024-FAISMUN-SOPMA-0041-IU-ETMF",
-    "nombre": "Construcción DE SOBRECARPETA Asfáltica, CALLE GRAL. ÁLVARO OBREGÓN",
-    "descripcion": "Construcción DE SOBRECARPETA Asfáltica, CALLE GRAL. ÁLVARO OBREGÓN. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
+    "clave": "2024-PDM-SOPMA-0023-SA-ETMF",
+    "nombre": "Construcción de Sobrecarpeta Asfáltica en Calle Gral. Álvaro Obregón, Zona Centro",
+    "descripcion": "Rehabilitación de carpeta asfáltica en Calle Álvaro Obregón, tramo entre Ignacio Zaragoza y Ramón López Velarde en Zona Centro.",
     "rubro": "Vialidades y Pavimentación",
-    "monto": 1954915.75,
-    "colonia": "Aguascalientes",
+    "monto": 1900000.01,
+    "colonia": "Zona Centro",
     "distrito": "Municipio de Aguascalientes",
     "zap2026": "",
-    "folio": "2024-FAISMUN-SOPMA-0041-IU-ETMF",
+    "folio": "2024-PDM-SOPMA-0023-SA-ETMF",
     "tipo": "",
     "peticion": "",
     "distancia": "",
     "calle": "",
-    "foto": "",
+    "foto": "assets/img/obras/obra_271.jpg",
     "fotoRemota": "",
     "tipoGeom": "LineString",
     "lat": 21.887022,
@@ -12913,44 +14391,62 @@ window.OBRAS_DATA = [
     "estatus": "Concluida",
     "fecha_inicio": "2024-03-01",
     "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-FAISMUN-SOPMA-0041-IU-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en construcción de sobrecarpeta asfáltica, calle gral. álvaro obregón, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Vialidades y Pavimentación, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $1,954,915.75 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 4638,
-    "beneficiarios": "4,638 habitantes",
+    "resumen_tecnico": "Retiro mediante fresadora de carpeta superficial agrietada, bacheo profundo, colocación de membrana o riego asfáltico de adherencia, tendido y rodillado de concreto asfáltico y balizamiento reglamentario.",
+    "num_beneficiarios": 3215,
+    "beneficiarios": 987,
     "beneficiarios_directos": "987 hab.",
-    "beneficiarios_indirectos": "3,651 hab.",
+    "beneficiarios_indirectos": "2,228 hab.",
     "poblacion_beneficiada": {
       "directa": "987 hab.",
-      "indirecta": "3,651 hab.",
-      "total": "4,638 hab."
+      "indirecta": "2,228 hab.",
+      "total": "3,215 hab."
     },
     "colonias_aledanas": [
-      "Zona Centro",
-      "Villas Verdes",
-      "La Fe"
+      "Zona Centro, Villas Verdes",
+      "La Fe, Zona Centro, Primavera",
+      "Primavera"
     ],
     "secciones_impacto": [
       "Sección 71",
       "Sección 73",
-      "Sección 72"
+      "Sección 72",
+      "Sección 66"
     ],
-    "eje_pdm": "Eje 2: Movilidad Urbana Segura y Conectividad Eficiente",
-    "tipo_impacto": "Conectividad Urbana, Reducción de Tiempos de Traslado y Seguridad Vial",
+    "eje_pdm": "Eje 3: Tejido Social Fuerte, Espacios Dignos y Deporte",
+    "tipo_impacto": "Reconstrucción del Tejido Social, Convivencia Familiar y Esparcimiento",
     "cobertura_territorial": "Cobertura Zonal / Delegacional",
     "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Vialidades y Pavimentación, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Espacios Públicos y Deporte, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "71",
+    "area_influencia": {
+      "seccion_principal": "71",
+      "secciones_aledanas": [
+        "73",
+        "72",
+        "66"
+      ],
+      "colonias_impactadas": [
+        "Zona Centro, Villas Verdes",
+        "La Fe, Zona Centro, Primavera",
+        "Primavera"
+      ],
+      "delegacion": "DELG. URB.CENTRO ORIENTE-JESUS ORTIZ TORRES",
+      "poblacion_directa": 987,
+      "poblacion_indirecta": 2228
+    }
   },
   {
-    "id": 211,
+    "id": 230,
     "anio": 2024,
-    "clave": "2024-FAISMUN-SOPMA-0042-IU-ETMF",
-    "nombre": "Construcción DE PAVIMENTO Hidráulico BOULEVARD JUAN PABLO II, Cañada PONIENTE",
-    "descripcion": "Construcción DE PAVIMENTO Hidráulico BOULEVARD JUAN PABLO II, Cañada PONIENTE. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
+    "clave": "2024-PDM-SOPMA-0024-SA-ETMF",
+    "nombre": "Construcción de Pavimento Hidráulico en Blvd. Juan Pablo II (Calzada Poniente), Fracc. El Edén",
+    "descripcion": "Construcción de pavimento de concreto hidráulico en Blvd. Juan Pablo II, entre Av. Valle de Morcinique y Blvd. San Marcos.",
     "rubro": "Vialidades y Pavimentación",
-    "monto": 7000000,
-    "colonia": "Aguascalientes",
+    "monto": 749767.74,
+    "colonia": "El Edén",
     "distrito": "Municipio de Aguascalientes",
     "zap2026": "",
-    "folio": "2024-FAISMUN-SOPMA-0042-IU-ETMF",
+    "folio": "2024-PDM-SOPMA-0024-SA-ETMF",
     "tipo": "",
     "peticion": "",
     "distancia": "",
@@ -12977,392 +14473,62 @@ window.OBRAS_DATA = [
     "estatus": "Concluida",
     "fecha_inicio": "2024-03-01",
     "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-FAISMUN-SOPMA-0042-IU-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en construcción de pavimento hidráulico boulevard juan pablo ii, cañada poniente, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Vialidades y Pavimentación, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $7,000,000.00 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 16332,
-    "beneficiarios": "16,332 habitantes",
+    "resumen_tecnico": "Apertura de caja y conformación de subrasante y base hidráulica, colado de losas de concreto hidráulico premezclado MR-45 con pasajuntas de acero liso, sellado de juntas de dilatación y señalamiento preventivo.",
+    "num_beneficiarios": 11329,
+    "beneficiarios": 1323,
     "beneficiarios_directos": "1,323 hab.",
-    "beneficiarios_indirectos": "15,009 hab.",
+    "beneficiarios_indirectos": "10,006 hab.",
     "poblacion_beneficiada": {
       "directa": "1,323 hab.",
-      "indirecta": "15,009 hab.",
-      "total": "16,332 hab."
+      "indirecta": "10,006 hab.",
+      "total": "11,329 hab."
     },
     "colonias_aledanas": [
-      "El Eden",
-      "Francisco Villa",
-      "Eucaliptos"
+      "El Eden, Francisco Villa, Eucaliptos, Mision De Juan Pablo Ii, Santa Barbara, Cerrada De La Fe",
+      "Don Manuel Gomez Morin, Villas De La Cantera, Canteras De Santa Imelda, Santa Imelda, Los Remedios, Molino De Flores, Canteras De San Jose,Canteras De San Javier, Coto Sacromonte, Capital City, Eucaliptos Ii",
+      "Los Pirules"
     ],
     "secciones_impacto": [
       "Sección 282",
       "Sección 301",
-      "Sección 293"
+      "Sección 293",
+      "Sección 284"
     ],
-    "eje_pdm": "Eje 2: Movilidad Urbana Segura y Conectividad Eficiente",
-    "tipo_impacto": "Conectividad Urbana, Reducción de Tiempos de Traslado y Seguridad Vial",
-    "cobertura_territorial": "Cobertura Municipal Estratégica",
-    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Vialidades y Pavimentación, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
-  },
-  {
-    "id": 212,
-    "anio": 2024,
-    "clave": "2024-FAISMUN-SOPMA-0052-SS-ETMF",
-    "nombre": "Construcción DE PAVIMENTO Hidráulico, AV. JULIO Díaz TORRE, TRAMO 2",
-    "descripcion": "Construcción DE PAVIMENTO Hidráulico, AV. JULIO Díaz TORRE, TRAMO 2. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
-    "rubro": "Vialidades y Pavimentación",
-    "monto": 20000000,
-    "colonia": "Aguascalientes",
-    "distrito": "Municipio de Aguascalientes",
-    "zap2026": "",
-    "folio": "2024-FAISMUN-SOPMA-0052-SS-ETMF",
-    "tipo": "",
-    "peticion": "",
-    "distancia": "",
-    "calle": "",
-    "foto": "",
-    "fotoRemota": "",
-    "tipoGeom": "LineString",
-    "lat": 21.842538,
-    "lng": -102.280486,
-    "linea": [
-      [
-        21.842538,
-        -102.280486
-      ],
-      [
-        21.838614,
-        -102.280422
-      ]
-    ],
-    "fuente": "PAOP 2024 - SOPMA",
-    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
-    "avance_fisico": "100",
-    "avance_financiero": "100",
-    "estatus": "Concluida",
-    "fecha_inicio": "2024-03-01",
-    "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-FAISMUN-SOPMA-0052-SS-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en construcción de pavimento hidráulico, av. julio díaz torre, tramo 2, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Vialidades y Pavimentación, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $20,000,000.00 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 14721,
-    "beneficiarios": "14,721 habitantes",
-    "beneficiarios_directos": "3,407 hab.",
-    "beneficiarios_indirectos": "11,314 hab.",
-    "poblacion_beneficiada": {
-      "directa": "3,407 hab.",
-      "indirecta": "11,314 hab.",
-      "total": "14,721 hab."
-    },
-    "colonias_aledanas": [
-      "Mision De Santa Lucia",
-      "Piramides",
-      "Ciudad Industrial"
-    ],
-    "secciones_impacto": [
-      "Sección 618",
-      "Sección 650",
-      "Sección 651"
-    ],
-    "eje_pdm": "Eje 2: Movilidad Urbana Segura y Conectividad Eficiente",
-    "tipo_impacto": "Conectividad Urbana, Reducción de Tiempos de Traslado y Seguridad Vial",
-    "cobertura_territorial": "Cobertura Municipal Estratégica",
-    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Vialidades y Pavimentación, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
-  },
-  {
-    "id": 213,
-    "anio": 2024,
-    "clave": "2024-FAISMUN-SOPMA-0058-IU-ETMF",
-    "nombre": "Construcción de Dormitorios y Cubículos en el Instituto Superior de Seguridad Pública",
-    "descripcion": "Construcción de Dormitorios y Cubículos en el Instituto Superior de Seguridad Pública. Ubicación: Fracc. Gómez Portugal, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
-    "rubro": "Infraestructura Urbana",
-    "monto": 5000000,
-    "colonia": "Fracc. Gómez Portugal",
-    "distrito": "Municipio de Aguascalientes",
-    "zap2026": "",
-    "folio": "2024-FAISMUN-SOPMA-0058-IU-ETMF",
-    "tipo": "",
-    "peticion": "",
-    "distancia": "",
-    "calle": "Fracc. Gómez Portugal",
-    "foto": "",
-    "fotoRemota": "",
-    "tipoGeom": "Point",
-    "lat": 21.859852,
-    "lng": -102.255321,
-    "linea": {},
-    "fuente": "PAOP 2024 - SSPM",
-    "departamento": "Secretaría de Seguridad Pública Municipal (SSPM)",
-    "avance_fisico": "100",
-    "avance_financiero": "100",
-    "estatus": "Concluida",
-    "fecha_inicio": "2024-03-01",
-    "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-FAISMUN-SOPMA-0058-IU-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Seguridad Pública Municipal (SSPM) en Fracc. Gómez Portugal. Los trabajos consistieron integralmente en construcción de dormitorios y cubículos en el instituto superior de seguridad pública, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Infraestructura Urbana, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $5,000,000.00 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 5250,
-    "beneficiarios": "5,250 habitantes",
-    "beneficiarios_directos": "1,085 hab.",
-    "beneficiarios_indirectos": "4,165 hab.",
-    "poblacion_beneficiada": {
-      "directa": "1,085 hab.",
-      "indirecta": "4,165 hab.",
-      "total": "5,250 hab."
-    },
-    "colonias_aledanas": [
-      "Morelos",
-      "Morelos I",
-      "La Terraza"
-    ],
-    "secciones_impacto": [
-      "Sección 516",
-      "Sección 645",
-      "Sección 515"
-    ],
-    "eje_pdm": "Eje 1: Ordenamiento Urbano y Dignificación Barrial",
-    "tipo_impacto": "Dignificación del Entorno Vecinal y Mitigación de Vulnerabilidad",
-    "cobertura_territorial": "Cobertura Municipal Estratégica",
-    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Infraestructura Urbana, orientada a optimizar la calidad de vida de las familias en Fracc. Gómez Portugal, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
-  },
-  {
-    "id": 214,
-    "anio": 2024,
-    "clave": "2024-FAISMUN-SOPMA-0063-MM-ETMF",
-    "nombre": "INSPECCIÓN Y PESAJE DE LOS TIRANTES DEL PUENTE BICENTENARIO",
-    "descripcion": "INSPECCIÓN Y PESAJE DE LOS TIRANTES DEL PUENTE BICENTENARIO. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
-    "rubro": "Infraestructura Urbana",
-    "monto": 3123481.56,
-    "colonia": "Aguascalientes",
-    "distrito": "Municipio de Aguascalientes",
-    "zap2026": "",
-    "folio": "2024-FAISMUN-SOPMA-0063-MM-ETMF",
-    "tipo": "",
-    "peticion": "",
-    "distancia": "",
-    "calle": "",
-    "foto": "",
-    "fotoRemota": "",
-    "tipoGeom": "Point",
-    "lat": 21.858077,
-    "lng": -102.292973,
-    "linea": {},
-    "fuente": "PAOP 2024 - SOPMA",
-    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
-    "avance_fisico": "100",
-    "avance_financiero": "100",
-    "estatus": "Concluida",
-    "fecha_inicio": "2024-03-01",
-    "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-FAISMUN-SOPMA-0063-MM-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en inspección y pesaje de los tirantes del puente bicentenario, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Infraestructura Urbana, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $3,123,481.56 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 3798,
-    "beneficiarios": "3,798 habitantes",
-    "beneficiarios_directos": "950 hab.",
-    "beneficiarios_indirectos": "2,848 hab.",
-    "poblacion_beneficiada": {
-      "directa": "950 hab.",
-      "indirecta": "2,848 hab.",
-      "total": "3,798 hab."
-    },
-    "colonias_aledanas": [
-      "Martinez Dominguez",
-      "Prados Del Sur",
-      "Jardines De La Asuncion"
-    ],
-    "secciones_impacto": [
-      "Sección 227",
-      "Sección 226",
-      "Sección 210"
-    ],
-    "eje_pdm": "Eje 1: Ordenamiento Urbano y Dignificación Barrial",
-    "tipo_impacto": "Dignificación del Entorno Vecinal y Mitigación de Vulnerabilidad",
-    "cobertura_territorial": "Cobertura Zonal / Delegacional",
-    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Infraestructura Urbana, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
-  },
-  {
-    "id": 215,
-    "anio": 2024,
-    "clave": "2024-FAISMUN-SOPMA-0070-ID-ETMF",
-    "nombre": "MÓDULO DE PROTECCIÓN CIVIL, MERCADO VILLAS DE NUESTRA SEÑORA DE LA Asunción",
-    "descripcion": "MÓDULO DE PROTECCIÓN CIVIL, MERCADO VILLAS DE NUESTRA SEÑORA DE LA Asunción. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
-    "rubro": "Infraestructura Urbana",
-    "monto": 1953119.89,
-    "colonia": "Aguascalientes",
-    "distrito": "Municipio de Aguascalientes",
-    "zap2026": "",
-    "folio": "2024-FAISMUN-SOPMA-0070-ID-ETMF",
-    "tipo": "",
-    "peticion": "",
-    "distancia": "",
-    "calle": "",
-    "foto": "",
-    "fotoRemota": "",
-    "tipoGeom": "Point",
-    "lat": 21.930525,
-    "lng": -102.260581,
-    "linea": {},
-    "fuente": "PAOP 2024 - SOPMA",
-    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
-    "avance_fisico": "100",
-    "avance_financiero": "100",
-    "estatus": "Concluida",
-    "fecha_inicio": "2024-03-01",
-    "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-FAISMUN-SOPMA-0070-ID-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en módulo de protección civil, mercado villas de nuestra señora de la asunción, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Infraestructura Urbana, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $1,953,119.89 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 15255,
-    "beneficiarios": "15,255 habitantes",
-    "beneficiarios_directos": "4,175 hab.",
-    "beneficiarios_indirectos": "11,080 hab.",
-    "poblacion_beneficiada": {
-      "directa": "4,175 hab.",
-      "indirecta": "11,080 hab.",
-      "total": "15,255 hab."
-    },
-    "colonias_aledanas": [
-      "Vnsa Sector Guadalupe",
-      "Vnsa Sector Estacion",
-      "Vnsa Sector Alameda"
-    ],
-    "secciones_impacto": [
-      "Sección 614",
-      "Sección 602",
-      "Sección 613"
-    ],
-    "eje_pdm": "Eje 1: Ordenamiento Urbano y Dignificación Barrial",
-    "tipo_impacto": "Dignificación del Entorno Vecinal y Mitigación de Vulnerabilidad",
-    "cobertura_territorial": "Cobertura Zonal / Delegacional",
-    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Infraestructura Urbana, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
-  },
-  {
-    "id": 216,
-    "anio": 2024,
-    "clave": "2024-FAISMUN-SOPMA-0079-IU-ETMF",
-    "nombre": "Edificación, ALUMBRADO Y BARDEO, PRIMERA ETAPA",
-    "descripcion": "Edificación, ALUMBRADO Y BARDEO, PRIMERA ETAPA. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
-    "rubro": "Infraestructura Urbana",
-    "monto": 18999999.99,
-    "colonia": "Aguascalientes",
-    "distrito": "Municipio de Aguascalientes",
-    "zap2026": "",
-    "folio": "2024-FAISMUN-SOPMA-0079-IU-ETMF",
-    "tipo": "",
-    "peticion": "",
-    "distancia": "",
-    "calle": "",
-    "foto": "",
-    "fotoRemota": "",
-    "tipoGeom": "Point",
-    "lat": 21.791122,
-    "lng": -102.225693,
-    "linea": {},
-    "fuente": "PAOP 2024 - SOPMA",
-    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
-    "avance_fisico": "100",
-    "avance_financiero": "100",
-    "estatus": "Concluida",
-    "fecha_inicio": "2024-03-01",
-    "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-FAISMUN-SOPMA-0079-IU-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en edificación, alumbrado y bardeo, primera etapa, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Infraestructura Urbana, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $18,999,999.99 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 3117,
-    "beneficiarios": "3,117 habitantes",
-    "beneficiarios_directos": "950 hab.",
-    "beneficiarios_indirectos": "2,167 hab.",
-    "poblacion_beneficiada": {
-      "directa": "950 hab.",
-      "indirecta": "2,167 hab.",
-      "total": "3,117 hab."
-    },
-    "colonias_aledanas": [
-      "El Guarda",
-      "Lomas De Arellano",
-      "Lomas De San Judas Tadeo"
-    ],
-    "secciones_impacto": [
-      "Sección 681",
-      "Sección 629",
-      "Sección 630"
-    ],
-    "eje_pdm": "Eje 1: Ordenamiento Urbano y Dignificación Barrial",
-    "tipo_impacto": "Dignificación del Entorno Vecinal y Mitigación de Vulnerabilidad",
-    "cobertura_territorial": "Cobertura Municipal Estratégica",
-    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Infraestructura Urbana, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
-  },
-  {
-    "id": 217,
-    "anio": 2024,
-    "clave": "2024-FAISMUN-SOPMA-0123-IU-ETF",
-    "nombre": "Pavimentación CON CARPETA Asfáltica, ACCESO PONIENTE AV. HACIENDAS DE SANTA Mónica",
-    "descripcion": "Pavimentación CON CARPETA Asfáltica, ACCESO PONIENTE AV. HACIENDAS DE SANTA Mónica. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
-    "rubro": "Vialidades y Pavimentación",
-    "monto": 367064.3,
-    "colonia": "Aguascalientes",
-    "distrito": "Municipio de Aguascalientes",
-    "zap2026": "",
-    "folio": "2024-FAISMUN-SOPMA-0123-IU-ETF",
-    "tipo": "",
-    "peticion": "",
-    "distancia": "",
-    "calle": "",
-    "foto": "",
-    "fotoRemota": "",
-    "tipoGeom": "LineString",
-    "lat": 21.836563,
-    "lng": -102.320474,
-    "linea": [
-      [
-        21.836563,
-        -102.320474
-      ],
-      [
-        21.837713,
-        -102.32645
-      ]
-    ],
-    "fuente": "PAOP 2024 - SOPMA",
-    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
-    "avance_fisico": "100",
-    "avance_financiero": "100",
-    "estatus": "Concluida",
-    "fecha_inicio": "2024-03-01",
-    "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-FAISMUN-SOPMA-0123-IU-ETF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en pavimentación con carpeta asfáltica, acceso poniente av. haciendas de santa mónica, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Vialidades y Pavimentación, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $367,064.30 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 20408,
-    "beneficiarios": "20,408 habitantes",
-    "beneficiarios_directos": "15,002 hab.",
-    "beneficiarios_indirectos": "5,406 hab.",
-    "poblacion_beneficiada": {
-      "directa": "15,002 hab.",
-      "indirecta": "5,406 hab.",
-      "total": "20,408 hab."
-    },
-    "colonias_aledanas": [
-      "Los Barandales San Jose",
-      "Villas Del Mediterraneo",
-      "Olinda"
-    ],
-    "secciones_impacto": [
-      "Sección 326",
-      "Sección 256",
-      "Sección 255"
-    ],
-    "eje_pdm": "Eje 2: Movilidad Urbana Segura y Conectividad Eficiente",
-    "tipo_impacto": "Conectividad Urbana, Reducción de Tiempos de Traslado y Seguridad Vial",
+    "eje_pdm": "Eje 3: Tejido Social Fuerte, Espacios Dignos y Deporte",
+    "tipo_impacto": "Reconstrucción del Tejido Social, Convivencia Familiar y Esparcimiento",
     "cobertura_territorial": "Cobertura Barrial Directa",
     "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Vialidades y Pavimentación, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Espacios Públicos y Deporte, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "282",
+    "area_influencia": {
+      "seccion_principal": "282",
+      "secciones_aledanas": [
+        "301",
+        "293",
+        "284"
+      ],
+      "colonias_impactadas": [
+        "El Eden, Francisco Villa, Eucaliptos, Mision De Juan Pablo Ii, Santa Barbara, Cerrada De La Fe",
+        "Don Manuel Gomez Morin, Villas De La Cantera, Canteras De Santa Imelda, Santa Imelda, Los Remedios, Molino De Flores, Canteras De San Jose,Canteras De San Javier, Coto Sacromonte, Capital City, Eucaliptos Ii",
+        "Los Pirules"
+      ],
+      "delegacion": "DELG. URB.SAN MARCOS-ZINTIA VARGAS TORRES",
+      "poblacion_directa": 1323,
+      "poblacion_indirecta": 10006
+    }
   },
   {
-    "id": 218,
+    "id": 231,
     "anio": 2024,
-    "clave": "2024-FAISMUN-SOPMA-0124-IU-ETMF",
-    "nombre": "Construcción DE SOBRECARPETA Asfáltica, CALLE Vázquez DEL MERCADO, TRAMO 2",
-    "descripcion": "Construcción DE SOBRECARPETA Asfáltica, CALLE Vázquez DEL MERCADO, TRAMO 2. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
+    "clave": "2024-PDM-SOPMA-0074-SA-ETMF",
+    "nombre": "Construcción de Sobrecarpeta Asfáltica en Calle Vázquez del Mercado (Tramo 2), La Purísima",
+    "descripcion": "Rehabilitación de vialidad en Calle Vázquez del Mercado, tramo entre Calle Miguel Barragán y Calle de la Cruz en La Purísima / Zona Centro.",
     "rubro": "Vialidades y Pavimentación",
-    "monto": 1137697.98,
-    "colonia": "Aguascalientes",
+    "monto": 1800000.01,
+    "colonia": "Zona Centro",
     "distrito": "Municipio de Aguascalientes",
     "zap2026": "",
-    "folio": "2024-FAISMUN-SOPMA-0124-IU-ETMF",
+    "folio": "2024-PDM-SOPMA-0074-SA-ETMF",
     "tipo": "",
     "peticion": "",
     "distancia": "",
@@ -13389,790 +14555,59 @@ window.OBRAS_DATA = [
     "estatus": "Concluida",
     "fecha_inicio": "2024-03-01",
     "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-FAISMUN-SOPMA-0124-IU-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en construcción de sobrecarpeta asfáltica, calle vázquez del mercado, tramo 2, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Vialidades y Pavimentación, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $1,137,697.98 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 4289,
-    "beneficiarios": "4,289 habitantes",
-    "beneficiarios_directos": "950 hab.",
-    "beneficiarios_indirectos": "3,339 hab.",
+    "resumen_tecnico": "Fresado mecánico en caliente, barrido de superficie, riego de impregnación y liga con asfalto modificado, tendido de sobrecarpeta de concreto asfáltico de 5 cm compactado y delimitación vial completa.",
+    "num_beneficiarios": 2564,
+    "beneficiarios": 558,
+    "beneficiarios_directos": "558 hab.",
+    "beneficiarios_indirectos": "2,006 hab.",
     "poblacion_beneficiada": {
-      "directa": "950 hab.",
-      "indirecta": "3,339 hab.",
-      "total": "4,289 hab."
+      "directa": "558 hab.",
+      "indirecta": "2,006 hab.",
+      "total": "2,564 hab."
     },
     "colonias_aledanas": [
       "La Purisima",
-      "Zona Centro",
+      "Zona Centro, La Purisima",
       "Gremial"
     ],
     "secciones_impacto": [
       "Sección 77",
       "Sección 70",
-      "Sección 78"
-    ],
-    "eje_pdm": "Eje 2: Movilidad Urbana Segura y Conectividad Eficiente",
-    "tipo_impacto": "Conectividad Urbana, Reducción de Tiempos de Traslado y Seguridad Vial",
-    "cobertura_territorial": "Cobertura Barrial Directa",
-    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Vialidades y Pavimentación, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
-  },
-  {
-    "id": 219,
-    "anio": 2024,
-    "clave": "2024-FORTAMUN-IMASAM-0029-ADQUISICION-ETMF",
-    "nombre": "Rehabilitación DE POLIDEPORTIVO V.N.S.A.",
-    "descripcion": "Rehabilitación DE POLIDEPORTIVO V.N.S.A.. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
-    "rubro": "Infraestructura Urbana",
-    "monto": 300000,
-    "colonia": "Aguascalientes",
-    "distrito": "Municipio de Aguascalientes",
-    "zap2026": "",
-    "folio": "2024-FORTAMUN-IMASAM-0029-ADQUISICION-ETMF",
-    "tipo": "",
-    "peticion": "",
-    "distancia": "",
-    "calle": "",
-    "foto": "",
-    "fotoRemota": "",
-    "tipoGeom": "Point",
-    "lat": 21.927069,
-    "lng": -102.258171,
-    "linea": {},
-    "fuente": "PAOP 2024 - SOPMA",
-    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
-    "avance_fisico": "100",
-    "avance_financiero": "100",
-    "estatus": "Concluida",
-    "fecha_inicio": "2024-03-01",
-    "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-FORTAMUN-IMASAM-0029-ADQUISICION-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en rehabilitación de polideportivo v.n.s.a, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Infraestructura Urbana, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $300,000.00 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 16108,
-    "beneficiarios": "16,108 habitantes",
-    "beneficiarios_directos": "4,175 hab.",
-    "beneficiarios_indirectos": "11,933 hab.",
-    "poblacion_beneficiada": {
-      "directa": "4,175 hab.",
-      "indirecta": "11,933 hab.",
-      "total": "16,108 hab."
-    },
-    "colonias_aledanas": [
-      "Vnsa Sector Guadalupe",
-      "Vnsa Sector San Marcos",
-      "Anexo Benito Palomino Dena"
-    ],
-    "secciones_impacto": [
-      "Sección 614",
-      "Sección 613",
-      "Sección 635"
-    ],
-    "eje_pdm": "Eje 1: Ordenamiento Urbano y Dignificación Barrial",
-    "tipo_impacto": "Dignificación del Entorno Vecinal y Mitigación de Vulnerabilidad",
-    "cobertura_territorial": "Cobertura Barrial Directa",
-    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Infraestructura Urbana, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
-  },
-  {
-    "id": 220,
-    "anio": 2024,
-    "clave": "2024-FORTAMUN-SEFIN-0032-DEUDA-ETMF",
-    "nombre": "Rehabilitación DE GIMNASIO DE USOS MÚLTIPLES VNSA",
-    "descripcion": "Rehabilitación DE GIMNASIO DE USOS MÚLTIPLES VNSA. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
-    "rubro": "Infraestructura Urbana",
-    "monto": 300000,
-    "colonia": "Aguascalientes",
-    "distrito": "Municipio de Aguascalientes",
-    "zap2026": "",
-    "folio": "2024-FORTAMUN-SEFIN-0032-DEUDA-ETMF",
-    "tipo": "",
-    "peticion": "",
-    "distancia": "",
-    "calle": "",
-    "foto": "",
-    "fotoRemota": "",
-    "tipoGeom": "Point",
-    "lat": 21.928956,
-    "lng": -102.261633,
-    "linea": {},
-    "fuente": "PAOP 2024 - SOPMA",
-    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
-    "avance_fisico": "100",
-    "avance_financiero": "100",
-    "estatus": "Concluida",
-    "fecha_inicio": "2024-03-01",
-    "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-FORTAMUN-SEFIN-0032-DEUDA-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en rehabilitación de gimnasio de usos múltiples vnsa, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Infraestructura Urbana, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $300,000.00 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 15421,
-    "beneficiarios": "15,421 habitantes",
-    "beneficiarios_directos": "4,175 hab.",
-    "beneficiarios_indirectos": "11,246 hab.",
-    "poblacion_beneficiada": {
-      "directa": "4,175 hab.",
-      "indirecta": "11,246 hab.",
-      "total": "15,421 hab."
-    },
-    "colonias_aledanas": [
-      "Vnsa Sector Guadalupe",
-      "Vnsa Sector San Marcos",
-      "Vnsa Sector Alameda"
-    ],
-    "secciones_impacto": [
-      "Sección 614",
-      "Sección 635",
-      "Sección 601"
-    ],
-    "eje_pdm": "Eje 1: Ordenamiento Urbano y Dignificación Barrial",
-    "tipo_impacto": "Dignificación del Entorno Vecinal y Mitigación de Vulnerabilidad",
-    "cobertura_territorial": "Cobertura Barrial Directa",
-    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Infraestructura Urbana, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
-  },
-  {
-    "id": 221,
-    "anio": 2024,
-    "clave": "2024-FORTAMUN-SSPM-0102-VEHICULOS-ETMF",
-    "nombre": "PINO EN DIF MUNICIPAL",
-    "descripcion": "PINO EN DIF MUNICIPAL. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
-    "rubro": "Infraestructura Urbana",
-    "monto": 476906.88,
-    "colonia": "Aguascalientes",
-    "distrito": "Municipio de Aguascalientes",
-    "zap2026": "",
-    "folio": "2024-FORTAMUN-SSPM-0102-VEHICULOS-ETMF",
-    "tipo": "",
-    "peticion": "",
-    "distancia": "",
-    "calle": "",
-    "foto": "assets/img/obras/obra_263.jpg",
-    "fotoRemota": "",
-    "tipoGeom": "Point",
-    "lat": 21.908598,
-    "lng": -102.310884,
-    "linea": {},
-    "fuente": "PAOP 2024 - SOPMA",
-    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
-    "avance_fisico": "100",
-    "avance_financiero": "100",
-    "estatus": "Concluida",
-    "fecha_inicio": "2024-03-01",
-    "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-FORTAMUN-SSPM-0102-VEHICULOS-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en pino en dif municipal, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Infraestructura Urbana, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $476,906.88 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 7148,
-    "beneficiarios": "7,148 habitantes",
-    "beneficiarios_directos": "2,450 hab.",
-    "beneficiarios_indirectos": "4,698 hab.",
-    "poblacion_beneficiada": {
-      "directa": "2,450 hab.",
-      "indirecta": "4,698 hab.",
-      "total": "7,148 hab."
-    },
-    "colonias_aledanas": [
-      "San Jose Del Arenal",
-      "Fatima",
-      "Bosques Del Prado Sur"
-    ],
-    "secciones_impacto": [
-      "Sección 48",
-      "Sección 49",
-      "Sección 46"
-    ],
-    "eje_pdm": "Eje 1: Ordenamiento Urbano y Dignificación Barrial",
-    "tipo_impacto": "Dignificación del Entorno Vecinal y Mitigación de Vulnerabilidad",
-    "cobertura_territorial": "Cobertura Barrial Directa",
-    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Infraestructura Urbana, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
-  },
-  {
-    "id": 222,
-    "anio": 2024,
-    "clave": "2024-PDM-CCAPAMA-0095-POZO-ETMF",
-    "nombre": "Construcción DE LA RED DE ALCANTARILLADO PLUVIAL",
-    "descripcion": "Construcción DE LA RED DE ALCANTARILLADO PLUVIAL. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
-    "rubro": "Agua y Saneamiento",
-    "monto": 1011017.21,
-    "colonia": "Aguascalientes",
-    "distrito": "Municipio de Aguascalientes",
-    "zap2026": "",
-    "folio": "2024-PDM-CCAPAMA-0095-POZO-ETMF",
-    "tipo": "",
-    "peticion": "",
-    "distancia": "",
-    "calle": "",
-    "foto": "assets/img/obras/obra_264.jpg",
-    "fotoRemota": "",
-    "tipoGeom": "Point",
-    "lat": 21.862613,
-    "lng": -102.337435,
-    "linea": {},
-    "fuente": "PAOP 2024 - MIAA",
-    "departamento": "Modelo Integral de Aguas de Aguascalientes (MIAA)",
-    "avance_fisico": "100",
-    "avance_financiero": "100",
-    "estatus": "Concluida",
-    "fecha_inicio": "2024-03-01",
-    "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-PDM-CCAPAMA-0095-POZO-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Modelo Integral de Aguas de Aguascalientes (MIAA) en Aguascalientes. Los trabajos consistieron integralmente en construcción de la red de alcantarillado pluvial, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Agua y Saneamiento, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $1,011,017.21 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 18625,
-    "beneficiarios": "18,625 habitantes",
-    "beneficiarios_directos": "7,636 hab.",
-    "beneficiarios_indirectos": "10,989 hab.",
-    "poblacion_beneficiada": {
-      "directa": "7,636 hab.",
-      "indirecta": "10,989 hab.",
-      "total": "18,625 hab."
-    },
-    "colonias_aledanas": [
-      "Don Manuel Gomez Morin",
-      "Villas De La Cantera",
-      "Canteras De Santa Imelda"
-    ],
-    "secciones_impacto": [
-      "Sección 301",
-      "Sección 302",
-      "Sección 282"
-    ],
-    "eje_pdm": "Eje 1: Servicios Públicos de Calidad y Sustentabilidad Hídrica",
-    "tipo_impacto": "Salud Pública, Eficiencia Hídrica y Prevención de Encharcamientos",
-    "cobertura_territorial": "Cobertura Barrial Directa",
-    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Agua y Saneamiento, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
-  },
-  {
-    "id": 223,
-    "anio": 2024,
-    "clave": "2024-PDM-SOPMA-0014-SA-ETMF",
-    "nombre": "PINO EN ZONA DE ARCOS Y TRABES PRINCIPALES DEL PUENTE BICENTENARIO",
-    "descripcion": "PINO EN ZONA DE ARCOS Y TRABES PRINCIPALES DEL PUENTE BICENTENARIO. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
-    "rubro": "Infraestructura Urbana",
-    "monto": 3199999.23,
-    "colonia": "Aguascalientes",
-    "distrito": "Municipio de Aguascalientes",
-    "zap2026": "",
-    "folio": "2024-PDM-SOPMA-0014-SA-ETMF",
-    "tipo": "",
-    "peticion": "",
-    "distancia": "",
-    "calle": "",
-    "foto": "",
-    "fotoRemota": "",
-    "tipoGeom": "Point",
-    "lat": 21.858044,
-    "lng": -102.292959,
-    "linea": {},
-    "fuente": "PAOP 2024 - SOPMA",
-    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
-    "avance_fisico": "100",
-    "avance_financiero": "100",
-    "estatus": "Concluida",
-    "fecha_inicio": "2024-03-01",
-    "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-PDM-SOPMA-0014-SA-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en pino en zona de arcos y trabes principales del puente bicentenario, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Infraestructura Urbana, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $3,199,999.23 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 3798,
-    "beneficiarios": "3,798 habitantes",
-    "beneficiarios_directos": "950 hab.",
-    "beneficiarios_indirectos": "2,848 hab.",
-    "poblacion_beneficiada": {
-      "directa": "950 hab.",
-      "indirecta": "2,848 hab.",
-      "total": "3,798 hab."
-    },
-    "colonias_aledanas": [
-      "Martinez Dominguez",
-      "Prados Del Sur",
-      "Jardines De La Asuncion"
-    ],
-    "secciones_impacto": [
-      "Sección 227",
-      "Sección 226",
-      "Sección 210"
-    ],
-    "eje_pdm": "Eje 1: Ordenamiento Urbano y Dignificación Barrial",
-    "tipo_impacto": "Dignificación del Entorno Vecinal y Mitigación de Vulnerabilidad",
-    "cobertura_territorial": "Cobertura Zonal / Delegacional",
-    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Infraestructura Urbana, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
-  },
-  {
-    "id": 224,
-    "anio": 2024,
-    "clave": "2024-PDM-SOPMA-0015-SA-ETMF",
-    "nombre": "SISTEMA DE CAPTACIÓN DE LIXIVIADOS, PARTE NORTE ETAPA 4, RELLENO SANITARIO SAN NICOLÁS",
-    "descripcion": "SISTEMA DE CAPTACIÓN DE LIXIVIADOS, PARTE NORTE ETAPA 4, RELLENO SANITARIO SAN NICOLÁS. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
-    "rubro": "Infraestructura Urbana",
-    "monto": 1277000,
-    "colonia": "Aguascalientes",
-    "distrito": "Municipio de Aguascalientes",
-    "zap2026": "",
-    "folio": "2024-PDM-SOPMA-0015-SA-ETMF",
-    "tipo": "",
-    "peticion": "",
-    "distancia": "",
-    "calle": "",
-    "foto": "",
-    "fotoRemota": "",
-    "tipoGeom": "Point",
-    "lat": 21.966194,
-    "lng": -102.213235,
-    "linea": {},
-    "fuente": "PAOP 2024 - SOPMA",
-    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
-    "avance_fisico": "100",
-    "avance_financiero": "100",
-    "estatus": "Concluida",
-    "fecha_inicio": "2024-03-01",
-    "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-PDM-SOPMA-0015-SA-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en sistema de captación de lixiviados, parte norte etapa 4, relleno sanitario san nicolás, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Infraestructura Urbana, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $1,277,000.00 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 16002,
-    "beneficiarios": "16,002 habitantes",
-    "beneficiarios_directos": "3,808 hab.",
-    "beneficiarios_indirectos": "12,194 hab.",
-    "poblacion_beneficiada": {
-      "directa": "3,808 hab.",
-      "indirecta": "12,194 hab.",
-      "total": "16,002 hab."
-    },
-    "colonias_aledanas": [
-      "El Conejal",
-      "San Antonio De Los Pedroza",
-      "San Jose De La Ordeña"
-    ],
-    "secciones_impacto": [
-      "Sección 608",
-      "Sección 609",
-      "Sección 316"
-    ],
-    "eje_pdm": "Eje 1: Ordenamiento Urbano y Dignificación Barrial",
-    "tipo_impacto": "Dignificación del Entorno Vecinal y Mitigación de Vulnerabilidad",
-    "cobertura_territorial": "Cobertura Zonal / Delegacional",
-    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Infraestructura Urbana, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
-  },
-  {
-    "id": 225,
-    "anio": 2024,
-    "clave": "2024-PDM-SOPMA-0016-SA-ETMF",
-    "nombre": "APLICACIÓN DE RIEGO DE SELLO EN AMBAS CALZADAS, PUENTE VEHUICULAR BICENTENARIO",
-    "descripcion": "APLICACIÓN DE RIEGO DE SELLO EN AMBAS CALZADAS, PUENTE VEHUICULAR BICENTENARIO. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
-    "rubro": "Infraestructura Urbana",
-    "monto": 2549999.7,
-    "colonia": "Aguascalientes",
-    "distrito": "Municipio de Aguascalientes",
-    "zap2026": "",
-    "folio": "2024-PDM-SOPMA-0016-SA-ETMF",
-    "tipo": "",
-    "peticion": "",
-    "distancia": "",
-    "calle": "",
-    "foto": "",
-    "fotoRemota": "",
-    "tipoGeom": "LineString",
-    "lat": 21.858235,
-    "lng": -102.296522,
-    "linea": [
-      [
-        21.858235,
-        -102.296522
-      ],
-      [
-        21.857986,
-        -102.295846
-      ],
-      [
-        21.857797,
-        -102.295031
-      ],
-      [
-        21.857836,
-        -102.294344
-      ],
-      [
-        21.858046,
-        -102.293046
-      ],
-      [
-        21.858514,
-        -102.290804
-      ]
-    ],
-    "fuente": "PAOP 2024 - SOPMA",
-    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
-    "avance_fisico": "100",
-    "avance_financiero": "100",
-    "estatus": "Concluida",
-    "fecha_inicio": "2024-03-01",
-    "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-PDM-SOPMA-0016-SA-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en aplicación de riego de sello en ambas calzadas, puente vehuicular bicentenario, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Infraestructura Urbana, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $2,549,999.70 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 3691,
-    "beneficiarios": "3,691 habitantes",
-    "beneficiarios_directos": "970 hab.",
-    "beneficiarios_indirectos": "2,721 hab.",
-    "poblacion_beneficiada": {
-      "directa": "970 hab.",
-      "indirecta": "2,721 hab.",
-      "total": "3,691 hab."
-    },
-    "colonias_aledanas": [
-      "Prados Del Sur",
-      "Martinez Dominguez",
-      "Boulevares 1A Seccion"
-    ],
-    "secciones_impacto": [
-      "Sección 226",
-      "Sección 227",
-      "Sección 228"
-    ],
-    "eje_pdm": "Eje 1: Ordenamiento Urbano y Dignificación Barrial",
-    "tipo_impacto": "Dignificación del Entorno Vecinal y Mitigación de Vulnerabilidad",
-    "cobertura_territorial": "Cobertura Zonal / Delegacional",
-    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Infraestructura Urbana, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
-  },
-  {
-    "id": 226,
-    "anio": 2024,
-    "clave": "2024-PDM-SOPMA-0017-SA-ETMF",
-    "nombre": "RETIRO DE PASTO SINTÉTICO CANCHA DE FUTBOL 7",
-    "descripcion": "RETIRO DE PASTO SINTÉTICO CANCHA DE FUTBOL 7. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
-    "rubro": "Espacios Públicos y Deporte",
-    "monto": 163087.11,
-    "colonia": "Aguascalientes",
-    "distrito": "Municipio de Aguascalientes",
-    "zap2026": "",
-    "folio": "2024-PDM-SOPMA-0017-SA-ETMF",
-    "tipo": "",
-    "peticion": "",
-    "distancia": "",
-    "calle": "",
-    "foto": "",
-    "fotoRemota": "",
-    "tipoGeom": "Point",
-    "lat": 21.864436,
-    "lng": -102.278408,
-    "linea": {},
-    "fuente": "PAOP 2024 - SOPMA",
-    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
-    "avance_fisico": "100",
-    "avance_financiero": "100",
-    "estatus": "Concluida",
-    "fecha_inicio": "2024-03-01",
-    "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-PDM-SOPMA-0017-SA-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en retiro de pasto sintético cancha de futbol 7, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Espacios Públicos y Deporte, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $163,087.11 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 4614,
-    "beneficiarios": "4,614 habitantes",
-    "beneficiarios_directos": "950 hab.",
-    "beneficiarios_indirectos": "3,664 hab.",
-    "poblacion_beneficiada": {
-      "directa": "950 hab.",
-      "indirecta": "3,664 hab.",
-      "total": "4,614 hab."
-    },
-    "colonias_aledanas": [
-      "Ojo De Agua",
-      "Mexico",
-      "La Cruz"
-    ],
-    "secciones_impacto": [
-      "Sección 206",
-      "Sección 207",
-      "Sección 213"
-    ],
-    "eje_pdm": "Eje 3: Tejido Social Fuerte, Espacios Dignos y Deporte",
-    "tipo_impacto": "Reconstrucción del Tejido Social, Convivencia Familiar y Esparcimiento",
-    "cobertura_territorial": "Cobertura Barrial Directa",
-    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Espacios Públicos y Deporte, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
-  },
-  {
-    "id": 227,
-    "anio": 2024,
-    "clave": "2024-PDM-SOPMA-0018-SA-ETMF",
-    "nombre": "Construcción DE GUARNICIONES Y BANQUETAS EN CALLE LA MANZANA, Cañada SUR",
-    "descripcion": "Construcción DE GUARNICIONES Y BANQUETAS EN CALLE LA MANZANA, Cañada SUR. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
-    "rubro": "Vialidades y Pavimentación",
-    "monto": 288818.44,
-    "colonia": "Aguascalientes",
-    "distrito": "Municipio de Aguascalientes",
-    "zap2026": "",
-    "folio": "2024-PDM-SOPMA-0018-SA-ETMF",
-    "tipo": "",
-    "peticion": "",
-    "distancia": "",
-    "calle": "",
-    "foto": "",
-    "fotoRemota": "",
-    "tipoGeom": "LineString",
-    "lat": 21.883626,
-    "lng": -102.244918,
-    "linea": [
-      [
-        21.883626,
-        -102.244918
-      ],
-      [
-        21.883359,
-        -102.245645
-      ]
-    ],
-    "fuente": "PAOP 2024 - SOPMA",
-    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
-    "avance_fisico": "100",
-    "avance_financiero": "100",
-    "estatus": "Concluida",
-    "fecha_inicio": "2024-03-01",
-    "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-PDM-SOPMA-0018-SA-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en construcción de guarniciones y banquetas en calle la manzana, cañada sur, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Vialidades y Pavimentación, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $288,818.44 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 5836,
-    "beneficiarios": "5,836 habitantes",
-    "beneficiarios_directos": "1,056 hab.",
-    "beneficiarios_indirectos": "4,780 hab.",
-    "poblacion_beneficiada": {
-      "directa": "1,056 hab.",
-      "indirecta": "4,780 hab.",
-      "total": "5,836 hab."
-    },
-    "colonias_aledanas": [
-      "Ojocaliente Iii",
-      "Villerias",
-      "Haciendas De Aguascalientes"
-    ],
-    "secciones_impacto": [
-      "Sección 563",
-      "Sección 560",
-      "Sección 561"
-    ],
-    "eje_pdm": "Eje 2: Movilidad Urbana Segura y Conectividad Eficiente",
-    "tipo_impacto": "Conectividad Urbana, Reducción de Tiempos de Traslado y Seguridad Vial",
-    "cobertura_territorial": "Cobertura Barrial Directa",
-    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Vialidades y Pavimentación, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
-  },
-  {
-    "id": 228,
-    "anio": 2024,
-    "clave": "2024-PDM-SOPMA-0019-SA-ETMF",
-    "nombre": "Rehabilitación DE PARQUE VILLAS DE LA CANTERA",
-    "descripcion": "Rehabilitación DE PARQUE VILLAS DE LA CANTERA. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
-    "rubro": "Espacios Públicos y Deporte",
-    "monto": 999086.68,
-    "colonia": "Aguascalientes",
-    "distrito": "Municipio de Aguascalientes",
-    "zap2026": "",
-    "folio": "2024-PDM-SOPMA-0019-SA-ETMF",
-    "tipo": "",
-    "peticion": "",
-    "distancia": "",
-    "calle": "",
-    "foto": "",
-    "fotoRemota": "",
-    "tipoGeom": "Point",
-    "lat": 21.852316,
-    "lng": -102.334693,
-    "linea": {},
-    "fuente": "PAOP 2024 - SOPMA",
-    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
-    "avance_fisico": "100",
-    "avance_financiero": "100",
-    "estatus": "Concluida",
-    "fecha_inicio": "2024-03-01",
-    "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-PDM-SOPMA-0019-SA-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en rehabilitación de parque villas de la cantera, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Espacios Públicos y Deporte, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $999,086.68 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 15155,
-    "beneficiarios": "15,155 habitantes",
-    "beneficiarios_directos": "3,138 hab.",
-    "beneficiarios_indirectos": "12,017 hab.",
-    "poblacion_beneficiada": {
-      "directa": "3,138 hab.",
-      "indirecta": "12,017 hab.",
-      "total": "15,155 hab."
-    },
-    "colonias_aledanas": [
-      "Fuentes Del Lago",
-      "Loma Bonita",
-      "Porta Canteras"
-    ],
-    "secciones_impacto": [
-      "Sección 303",
-      "Sección 302",
-      "Sección 301"
-    ],
-    "eje_pdm": "Eje 3: Tejido Social Fuerte, Espacios Dignos y Deporte",
-    "tipo_impacto": "Reconstrucción del Tejido Social, Convivencia Familiar y Esparcimiento",
-    "cobertura_territorial": "Cobertura Barrial Directa",
-    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Espacios Públicos y Deporte, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
-  },
-  {
-    "id": 229,
-    "anio": 2024,
-    "clave": "2024-PDM-SOPMA-0023-SA-ETMF",
-    "nombre": "CUBIERTA PARQUE VERSALLES",
-    "descripcion": "CUBIERTA PARQUE VERSALLES. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
-    "rubro": "Espacios Públicos y Deporte",
-    "monto": 1900000.01,
-    "colonia": "Aguascalientes",
-    "distrito": "Municipio de Aguascalientes",
-    "zap2026": "",
-    "folio": "2024-PDM-SOPMA-0023-SA-ETMF",
-    "tipo": "",
-    "peticion": "",
-    "distancia": "",
-    "calle": "",
-    "foto": "assets/img/obras/obra_271.jpg",
-    "fotoRemota": "",
-    "tipoGeom": "Point",
-    "lat": 21.860104,
-    "lng": -102.310846,
-    "linea": {},
-    "fuente": "PAOP 2024 - SOPMA",
-    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
-    "avance_fisico": "100",
-    "avance_financiero": "100",
-    "estatus": "Concluida",
-    "fecha_inicio": "2024-03-01",
-    "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-PDM-SOPMA-0023-SA-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en cubierta parque versalles, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Espacios Públicos y Deporte, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $1,900,000.01 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 4864,
-    "beneficiarios": "4,864 habitantes",
-    "beneficiarios_directos": "1,680 hab.",
-    "beneficiarios_indirectos": "3,184 hab.",
-    "poblacion_beneficiada": {
-      "directa": "1,680 hab.",
-      "indirecta": "3,184 hab.",
-      "total": "4,864 hab."
-    },
-    "colonias_aledanas": [
-      "El Dorado 1A Seccion",
-      "El Dorado 2Da Seccion",
-      "Versalles 1A Seccion"
-    ],
-    "secciones_impacto": [
-      "Sección 222",
-      "Sección 298",
-      "Sección 297"
+      "Sección 78",
+      "Sección 76"
     ],
     "eje_pdm": "Eje 3: Tejido Social Fuerte, Espacios Dignos y Deporte",
     "tipo_impacto": "Reconstrucción del Tejido Social, Convivencia Familiar y Esparcimiento",
     "cobertura_territorial": "Cobertura Zonal / Delegacional",
     "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Espacios Públicos y Deporte, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
-  },
-  {
-    "id": 230,
-    "anio": 2024,
-    "clave": "2024-PDM-SOPMA-0024-SA-ETMF",
-    "nombre": "Rehabilitación PARQUE CARTAGENA",
-    "descripcion": "Rehabilitación PARQUE CARTAGENA. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
-    "rubro": "Espacios Públicos y Deporte",
-    "monto": 749767.74,
-    "colonia": "Aguascalientes",
-    "distrito": "Municipio de Aguascalientes",
-    "zap2026": "",
-    "folio": "2024-PDM-SOPMA-0024-SA-ETMF",
-    "tipo": "",
-    "peticion": "",
-    "distancia": "",
-    "calle": "",
-    "foto": "",
-    "fotoRemota": "",
-    "tipoGeom": "Point",
-    "lat": 21.955664,
-    "lng": -102.274504,
-    "linea": {},
-    "fuente": "PAOP 2024 - SOPMA",
-    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
-    "avance_fisico": "100",
-    "avance_financiero": "100",
-    "estatus": "Concluida",
-    "fecha_inicio": "2024-03-01",
-    "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-PDM-SOPMA-0024-SA-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en rehabilitación parque cartagena, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Espacios Públicos y Deporte, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $749,767.74 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 33329,
-    "beneficiarios": "33,329 habitantes",
-    "beneficiarios_directos": "11,459 hab.",
-    "beneficiarios_indirectos": "21,870 hab.",
-    "poblacion_beneficiada": {
-      "directa": "11,459 hab.",
-      "indirecta": "21,870 hab.",
-      "total": "33,329 hab."
-    },
-    "colonias_aledanas": [
-      "Cartagena De 1947",
-      "Los Angeles",
-      "Los Boyuyos"
-    ],
-    "secciones_impacto": [
-      "Sección 80",
-      "Sección 596",
-      "Sección 594"
-    ],
-    "eje_pdm": "Eje 3: Tejido Social Fuerte, Espacios Dignos y Deporte",
-    "tipo_impacto": "Reconstrucción del Tejido Social, Convivencia Familiar y Esparcimiento",
-    "cobertura_territorial": "Cobertura Barrial Directa",
-    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Espacios Públicos y Deporte, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
-  },
-  {
-    "id": 231,
-    "anio": 2024,
-    "clave": "2024-PDM-SOPMA-0074-SA-ETMF",
-    "nombre": "Rehabilitación PARQUE VILLA SUR",
-    "descripcion": "Rehabilitación PARQUE VILLA SUR. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
-    "rubro": "Espacios Públicos y Deporte",
-    "monto": 1800000.01,
-    "colonia": "Aguascalientes",
-    "distrito": "Municipio de Aguascalientes",
-    "zap2026": "",
-    "folio": "2024-PDM-SOPMA-0074-SA-ETMF",
-    "tipo": "",
-    "peticion": "",
-    "distancia": "",
-    "calle": "",
-    "foto": "",
-    "fotoRemota": "",
-    "tipoGeom": "Point",
-    "lat": 21.823905,
-    "lng": -102.274302,
-    "linea": {},
-    "fuente": "PAOP 2024 - SOPMA",
-    "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
-    "avance_fisico": "100",
-    "avance_financiero": "100",
-    "estatus": "Concluida",
-    "fecha_inicio": "2024-03-01",
-    "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-PDM-SOPMA-0074-SA-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en rehabilitación parque villa sur, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Espacios Públicos y Deporte, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $1,800,000.01 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 10116,
-    "beneficiarios": "10,116 habitantes",
-    "beneficiarios_directos": "4,698 hab.",
-    "beneficiarios_indirectos": "5,418 hab.",
-    "poblacion_beneficiada": {
-      "directa": "4,698 hab.",
-      "indirecta": "5,418 hab.",
-      "total": "10,116 hab."
-    },
-    "colonias_aledanas": [
-      "Villa Sur",
-      "San Javier",
-      "San Sebastian"
-    ],
-    "secciones_impacto": [
-      "Sección 624",
-      "Sección 622",
-      "Sección 625"
-    ],
-    "eje_pdm": "Eje 3: Tejido Social Fuerte, Espacios Dignos y Deporte",
-    "tipo_impacto": "Reconstrucción del Tejido Social, Convivencia Familiar y Esparcimiento",
-    "cobertura_territorial": "Cobertura Zonal / Delegacional",
-    "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Espacios Públicos y Deporte, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Espacios Públicos y Deporte, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "77",
+    "area_influencia": {
+      "seccion_principal": "77",
+      "secciones_aledanas": [
+        "70",
+        "78",
+        "76"
+      ],
+      "colonias_impactadas": [
+        "La Purisima",
+        "Zona Centro, La Purisima",
+        "Gremial"
+      ],
+      "delegacion": "DELG. URB.CENTRO ORIENTE-JESUS ORTIZ TORRES",
+      "poblacion_directa": 558,
+      "poblacion_indirecta": 2006
+    }
   },
   {
     "id": 232,
     "anio": 2024,
     "clave": "2024-PP-SOPMA-0038-SS-ETMF",
-    "nombre": "Rehabilitación DE Camellón CENTRAL EN AV. JUAN DE TOLOSA",
-    "descripcion": "Rehabilitación DE Camellón CENTRAL EN AV. JUAN DE TOLOSA. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
-    "rubro": "Vialidades y Pavimentación",
+    "nombre": "Rehabilitación Integral de Parque Cartagena, Fracc. Cartagena 1947",
+    "descripcion": "Modernización de parque público en Calle Patón González s/n, colonia Cartagena 1947 mediante Presupuesto Participativo.",
+    "rubro": "Espacios Públicos y Recreación",
     "monto": 999999.99,
-    "colonia": "Aguascalientes",
+    "colonia": "Cartagena 1947",
     "distrito": "Municipio de Aguascalientes",
     "zap2026": "",
     "folio": "2024-PP-SOPMA-0038-SS-ETMF",
@@ -14182,19 +14617,10 @@ window.OBRAS_DATA = [
     "calle": "",
     "foto": "",
     "fotoRemota": "",
-    "tipoGeom": "LineString",
-    "lat": 21.863622,
-    "lng": -102.293702,
-    "linea": [
-      [
-        21.863622,
-        -102.293702
-      ],
-      [
-        21.863925,
-        -102.291508
-      ]
-    ],
+    "tipoGeom": "Point",
+    "lat": 21.908,
+    "lng": -102.285,
+    "linea": [],
     "fuente": "PAOP 2024 - SOPMA",
     "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
     "avance_fisico": "100",
@@ -14202,41 +14628,59 @@ window.OBRAS_DATA = [
     "estatus": "Concluida",
     "fecha_inicio": "2024-03-01",
     "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-PP-SOPMA-0038-SS-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en rehabilitación de camellón central en av. juan de tolosa, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Vialidades y Pavimentación, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $999,999.99 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 6477,
-    "beneficiarios": "6,477 habitantes",
-    "beneficiarios_directos": "1,052 hab.",
-    "beneficiarios_indirectos": "5,425 hab.",
+    "resumen_tecnico": "Demolición y reposición de firmes deteriorados, instalación de módulos de juegos infantiles con pasto sintético, gimnasio al aire libre, rehabilitación de cancha deportiva, iluminación LED y mobiliario de descanso.",
+    "num_beneficiarios": 8817,
+    "beneficiarios": 1533,
+    "beneficiarios_directos": "1,533 hab.",
+    "beneficiarios_indirectos": "7,284 hab.",
     "poblacion_beneficiada": {
-      "directa": "1,052 hab.",
-      "indirecta": "5,425 hab.",
-      "total": "6,477 hab."
+      "directa": "1,533 hab.",
+      "indirecta": "7,284 hab.",
+      "total": "8,817 hab."
     },
     "colonias_aledanas": [
-      "Jardines De La Asuncion",
-      "Antonio Garza Elizondo",
-      "Jardines De Las Fuentes"
+      "Macias Arellano, Mision Del Cobano, La Esmeralda",
+      "Villas Del Cobano, Alianza Ferrocarrilera, La Estrella",
+      "Trojes Del Cobano, Parras, Bosques Del Prado Oriente, Alianza Ferrocarrilera, Macias Arellano, Valtica, Trento"
     ],
     "secciones_impacto": [
-      "Sección 210",
-      "Sección 200",
-      "Sección 217"
+      "Sección 89",
+      "Sección 88",
+      "Sección 90",
+      "Sección 91"
     ],
     "eje_pdm": "Eje 2: Movilidad Urbana Segura y Conectividad Eficiente",
     "tipo_impacto": "Conectividad Urbana, Reducción de Tiempos de Traslado y Seguridad Vial",
     "cobertura_territorial": "Cobertura Barrial Directa",
     "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Vialidades y Pavimentación, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Vialidades y Pavimentación, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "89",
+    "area_influencia": {
+      "seccion_principal": "89",
+      "secciones_aledanas": [
+        "88",
+        "90",
+        "91"
+      ],
+      "colonias_impactadas": [
+        "Macias Arellano, Mision Del Cobano, La Esmeralda",
+        "Villas Del Cobano, Alianza Ferrocarrilera, La Estrella",
+        "Trojes Del Cobano, Parras, Bosques Del Prado Oriente, Alianza Ferrocarrilera, Macias Arellano, Valtica, Trento"
+      ],
+      "delegacion": "DELG. URB. POZO BRAVO-MONICA IBARRA JAUREGUI",
+      "poblacion_directa": 1533,
+      "poblacion_indirecta": 7284
+    }
   },
   {
     "id": 233,
     "anio": 2024,
     "clave": "2024-PP-SOPMA-0039-SS-ETMF",
-    "nombre": "PARQUE VILLAS DEL CÚBANO, 1A. ETAPA",
-    "descripcion": "PARQUE VILLAS DEL CÚBANO, 1A. ETAPA. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
-    "rubro": "Espacios Públicos y Deporte",
+    "nombre": "Rehabilitación de Parque Emiliano Zapata, Col. Emiliano Zapata",
+    "descripcion": "Adecuación y equipamiento del parque en Calle Antonio Díaz Soto y Gama esq. Carlos M. Bustamante en Col. Emiliano Zapata.",
+    "rubro": "Espacios Públicos y Recreación",
     "monto": 1299999.98,
-    "colonia": "Aguascalientes",
+    "colonia": "Emiliano Zapata",
     "distrito": "Municipio de Aguascalientes",
     "zap2026": "",
     "folio": "2024-PP-SOPMA-0039-SS-ETMF",
@@ -14247,9 +14691,9 @@ window.OBRAS_DATA = [
     "foto": "",
     "fotoRemota": "",
     "tipoGeom": "Point",
-    "lat": 21.909866,
-    "lng": -102.280646,
-    "linea": {},
+    "lat": 21.865,
+    "lng": -102.282,
+    "linea": [],
     "fuente": "PAOP 2024 - SOPMA",
     "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
     "avance_fisico": "100",
@@ -14257,41 +14701,59 @@ window.OBRAS_DATA = [
     "estatus": "Concluida",
     "fecha_inicio": "2024-03-01",
     "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-PP-SOPMA-0039-SS-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en parque villas del cúbano, 1a. etapa, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Espacios Públicos y Deporte, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $1,299,999.98 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 10340,
-    "beneficiarios": "10,340 habitantes",
-    "beneficiarios_directos": "4,627 hab.",
-    "beneficiarios_indirectos": "5,713 hab.",
+    "resumen_tecnico": "Rehabilitación integral de andadores de concreto, colocación de juegos infantiles y piso amortiguante, bancas metálicas, botes separadores de basura, reforestación y rehabilitación de luminarias de bajo consumo.",
+    "num_beneficiarios": 4331,
+    "beneficiarios": 1284,
+    "beneficiarios_directos": "1,284 hab.",
+    "beneficiarios_indirectos": "3,047 hab.",
     "poblacion_beneficiada": {
-      "directa": "4,627 hab.",
-      "indirecta": "5,713 hab.",
-      "total": "10,340 hab."
+      "directa": "1,284 hab.",
+      "indirecta": "3,047 hab.",
+      "total": "4,331 hab."
     },
     "colonias_aledanas": [
-      "Trojes Del Cobano",
-      "Parras",
-      "Bosques Del Prado Oriente"
+      "Ojo De Agua, La Salud, Fuentes De La Asuncion, Jardines De Las Fuentes, Jardines De La Luz, Jardines De Las Fuentes",
+      "Ojo De Agua",
+      "La Salud, Ojo De Agua, Rinconada El Cedazo"
     ],
     "secciones_impacto": [
-      "Sección 90",
-      "Sección 88",
-      "Sección 87"
+      "Sección 208",
+      "Sección 207",
+      "Sección 202",
+      "Sección 206"
     ],
     "eje_pdm": "Eje 3: Tejido Social Fuerte, Espacios Dignos y Deporte",
     "tipo_impacto": "Reconstrucción del Tejido Social, Convivencia Familiar y Esparcimiento",
     "cobertura_territorial": "Cobertura Zonal / Delegacional",
     "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Espacios Públicos y Deporte, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Espacios Públicos y Deporte, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "208",
+    "area_influencia": {
+      "seccion_principal": "208",
+      "secciones_aledanas": [
+        "207",
+        "202",
+        "206"
+      ],
+      "colonias_impactadas": [
+        "Ojo De Agua, La Salud, Fuentes De La Asuncion, Jardines De Las Fuentes, Jardines De La Luz, Jardines De Las Fuentes",
+        "Ojo De Agua",
+        "La Salud, Ojo De Agua, Rinconada El Cedazo"
+      ],
+      "delegacion": "DELG. URB.CENTRO ORIENTE-JESUS ORTIZ TORRES",
+      "poblacion_directa": 1284,
+      "poblacion_indirecta": 3047
+    }
   },
   {
     "id": 234,
     "anio": 2024,
     "clave": "2024-PP-SOPMA-0046-SS-ETMF",
-    "nombre": "PARQUE RECÁÁÁÁÁÁÁÁÁÁÁÁREATIVO NUEVA CASTILLA, 1A ETAPA",
-    "descripcion": "PARQUE RECÁÁÁÁÁÁÁÁÁÁÁÁREATIVO NUEVA CASTILLA, 1A ETAPA. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
-    "rubro": "Espacios Públicos y Deporte",
+    "nombre": "Construcción de Parque Recreativo Nueva Castilla (1a Etapa), Fracc. Fuentes del Lago",
+    "descripcion": "Creación de nuevo parque y área verde comunitaria en Av. Fuentes del Lago, Coto Nueva Castilla en Fracc. Fuentes del Lago.",
+    "rubro": "Espacios Públicos y Recreación",
     "monto": 989871.23,
-    "colonia": "Aguascalientes",
+    "colonia": "Fuentes del Lago",
     "distrito": "Municipio de Aguascalientes",
     "zap2026": "",
     "folio": "2024-PP-SOPMA-0046-SS-ETMF",
@@ -14304,7 +14766,7 @@ window.OBRAS_DATA = [
     "tipoGeom": "Point",
     "lat": 21.853282,
     "lng": -102.346176,
-    "linea": {},
+    "linea": [],
     "fuente": "PAOP 2024 - SOPMA",
     "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
     "avance_fisico": "100",
@@ -14312,9 +14774,9 @@ window.OBRAS_DATA = [
     "estatus": "Concluida",
     "fecha_inicio": "2024-03-01",
     "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-PP-SOPMA-0046-SS-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en parque recáááááááááááááreativo nueva castilla, 1a etapa, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Espacios Públicos y Deporte, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $989,871.23 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
+    "resumen_tecnico": "Despalme de terreno, trazo de andadores y plazoleta central, colocación de adoquín ecológico permeable, juegos infantiles, ejercitadores para adultos mayores, jardinería con especies nativas y alumbrado público LED.",
     "num_beneficiarios": 18900,
-    "beneficiarios": "18,900 habitantes",
+    "beneficiarios": 3138,
     "beneficiarios_directos": "3,138 hab.",
     "beneficiarios_indirectos": "15,762 hab.",
     "poblacion_beneficiada": {
@@ -14323,30 +14785,48 @@ window.OBRAS_DATA = [
       "total": "18,900 hab."
     },
     "colonias_aledanas": [
-      "Fuentes Del Lago",
-      "Loma Bonita",
-      "Porta Canteras"
+      "Fuentes Del Lago, Loma Bonita",
+      "Fuentes Del Lago, Porta Canteras, Loma Bonita",
+      "Los Negritos, Loma De Los Negritos, Coyotes, Canteras De San Agustin, Jardines Del Lago, Xenia, San Martin, San Nicolas, Reserva San Nicolas, San Nicolas Premier, Col. Veteranos De La Revolucion, Nueva Castilla, San Luis, Jose Vasconcelos Calderon"
     ],
     "secciones_impacto": [
       "Sección 303",
       "Sección 302",
-      "Sección 327"
+      "Sección 327",
+      "Sección 301"
     ],
     "eje_pdm": "Eje 3: Tejido Social Fuerte, Espacios Dignos y Deporte",
     "tipo_impacto": "Reconstrucción del Tejido Social, Convivencia Familiar y Esparcimiento",
     "cobertura_territorial": "Cobertura Barrial Directa",
     "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Espacios Públicos y Deporte, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Espacios Públicos y Deporte, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "303",
+    "area_influencia": {
+      "seccion_principal": "303",
+      "secciones_aledanas": [
+        "302",
+        "327",
+        "301"
+      ],
+      "colonias_impactadas": [
+        "Fuentes Del Lago, Loma Bonita",
+        "Fuentes Del Lago, Porta Canteras, Loma Bonita",
+        "Los Negritos, Loma De Los Negritos, Coyotes, Canteras De San Agustin, Jardines Del Lago, Xenia, San Martin, San Nicolas, Reserva San Nicolas, San Nicolas Premier, Col. Veteranos De La Revolucion, Nueva Castilla, San Luis, Jose Vasconcelos Calderon"
+      ],
+      "delegacion": "DELG. URB.SAN MARCOS-ZINTIA VARGAS TORRES",
+      "poblacion_directa": 3138,
+      "poblacion_indirecta": 15762
+    }
   },
   {
     "id": 235,
     "anio": 2024,
     "clave": "2024-PP-SOPMA-0048-SS-ETMF",
-    "nombre": "PARQUE V.N.S.A.,SECTOR ENCINO, 1A. ETAPA",
-    "descripcion": "PARQUE V.N.S.A.,SECTOR ENCINO, 1A. ETAPA. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
-    "rubro": "Espacios Públicos y Deporte",
+    "nombre": "Acondicionamiento y Mejoramiento de Parque de Béisbol en San Antonio de Peñuelas",
+    "descripcion": "Rehabilitación del parque deportivo de béisbol en Calle Benito Juárez s/n en la comunidad de San Antonio de Peñuelas.",
+    "rubro": "Espacios Públicos y Recreación",
     "monto": 1899999.99,
-    "colonia": "Aguascalientes",
+    "colonia": "San Antonio de Peñuelas",
     "distrito": "Municipio de Aguascalientes",
     "zap2026": "",
     "folio": "2024-PP-SOPMA-0048-SS-ETMF",
@@ -14357,9 +14837,9 @@ window.OBRAS_DATA = [
     "foto": "",
     "fotoRemota": "",
     "tipoGeom": "Point",
-    "lat": 21.924724,
-    "lng": -102.265661,
-    "linea": {},
+    "lat": 21.725,
+    "lng": -102.265,
+    "linea": [],
     "fuente": "PAOP 2024 - SOPMA",
     "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
     "avance_fisico": "100",
@@ -14367,41 +14847,59 @@ window.OBRAS_DATA = [
     "estatus": "Concluida",
     "fecha_inicio": "2024-03-01",
     "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-PP-SOPMA-0048-SS-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en parque v.n.s.a.,sector encino, 1a. etapa, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Espacios Públicos y Deporte, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $1,899,999.99 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 14235,
-    "beneficiarios": "14,235 habitantes",
-    "beneficiarios_directos": "3,326 hab.",
-    "beneficiarios_indirectos": "10,909 hab.",
+    "resumen_tecnico": "Reacondicionamiento de cuadro y campo exterior de béisbol, suministro de tierra roja especial para diamante, rehabilitación de backstop con malla ciclónica galvanizada, pintura en gradas y bancas de dogouts para jugadores.",
+    "num_beneficiarios": 12000,
+    "beneficiarios": 3500,
+    "beneficiarios_directos": "3,500 hab.",
+    "beneficiarios_indirectos": "8,500 hab.",
     "poblacion_beneficiada": {
-      "directa": "3,326 hab.",
-      "indirecta": "10,909 hab.",
-      "total": "14,235 hab."
+      "directa": "3,500 hab.",
+      "indirecta": "8,500 hab.",
+      "total": "12,000 hab."
     },
     "colonias_aledanas": [
-      "Vnsa Sector San Marcos",
-      "Parque Mexico",
-      "Vnsa"
+      "Peñuelas (El Cienegal), Cotorina (Coyotes), Cotorina De Abajo, El Mirador",
+      "Buenavista De Peñuelas, El Refugio De Peñuelas, Ex Hacienda De Peñuelas, El Cedazo",
+      "Lomas De Arellano, Lomas De San Judas Tadeo, Cañada Grande De Cotorina, Lomas De Nueva York"
     ],
     "secciones_impacto": [
-      "Sección 635",
-      "Sección 636",
-      "Sección 601"
+      "Sección 332",
+      "Sección 333",
+      "Sección 629",
+      "Sección 683"
     ],
     "eje_pdm": "Eje 3: Tejido Social Fuerte, Espacios Dignos y Deporte",
     "tipo_impacto": "Reconstrucción del Tejido Social, Convivencia Familiar y Esparcimiento",
     "cobertura_territorial": "Cobertura Zonal / Delegacional",
     "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Espacios Públicos y Deporte, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Espacios Públicos y Deporte, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "332",
+    "area_influencia": {
+      "seccion_principal": "332",
+      "secciones_aledanas": [
+        "333",
+        "629",
+        "683"
+      ],
+      "colonias_impactadas": [
+        "Peñuelas (El Cienegal), Cotorina (Coyotes), Cotorina De Abajo, El Mirador",
+        "Buenavista De Peñuelas, El Refugio De Peñuelas, Ex Hacienda De Peñuelas, El Cedazo",
+        "Lomas De Arellano, Lomas De San Judas Tadeo, Cañada Grande De Cotorina, Lomas De Nueva York"
+      ],
+      "delegacion": "DEL. RUR. CALVILLITO- JUAN HUMBERTO MEDINA PALOS Y DELG. RUR.PEÑUELAS-IGNACIO CARMONA ORTIZ (AQUI SE ENCUENTRA L DELEGACION)",
+      "poblacion_directa": 3500,
+      "poblacion_indirecta": 8500
+    }
   },
   {
     "id": 236,
     "anio": 2024,
     "clave": "2024-PP-SOPMA-0054-SS-ETMF",
-    "nombre": "ACONDICIONAMIENTO DE PARQUE DE BÉISBOL",
-    "descripcion": "ACONDICIONAMIENTO DE PARQUE DE BÉISBOL. Ubicación: Aguascalientes, Municipio de Aguascalientes. Programa oficial de inversión pública del ejercicio 2024.",
-    "rubro": "Espacios Públicos y Deporte",
+    "nombre": "Rehabilitación de Parque Urbano La Rinconada, Fracc. La Rinconada",
+    "descripcion": "Modernización de área deportiva y recreativa en Calle Roble esq. Privada Roble en Fracc. La Rinconada.",
+    "rubro": "Espacios Públicos y Recreación",
     "monto": 713861.2,
-    "colonia": "Aguascalientes",
+    "colonia": "La Rinconada",
     "distrito": "Municipio de Aguascalientes",
     "zap2026": "",
     "folio": "2024-PP-SOPMA-0054-SS-ETMF",
@@ -14412,9 +14910,9 @@ window.OBRAS_DATA = [
     "foto": "",
     "fotoRemota": "",
     "tipoGeom": "Point",
-    "lat": 21.8632,
-    "lng": -102.2981,
-    "linea": {},
+    "lat": 21.898,
+    "lng": -102.298,
+    "linea": [],
     "fuente": "PAOP 2024 - SOPMA",
     "departamento": "Secretaría de Obras Públicas Municipales (SOPMA)",
     "avance_fisico": "100",
@@ -14422,31 +14920,49 @@ window.OBRAS_DATA = [
     "estatus": "Concluida",
     "fecha_inicio": "2024-03-01",
     "fecha_fin": "2024-11-15",
-    "resumen_tecnico": "Proyecto oficial de infraestructura urbana (2024-PP-SOPMA-0054-SS-ETMF) correspondiente al Programa Anual de Obra Pública 2024 del Municipio de Aguascalientes, ejecutado por la Secretaría de Obras Públicas Municipales (SOPMA) en Aguascalientes. Los trabajos consistieron integralmente en acondicionamiento de parque de béisbol, apegados a la normativa técnica municipal, estándares de calidad de materiales y supervisión especializada en sitio. La intervención tuvo como propósito primordial dignificar el entorno vecinal, asegurar la cobertura y confiabilidad de los servicios del sector Espacios Públicos y Deporte, así como brindar condiciones óptimas de seguridad, habitabilidad y bienestar a las familias residentes. Con una inversión ejercida de $713,861.20 MXN, se consolida una obra de alto impacto social que fortalece el desarrollo ordenado y sustentable de la ciudad.",
-    "num_beneficiarios": 4573,
-    "beneficiarios": "4,573 habitantes",
-    "beneficiarios_directos": "1,678 hab.",
-    "beneficiarios_indirectos": "2,895 hab.",
+    "resumen_tecnico": "Pintura y marcaje reglamentario de cancha polideportiva, suministro de tableros de basquetbol, reflectores LED de alta potencia para uso nocturno, andadores perimetrales y remozamiento de áreas verdes.",
+    "num_beneficiarios": 4046,
+    "beneficiarios": 1037,
+    "beneficiarios_directos": "1,037 hab.",
+    "beneficiarios_indirectos": "3,009 hab.",
     "poblacion_beneficiada": {
-      "directa": "1,678 hab.",
-      "indirecta": "2,895 hab.",
-      "total": "4,573 hab."
+      "directa": "1,037 hab.",
+      "indirecta": "3,009 hab.",
+      "total": "4,046 hab."
     },
     "colonias_aledanas": [
-      "Las Americas",
-      "Jardines De Santa Elena",
-      "Valle Dorado"
+      "Circunvalacion Norte",
+      "Del Sol, San Pablo",
+      "Industrial, Gremial"
     ],
     "secciones_impacto": [
-      "Sección 218",
-      "Sección 217",
-      "Sección 225"
+      "Sección 56",
+      "Sección 55",
+      "Sección 59",
+      "Sección 51"
     ],
     "eje_pdm": "Eje 3: Tejido Social Fuerte, Espacios Dignos y Deporte",
     "tipo_impacto": "Reconstrucción del Tejido Social, Convivencia Familiar y Esparcimiento",
     "cobertura_territorial": "Cobertura Barrial Directa",
     "plazo_ejecucion": "2024-03-01 al 2024-11-15",
-    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Espacios Públicos y Deporte, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
+    "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Espacios Públicos y Deporte, orientada a optimizar la calidad de vida de las familias en Aguascalientes, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal.",
+    "seccion": "56",
+    "area_influencia": {
+      "seccion_principal": "56",
+      "secciones_aledanas": [
+        "55",
+        "59",
+        "51"
+      ],
+      "colonias_impactadas": [
+        "Circunvalacion Norte",
+        "Del Sol, San Pablo",
+        "Industrial, Gremial"
+      ],
+      "delegacion": "DELG. URB. POCITOS-CARLOS DANIEL BADILLO MORALES",
+      "poblacion_directa": 1037,
+      "poblacion_indirecta": 3009
+    }
   },
   {
     "id": 237,
@@ -22323,4 +22839,3 @@ window.OBRAS_DATA = [
     "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Agua y Saneamiento, orientada a optimizar la calidad de vida de las familias en TODO EL MUNICIPIO, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
   }
 ];
-window.OBRAS_ITEMS = window.OBRAS_DATA;

@@ -405,7 +405,7 @@ window.ObrasApp = {
           </div>
           ${fotoHtml}
           <h4 class="font-bold text-xs text-slate-900 leading-tight mb-1">${item.nombre}</h4>
-          <p class="text-[11px] text-slate-600 mb-2 line-clamp-3 leading-snug">${item.resumen_tecnico || item.descripcion}</p>
+          <p class="text-[11px] text-slate-600 mb-2 leading-snug line-clamp-3">${item.descripcion || item.nombre}</p>
           <div class="bg-slate-50 p-2 rounded-lg border border-slate-100 mb-2.5 space-y-1 text-[11px]">
             <div class="flex justify-between">
               <span class="text-slate-400">Inversión:</span>
@@ -1371,6 +1371,12 @@ window.ObrasApp = {
             type: 'linear',
             display: true,
             position: 'left',
+            title: {
+              display: true,
+              text: 'Obras',
+              font: { size: 10, weight: 'bold' },
+              color: '#0A3B66'
+            },
             grid: { color: '#f1f5f9' },
             ticks: { font: { size: 9 } }
           },
@@ -1378,8 +1384,14 @@ window.ObrasApp = {
             type: 'linear',
             display: true,
             position: 'right',
+            title: {
+              display: true,
+              text: 'Inversión ($ MDP)',
+              font: { size: 10, weight: 'bold' },
+              color: '#009FB9'
+            },
             grid: { drawOnChartArea: false },
-            ticks: { font: { size: 9 } }
+            ticks: { font: { size: 9 }, callback: (v) => `$${v}M` }
           }
         },
         onClick: (evt, elements) => {
