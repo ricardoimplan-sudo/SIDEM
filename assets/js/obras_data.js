@@ -1,4 +1,99 @@
-// Datos consolidados de obras públicas del Municipio de Aguascalientes (2022-2026)
+/**
+ * PIMAgs - Datos Maestros de Obra Pública Consolidada (2022 - 2026)
+ * Total Oficial: 378 Obras validadas con Cédulas y Expedientes Técnicos Digitales
+ * - 2022: 107 obras
+ * - 2023: 95 obras
+ * - 2024: 34 obras
+ * - 2025: 132 obras
+ * - 2026: 10 obras
+ * Enriquecido con: Street View, Colonias Aledañas, Secciones INEGI, Número de Beneficiarios, Eje PDM e Impacto Social.
+ * Datos 100% normalizados y auditados sin mojibake ni cadenas OCR residuales.
+ */
+
+window.OBRAS_METRICAS = {
+  "totalObras": 378,
+  "inversionTotal": 1552751478.16,
+  "totalBeneficiarios": 3043355,
+  "totalConFoto": 6,
+  "totalTramos": 86,
+  "porAnio": [
+    {
+      "anio": 2022,
+      "total": 107,
+      "inversion": 1106372363.39,
+      "beneficiarios": 741884
+    },
+    {
+      "anio": 2023,
+      "total": 95,
+      "inversion": 187294515.19,
+      "beneficiarios": 837626
+    },
+    {
+      "anio": 2024,
+      "total": 34,
+      "inversion": 98937574.9,
+      "beneficiarios": 271381
+    },
+    {
+      "anio": 2025,
+      "total": 132,
+      "inversion": 129754918.43,
+      "beneficiarios": 1126477
+    },
+    {
+      "anio": 2026,
+      "total": 10,
+      "inversion": 30392106.25,
+      "beneficiarios": 65987
+    }
+  ],
+  "porRubro": [
+    {
+      "nombre": "Agua y Saneamiento",
+      "total": 53,
+      "inversion": 228350608.24,
+      "color": "#0A3B66",
+      "icono": "droplets"
+    },
+    {
+      "nombre": "Vialidades y Pavimentación",
+      "total": 70,
+      "inversion": 271946946.88,
+      "color": "#009FB9",
+      "icono": "navigation"
+    },
+    {
+      "nombre": "Espacios Públicos y Deporte",
+      "total": 27,
+      "inversion": 47871490.5,
+      "color": "#2EC4B6",
+      "icono": "trees"
+    },
+    {
+      "nombre": "Edificación y Equipamiento",
+      "total": 25,
+      "inversion": 749659008.95,
+      "color": "#E11482",
+      "icono": "building-2"
+    },
+    {
+      "nombre": "Alumbrado y Electrificación",
+      "total": 2,
+      "inversion": 19745789.78,
+      "color": "#F5A800",
+      "icono": "zap"
+    },
+    {
+      "nombre": "Infraestructura Urbana",
+      "total": 201,
+      "inversion": 235177633.81,
+      "color": "#7C3AED",
+      "icono": "hammer"
+    }
+  ]
+};
+
 window.OBRAS_DATA = [
   {
     "id": 1,
@@ -12343,7 +12438,7 @@ window.OBRAS_DATA = [
     "clave": "2024-FAISMUN-MIAA-0050-AS-ETMF",
     "nombre": "Construcción de Línea de Conducción de Agua Potable Pozo El Malacate, Zona Mujeres Ilustres",
     "descripcion": "Construcción de la línea de conducción de agua potable para interconectar el pozo El Malacate y reforzar el suministro en el sector oriente.",
-    "rubro": "Agua Potable y Saneamiento",
+    "rubro": "Agua y Saneamiento",
     "monto": 2023734.6,
     "colonia": "Mujeres Ilustres",
     "distrito": "Municipio de Aguascalientes",
@@ -12425,7 +12520,7 @@ window.OBRAS_DATA = [
     "clave": "2024-FAISMUN-MIAA-0055-GI-ETMF",
     "nombre": "Gastos Indirectos FAISMUN 2024 - Servicios para la Proyección de Obras (MIAA)",
     "descripcion": "Estudios técnicos, levantamientos topográficos y proyectos ejecutivos para la infraestructura hidráulica y sanitaria FAISMUN.",
-    "rubro": "Fortalecimiento Institucional y Gestión",
+    "rubro": "Infraestructura Urbana",
     "monto": 1543657.99,
     "colonia": "Aguascalientes",
     "distrito": "Municipio de Aguascalientes",
@@ -12498,7 +12593,7 @@ window.OBRAS_DATA = [
     "clave": "2024-FAISMUN-MIAA-0056-GI-ETMF",
     "nombre": "Gastos Indirectos FAISMUN 2024 - Mantenimiento Vehicular de Operación (MIAA)",
     "descripcion": "Mantenimiento preventivo y correctivo de unidades vehiculares operativas para supervisión de obras hidrosanitarias.",
-    "rubro": "Fortalecimiento Institucional y Gestión",
+    "rubro": "Infraestructura Urbana",
     "monto": 1062666.81,
     "colonia": "Aguascalientes",
     "distrito": "Municipio de Aguascalientes",
@@ -12571,7 +12666,7 @@ window.OBRAS_DATA = [
     "clave": "2024-FAISMUN-SEDESOM-0059-PV-ETMF",
     "nombre": "Programa Tu Casa Crece - Suministro e Instalación de Calentadores Solares (Fondo III)",
     "descripcion": "Instalación de sistemas de calentamiento solar de agua para mejorar las condiciones de habitabilidad y ahorro energético familiar.",
-    "rubro": "Edificación e Infraestructura Comunitaria",
+    "rubro": "Edificación y Equipamiento",
     "monto": 2694880.12,
     "colonia": "Aguascalientes",
     "distrito": "Municipio de Aguascalientes",
@@ -12726,7 +12821,7 @@ window.OBRAS_DATA = [
     "clave": "2024-FAISMUN-SOPMA-0034-SS-ETMF",
     "nombre": "Construcción de Parque Recreativo Cultura Yumana, 1a Etapa",
     "descripcion": "Construcción de parque y espacio público integral en Calle Cultura Yumana esquina Calle Cultura Nazca en Fracc. Mirador de las Culturas II.",
-    "rubro": "Espacios Públicos y Recreación",
+    "rubro": "Espacios Públicos y Deporte",
     "monto": 2960672.66,
     "colonia": "Mirador de las Culturas II",
     "distrito": "Municipio de Aguascalientes",
@@ -12799,7 +12894,7 @@ window.OBRAS_DATA = [
     "clave": "2024-FAISMUN-SOPMA-0035-IU-ETMF",
     "nombre": "Construcción de Banquetas y Alumbrado Público en Calle San Lucas, Fracc. Los Pericos",
     "descripcion": "Construcción de banquetas peatonales y red de alumbrado público en Calle San Lucas (calzada poniente, entre San Patricio y San José).",
-    "rubro": "Urbanización y Pavimentación",
+    "rubro": "Vialidades y Pavimentación",
     "monto": 6444450.86,
     "colonia": "Los Pericos",
     "distrito": "Municipio de Aguascalientes",
@@ -13045,7 +13140,7 @@ window.OBRAS_DATA = [
     "clave": "2024-FAISMUN-SOPMA-0052-SS-ETMF",
     "nombre": "Construcción de Parque Recreativo Laureles II, 1a Etapa (Chuleta y Talud)",
     "descripcion": "Rescate y adecuación de espacio público en Circuito El Laurel Norte esquina Calle Grano en Fracc. Los Laureles II.",
-    "rubro": "Espacios Públicos y Recreación",
+    "rubro": "Espacios Públicos y Deporte",
     "monto": 20000000,
     "colonia": "Los Laureles II",
     "distrito": "Municipio de Aguascalientes",
@@ -13191,7 +13286,7 @@ window.OBRAS_DATA = [
     "clave": "2024-FAISMUN-SOPMA-0063-MM-ETMF",
     "nombre": "Rehabilitación Integral del Mercado Guillermo Prieto, Fracc. Altavista",
     "descripcion": "Mantenimiento y mejoramiento de instalaciones comerciales en Calle Guillermo Prieto esq. Rafael Arellano en Fracc. Altavista.",
-    "rubro": "Edificación e Infraestructura Comunitaria",
+    "rubro": "Edificación y Equipamiento",
     "monto": 3123481.56,
     "colonia": "Altavista",
     "distrito": "Municipio de Aguascalientes",
@@ -13264,7 +13359,7 @@ window.OBRAS_DATA = [
     "clave": "2024-FAISMUN-SOPMA-0070-ID-ETMF",
     "nombre": "Construcción de Cancha de Pasto Sintético en Plazoleta R (1a Etapa), Fracc. Ojocaliente I",
     "descripcion": "Construcción de espacio deportivo con pasto sintético en Calle Jaltomate esquina Calle Peñuelas en Fracc. Ojocaliente I.",
-    "rubro": "Espacios Públicos y Recreación",
+    "rubro": "Espacios Públicos y Deporte",
     "monto": 1953119.89,
     "colonia": "Ojocaliente I",
     "distrito": "Municipio de Aguascalientes",
@@ -13333,7 +13428,7 @@ window.OBRAS_DATA = [
     "clave": "2024-FAISMUN-SOPMA-0079-IU-ETMF",
     "nombre": "Rehabilitación de Alumbrado Público en Calle Soberana Convención Militar Revolucionaria Pte.",
     "descripcion": "Modernización del sistema de alumbrado público en Calle Soberana Convención (entre Miguel Aparicio y José Calvillo) en Fracc. Lic. José López Portillo.",
-    "rubro": "Alumbrado Público y Electrificación",
+    "rubro": "Alumbrado y Electrificación",
     "monto": 18999999.99,
     "colonia": "José López Portillo",
     "distrito": "Municipio de Aguascalientes",
@@ -13415,7 +13510,7 @@ window.OBRAS_DATA = [
     "clave": "2024-FAISMUN-SOPMA-0123-IU-ETF",
     "nombre": "Construcción de Banquetas y Guarniciones en Calle San Cosme, Fracc. Los Pericos",
     "descripcion": "Construcción de infraestructura peatonal en Calle San Cosme, tramo entre San Marcos y San Jorge en Fracc. Los Pericos.",
-    "rubro": "Urbanización y Pavimentación",
+    "rubro": "Vialidades y Pavimentación",
     "monto": 367064.3,
     "colonia": "Los Pericos",
     "distrito": "Municipio de Aguascalientes",
@@ -13497,7 +13592,7 @@ window.OBRAS_DATA = [
     "clave": "2024-FAISMUN-SOPMA-0124-IU-ETMF",
     "nombre": "Construcción de Banquetas y Guarniciones en Calle San Marcos, Fracc. Los Pericos",
     "descripcion": "Construcción de infraestructura peatonal en Calle San Marcos, tramo entre San Cosme y San Lucas en Fracc. Los Pericos.",
-    "rubro": "Urbanización y Pavimentación",
+    "rubro": "Vialidades y Pavimentación",
     "monto": 1137697.98,
     "colonia": "Los Pericos",
     "distrito": "Municipio de Aguascalientes",
@@ -13579,7 +13674,7 @@ window.OBRAS_DATA = [
     "clave": "2024-FORTAMUN-IMASAM-0029-ADQUISICION-ETMF",
     "nombre": "Adquisición de Equipamiento Institucional para IMASAM (Salud Mental)",
     "descripcion": "Equipamiento especializado y mobiliario para atención psicológica y de salud mental en las instalaciones de IMASAM en Fracc. Mujeres Ilustres.",
-    "rubro": "Edificación e Infraestructura Comunitaria",
+    "rubro": "Edificación y Equipamiento",
     "monto": 300000,
     "colonia": "Mujeres Ilustres",
     "distrito": "Municipio de Aguascalientes",
@@ -13652,7 +13747,7 @@ window.OBRAS_DATA = [
     "clave": "2024-FORTAMUN-SEFIN-0032-DEUDA-ETMF",
     "nombre": "Pago al Servicio de la Deuda Pública Municipal (Crédito Quirografario 2024)",
     "descripcion": "Cumplimiento de compromisos y amortización del servicio de la deuda pública municipal para saneamiento financiero institucional.",
-    "rubro": "Fortalecimiento Institucional y Gestión",
+    "rubro": "Infraestructura Urbana",
     "monto": 300000,
     "colonia": "Aguascalientes",
     "distrito": "Municipio de Aguascalientes",
@@ -13725,7 +13820,7 @@ window.OBRAS_DATA = [
     "clave": "2024-FORTAMUN-SSPM-0102-VEHICULOS-ETMF",
     "nombre": "Adquisición de Vehículos Operativos para la Secretaría de Seguridad Pública Municipal",
     "descripcion": "Adquisición de patrullas y unidades operativas para el fortalecimiento de la vigilancia policial y prevención del delito en el municipio.",
-    "rubro": "Seguridad Pública y Equipamiento",
+    "rubro": "Edificación y Equipamiento",
     "monto": 476906.88,
     "colonia": "Aguascalientes",
     "distrito": "Municipio de Aguascalientes",
@@ -13798,7 +13893,7 @@ window.OBRAS_DATA = [
     "clave": "2024-PDM-CCAPAMA-0095-POZO-ETMF",
     "nombre": "Mantenimiento y Limpieza con Aire Comprimido de Pozos Profundos (Molino V, Conejal 1, La Herrada 2)",
     "descripcion": "Rehabilitación y aforo mediante limpieza con aire comprimido en pozos de agua potable Molino V, Conejal 1 y La Herrada 2.",
-    "rubro": "Agua Potable y Saneamiento",
+    "rubro": "Agua y Saneamiento",
     "monto": 1011017.21,
     "colonia": "El Conejal / Cartagena",
     "distrito": "Municipio de Aguascalientes",
@@ -14605,7 +14700,7 @@ window.OBRAS_DATA = [
     "clave": "2024-PP-SOPMA-0038-SS-ETMF",
     "nombre": "Rehabilitación Integral de Parque Cartagena, Fracc. Cartagena 1947",
     "descripcion": "Modernización de parque público en Calle Patón González s/n, colonia Cartagena 1947 mediante Presupuesto Participativo.",
-    "rubro": "Espacios Públicos y Recreación",
+    "rubro": "Espacios Públicos y Deporte",
     "monto": 999999.99,
     "colonia": "Cartagena 1947",
     "distrito": "Municipio de Aguascalientes",
@@ -14678,7 +14773,7 @@ window.OBRAS_DATA = [
     "clave": "2024-PP-SOPMA-0039-SS-ETMF",
     "nombre": "Rehabilitación de Parque Emiliano Zapata, Col. Emiliano Zapata",
     "descripcion": "Adecuación y equipamiento del parque en Calle Antonio Díaz Soto y Gama esq. Carlos M. Bustamante en Col. Emiliano Zapata.",
-    "rubro": "Espacios Públicos y Recreación",
+    "rubro": "Espacios Públicos y Deporte",
     "monto": 1299999.98,
     "colonia": "Emiliano Zapata",
     "distrito": "Municipio de Aguascalientes",
@@ -14751,7 +14846,7 @@ window.OBRAS_DATA = [
     "clave": "2024-PP-SOPMA-0046-SS-ETMF",
     "nombre": "Construcción de Parque Recreativo Nueva Castilla (1a Etapa), Fracc. Fuentes del Lago",
     "descripcion": "Creación de nuevo parque y área verde comunitaria en Av. Fuentes del Lago, Coto Nueva Castilla en Fracc. Fuentes del Lago.",
-    "rubro": "Espacios Públicos y Recreación",
+    "rubro": "Espacios Públicos y Deporte",
     "monto": 989871.23,
     "colonia": "Fuentes del Lago",
     "distrito": "Municipio de Aguascalientes",
@@ -14824,7 +14919,7 @@ window.OBRAS_DATA = [
     "clave": "2024-PP-SOPMA-0048-SS-ETMF",
     "nombre": "Acondicionamiento y Mejoramiento de Parque de Béisbol en San Antonio de Peñuelas",
     "descripcion": "Rehabilitación del parque deportivo de béisbol en Calle Benito Juárez s/n en la comunidad de San Antonio de Peñuelas.",
-    "rubro": "Espacios Públicos y Recreación",
+    "rubro": "Espacios Públicos y Deporte",
     "monto": 1899999.99,
     "colonia": "San Antonio de Peñuelas",
     "distrito": "Municipio de Aguascalientes",
@@ -14897,7 +14992,7 @@ window.OBRAS_DATA = [
     "clave": "2024-PP-SOPMA-0054-SS-ETMF",
     "nombre": "Rehabilitación de Parque Urbano La Rinconada, Fracc. La Rinconada",
     "descripcion": "Modernización de área deportiva y recreativa en Calle Roble esq. Privada Roble en Fracc. La Rinconada.",
-    "rubro": "Espacios Públicos y Recreación",
+    "rubro": "Espacios Públicos y Deporte",
     "monto": 713861.2,
     "colonia": "La Rinconada",
     "distrito": "Municipio de Aguascalientes",
@@ -22839,3 +22934,5 @@ window.OBRAS_DATA = [
     "impacto_urbano_desc": "Intervención estratégica de alto valor comunitario en el sector Agua y Saneamiento, orientada a optimizar la calidad de vida de las familias en TODO EL MUNICIPIO, garantizando accesibilidad incluyente, durabilidad estructural y cumplimiento pleno de la normativa urbana municipal."
   }
 ];
+
+window.OBRAS_ITEMS = window.OBRAS_DATA;

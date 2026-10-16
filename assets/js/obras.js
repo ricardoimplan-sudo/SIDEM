@@ -55,9 +55,47 @@ window.ObrasApp = {
     if (!window.OBRAS_DATA && window.OBRAS_ITEMS) {
       window.OBRAS_DATA = window.OBRAS_ITEMS;
     }
-    if (!window.OBRAS_METRICAS || !window.OBRAS_ITEMS) {
+    if (!window.OBRAS_ITEMS || window.OBRAS_ITEMS.length === 0) {
       console.warn('Datos de Obra Pública no disponibles.');
       return;
+    }
+
+    if (!window.OBRAS_METRICAS) {
+      const items = window.OBRAS_ITEMS;
+      const rubroConfig = {
+        'Agua y Saneamiento': { color: '#0A3B66', icono: 'droplets' },
+        'Vialidades y Pavimentación': { color: '#009FB9', icono: 'navigation' },
+        'Espacios Públicos y Deporte': { color: '#2EC4B6', icono: 'trees' },
+        'Edificación y Equipamiento': { color: '#E11482', icono: 'building-2' },
+        'Alumbrado y Electrificación': { color: '#F5A800', icono: 'zap' },
+        'Infraestructura Urbana': { color: '#7C3AED', icono: 'hammer' }
+      };
+      const porAnioDict = {};
+      const porRubroDict = {};
+      Object.keys(rubroConfig).forEach(k => {
+        porRubroDict[k] = { nombre: k, total: 0, inversion: 0, color: rubroConfig[k].color, icono: rubroConfig[k].icono };
+      });
+      items.forEach(o => {
+        const yr = o.anio || 2024;
+        if (!porAnioDict[yr]) porAnioDict[yr] = { anio: yr, total: 0, inversion: 0, beneficiarios: 0 };
+        porAnioDict[yr].total++;
+        porAnioDict[yr].inversion += (o.monto || 0);
+        porAnioDict[yr].beneficiarios += (o.num_beneficiarios || o.beneficiarios || 0);
+        const r = o.rubro || 'Infraestructura Urbana';
+        if (porRubroDict[r]) {
+          porRubroDict[r].total++;
+          porRubroDict[r].inversion += (o.monto || 0);
+        }
+      });
+      window.OBRAS_METRICAS = {
+        totalObras: items.length,
+        inversionTotal: items.reduce((acc, o) => acc + (o.monto || 0), 0),
+        totalBeneficiarios: items.reduce((acc, o) => acc + (o.num_beneficiarios || o.beneficiarios || 0), 0),
+        totalConFoto: items.filter(o => o.foto || o.fotoRemota).length,
+        totalTramos: items.filter(o => o.tipoGeom === 'LineString').length,
+        porAnio: Object.keys(porAnioDict).sort().map(k => porAnioDict[k]),
+        porRubro: Object.values(porRubroDict)
+      };
     }
 
     try {
