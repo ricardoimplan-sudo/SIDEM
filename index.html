@@ -95,7 +95,7 @@
   <!-- ========================================== -->
   <!-- MODAL / PORTAL DE ACCESO Y AUTENTICACIÓN PIMAGS -->
   <!-- ========================================== -->
-  <div id="authModalOverlay" class="hidden fixed inset-0 z-[99999] bg-[#051C2F]/95 backdrop-blur-2xl flex items-center justify-center p-4">
+  <div id="authModalOverlay" class="hidden fixed inset-0 z-[99999] bg-[#051C2F]/95 backdrop-blur-2xl flex items-center justify-center p-4" style="display: none;">
     <div class="bg-white/10 border border-white/20 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl backdrop-blur-xl text-white space-y-6 animate-in fade-in zoom-in-95 duration-300">
       
       <!-- Cabecera Institucional -->
@@ -3085,10 +3085,11 @@
           fadeAnimation: true
         }).setView([21.8853, -102.2916], 11.5);
 
-        // Capas Base Libres y Profesionales (Sin marcas de agua API KEY)
-        heroCapaCalles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        // Capas Base Libres y Profesionales (Alta velocidad CDN y sin marcas de agua)
+        heroCapaCalles = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+          subdomains: 'abcd',
           maxZoom: 19,
-          attribution: '&copy; OpenStreetMap contributors | IMPLAN Aguascalientes'
+          attribution: '&copy; CartoDB &bull; IMPLAN Aguascalientes'
         });
 
         heroCapaSatelite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
@@ -3101,9 +3102,10 @@
           attribution: '&copy; Esri Topo | OpenStreetMap'
         });
 
-        heroCapaOscuro = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+        heroCapaOscuro = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+          subdomains: 'abcd',
           maxZoom: 19,
-          attribution: '&copy; Esri Dark Canvas'
+          attribution: '&copy; CartoDB Dark'
         });
 
         heroCapaCalles.addTo(mapHero);
@@ -3206,8 +3208,9 @@
           }
         });
 
-        setTimeout(() => { mapHero.invalidateSize(); }, 200);
-        setTimeout(() => { mapHero.invalidateSize(); }, 600);
+        setTimeout(() => { if (mapHero) mapHero.invalidateSize(); }, 80);
+        setTimeout(() => { if (mapHero) mapHero.invalidateSize(); }, 300);
+        setTimeout(() => { if (mapHero) mapHero.invalidateSize(); }, 800);
 
       } catch (e) {
         console.error("Error al inicializar mapa Hero:", e);
@@ -5391,7 +5394,7 @@ Enviado a través de la Plataforma de Información Municipal PIMAgs`
   </script>
 
       <!-- MODAL DE FICHA TÉCNICA DE OBRA PÚBLICA -->
-    <div id="modalFichaObra" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+    <div id="modalFichaObra" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" style="display: none;">
       <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-200 relative p-6 space-y-4 animate-in fade-in zoom-in duration-200">
         <button onclick="ObrasApp.cerrarFicha()" class="absolute top-4 right-4 p-2 bg-slate-100 hover:bg-slate-200 rounded-full text-slate-600 transition cursor-pointer" aria-label="Cerrar Ficha">
           <i data-lucide="x" class="w-5 h-5"></i>
@@ -5404,7 +5407,7 @@ Enviado a través de la Plataforma de Información Municipal PIMAgs`
     </div>
 
     <!-- MODAL DE FICHA TÉCNICA DE EQUIPAMIENTO -->
-  <div id="modalFichaEquipamiento" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+  <div id="modalFichaEquipamiento" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" style="display: none;">
     <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-200 relative p-6 space-y-4 animate-in fade-in zoom-in duration-200">
       <button onclick="EquipamientoApp.cerrarFicha()" class="absolute top-4 right-4 p-2 bg-slate-100 hover:bg-slate-200 rounded-full text-slate-600 transition" aria-label="Cerrar Ficha">
         <i data-lucide="x" class="w-5 h-5"></i>
@@ -5417,7 +5420,7 @@ Enviado a través de la Plataforma de Información Municipal PIMAgs`
   </div>
 
   <!-- MODAL DE SERVICIOS PÚBLICOS MUNICIPALES (SSP) -->
-  <div id="modalServiciosPublicos" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+  <div id="modalServiciosPublicos" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" style="display: none;">
     <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[92vh] overflow-hidden shadow-2xl border border-slate-200 relative flex flex-col animate-in fade-in zoom-in duration-200">
       
       <!-- Modal Header -->

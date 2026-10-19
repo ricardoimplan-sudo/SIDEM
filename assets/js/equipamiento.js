@@ -866,13 +866,17 @@ const EquipamientoApp = {
       </div>
     `;
 
+    modal.style.display = 'flex';
     modal.classList.remove('hidden');
     if (window.lucide) lucide.createIcons();
   },
 
   cerrarFicha() {
     const modal = document.getElementById('modalFichaEquipamiento');
-    if (modal) modal.classList.add('hidden');
+    if (modal) {
+      modal.style.display = 'none';
+      modal.classList.add('hidden');
+    }
   },
 
   exportarCsv() {

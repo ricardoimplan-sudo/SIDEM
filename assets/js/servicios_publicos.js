@@ -168,6 +168,7 @@ window.ServiciosPublicosApp = {
   abrirModal() {
     const m = document.getElementById('modalServiciosPublicos');
     if (!m) return;
+    m.style.display = 'flex';
     m.classList.remove('hidden');
     this.cambiarTab(this.tabActiva || 'limpia');
     if (window.createIconsSafe) window.createIconsSafe();
@@ -175,7 +176,10 @@ window.ServiciosPublicosApp = {
 
   cerrarModal() {
     const m = document.getElementById('modalServiciosPublicos');
-    if (m) m.classList.add('hidden');
+    if (m) {
+      m.style.display = 'none';
+      m.classList.add('hidden');
+    }
   },
 
   cambiarTab(tabName) {

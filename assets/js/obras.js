@@ -1280,6 +1280,7 @@ window.ObrasApp = {
       </div>
     `;
 
+    modal.style.display = 'flex';
     modal.classList.remove('hidden');
     if (window.lucide) lucide.createIcons();
 
@@ -1389,7 +1390,10 @@ window.ObrasApp = {
       this.miniMapaSatelital = null;
     }
     const modal = document.getElementById('modalFichaObra');
-    if (modal) modal.classList.add('hidden');
+    if (modal) {
+      modal.style.display = 'none';
+      modal.classList.add('hidden');
+    }
   },
 
   iniciarGraficos() {
