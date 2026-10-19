@@ -1641,44 +1641,57 @@
       </div>
 
       <!-- Tarjetas de Métricas Rápidas del SIG -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-navy flex items-center justify-center font-bold">
+      <div class="grid grid-cols-2 lg:grid-cols-5 gap-3.5">
+        <div class="bg-white rounded-2xl p-3.5 border border-slate-200 shadow-sm flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-navy flex items-center justify-center font-bold shrink-0">
             <i data-lucide="map" class="w-5 h-5"></i>
           </div>
-          <div>
-            <div class="text-xs text-slate-500 font-semibold">Superficie Municipal</div>
-            <div class="text-lg font-extrabold text-slate-900">1,178.1 km²</div>
+          <div class="min-w-0">
+            <div class="text-[11px] text-slate-500 font-semibold truncate">Superficie Municipal</div>
+            <div class="text-base sm:text-lg font-extrabold text-slate-900">1,178.1 km²</div>
           </div>
         </div>
 
-        <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-pink-50 text-brand-magenta flex items-center justify-center font-bold">
+        <div class="bg-white rounded-2xl p-3.5 border border-slate-200 shadow-sm flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-pink-50 text-brand-magenta flex items-center justify-center font-bold shrink-0">
             <i data-lucide="building-2" class="w-5 h-5"></i>
           </div>
-          <div>
-            <div class="text-xs text-slate-500 font-semibold">Equipamientos Registrados</div>
-            <div class="text-lg font-extrabold text-slate-900">48,908 Puntos</div>
+          <div class="min-w-0">
+            <div class="text-[11px] text-slate-500 font-semibold truncate">Equipamientos</div>
+            <div class="text-base sm:text-lg font-extrabold text-slate-900">48,908 Puntos</div>
           </div>
         </div>
 
-        <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-cyan-50 text-brand-cyan flex items-center justify-center font-bold">
+        <div class="bg-white rounded-2xl p-3.5 border border-slate-200 shadow-sm flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-cyan-50 text-brand-cyan flex items-center justify-center font-bold shrink-0">
             <i data-lucide="hammer" class="w-5 h-5"></i>
           </div>
-          <div>
-            <div class="text-xs text-slate-500 font-semibold">Proyectos de Obra</div>
-            <div class="text-lg font-extrabold text-slate-900">549 Proyectos</div>
+          <div class="min-w-0">
+            <div class="text-[11px] text-slate-500 font-semibold truncate">Obra Pública</div>
+            <div class="text-base sm:text-lg font-extrabold text-slate-900">378 Obras</div>
           </div>
         </div>
 
-        <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold">
+        <div class="bg-white rounded-2xl p-3.5 border border-slate-200 shadow-sm flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold shrink-0">
             <i data-lucide="navigation" class="w-5 h-5"></i>
           </div>
-          <div>
-            <div class="text-xs text-slate-500 font-semibold">Red de Vialidades</div>
-            <div class="text-lg font-extrabold text-slate-900">20,844 Calles</div>
+          <div class="min-w-0">
+            <div class="text-[11px] text-slate-500 font-semibold truncate">Red de Vialidades</div>
+            <div class="text-base sm:text-lg font-extrabold text-slate-900">20,844 Calles</div>
+          </div>
+        </div>
+
+        <div onclick="abrirModalServiciosPublicos()" class="bg-gradient-to-br from-emerald-50 to-teal-50/50 hover:from-emerald-100/70 hover:to-teal-100/70 transition cursor-pointer rounded-2xl p-3.5 border border-emerald-200/80 shadow-sm flex items-center gap-3 col-span-2 sm:col-span-1" title="Ver Indicadores Oficiales de Servicios Públicos">
+          <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold shrink-0 shadow-md shadow-emerald-700/20">
+            <i data-lucide="truck" class="w-5 h-5"></i>
+          </div>
+          <div class="min-w-0">
+            <div class="text-[11px] text-emerald-800 font-bold truncate flex items-center gap-1">
+              <span>Servicios Públicos</span>
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            </div>
+            <div class="text-xs sm:text-sm font-extrabold text-slate-900">4,446 Cont. &bull; 320 Parq.</div>
           </div>
         </div>
       </div>
@@ -1714,6 +1727,12 @@
               <button id="btnVisorCapaTopo" onclick="cambiarCapaVisor('topo')" class="px-2.5 py-1 text-slate-300 hover:text-white rounded-lg transition cursor-pointer">Topográfico</button>
               <button id="btnVisorCapaDark" onclick="cambiarCapaVisor('dark')" class="px-2.5 py-1 text-slate-300 hover:text-white rounded-lg transition cursor-pointer">Oscuro</button>
             </div>
+
+            <!-- Botón Servicios Públicos Modal -->
+            <button onclick="abrirModalServiciosPublicos()" title="Indicadores Oficiales de Servicios Públicos (SSP)" class="px-2.5 py-1 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shadow-sm">
+              <i data-lucide="truck" class="w-3.5 h-3.5"></i>
+              <span class="hidden sm:inline">Servicios Públicos</span>
+            </button>
 
             <!-- Botones de Medición y Control -->
             <button onclick="centrarMapaVisor()" title="Restablecer vista inicial" class="p-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl border border-slate-700 transition cursor-pointer">
@@ -1844,6 +1863,44 @@
                   </div>
                 </div>
                 <span class="w-3 h-3 rounded-full bg-[#72B626]"></span>
+              </label>
+
+              <!-- Separador Servicios Públicos Municipales (SSP) -->
+              <div class="pt-2.5 pb-1 border-t border-slate-200">
+                <span class="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider block flex items-center gap-1.5">
+                  <i data-lucide="truck" class="w-3.5 h-3.5 text-emerald-600"></i>
+                  <span>Servicios Públicos (SSP)</span>
+                </span>
+              </div>
+
+              <!-- Capa SSP 1: Contenedores RSU -->
+              <label class="flex items-center justify-between p-2 rounded-xl hover:bg-sky-50/60 cursor-pointer border border-sky-200/80 bg-sky-50/30">
+                <div class="flex items-center gap-2.5">
+                  <input type="checkbox" id="chkCapaContenedores" onchange="toggleCapaVisor('contenedores', this.checked)" class="rounded text-sky-600 focus:ring-sky-500 cursor-pointer">
+                  <div>
+                    <span class="font-bold text-slate-900 block flex items-center gap-1.5">
+                      <span>Contenedores RSU</span>
+                      <span class="text-[9px] px-1.5 py-0.2 bg-sky-600 text-white rounded-full font-bold">4,446</span>
+                    </span>
+                    <span class="text-[10px] text-slate-500">Limpia: rutas, turnos y capacidad</span>
+                  </div>
+                </div>
+                <span class="w-3 h-3 rounded-full bg-sky-500"></span>
+              </label>
+
+              <!-- Capa SSP 2: Parques y Canchas (SSP) -->
+              <label class="flex items-center justify-between p-2 rounded-xl hover:bg-emerald-50/60 cursor-pointer border border-emerald-200/80 bg-emerald-50/30">
+                <div class="flex items-center gap-2.5">
+                  <input type="checkbox" id="chkCapaParquesSSP" onchange="toggleCapaVisor('parques_ssp', this.checked)" class="rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                  <div>
+                    <span class="font-bold text-slate-900 block flex items-center gap-1.5">
+                      <span>Parques y Canchas (SSP)</span>
+                      <span class="text-[9px] px-1.5 py-0.2 bg-emerald-600 text-white rounded-full font-bold">320</span>
+                    </span>
+                    <span class="text-[10px] text-slate-500">Polígonos, equipamiento y áreas verdes</span>
+                  </div>
+                </div>
+                <span class="w-3 h-3 rounded-full bg-emerald-600"></span>
               </label>
 
             </div>
@@ -2265,6 +2322,8 @@
   <script src="assets/js/obras.js?v=20261016_378_v11"></script>
   <script src="assets/js/vialidades_data.js?v=20261002_vialidades_fixed"></script>
   <script src="assets/js/secciones_data.js?v=20261002_clean"></script>
+  <script src="assets/js/servicios_publicos_data.js?v=20261019_v1"></script>
+  <script src="assets/js/servicios_publicos.js?v=20261019_v1"></script>
   <script>
     window.createIconsSafe = function() {
       if (window.lucide && typeof window.lucide.createIcons === 'function') {
@@ -3252,7 +3311,9 @@
       educacion: null,
       vias: null,
       verdes: null,
-      secciones: null
+      secciones: null,
+      contenedores: null,
+      parques_ssp: null
     };
 
     function initMapa() {
@@ -3476,6 +3537,37 @@
         } else {
           if (visorCapas.vialidades && window.mapPimags.hasLayer(visorCapas.vialidades)) {
             window.mapPimags.removeLayer(visorCapas.vialidades);
+          }
+        }
+      // Carga perezosa de los 4,446 Contenedores de Limpia (L.markerClusterGroup)
+      if (nombreCapa === 'contenedores') {
+        if (activo) {
+          if (!visorCapas.contenedores) {
+            inicializarCapaContenedores();
+          }
+          if (visorCapas.contenedores) {
+            window.mapPimags.addLayer(visorCapas.contenedores);
+          }
+        } else {
+          if (visorCapas.contenedores && window.mapPimags.hasLayer(visorCapas.contenedores)) {
+            window.mapPimags.removeLayer(visorCapas.contenedores);
+          }
+        }
+        return;
+      }
+
+      // Carga perezosa de los 320 Parques, Canchas y Jardines Municipales (SSP)
+      if (nombreCapa === 'parques_ssp') {
+        if (activo) {
+          if (!visorCapas.parques_ssp) {
+            inicializarCapaParquesSSP();
+          }
+          if (visorCapas.parques_ssp) {
+            window.mapPimags.addLayer(visorCapas.parques_ssp);
+          }
+        } else {
+          if (visorCapas.parques_ssp && window.mapPimags.hasLayer(visorCapas.parques_ssp)) {
+            window.mapPimags.removeLayer(visorCapas.parques_ssp);
           }
         }
         return;
@@ -3950,6 +4042,54 @@
                     </div>
                   </div>
                   <span class="text-[9px] px-1.5 py-0.5 bg-cyan-500/30 text-cyan-300 rounded font-bold">Obra</span>
+                </div>
+              `;
+              matchCount++;
+            }
+          }
+        }
+      }
+
+      // 4. Parques y Canchas Municipales (SSP)
+      if (window.PARQUES_SSP_DATA && Array.isArray(window.PARQUES_SSP_DATA)) {
+        for (let i = 0; i < window.PARQUES_SSP_DATA.length; i++) {
+          const p = window.PARQUES_SSP_DATA[i];
+          if ((p.nombre && p.nombre.toLowerCase().includes(q)) || (p.colonia && p.colonia.toLowerCase().includes(q))) {
+            if (matchCount < 8) {
+              html += `
+                <div onclick="irAParqueSSP(${p.id})" class="p-2 hover:bg-white/10 rounded-xl cursor-pointer transition flex items-center justify-between border-b border-white/5">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                    <div>
+                      <strong class="text-xs text-emerald-200 block truncate max-w-[200px]">${p.nombre}</strong>
+                      <span class="text-[10px] text-slate-400">${p.tipo} &bull; ${p.colonia || 'Aguascalientes'}</span>
+                    </div>
+                  </div>
+                  <span class="text-[9px] px-1.5 py-0.5 bg-emerald-500/30 text-emerald-300 rounded font-bold">Parque SSP</span>
+                </div>
+              `;
+              matchCount++;
+            }
+          }
+        }
+      }
+
+      // 5. Contenedores de Limpia (SSP)
+      if (window.CONTENEDORES_DATA && Array.isArray(window.CONTENEDORES_DATA)) {
+        for (let i = 0; i < window.CONTENEDORES_DATA.length; i++) {
+          const c = window.CONTENEDORES_DATA[i];
+          if ((c.folio && c.folio.toLowerCase().includes(q)) || (c.calle1 && c.calle1.toLowerCase().includes(q)) || (c.colonia && c.colonia.toLowerCase().includes(q))) {
+            if (matchCount < 8) {
+              html += `
+                <div onclick="irAContenedorSSP(${c.id})" class="p-2 hover:bg-white/10 rounded-xl cursor-pointer transition flex items-center justify-between border-b border-white/5">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-sky-400"></span>
+                    <div>
+                      <strong class="text-xs text-sky-200 block truncate max-w-[200px]">${c.calle1} (${c.colonia || 'Ags'})</strong>
+                      <span class="text-[10px] text-slate-400">Folio: ${c.folio} &bull; Turno ${c.turno}</span>
+                    </div>
+                  </div>
+                  <span class="text-[9px] px-1.5 py-0.5 bg-sky-500/30 text-sky-300 rounded font-bold">Contenedor</span>
                 </div>
               `;
               matchCount++;
@@ -5273,6 +5413,365 @@ Enviado a través de la Plataforma de Información Municipal PIMAgs`
       <div id="modalFichaContenido">
         <!-- Generado dinámicamente -->
       </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE SERVICIOS PÚBLICOS MUNICIPALES (SSP) -->
+  <div id="modalServiciosPublicos" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+    <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[92vh] overflow-hidden shadow-2xl border border-slate-200 relative flex flex-col animate-in fade-in zoom-in duration-200">
+      
+      <!-- Modal Header -->
+      <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-gradient-to-r from-emerald-900 via-teal-900 to-slate-900 text-white shrink-0">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center text-emerald-300 font-bold shadow-inner">
+            <i data-lucide="sparkles" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-emerald-400/20 text-emerald-300 border border-emerald-400/30 tracking-wider">Secretaría de Servicios Públicos</span>
+              <span class="text-[10px] font-bold text-slate-300">PIM.SSP • Municipio de Aguascalientes</span>
+            </div>
+            <h3 class="text-base sm:text-lg font-black text-white leading-tight">Servicios Públicos Municipales e Infraestructura</h3>
+          </div>
+        </div>
+        <button onclick="ServiciosPublicosApp.cerrarModal()" class="p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition cursor-pointer" aria-label="Cerrar Modal">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="bg-slate-100/80 p-2 border-b border-slate-200 flex items-center gap-1.5 overflow-x-auto shrink-0">
+        <button id="tabBtnSSP_limpia" onclick="ServiciosPublicosApp.cambiarTab('limpia')" class="tab-btn-ssp px-3.5 py-1.5 rounded-xl text-xs font-extrabold transition flex items-center gap-1.5 bg-white text-emerald-800 shadow-sm border border-emerald-300">
+          <i data-lucide="trash-2" class="w-4 h-4 text-emerald-600"></i>
+          <span>Limpia y Aseo (4,446 Cont.)</span>
+        </button>
+        <button id="tabBtnSSP_alumbrado" onclick="ServiciosPublicosApp.cambiarTab('alumbrado')" class="tab-btn-ssp px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 text-slate-600 hover:text-slate-900">
+          <i data-lucide="lightbulb" class="w-4 h-4 text-amber-500"></i>
+          <span>Alumbrado Público (DAP)</span>
+        </button>
+        <button id="tabBtnSSP_parques" onclick="ServiciosPublicosApp.cambiarTab('parques')" class="tab-btn-ssp px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 text-slate-600 hover:text-slate-900">
+          <i data-lucide="trees" class="w-4 h-4 text-emerald-600"></i>
+          <span>Parques y Jardines (320 Espacios)</span>
+        </button>
+        <button id="tabBtnSSP_panteones" onclick="ServiciosPublicosApp.cambiarTab('panteones')" class="tab-btn-ssp px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 text-slate-600 hover:text-slate-900">
+          <i data-lucide="cross" class="w-4 h-4 text-indigo-500"></i>
+          <span>Panteones (13 Recintos)</span>
+        </button>
+      </div>
+
+      <!-- Modal Body Content -->
+      <div class="p-6 overflow-y-auto space-y-6 flex-1 text-slate-800">
+
+        <!-- TAB 1: LIMPIA Y ASEO PÚBLICO -->
+        <div id="tabPaneSSP_limpia" class="space-y-5">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200/80 rounded-2xl p-4">
+            <div>
+              <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">Dirección de Limpia y Aseo Público</span>
+              <h4 class="text-base font-extrabold text-emerald-950 mt-1">Red Municipal de Contenedores y Rutas de Recolección</h4>
+              <p class="text-xs text-slate-600">Información cartográfica oficial de los 4,446 contenedores de residuos sólidos urbanos distribuidos en las 63 rutas del municipio.</p>
+            </div>
+            <button onclick="ServiciosPublicosApp.activarCapaYCentrar('contenedores')" class="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold transition shadow-md flex items-center gap-2 shrink-0 cursor-pointer">
+              <i data-lucide="map-pin" class="w-4 h-4"></i>
+              <span>Ver Contenedores en Geovisor</span>
+            </button>
+          </div>
+
+          <!-- Grid de Métricas Limpia -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm text-center">
+              <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Total Contenedores</div>
+              <div class="text-2xl font-black text-emerald-700 mt-0.5">4,446</div>
+              <div class="text-[10px] text-slate-500 mt-0.5 font-medium">Georreferenciados WGS84</div>
+            </div>
+            <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm text-center">
+              <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Rutas Operativas</div>
+              <div class="text-2xl font-black text-blue-700 mt-0.5">63</div>
+              <div class="text-[10px] text-slate-500 mt-0.5 font-medium">Cobertura municipal</div>
+            </div>
+            <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm text-center">
+              <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Recolección Diaria Prom.</div>
+              <div class="text-2xl font-black text-slate-800 mt-0.5">707.7 <span class="text-xs font-semibold">Ton</span></div>
+              <div class="text-[10px] text-slate-500 mt-0.5 font-medium">258,309.79 Ton/Año</div>
+            </div>
+            <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm text-center">
+              <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Disposición Final</div>
+              <div class="text-lg font-black text-teal-800 mt-1">San Nicolás</div>
+              <div class="text-[10px] text-slate-500 mt-0.5 font-medium">418,668.22 Ton/Año Totales</div>
+            </div>
+          </div>
+
+          <!-- Fichas y Desglose Operativo -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 space-y-2.5">
+              <h5 class="text-xs font-extrabold text-slate-800 uppercase tracking-wide flex items-center gap-1.5">
+                <i data-lucide="clock" class="w-3.5 h-3.5 text-blue-600"></i>
+                <span>Operación y Esquema de Turnos</span>
+              </h5>
+              <ul class="text-xs space-y-2 text-slate-600">
+                <li class="flex items-center justify-between border-b border-slate-200 pb-1.5">
+                  <span class="font-medium">Turno Nocturno (Zona Centro y Avenidas):</span>
+                  <strong class="text-slate-800 font-bold">2,082 contenedores (46.8%)</strong>
+                </li>
+                <li class="flex items-center justify-between border-b border-slate-200 pb-1.5">
+                  <span class="font-medium">Turnos Ordinario / Mixtos:</span>
+                  <strong class="text-slate-800 font-bold">2,364 contenedores (53.2%)</strong>
+                </li>
+                <li class="flex items-center justify-between pt-0.5">
+                  <span class="font-medium">Capacidades Estándar:</span>
+                  <strong class="text-slate-800 font-bold">2.6 m³, 4.0 m³ y 5.5 m³</strong>
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 space-y-2.5">
+              <h5 class="text-xs font-extrabold text-slate-800 uppercase tracking-wide flex items-center gap-1.5">
+                <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-600"></i>
+                <span>Indicadores de Desempeño PIM.SSP.02</span>
+              </h5>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Aguascalientes cuenta con uno de los sistemas de recolección de basura por contenedor más eficientes del país, con vaciado programado diario y mantenimiento preventivo continuo a las cajas y camiones compactadores.
+              </p>
+              <div class="bg-white p-2.5 rounded-xl border border-slate-200 text-[11px] text-slate-700 flex items-center justify-between">
+                <span class="font-bold">Índice de cobertura de recolección:</span>
+                <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-extrabold">99.2%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: ALUMBRADO PÚBLICO -->
+        <div id="tabPaneSSP_alumbrado" class="space-y-5 hidden">
+          <div class="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200/80 rounded-2xl p-4">
+            <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-amber-100 text-amber-800">Dirección de Alumbrado Público (DAP)</span>
+            <h4 class="text-base font-extrabold text-amber-950 mt-1">Red de Iluminación Urbana e Infraestructura LED</h4>
+            <p class="text-xs text-slate-600">Monitoreo continuo de circuitos, subestaciones, reposición de balastros y modernización a luminarias LED de bajo consumo.</p>
+          </div>
+
+          <!-- Grid de Métricas Alumbrado -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm text-center">
+              <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Luminarias Operativas</div>
+              <div class="text-2xl font-black text-amber-600 mt-0.5">45,800+</div>
+              <div class="text-[10px] text-slate-500 mt-0.5 font-medium">Puntos de luz en el municipio</div>
+            </div>
+            <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm text-center">
+              <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Cobertura Urbana</div>
+              <div class="text-2xl font-black text-emerald-700 mt-0.5">98.5%</div>
+              <div class="text-[10px] text-slate-500 mt-0.5 font-medium">Área consolidada municipal</div>
+            </div>
+            <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm text-center">
+              <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Mantenimiento Anual</div>
+              <div class="text-2xl font-black text-blue-700 mt-0.5">18,450</div>
+              <div class="text-[10px] text-slate-500 mt-0.5 font-medium">Focos y balastros repuestos</div>
+            </div>
+            <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm text-center">
+              <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Atención Reportes</div>
+              <div class="text-2xl font-black text-teal-700 mt-0.5">9,240</div>
+              <div class="text-[10px] text-slate-500 mt-0.5 font-medium">Reparaciones de red y circuitos</div>
+            </div>
+          </div>
+
+          <!-- Detalles Alumbrado -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 space-y-2.5">
+              <h5 class="text-xs font-extrabold text-slate-800 uppercase tracking-wide flex items-center gap-1.5">
+                <i data-lucide="zap" class="w-3.5 h-3.5 text-amber-500"></i>
+                <span>Eficiencia Energética y Tecnología LED</span>
+              </h5>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Migración programada de vapor de sodio a tecnología LED de alta eficiencia lumínica, mejorando la visibilidad nocturna y reduciendo emisiones de carbono en avenidas principales, fraccionamientos y comunidades rurales.
+              </p>
+              <div class="flex items-center gap-2 pt-1">
+                <span class="text-[10px] px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold">Avenidas Principales</span>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-bold">Pasos a Desnivel</span>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">Parques Iluminados</span>
+              </div>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 space-y-2.5">
+              <h5 class="text-xs font-extrabold text-slate-800 uppercase tracking-wide flex items-center gap-1.5">
+                <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-600"></i>
+                <span>Tiempos de Respuesta Ciudadana</span>
+              </h5>
+              <ul class="text-xs space-y-2 text-slate-600">
+                <li class="flex items-center justify-between border-b border-slate-200 pb-1.5">
+                  <span class="font-medium">Tiempo promedio de atención:</span>
+                  <strong class="text-slate-800 font-bold">&lt; 72 horas hábiles</strong>
+                </li>
+                <li class="flex items-center justify-between border-b border-slate-200 pb-1.5">
+                  <span class="font-medium">Canal de reporte:</span>
+                  <strong class="text-slate-800 font-bold">072 • Hagamos Equipo</strong>
+                </li>
+                <li class="flex items-center justify-between pt-0.5">
+                  <span class="font-medium">Cuadrillas operativas DAP:</span>
+                  <strong class="text-slate-800 font-bold">Guardias 24/7</strong>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: PARQUES Y JARDINES -->
+        <div id="tabPaneSSP_parques" class="space-y-5 hidden">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-gradient-to-r from-emerald-50 to-green-50 border border-emerald-200/80 rounded-2xl p-4">
+            <div>
+              <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">Dirección de Parques y Jardines</span>
+              <h4 class="text-base font-extrabold text-emerald-950 mt-1">Espacios Públicos, Canchas y Áreas Verdes</h4>
+              <p class="text-xs text-slate-600">320 parques, jardines y canchas deportivas cartografiados con delimitación perimetral, tipo de equipamiento y diagnóstico.</p>
+            </div>
+            <button onclick="ServiciosPublicosApp.activarCapaYCentrar('parques_ssp')" class="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold transition shadow-md flex items-center gap-2 shrink-0 cursor-pointer">
+              <i data-lucide="map-pin" class="w-4 h-4"></i>
+              <span>Ver Parques en Geovisor</span>
+            </button>
+          </div>
+
+          <!-- Grid de Métricas Parques -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm text-center">
+              <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Espacios Atendidos</div>
+              <div class="text-2xl font-black text-emerald-700 mt-0.5">320</div>
+              <div class="text-[10px] text-slate-500 mt-0.5 font-medium">Parques, canchas y jardines</div>
+            </div>
+            <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm text-center">
+              <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Superficie Total</div>
+              <div class="text-2xl font-black text-teal-700 mt-0.5">2.84M <span class="text-xs font-semibold">m²</span></div>
+              <div class="text-[10px] text-slate-500 mt-0.5 font-medium">284.5 hectáreas de recreación</div>
+            </div>
+            <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm text-center">
+              <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Áreas Verdes Puras</div>
+              <div class="text-2xl font-black text-green-700 mt-0.5">1.42M <span class="text-xs font-semibold">m²</span></div>
+              <div class="text-[10px] text-slate-500 mt-0.5 font-medium">Riego tecnificado con agua tratada</div>
+            </div>
+            <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm text-center">
+              <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Vivero Municipal</div>
+              <div class="text-lg font-black text-emerald-900 mt-1">50,000+</div>
+              <div class="text-[10px] text-slate-500 mt-0.5 font-medium">Plantas y árboles anuales</div>
+            </div>
+          </div>
+
+          <!-- Detalles Parques -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 space-y-2.5">
+              <h5 class="text-xs font-extrabold text-slate-800 uppercase tracking-wide flex items-center gap-1.5">
+                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-600"></i>
+                <span>Equipamiento e Infraestructura Deportiva</span>
+              </h5>
+              <ul class="text-xs space-y-1.5 text-slate-600">
+                <li class="flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                  <span>Canchas de usos múltiples (Básquetbol, Voleibol y Fútbol)</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                  <span>Juegos infantiles y módulos lúdicos incluyentes</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                  <span>Gimnasios al aire libre y aparatos de acondicionamiento</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                  <span>Andadores de concreto ecológico y trotapistas</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 space-y-2.5">
+              <h5 class="text-xs font-extrabold text-slate-800 uppercase tracking-wide flex items-center gap-1.5">
+                <i data-lucide="droplet" class="w-3.5 h-3.5 text-sky-600"></i>
+                <span>Sustentabilidad Hídrica y Reforestación</span>
+              </h5>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Línea morada para riego de camellones y parques con agua tratada para no comprometer el acuífero de Aguascalientes. Programa anual de reforestación urbana con más de 12,000 árboles plantados con especies nativas adaptadas a clima semidesértico.
+              </p>
+              <div class="bg-white p-2.5 rounded-xl border border-slate-200 text-[11px] text-slate-700 flex items-center justify-between">
+                <span class="font-bold">Especies:</span>
+                <span class="text-slate-600 italic">Mezquite, Huizache, Pirul criollo, Jacaranda</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 4: PANTEONES -->
+        <div id="tabPaneSSP_panteones" class="space-y-5 hidden">
+          <div class="bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200/80 rounded-2xl p-4">
+            <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-indigo-100 text-indigo-800">Dirección de Panteones</span>
+            <h4 class="text-base font-extrabold text-indigo-950 mt-1">Panteones y Servicios Funerarios Municipales</h4>
+            <p class="text-xs text-slate-600">Administración, inhumación, cremación y preservación del patrimonio funerario e histórico del municipio.</p>
+          </div>
+
+          <!-- Grid de Métricas Panteones -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm text-center">
+              <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Panteones Municipales</div>
+              <div class="text-2xl font-black text-indigo-700 mt-0.5">13</div>
+              <div class="text-[10px] text-slate-500 mt-0.5 font-medium">Urbanos y delegacionales</div>
+            </div>
+            <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm text-center">
+              <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Trámites Anuales</div>
+              <div class="text-2xl font-black text-purple-700 mt-0.5">22,554</div>
+              <div class="text-[10px] text-slate-500 mt-0.5 font-medium">Servicios y constancias</div>
+            </div>
+            <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm text-center">
+              <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Inhumaciones</div>
+              <div class="text-2xl font-black text-slate-800 mt-0.5">1,114</div>
+              <div class="text-[10px] text-slate-500 mt-0.5 font-medium">Registros anuales</div>
+            </div>
+            <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm text-center">
+              <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Cremaciones</div>
+              <div class="text-2xl font-black text-slate-800 mt-0.5">890</div>
+              <div class="text-[10px] text-slate-500 mt-0.5 font-medium">Horno crematorio municipal</div>
+            </div>
+          </div>
+
+          <!-- Panteones Principales -->
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 space-y-3">
+            <h5 class="text-xs font-extrabold text-slate-800 uppercase tracking-wide flex items-center gap-1.5">
+              <i data-lucide="landmark" class="w-3.5 h-3.5 text-indigo-600"></i>
+              <span>Recintos Funerarios y Patrimonio Histórico</span>
+            </h5>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 text-xs">
+              <div class="bg-white p-2.5 rounded-xl border border-slate-200">
+                <strong class="text-slate-900 block font-bold">Panteón de la Cruz</strong>
+                <span class="text-[10px] text-slate-500">Patrimonio Histórico y Cultural</span>
+              </div>
+              <div class="bg-white p-2.5 rounded-xl border border-slate-200">
+                <strong class="text-slate-900 block font-bold">Panteón Los Ángeles</strong>
+                <span class="text-[10px] text-slate-500">Col. Barrio del Encino</span>
+              </div>
+              <div class="bg-white p-2.5 rounded-xl border border-slate-200">
+                <strong class="text-slate-900 block font-bold">Panteón La Asunción</strong>
+                <span class="text-[10px] text-slate-500">Zona Oriente</span>
+              </div>
+              <div class="bg-white p-2.5 rounded-xl border border-slate-200">
+                <strong class="text-slate-900 block font-bold">Panteón San Marcos</strong>
+                <span class="text-[10px] text-slate-500">Comunidad Trojes de Alonso</span>
+              </div>
+              <div class="bg-white p-2.5 rounded-xl border border-slate-200">
+                <strong class="text-slate-900 block font-bold">Panteón Cañada Honda</strong>
+                <span class="text-[10px] text-slate-500">Delegación Cañada Honda</span>
+              </div>
+              <div class="bg-white p-2.5 rounded-xl border border-slate-200">
+                <strong class="text-slate-900 block font-bold">Panteón Calvillito</strong>
+                <span class="text-[10px] text-slate-500">Delegación Calvillito</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-4 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 shrink-0">
+        <div class="flex items-center gap-2">
+          <i data-lucide="info" class="w-4 h-4 text-emerald-600"></i>
+          <span>Fuente: Secretaría de Servicios Públicos del H. Ayuntamiento de Aguascalientes e IMPLAN.</span>
+        </div>
+        <button onclick="ServiciosPublicosApp.cerrarModal()" class="w-full sm:w-auto px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-xl transition cursor-pointer">
+          Cerrar Panel
+        </button>
+      </div>
+
     </div>
   </div>
 
