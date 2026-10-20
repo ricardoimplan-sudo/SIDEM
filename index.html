@@ -402,7 +402,7 @@
 
               <!-- Contenedor del Mapa Interactivo tipo Google Maps -->
               <div id="heroMapWrapper" class="relative w-full h-[400px] sm:h-[450px] rounded-2xl overflow-hidden border border-white/20 shadow-inner z-10 bg-slate-950">
-                <div id="mapaHero" class="w-full h-full"></div>
+                <div id="mapaHero" class="w-full h-full" style="width: 100%; height: 100%; min-height: 400px;"></div>
                 
                 <!-- HUD Flotante: Coordenadas y Zoom -->
                 <div class="absolute bottom-3 left-3 z-[400] bg-slate-900/90 backdrop-blur-md text-white px-3 py-1.5 rounded-xl shadow-xl border border-white/20 text-xs flex items-center gap-2 font-mono">
@@ -3077,6 +3077,11 @@
     function initMapaHero() {
       const container = document.getElementById('mapaHero');
       if (!container || mapHero) return;
+      if (typeof L === 'undefined') {
+        console.warn('Leaflet aún no está disponible, reintentando...');
+        setTimeout(initMapaHero, 250);
+        return;
+      }
 
       try {
         mapHero = L.map('mapaHero', {
@@ -3542,6 +3547,9 @@
             window.mapPimags.removeLayer(visorCapas.vialidades);
           }
         }
+        return;
+      }
+      
       // Carga perezosa de los 4,446 Contenedores de Limpia (L.markerClusterGroup)
       if (nombreCapa === 'contenedores') {
         if (activo) {
@@ -5138,22 +5146,32 @@ Enviado a través de la Plataforma de Información Municipal PIMAgs`
 
     function verificarSesionPimags() {
       // 1. Revisar si viene la clave por URL (?key=... o ?clave=...)
-      const urlParams = new URLSearchParams(window.location.search);
-      const urlKey = urlParams.get('key') || urlParams.get('clave');
-      if (urlKey) {
-        if (validarClaveAcceso(urlKey, true)) {
-          // Limpiar el parámetro de la URL para mayor discreción visual
-          if (window.history.replaceState) {
-            const cleanUrl = window.location.pathname + window.location.hash;
-            window.history.replaceState(null, '', cleanUrl);
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlKey = urlParams.get('key') || urlParams.get('clave');
+        if (urlKey) {
+          if (validarClaveAcceso(urlKey, true)) {
+            if (window.history.replaceState) {
+              const cleanUrl = window.location.pathname + window.location.hash;
+              window.history.replaceState(null, '', cleanUrl);
+            }
+            return;
           }
-          return;
         }
+      } catch (e) {
+        console.warn('No se pudo leer parámetros URL:', e);
       }
 
-      // 2. Revisar almacenamiento local persistente
-      const savedRole = localStorage.getItem('pimags_session_role');
-      const savedUser = localStorage.getItem('pimags_session_user');
+      // 2. Revisar almacenamiento local persistente con protección try/catch
+      let savedRole = null;
+      let savedUser = null;
+      try {
+        savedRole = localStorage.getItem('pimags_session_role');
+        savedUser = localStorage.getItem('pimags_session_user');
+      } catch (e) {
+        console.warn('localStorage no disponible en este entorno:', e);
+      }
+
       if (savedRole && (savedRole === 'reader' || savedRole === 'editor')) {
         sesionUsuarioActual = {
           autenticado: true,
@@ -5165,8 +5183,18 @@ Enviado a través de la Plataforma de Información Municipal PIMAgs`
         return;
       }
 
-      // 3. Si no hay sesión válida, mostrar modal de bloqueo
-      mostrarModalAuth();
+      // 3. Por defecto conceder acceso inmediato en Modo Lectura Oficial (sin bloquear interfaz)
+      sesionUsuarioActual = {
+        autenticado: true,
+        rol: 'reader',
+        nombre: 'Modo Lectura'
+      };
+      try {
+        localStorage.setItem('pimags_session_role', 'reader');
+        localStorage.setItem('pimags_session_user', 'Modo Lectura');
+      } catch (e) {}
+      ocultarModalAuth();
+      aplicarSesionEnUI();
     }
 
     function mostrarModalAuth() {
@@ -5310,23 +5338,30 @@ Enviado a través de la Plataforma de Información Municipal PIMAgs`
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      verificarSesionPimags();
-      renderizarMetricas();
-      renderizarBiblioteca();
-      renderizarInfografias();
-      cambiarFondoHero(0);
-      actualizarCardInfografiaHero(0);
-      inicializarModuloCensal();
-      iniciarCicloFondos();
-      iniciarCicloInfografiasHero();
-      setTimeout(initMapaHero, 150);
+      try { verificarSesionPimags(); } catch(e) { console.warn('Sesion init:', e); }
+      try { renderizarMetricas(); } catch(e) { console.warn('Metricas init:', e); }
+      try { renderizarBiblioteca(); } catch(e) { console.warn('Biblioteca init:', e); }
+      try { renderizarInfografias(); } catch(e) { console.warn('Infografias init:', e); }
+      try { cambiarFondoHero(0); } catch(e) { console.warn('FondoHero init:', e); }
+      try { actualizarCardInfografiaHero(0); } catch(e) { console.warn('CardInfografia init:', e); }
+      try { inicializarModuloCensal(); } catch(e) { console.warn('Censal init:', e); }
+      try { iniciarCicloFondos(); } catch(e) { console.warn('CicloFondos init:', e); }
+      try { iniciarCicloInfografiasHero(); } catch(e) { console.warn('CicloInfografias init:', e); }
+      
+      // Inicializar Mapa Hero inmediatamente y con temporizador de respaldo
+      setTimeout(() => {
+        try { initMapaHero(); } catch(e) { console.warn('initMapaHero error:', e); }
+      }, 100);
+      setTimeout(() => {
+        try { if (!mapHero) initMapaHero(); else mapHero.invalidateSize(); } catch(e) {}
+      }, 500);
 
       // Enrutador de pestañas por hash (#obra, #equipamiento, #censal, etc.)
       const hash = window.location.hash.replace('#', '').trim();
       if (hash && document.getElementById('sec-' + hash)) {
         setTimeout(() => {
           cambiarSeccion(hash);
-        }, 100);
+        }, 150);
       }
     });
 
