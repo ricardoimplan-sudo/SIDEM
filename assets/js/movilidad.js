@@ -33,6 +33,143 @@ window.MovilidadApp = {
     this.renderDirectorio();
   },
 
+  // Obtiene el destino y recorrido oficial de una combi (de dónde a dónde se dirige)
+  obtenerDestinoCombi(r) {
+    if (!this._dictCombis && window.MOVILIDAD_COMBIS) {
+      this._dictCombis = {};
+      window.MOVILIDAD_COMBIS.forEach(c => {
+        const cKey = (c.ruta || '').replace(/^Ruta\s+/i, '').trim().toUpperCase();
+        const trasladoLimpio = (c.traslado || '')
+          .replace(/CA'ADA/g, 'CAÑADA')
+          .replace(/PE'UELAS/g, 'PEÑUELAS')
+          .replace(/ORDE'A/g, 'ORDEÑA')
+          .trim();
+        this._dictCombis[cKey] = trasladoLimpio;
+      });
+    }
+    const key = (r || '').replace(/^Ruta\s+/i, '').trim().toUpperCase();
+    return (this._dictCombis && this._dictCombis[key]) || 'Ruta colectiva suburbana';
+  },
+
+  // Obtiene el destino y recorrido oficial de un autobús YoVoy (de dónde a dónde se dirige)
+  obtenerDestinoYoVoy(r) {
+    if (!this._dictYoVoy && window.MOVILIDAD_YOVOY) {
+      this._dictYoVoy = {};
+      window.MOVILIDAD_YOVOY.forEach(y => {
+        const m = (y.nombre || '').match(/^SITMA\s+(\d+(?:\s+[A-Z])?)\s+(?:(?:Norte|Sur|[SN])\s+)?(.*)$/i);
+        if (m) {
+          const cod = 'SITMA ' + m[1].trim().toUpperCase();
+          let tray = m[2]
+            .replace(/_r$/i, '')
+            .replace(/_ida$/i, '')
+            .replace(/_reg$/i, '')
+            .replace(/Viedos/g, 'Viñedos')
+            .replace(/Montaa/g, 'Montaña')
+            .replace(/Jesǧs/g, 'Jesús')
+            .replace(/Terǭn/g, 'Terán')
+            .replace(/Martnez/g, 'Martínez')
+            .replace(/Domnguez/g, 'Domínguez')
+            .trim();
+          if (!this._dictYoVoy[cod]) {
+            this._dictYoVoy[cod] = tray;
+          } else if (tray && !this._dictYoVoy[cod].includes(tray)) {
+            this._dictYoVoy[cod] += ' / ' + tray;
+          }
+        }
+      });
+    }
+    const key = (r || '').trim().toUpperCase();
+    return (this._dictYoVoy && this._dictYoVoy[key]) || 'Ruta urbana YoVoy SITMA';
+  },
+
+  // Genera popup enriquecido para Paradas de Combis con desglose de destinos
+  crearPopupHtmlParadaCombi(s) {
+    const rutasCards = (s.rutas || []).map(r => {
+      const destino = this.obtenerDestinoCombi(r);
+      const arrowDest = destino.replace(/\s*-\s*/g, ' <span class="text-amber-500 font-bold">➔</span> ');
+      return `
+        <div onclick="MovilidadApp.resaltarRutaEnMapa('combi', '${r}')" title="Haz clic para ver trazado de ${r} en el mapa" class="p-2 rounded-xl bg-amber-50/90 hover:bg-amber-100 border border-amber-200/90 transition cursor-pointer flex items-start gap-2 shadow-xs group">
+          <span class="px-1.5 py-0.5 rounded bg-amber-500 group-hover:bg-amber-600 text-white font-black text-[10px] shrink-0 mt-0.5 shadow-xs">🚐 ${r}</span>
+          <div class="flex-1 min-w-0">
+            <div class="text-[11px] font-bold text-slate-900 leading-snug">${arrowDest}</div>
+            <span class="text-[9px] text-amber-700 font-semibold group-hover:underline flex items-center gap-0.5 mt-0.5">
+              <span>Trazar ruta en mapa</span> ➔
+            </span>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    return `
+      <div class="p-2.5 font-sans min-w-[280px] max-w-[340px] space-y-2">
+        <div class="flex items-center justify-between gap-2 border-b border-amber-200 pb-1.5">
+          <span class="text-xs font-black text-amber-800 uppercase tracking-wider flex items-center gap-1.5">
+            <span>🚏 Parada de Combi #${s.id}</span>
+          </span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-500 text-white font-black shadow-xs">
+            ${s.num_rutas} ${s.num_rutas === 1 ? 'ruta' : 'rutas'}
+          </span>
+        </div>
+        <div class="text-[11px] text-slate-700 font-semibold">${s.nombre}</div>
+        <div class="space-y-1.5 pt-1">
+          <span class="text-[10px] font-black text-slate-500 uppercase tracking-wider block">¿Para dónde van estas combis? (Destinos):</span>
+          <div class="space-y-1.5 max-h-56 overflow-y-auto pr-1">
+            ${rutasCards || '<span class="text-xs text-slate-400">Ruta foránea</span>'}
+          </div>
+        </div>
+        <div class="pt-1 text-center border-t border-slate-100">
+          <button onclick="MovilidadApp.calcularTransporteMasCercano(${s.lat}, ${s.lng}, 'Parada Combi #${s.id}')" class="w-full py-1 text-center text-[10px] text-amber-700 hover:text-amber-900 font-bold bg-amber-50 hover:bg-amber-100 rounded-lg border border-amber-200 transition cursor-pointer">
+            📍 Calcular transporte más cercano desde aquí
+          </button>
+        </div>
+      </div>
+    `;
+  },
+
+  // Genera popup enriquecido para Paradas de Autobús YoVoy con desglose de destinos
+  crearPopupHtmlParadaYoVoy(s) {
+    const rutasCards = (s.rutas || []).map(r => {
+      const destino = this.obtenerDestinoYoVoy(r);
+      const arrowDest = destino.replace(/\s*-\s*/g, ' <span class="text-sky-500 font-bold">➔</span> ');
+      return `
+        <div onclick="MovilidadApp.resaltarRutaEnMapa('yovoy', '${r}')" title="Haz clic para ver trazado de ${r} en el mapa" class="p-2 rounded-xl bg-sky-50/90 hover:bg-sky-100 border border-sky-200/90 transition cursor-pointer flex items-start gap-2 shadow-xs group">
+          <span class="px-1.5 py-0.5 rounded bg-sky-600 group-hover:bg-sky-700 text-white font-black text-[10px] shrink-0 mt-0.5 shadow-xs">🚌 ${r}</span>
+          <div class="flex-1 min-w-0">
+            <div class="text-[11px] font-bold text-slate-900 leading-snug">${arrowDest}</div>
+            <span class="text-[9px] text-sky-700 font-semibold group-hover:underline flex items-center gap-0.5 mt-0.5">
+              <span>Trazar ruta en mapa</span> ➔
+            </span>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    return `
+      <div class="p-2.5 font-sans min-w-[280px] max-w-[340px] space-y-2">
+        <div class="flex items-center justify-between gap-2 border-b border-sky-200 pb-1.5">
+          <span class="text-xs font-black text-sky-800 uppercase tracking-wider flex items-center gap-1.5">
+            <span>🚏 Parada YoVoy #${s.id}</span>
+          </span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-sky-600 text-white font-black shadow-xs">
+            ${s.num_rutas} ${s.num_rutas === 1 ? 'ruta' : 'rutas'}
+          </span>
+        </div>
+        <div class="text-[11px] text-slate-700 font-semibold">${s.nombre}</div>
+        <div class="space-y-1.5 pt-1">
+          <span class="text-[10px] font-black text-slate-500 uppercase tracking-wider block">¿Para dónde van estos autobuses? (Destinos):</span>
+          <div class="space-y-1.5 max-h-56 overflow-y-auto pr-1">
+            ${rutasCards || '<span class="text-xs text-slate-400">Ruta urbana</span>'}
+          </div>
+        </div>
+        <div class="pt-1 text-center border-t border-slate-100">
+          <button onclick="MovilidadApp.calcularTransporteMasCercano(${s.lat}, ${s.lng}, 'Parada YoVoy #${s.id}')" class="w-full py-1 text-center text-[10px] text-sky-700 hover:text-sky-900 font-bold bg-sky-50 hover:bg-sky-100 rounded-lg border border-sky-200 transition cursor-pointer">
+            📍 Calcular transporte más cercano desde aquí
+          </button>
+        </div>
+      </div>
+    `;
+  },
+
   // Inicialización del mapa en la sección Movilidad
   initMapa() {
     if (this.mapa) {
@@ -196,7 +333,7 @@ window.MovilidadApp = {
       });
     }
 
-    // 4. Paradas de Camión YoVoy (Puntos azúles)
+    // 4. Paradas de Camión YoVoy (Puntos azúles con destinos)
     if (window.PARADAS_CAMIONES && Array.isArray(window.PARADAS_CAMIONES)) {
       window.PARADAS_CAMIONES.forEach(s => {
         const marker = L.circleMarker([s.lat, s.lng], {
@@ -208,42 +345,12 @@ window.MovilidadApp = {
           fillOpacity: 0.9
         });
 
-        const rutasBadges = (s.rutas || []).map(r => `
-          <button onclick="MovilidadApp.resaltarRutaEnMapa('yovoy', '${r}')" class="px-2 py-0.5 rounded bg-sky-50 hover:bg-sky-100 border border-sky-300 text-sky-800 text-[10px] font-bold transition cursor-pointer">
-            ${r}
-          </button>
-        `).join('');
-
-        marker.bindPopup(`
-          <div class="p-2.5 font-sans min-w-[230px] space-y-2">
-            <div class="flex items-center justify-between gap-2 border-b border-slate-100 pb-1.5">
-              <span class="text-[10px] font-bold text-sky-700 uppercase tracking-wider flex items-center gap-1">
-                <span>🚏 Parada YoVoy #${s.id}</span>
-              </span>
-              <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-sky-100 text-sky-800 font-bold">
-                ${s.num_rutas} ${s.num_rutas === 1 ? 'ruta' : 'rutas'}
-              </span>
-            </div>
-            <div class="space-y-1">
-              <span class="text-[10px] font-bold text-slate-600 block">Rutas que pasan por aquí:</span>
-              <div class="flex flex-wrap gap-1 max-h-24 overflow-y-auto">
-                ${rutasBadges || '<span class="text-xs text-slate-400">Ruta urbana</span>'}
-              </div>
-            </div>
-            ${s.destinos ? `<div class="text-[10px] text-slate-500 pt-1 border-t border-slate-100 line-clamp-2">${s.destinos}</div>` : ''}
-            <div class="pt-1 text-center">
-              <button onclick="MovilidadApp.calcularTransporteMasCercano(${s.lat}, ${s.lng}, 'Parada #${s.id}')" class="w-full text-center text-[10px] text-cyan-600 hover:text-cyan-800 font-bold">
-                📍 Calcular cercanía desde aquí
-              </button>
-            </div>
-          </div>
-        `);
-
+        marker.bindPopup(this.crearPopupHtmlParadaYoVoy(s));
         this.capaParadasCamiones.addLayer(marker);
       });
     }
 
-    // 5. Paradas de Combis (Puntos naranjas)
+    // 5. Paradas de Combis (Puntos naranjas con destinos de dónde a dónde se dirigen)
     if (window.PARADAS_COMBIS && Array.isArray(window.PARADAS_COMBIS)) {
       window.PARADAS_COMBIS.forEach(s => {
         const marker = L.circleMarker([s.lat, s.lng], {
@@ -255,37 +362,7 @@ window.MovilidadApp = {
           fillOpacity: 0.95
         });
 
-        const rutasBadges = (s.rutas || []).map(r => `
-          <button onclick="MovilidadApp.resaltarRutaEnMapa('combi', '${r}')" class="px-2 py-0.5 rounded bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-800 text-[10px] font-bold transition cursor-pointer">
-            ${r}
-          </button>
-        `).join('');
-
-        marker.bindPopup(`
-          <div class="p-2.5 font-sans min-w-[230px] space-y-2">
-            <div class="flex items-center justify-between gap-2 border-b border-slate-100 pb-1.5">
-              <span class="text-[10px] font-bold text-amber-700 uppercase tracking-wider flex items-center gap-1">
-                <span>🚏 Parada Combi #${s.id}</span>
-              </span>
-              <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-amber-100 text-amber-800 font-bold">
-                ${s.num_rutas} ${s.num_rutas === 1 ? 'ruta' : 'rutas'}
-              </span>
-            </div>
-            <div class="space-y-1">
-              <span class="text-[10px] font-bold text-slate-600 block">Rutas que pasan por aquí:</span>
-              <div class="flex flex-wrap gap-1 max-h-24 overflow-y-auto">
-                ${rutasBadges || '<span class="text-xs text-slate-400">Ruta foránea</span>'}
-              </div>
-            </div>
-            ${s.destinos ? `<div class="text-[10px] text-slate-500 pt-1 border-t border-slate-100 line-clamp-2">${s.destinos}</div>` : ''}
-            <div class="pt-1 text-center">
-              <button onclick="MovilidadApp.calcularTransporteMasCercano(${s.lat}, ${s.lng}, 'Parada Combi #${s.id}')" class="w-full text-center text-[10px] text-amber-600 hover:text-amber-800 font-bold">
-                📍 Calcular cercanía desde aquí
-              </button>
-            </div>
-          </div>
-        `);
-
+        marker.bindPopup(this.crearPopupHtmlParadaCombi(s));
         this.capaParadasCombis.addLayer(marker);
       });
     }
@@ -541,14 +618,28 @@ window.MovilidadApp = {
     }).addTo(this.capaCercania);
 
     this.marcadorUsuario.bindPopup(`
-      <div class="p-2 font-sans text-xs space-y-1">
-        <span class="font-bold text-cyan-700 block flex items-center gap-1">
-          <span>📍 ${origenTexto || 'Tu Punto'}</span>
-        </span>
-        <span class="text-slate-600 font-mono text-[10px] block">${lat.toFixed(5)}, ${lng.toFixed(5)}</span>
-        <span class="text-[10px] text-slate-500 italic block pt-1 border-t border-slate-100">
-          💡 Puedes arrastrar este marcador a cualquier lugar para recalcular.
-        </span>
+      <div class="p-2.5 font-sans min-w-[240px] space-y-2">
+        <div class="flex items-center justify-between border-b border-cyan-200 pb-1">
+          <span class="font-black text-cyan-800 text-xs flex items-center gap-1">📍 MI PUNTO</span>
+          <span class="text-[9px] px-1.5 py-0.2 rounded bg-cyan-600 text-white font-bold">Arrastrable</span>
+        </div>
+        <div class="space-y-1 text-xs">
+          <div class="flex items-center justify-between text-slate-700">
+            <span class="flex items-center gap-1 font-semibold">🚌 Parada YoVoy:</span>
+            <span class="font-bold text-sky-700">${fmt(paradaCamionRes.distanciaMetros).distStr} (~${fmt(paradaCamionRes.distanciaMetros).tiempoMin} min)</span>
+          </div>
+          <div class="flex items-center justify-between text-slate-700">
+            <span class="flex items-center gap-1 font-semibold">🚐 Parada Combi:</span>
+            <span class="font-bold text-amber-700">${fmt(paradaCombiRes.distanciaMetros).distStr} (~${fmt(paradaCombiRes.distanciaMetros).tiempoMin} min)</span>
+          </div>
+          <div class="flex items-center justify-between text-slate-700">
+            <span class="flex items-center gap-1 font-semibold">🚲 Ciclovía:</span>
+            <span class="font-bold text-emerald-700">${fmt(cicloviaRes.distanciaMetros).distStr} (~${fmt(cicloviaRes.distanciaMetros).tiempoMin} min)</span>
+          </div>
+        </div>
+        <div class="text-[10px] text-slate-400 pt-1 border-t border-slate-100 italic">
+          Arrastra este punto a otra calle para recalcular.
+        </div>
       </div>
     `).openPopup();
 
@@ -560,16 +651,8 @@ window.MovilidadApp = {
 
     const boundsPoints = [[lat, lng]];
 
-    // Helper formato distancia y tiempo caminando (a ~80 m/min)
-    const fmt = (m) => {
-      const tiempoMin = Math.max(1, Math.round(m / 80));
-      let distStr = m < 1000 ? `${Math.round(m)} m` : `${(m / 1000).toFixed(2)} km`;
-      return { distStr, tiempoMin };
-    };
-
     // 1. Línea y marcador a Parada YoVoy (Azul)
     if (paradaCamionRes.parada && paradaCamionRes.coords) {
-      const f = fmt(paradaCamionRes.distanciaMetros);
       boundsPoints.push(paradaCamionRes.coords);
 
       L.polyline([[lat, lng], paradaCamionRes.coords], {
@@ -586,27 +669,12 @@ window.MovilidadApp = {
         iconAnchor: [16, 16]
       });
 
-      const rutasPills = (paradaCamionRes.parada.rutas || []).map(r => `
-        <span class="px-1.5 py-0.5 rounded bg-sky-100 text-sky-800 text-[10px] font-bold">${r}</span>
-      `).join('');
-
       L.marker(paradaCamionRes.coords, { icon: busIcon }).addTo(this.capaCercania)
-        .bindPopup(`
-          <div class="p-2 text-xs space-y-1.5 font-sans min-w-[220px]">
-            <span class="font-bold text-sky-700 block">🚏 Parada YoVoy más cercana</span>
-            <div class="font-semibold text-slate-800">${paradaCamionRes.parada.nombre}</div>
-            <div class="text-slate-600">A <b>${f.distStr}</b> (~${f.tiempoMin} min caminando)</div>
-            <div class="pt-1 border-t border-slate-100">
-              <span class="text-[10px] font-bold text-slate-600 block mb-1">Rutas que pasan por aquí:</span>
-              <div class="flex flex-wrap gap-1">${rutasPills}</div>
-            </div>
-          </div>
-        `);
+        .bindPopup(this.crearPopupHtmlParadaYoVoy(paradaCamionRes.parada));
     }
 
     // 2. Línea y marcador a Parada Combi (Ámbar)
     if (paradaCombiRes.parada && paradaCombiRes.coords) {
-      const f = fmt(paradaCombiRes.distanciaMetros);
       boundsPoints.push(paradaCombiRes.coords);
 
       L.polyline([[lat, lng], paradaCombiRes.coords], {
@@ -623,22 +691,8 @@ window.MovilidadApp = {
         iconAnchor: [16, 16]
       });
 
-      const combiPills = (paradaCombiRes.parada.rutas || []).map(r => `
-        <span class="px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 text-[10px] font-bold">${r}</span>
-      `).join('');
-
       L.marker(paradaCombiRes.coords, { icon: combiIcon }).addTo(this.capaCercania)
-        .bindPopup(`
-          <div class="p-2 text-xs space-y-1.5 font-sans min-w-[220px]">
-            <span class="font-bold text-amber-700 block">🚏 Parada de Combi más cercana</span>
-            <div class="font-semibold text-slate-800">${paradaCombiRes.parada.nombre}</div>
-            <div class="text-slate-600">A <b>${f.distStr}</b> (~${f.tiempoMin} min caminando)</div>
-            <div class="pt-1 border-t border-slate-100">
-              <span class="text-[10px] font-bold text-slate-600 block mb-1">Rutas que pasan por aquí:</span>
-              <div class="flex flex-wrap gap-1">${combiPills}</div>
-            </div>
-          </div>
-        `);
+        .bindPopup(this.crearPopupHtmlParadaCombi(paradaCombiRes.parada));
     }
 
     // 3. Línea y marcador a Ciclovía (Verde)
@@ -696,26 +750,40 @@ window.MovilidadApp = {
     const cbFmt = fmt(paradaCombiRes.distanciaMetros);
     const cFmt = fmt(cicloviaRes.distanciaMetros);
 
-    // Badges de rutas YoVoy en la parada
+    // Cards con destinos de rutas YoVoy en la parada más cercana
     const rutasYoVoy = (paradaCamionRes.parada && paradaCamionRes.parada.rutas) ? paradaCamionRes.parada.rutas : [];
     const yovoyBadgesHtml = rutasYoVoy.length > 0
-      ? rutasYoVoy.map(r => `
-          <button onclick="MovilidadApp.resaltarRutaEnMapa('yovoy', '${r}')" title="Haz clic para resaltar ruta en el mapa" class="px-2 py-1 rounded-lg bg-sky-500/20 hover:bg-sky-500/30 text-sky-200 border border-sky-400/30 text-xs font-bold transition flex items-center gap-1 cursor-pointer">
-            <i data-lucide="bus" class="w-3 h-3 text-sky-400"></i>
-            <span>${r}</span>
-          </button>
-        `).join('')
+      ? rutasYoVoy.map(r => {
+          const destino = this.obtenerDestinoYoVoy(r);
+          const arrowDest = destino.replace(/\s*-\s*/g, ' <span class="text-sky-400 font-bold">➔</span> ');
+          return `
+            <div onclick="MovilidadApp.resaltarRutaEnMapa('yovoy', '${r}')" title="Haz clic para ver trazado de ${r} en el mapa" class="p-2 rounded-xl bg-sky-900/40 hover:bg-sky-900/70 border border-sky-500/30 text-sky-200 transition cursor-pointer flex items-start gap-2 group">
+              <span class="px-1.5 py-0.5 rounded bg-sky-600 group-hover:bg-sky-500 text-white text-[10px] font-black shrink-0 mt-0.5 shadow-xs">🚌 ${r}</span>
+              <div class="flex-1 min-w-0">
+                <span class="text-xs font-semibold text-white block leading-snug">${arrowDest}</span>
+                <span class="text-[9px] text-sky-400 font-bold group-hover:underline block mt-0.5">Ver ruta en el mapa &raquo;</span>
+              </div>
+            </div>
+          `;
+        }).join('')
       : '<span class="text-xs text-slate-400">Sin rutas registradas</span>';
 
-    // Badges de rutas Combis en la parada
+    // Cards con destinos de rutas Combis en la parada más cercana
     const rutasCombis = (paradaCombiRes.parada && paradaCombiRes.parada.rutas) ? paradaCombiRes.parada.rutas : [];
     const combisBadgesHtml = rutasCombis.length > 0
-      ? rutasCombis.map(r => `
-          <button onclick="MovilidadApp.resaltarRutaEnMapa('combi', '${r}')" title="Haz clic para resaltar ruta en el mapa" class="px-2 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-200 border border-amber-400/30 text-xs font-bold transition flex items-center gap-1 cursor-pointer">
-            <i data-lucide="van" class="w-3 h-3 text-amber-400"></i>
-            <span>${r}</span>
-          </button>
-        `).join('')
+      ? rutasCombis.map(r => {
+          const destino = this.obtenerDestinoCombi(r);
+          const arrowDest = destino.replace(/\s*-\s*/g, ' <span class="text-amber-400 font-bold">➔</span> ');
+          return `
+            <div onclick="MovilidadApp.resaltarRutaEnMapa('combi', '${r}')" title="Haz clic para ver trazado de ${r} en el mapa" class="p-2 rounded-xl bg-amber-900/40 hover:bg-amber-900/70 border border-amber-500/30 text-amber-200 transition cursor-pointer flex items-start gap-2 group">
+              <span class="px-1.5 py-0.5 rounded bg-amber-500 group-hover:bg-amber-400 text-slate-950 text-[10px] font-black shrink-0 mt-0.5 shadow-xs">🚐 ${r}</span>
+              <div class="flex-1 min-w-0">
+                <span class="text-xs font-semibold text-white block leading-snug">${arrowDest}</span>
+                <span class="text-[9px] text-amber-400 font-bold group-hover:underline block mt-0.5">Ver ruta en el mapa &raquo;</span>
+              </div>
+            </div>
+          `;
+        }).join('')
       : '<span class="text-xs text-slate-400">Sin rutas registradas</span>';
 
     contenedor.innerHTML = `
@@ -757,8 +825,8 @@ window.MovilidadApp = {
                 <span class="text-slate-400">(${paradaCamionRes.parada ? paradaCamionRes.parada.num_rutas : 0} rutas)</span>
               </div>
               <div class="space-y-1.5 pt-1">
-                <span class="text-[10px] font-bold text-slate-300 uppercase tracking-wider block">Rutas que pasan por aquí:</span>
-                <div class="flex flex-wrap gap-1.5 max-h-32 overflow-y-auto pr-1">
+                <span class="text-[10px] font-bold text-sky-300 uppercase tracking-wider block">¿Para dónde van estos autobuses? (Destinos):</span>
+                <div class="space-y-1.5 max-h-44 overflow-y-auto pr-1">
                   ${yovoyBadgesHtml}
                 </div>
               </div>
@@ -793,8 +861,8 @@ window.MovilidadApp = {
                 <span class="text-slate-400">(${paradaCombiRes.parada ? paradaCombiRes.parada.num_rutas : 0} rutas)</span>
               </div>
               <div class="space-y-1.5 pt-1">
-                <span class="text-[10px] font-bold text-slate-300 uppercase tracking-wider block">Rutas que pasan por aquí:</span>
-                <div class="flex flex-wrap gap-1.5 max-h-32 overflow-y-auto pr-1">
+                <span class="text-[10px] font-bold text-amber-300 uppercase tracking-wider block">¿Para dónde van estas combis? (Destinos):</span>
+                <div class="space-y-1.5 max-h-44 overflow-y-auto pr-1">
                   ${combisBadgesHtml}
                 </div>
               </div>
@@ -1265,24 +1333,7 @@ window.MovilidadApp = {
           fillOpacity: 0.9
         });
 
-        const rutasBadges = (s.rutas || []).map(r => `
-          <span class="px-1.5 py-0.5 rounded bg-sky-100 text-sky-800 text-[10px] font-bold">${r}</span>
-        `).join('');
-
-        marker.bindPopup(`
-          <div class="p-2 font-sans text-xs min-w-[220px] space-y-1.5">
-            <div class="font-bold text-sky-700 flex items-center justify-between">
-              <span>🚏 Parada YoVoy #${s.id}</span>
-              <span class="text-[10px] px-1.5 py-0.2 bg-sky-600 text-white rounded-full font-bold">${s.num_rutas} rutas</span>
-            </div>
-            <div class="text-slate-800 font-semibold">${s.nombre}</div>
-            <div class="space-y-1 pt-1 border-t border-slate-100">
-              <span class="text-[10px] font-bold text-slate-600 block">Rutas que pasan por aquí:</span>
-              <div class="flex flex-wrap gap-1 max-h-24 overflow-y-auto">${rutasBadges}</div>
-            </div>
-          </div>
-        `);
-
+        marker.bindPopup(this.crearPopupHtmlParadaYoVoy(s));
         group.addLayer(marker);
       });
     } catch (e) {
@@ -1325,24 +1376,7 @@ window.MovilidadApp = {
           fillOpacity: 0.95
         });
 
-        const rutasBadges = (s.rutas || []).map(r => `
-          <span class="px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 text-[10px] font-bold">${r}</span>
-        `).join('');
-
-        marker.bindPopup(`
-          <div class="p-2 font-sans text-xs min-w-[220px] space-y-1.5">
-            <div class="font-bold text-amber-700 flex items-center justify-between">
-              <span>🚏 Parada Combi #${s.id}</span>
-              <span class="text-[10px] px-1.5 py-0.2 bg-amber-600 text-white rounded-full font-bold">${s.num_rutas} rutas</span>
-            </div>
-            <div class="text-slate-800 font-semibold">${s.nombre}</div>
-            <div class="space-y-1 pt-1 border-t border-slate-100">
-              <span class="text-[10px] font-bold text-slate-600 block">Rutas que pasan por aquí:</span>
-              <div class="flex flex-wrap gap-1 max-h-24 overflow-y-auto">${rutasBadges}</div>
-            </div>
-          </div>
-        `);
-
+        marker.bindPopup(this.crearPopupHtmlParadaCombi(s));
         group.addLayer(marker);
       });
     } catch (e) {
@@ -1356,6 +1390,216 @@ window.MovilidadApp = {
     const fg = this.crearCapaParadasCombis();
     if (window.visorCapas) window.visorCapas.paradas_combis = fg;
     return fg;
+  },
+
+  // MI PUNTO interactivo para el Visor IDEAgs (#sec-visor)
+  activarMiPuntoEnVisor() {
+    if (!window.mapPimags) {
+      if (typeof initMapa === 'function') {
+        try { initMapa(); } catch (e) {}
+      }
+    }
+    if (!window.mapPimags) {
+      alert("Cargando el visor... Por favor intenta en un momento.");
+      return;
+    }
+
+    const map = window.mapPimags;
+    const container = map.getContainer();
+    if (container) container.style.cursor = 'crosshair';
+
+    // Notificación flotante de ayuda
+    const toast = document.createElement('div');
+    toast.id = 'toastMiPuntoVisor';
+    toast.className = 'fixed bottom-8 left-1/2 -translate-x-1/2 z-[9999] px-4 py-2.5 rounded-2xl bg-slate-900/95 text-white text-xs font-bold shadow-2xl border border-cyan-400/50 flex items-center gap-2 animate-bounce';
+    toast.innerHTML = `
+      <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
+      <span>📍 <b>MODO MI PUNTO ACTIVADO:</b> Haz clic en cualquier lugar del mapa para consultar paradas y destinos cercanos.</span>
+    `;
+    const oldToast = document.getElementById('toastMiPuntoVisor');
+    if (oldToast) oldToast.remove();
+    document.body.appendChild(toast);
+
+    const onMapClick = (e) => {
+      const lat = e.latlng.lat;
+      const lng = e.latlng.lng;
+      if (container) container.style.cursor = '';
+      const t = document.getElementById('toastMiPuntoVisor');
+      if (t) t.remove();
+      map.off('click', onMapClick);
+      this.ejecutarConsultaMiPuntoVisor(lat, lng);
+    };
+
+    map.once('click', onMapClick);
+  },
+
+  ejecutarConsultaMiPuntoVisor(lat, lng) {
+    const map = window.mapPimags;
+    if (!map) return;
+
+    if (!this.capaVisorMiPunto) {
+      this.capaVisorMiPunto = L.featureGroup().addTo(map);
+    } else {
+      this.capaVisorMiPunto.clearLayers();
+    }
+
+    const paradaCamionRes = this.encontrarParadaMasCercana(lat, lng, window.PARADAS_CAMIONES || []);
+    const paradaCombiRes = this.encontrarParadaMasCercana(lat, lng, window.PARADAS_COMBIS || []);
+    const cicloviaRes = this.encontrarCicloviaMasCercana(lat, lng, window.MOVILIDAD_CICLOVIAS || []);
+
+    const fmt = (m) => {
+      if (m === Infinity || !m) return { distStr: 'N/D', tiempoMin: 0 };
+      const tiempoMin = Math.max(1, Math.round(m / 80));
+      let distStr = m < 1000 ? `${Math.round(m)} m` : `${(m / 1000).toFixed(2)} km`;
+      return { distStr, tiempoMin };
+    };
+
+    const yFmt = fmt(paradaCamionRes.distanciaMetros);
+    const cbFmt = fmt(paradaCombiRes.distanciaMetros);
+    const cFmt = fmt(cicloviaRes.distanciaMetros);
+
+    // Conector azul a Parada YoVoy
+    if (paradaCamionRes.coords) {
+      L.polyline([[lat, lng], paradaCamionRes.coords], {
+        color: '#0284c7',
+        weight: 3.5,
+        dashArray: '6,6',
+        opacity: 0.95
+      }).addTo(this.capaVisorMiPunto);
+
+      const busIcon = L.divIcon({
+        html: `<div class="w-7 h-7 rounded-full bg-sky-600 border-2 border-white shadow-md flex items-center justify-center text-xs text-white font-bold">🚏</div>`,
+        className: '',
+        iconSize: [28, 28],
+        iconAnchor: [14, 14]
+      });
+      L.marker(paradaCamionRes.coords, { icon: busIcon }).addTo(this.capaVisorMiPunto)
+        .bindPopup(this.crearPopupHtmlParadaYoVoy(paradaCamionRes.parada));
+    }
+
+    // Conector ámbar a Parada Combi
+    if (paradaCombiRes.coords) {
+      L.polyline([[lat, lng], paradaCombiRes.coords], {
+        color: '#f59e0b',
+        weight: 3.5,
+        dashArray: '6,6',
+        opacity: 0.95
+      }).addTo(this.capaVisorMiPunto);
+
+      const combiIcon = L.divIcon({
+        html: `<div class="w-7 h-7 rounded-full bg-amber-500 border-2 border-white shadow-md flex items-center justify-center text-xs text-white font-bold">🚏</div>`,
+        className: '',
+        iconSize: [28, 28],
+        iconAnchor: [14, 14]
+      });
+      L.marker(paradaCombiRes.coords, { icon: combiIcon }).addTo(this.capaVisorMiPunto)
+        .bindPopup(this.crearPopupHtmlParadaCombi(paradaCombiRes.parada));
+    }
+
+    // Conector verde a Ciclovía
+    if (cicloviaRes.puntoMasCercano) {
+      L.polyline([[lat, lng], cicloviaRes.puntoMasCercano], {
+        color: '#10b981',
+        weight: 3.5,
+        dashArray: '6,6',
+        opacity: 0.95
+      }).addTo(this.capaVisorMiPunto);
+
+      const cicloIcon = L.divIcon({
+        html: `<div class="w-7 h-7 rounded-full bg-emerald-600 border-2 border-white shadow-md flex items-center justify-center text-xs text-white font-bold">🚲</div>`,
+        className: '',
+        iconSize: [28, 28],
+        iconAnchor: [14, 14]
+      });
+      L.marker(cicloviaRes.puntoMasCercano, { icon: cicloIcon }).addTo(this.capaVisorMiPunto)
+        .bindPopup(`
+          <div class="p-2 font-sans text-xs space-y-1">
+            <span class="font-bold text-emerald-700 block">🚲 Ciclovía más cercana</span>
+            <div class="font-semibold text-slate-800">${cicloviaRes.ciclovia ? cicloviaRes.ciclovia.nombre : 'Vía Ciclista'}</div>
+            <div class="text-slate-600">A <b>${cFmt.distStr}</b> (~${cFmt.tiempoMin} min caminando)</div>
+          </div>
+        `);
+    }
+
+    // Marcador de Mi Punto arrastrable
+    const userIcon = L.divIcon({
+      html: `
+        <div class="relative flex items-center justify-center">
+          <div class="w-10 h-10 rounded-full bg-cyan-500/30 animate-ping absolute"></div>
+          <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-cyan-600 to-blue-600 border-2 border-white shadow-xl flex items-center justify-center text-white text-base">
+            📍
+          </div>
+        </div>
+      `,
+      className: '',
+      iconSize: [36, 36],
+      iconAnchor: [18, 18]
+    });
+
+    const marker = L.marker([lat, lng], { icon: userIcon, draggable: true }).addTo(this.capaVisorMiPunto);
+
+    marker.bindPopup(`
+      <div class="p-3 font-sans text-xs min-w-[280px] max-w-[340px] space-y-2.5">
+        <div class="flex items-center justify-between border-b border-cyan-200 pb-1.5">
+          <span class="font-black text-cyan-800 text-sm flex items-center gap-1">📍 MI PUNTO</span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-600 text-white font-bold">Arrastrable</span>
+        </div>
+        <div class="space-y-1.5">
+          <!-- Autobús -->
+          <div class="p-2 rounded-xl bg-sky-50 border border-sky-200 flex items-start justify-between gap-2">
+            <div>
+              <span class="font-bold text-sky-800 text-[11px] block">🚌 Parada YoVoy más cercana:</span>
+              <span class="text-[11px] text-slate-700 font-medium">${paradaCamionRes.parada ? paradaCamionRes.parada.nombre : 'N/D'}</span>
+            </div>
+            <div class="text-right shrink-0">
+              <span class="font-black text-sky-700 text-xs">${yFmt.distStr}</span>
+              <span class="text-[10px] text-slate-500 block">~${yFmt.tiempoMin} min</span>
+            </div>
+          </div>
+          <!-- Combi -->
+          <div class="p-2 rounded-xl bg-amber-50 border border-amber-200 flex items-start justify-between gap-2">
+            <div>
+              <span class="font-bold text-amber-800 text-[11px] block">🚐 Parada Combi más cercana:</span>
+              <span class="text-[11px] text-slate-700 font-medium">${paradaCombiRes.parada ? paradaCombiRes.parada.nombre : 'N/D'}</span>
+            </div>
+            <div class="text-right shrink-0">
+              <span class="font-black text-amber-700 text-xs">${cbFmt.distStr}</span>
+              <span class="text-[10px] text-slate-500 block">~${cbFmt.tiempoMin} min</span>
+            </div>
+          </div>
+          <!-- Ciclovía -->
+          <div class="p-2 rounded-xl bg-emerald-50 border border-emerald-200 flex items-start justify-between gap-2">
+            <div>
+              <span class="font-bold text-emerald-800 text-[11px] block">🚲 Ciclovía más cercana:</span>
+              <span class="text-[11px] text-slate-700 font-medium">${cicloviaRes.ciclovia ? cicloviaRes.ciclovia.nombre : 'N/D'}</span>
+            </div>
+            <div class="text-right shrink-0">
+              <span class="font-black text-emerald-700 text-xs">${cFmt.distStr}</span>
+              <span class="text-[10px] text-slate-500 block">~${cFmt.tiempoMin} min</span>
+            </div>
+          </div>
+        </div>
+        <div class="pt-1.5 border-t border-slate-100 flex items-center justify-between gap-2">
+          <span class="text-[10px] text-slate-400">Haz clic en cada parada para ver sus destinos.</span>
+          <button onclick="cambiarSeccion('movilidad')" class="text-[10px] px-2 py-1 rounded-lg bg-cyan-600 hover:bg-cyan-700 text-white font-bold transition">
+            Ver en Movilidad &raquo;
+          </button>
+        </div>
+      </div>
+    `).openPopup();
+
+    marker.on('dragend', (e) => {
+      const p = e.target.getLatLng();
+      this.ejecutarConsultaMiPuntoVisor(p.lat, p.lng);
+    });
+
+    const pts = [[lat, lng]];
+    if (paradaCamionRes.coords) pts.push(paradaCamionRes.coords);
+    if (paradaCombiRes.coords) pts.push(paradaCombiRes.coords);
+    if (cicloviaRes.puntoMasCercano) pts.push(cicloviaRes.puntoMasCercano);
+    try {
+      map.fitBounds(L.latLngBounds(pts), { padding: [60, 60], maxZoom: 16 });
+    } catch (e) {}
   }
 };
 

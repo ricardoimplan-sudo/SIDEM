@@ -1703,11 +1703,11 @@
         
         <!-- Barra Superior de Herramientas del Geovisor -->
         <div class="p-4 bg-slate-900 text-white flex flex-wrap items-center justify-between gap-3 border-b border-white/10">
-          <div class="flex items-center gap-3">
-            <span class="text-xs font-bold flex items-center gap-1.5 text-cyan-400">
-              <i data-lucide="compass" class="w-4 h-4"></i>
-              <span>Herramientas GIS</span>
-            </span>
+          <div class="flex items-center gap-2">
+            <button id="btnMiPuntoVisor" onclick="activarMiPuntoEnVisor()" title="Colocar mi punto en el mapa para saber qué transporte queda más cerca" class="text-xs font-bold flex items-center gap-1.5 text-cyan-400 hover:text-white bg-slate-800 hover:bg-slate-700/80 px-2.5 py-1.5 rounded-xl border border-slate-700 transition cursor-pointer shadow-sm">
+              <i data-lucide="map-pin" class="w-4 h-4 text-cyan-400"></i>
+              <span>MI PUNTO</span>
+            </button>
             <div class="h-4 w-px bg-white/20 hidden sm:block"></div>
             <!-- Buscador en el mapa con Autocomplete de Vialidades, Obras y Delegaciones -->
             <div class="relative">
@@ -2116,7 +2116,7 @@
             <!-- Botón Colocar Mi Punto -->
             <button id="btnColocarPuntoMov" onclick="MovilidadApp.activarColocarPunto()" class="px-3 py-1 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold rounded-lg transition flex items-center gap-1.5 cursor-pointer shadow-md">
               <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
-              <span>📍 Colocar mi punto</span>
+              <span>📍 MI PUNTO</span>
             </button>
 
             <!-- Botón Mi Ubicación GPS -->
@@ -2579,9 +2579,9 @@
   <script src="assets/js/secciones_data.js?v=20261002_clean"></script>
   <script src="assets/js/servicios_publicos_data.js?v=20261019_v1"></script>
   <script src="assets/js/servicios_publicos.js?v=20261019_v1"></script>
-  <script src="assets/js/movilidad_data.js?v=20261112_v3"></script>
-  <script src="assets/js/movilidad_paradas.js?v=20261112_v3"></script>
-  <script src="assets/js/movilidad.js?v=20261112_v3"></script>
+  <script src="assets/js/movilidad_data.js?v=20261112_v4"></script>
+  <script src="assets/js/movilidad_paradas.js?v=20261112_v4"></script>
+  <script src="assets/js/movilidad.js?v=20261112_v4"></script>
   <script>
     window.createIconsSafe = function() {
       if (window.lucide && typeof window.lucide.createIcons === 'function') {
@@ -3760,6 +3760,12 @@
 
       } catch (e) {
         console.error("Error al cargar mapa visor:", e);
+      }
+    }
+
+    function activarMiPuntoEnVisor() {
+      if (window.MovilidadApp && typeof window.MovilidadApp.activarMiPuntoEnVisor === 'function') {
+        window.MovilidadApp.activarMiPuntoEnVisor();
       }
     }
 
