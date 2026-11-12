@@ -745,82 +745,103 @@ window.MovilidadApp = {
   // INTEGRACIÓN CON EL GEOVISOR PRINCIPAL (sec-visor / mapPimags)
   // =========================================================================
 
-  inicializarCapaCicloviasVisor() {
-    if (!window.MOVILIDAD_CICLOVIAS || !Array.isArray(window.MOVILIDAD_CICLOVIAS)) return;
+  crearCapaCiclovias() {
+    const fg = L.featureGroup();
+    if (!window.MOVILIDAD_CICLOVIAS || !Array.isArray(window.MOVILIDAD_CICLOVIAS)) return fg;
     try {
-      window.visorCapas.ciclovias = L.featureGroup();
       window.MOVILIDAD_CICLOVIAS.forEach(c => {
         if (!c.coords) return;
         const poly = L.polyline(c.coords, {
           color: '#10b981',
-          weight: 3.5,
-          opacity: 0.9,
+          weight: 4,
+          opacity: 0.95,
           dashArray: c.tipo && c.tipo.toLowerCase().includes('compartida') ? '5,5' : null
         });
 
         poly.bindPopup(`
-          <div class="p-2 space-y-1 font-sans text-xs min-w-[190px]">
+          <div class="p-2 space-y-1 font-sans text-xs min-w-[200px]">
             <div class="font-bold text-emerald-700">🚲 Ciclovía: ${c.nombre}</div>
             <div class="text-slate-600"><b>Tipo:</b> ${c.tipo || 'Vía Ciclista'}</div>
             <div class="text-slate-600"><b>Longitud:</b> ${c.longitud_km ? c.longitud_km.toFixed(2) + ' km' : 'N/D'}</div>
           </div>
         `);
-        window.visorCapas.ciclovias.addLayer(poly);
+        fg.addLayer(poly);
       });
     } catch (e) {
-      console.error("Error al inicializar capa Ciclovías en Geovisor:", e);
+      console.error("Error al crear capa Ciclovías:", e);
     }
+    return fg;
   },
 
-  inicializarCapaYoVoyVisor() {
-    if (!window.MOVILIDAD_YOVOY || !Array.isArray(window.MOVILIDAD_YOVOY)) return;
+  inicializarCapaCicloviasVisor() {
+    const fg = this.crearCapaCiclovias();
+    if (window.visorCapas) window.visorCapas.ciclovias = fg;
+    return fg;
+  },
+
+  crearCapaYoVoy() {
+    const fg = L.featureGroup();
+    if (!window.MOVILIDAD_YOVOY || !Array.isArray(window.MOVILIDAD_YOVOY)) return fg;
     try {
-      window.visorCapas.yovoy = L.featureGroup();
       window.MOVILIDAD_YOVOY.forEach(y => {
         if (!y.coords) return;
         const poly = L.polyline(y.coords, {
           color: '#0284c7',
-          weight: 2.8,
-          opacity: 0.8
+          weight: 3.5,
+          opacity: 0.9
         });
 
         poly.bindPopup(`
-          <div class="p-2 space-y-1 font-sans text-xs min-w-[200px]">
+          <div class="p-2 space-y-1 font-sans text-xs min-w-[210px]">
             <div class="font-bold text-sky-700">🚌 Autobús YoVoy</div>
             <div class="text-slate-800 font-semibold">${y.nombre}</div>
             <div class="text-[11px] text-sky-800">SITMA Aguascalientes</div>
           </div>
         `);
-        window.visorCapas.yovoy.addLayer(poly);
+        fg.addLayer(poly);
       });
     } catch (e) {
-      console.error("Error al inicializar capa YoVoy en Geovisor:", e);
+      console.error("Error al crear capa YoVoy:", e);
     }
+    return fg;
   },
 
-  inicializarCapaCombisVisor() {
-    if (!window.MOVILIDAD_COMBIS || !Array.isArray(window.MOVILIDAD_COMBIS)) return;
+  inicializarCapaYoVoyVisor() {
+    const fg = this.crearCapaYoVoy();
+    if (window.visorCapas) window.visorCapas.yovoy = fg;
+    return fg;
+  },
+
+  crearCapaCombis() {
+    const fg = L.featureGroup();
+    if (!window.MOVILIDAD_COMBIS || !Array.isArray(window.MOVILIDAD_COMBIS)) return fg;
     try {
-      window.visorCapas.combis = L.featureGroup();
       window.MOVILIDAD_COMBIS.forEach(cb => {
         if (!cb.coords) return;
         const poly = L.polyline(cb.coords, {
           color: '#f59e0b',
-          weight: 2.8,
-          opacity: 0.85
+          weight: 3.5,
+          opacity: 0.9
         });
 
         poly.bindPopup(`
-          <div class="p-2 space-y-1 font-sans text-xs min-w-[200px]">
+          <div class="p-2 space-y-1 font-sans text-xs min-w-[210px]">
             <div class="font-bold text-amber-700">🚐 Combi Ruta ${cb.ruta}</div>
             <div class="text-slate-800 font-semibold">${cb.traslado}</div>
           </div>
         `);
-        window.visorCapas.combis.addLayer(poly);
+        fg.addLayer(poly);
       });
     } catch (e) {
-      console.error("Error al inicializar capa Combis en Geovisor:", e);
+      console.error("Error al crear capa Combis:", e);
     }
+    return fg;
+  },
+
+  inicializarCapaCombisVisor() {
+    const fg = this.crearCapaCombis();
+    if (window.visorCapas) window.visorCapas.combis = fg;
+    return fg;
   }
 };
 

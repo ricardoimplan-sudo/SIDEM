@@ -2531,8 +2531,8 @@
   <script src="assets/js/secciones_data.js?v=20261002_clean"></script>
   <script src="assets/js/servicios_publicos_data.js?v=20261019_v1"></script>
   <script src="assets/js/servicios_publicos.js?v=20261019_v1"></script>
-  <script src="assets/js/movilidad_data.js?v=20261112_v1"></script>
-  <script src="assets/js/movilidad.js?v=20261112_v1"></script>
+  <script src="assets/js/movilidad_data.js?v=20261112_v2"></script>
+  <script src="assets/js/movilidad.js?v=20261112_v2"></script>
   <script>
     window.createIconsSafe = function() {
       if (window.lucide && typeof window.lucide.createIcons === 'function') {
@@ -3548,8 +3548,12 @@
       verdes: null,
       secciones: null,
       contenedores: null,
-      parques_ssp: null
+      parques_ssp: null,
+      ciclovias: null,
+      yovoy: null,
+      combis: null
     };
+    window.visorCapas = visorCapas;
 
     function initMapa() {
       if (mapVisorInitialized) return;
@@ -3742,6 +3746,9 @@
     }
 
     function toggleCapaVisor(nombreCapa, activo) {
+      if (!window.mapPimags && typeof initMapa === 'function') {
+        try { initMapa(); } catch(e) { console.warn(e); }
+      }
       if (!window.mapPimags) return;
 
       if (nombreCapa === 'secciones') {
@@ -3815,7 +3822,7 @@
       if (nombreCapa === 'ciclovias') {
         if (activo) {
           if (!visorCapas.ciclovias && window.MovilidadApp) {
-            window.MovilidadApp.inicializarCapaCicloviasVisor();
+            visorCapas.ciclovias = window.MovilidadApp.crearCapaCiclovias();
           }
           if (visorCapas.ciclovias) {
             window.mapPimags.addLayer(visorCapas.ciclovias);
@@ -3832,7 +3839,7 @@
       if (nombreCapa === 'yovoy') {
         if (activo) {
           if (!visorCapas.yovoy && window.MovilidadApp) {
-            window.MovilidadApp.inicializarCapaYoVoyVisor();
+            visorCapas.yovoy = window.MovilidadApp.crearCapaYoVoy();
           }
           if (visorCapas.yovoy) {
             window.mapPimags.addLayer(visorCapas.yovoy);
@@ -3849,7 +3856,7 @@
       if (nombreCapa === 'combis') {
         if (activo) {
           if (!visorCapas.combis && window.MovilidadApp) {
-            window.MovilidadApp.inicializarCapaCombisVisor();
+            visorCapas.combis = window.MovilidadApp.crearCapaCombis();
           }
           if (visorCapas.combis) {
             window.mapPimags.addLayer(visorCapas.combis);
