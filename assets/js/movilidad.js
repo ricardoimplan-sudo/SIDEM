@@ -56,9 +56,9 @@ window.MovilidadApp = {
     if (!this._dictYoVoy && window.MOVILIDAD_YOVOY) {
       this._dictYoVoy = {};
       window.MOVILIDAD_YOVOY.forEach(y => {
-        const m = (y.nombre || '').match(/^SITMA\s+(\d+(?:\s+[A-Z])?)\s+(?:(?:Norte|Sur|[SN])\s+)?(.*)$/i);
+        const m = (y.nombre || '').match(/^(?:SITMA|Ruta)\s+(\d+(?:\s+[A-Z])?)\s+(?:(?:Norte|Sur|[SN])\s+)?(.*)$/i);
         if (m) {
-          const cod = 'SITMA ' + m[1].trim().toUpperCase();
+          const cod = 'RUTA ' + m[1].trim().toUpperCase();
           let tray = m[2]
             .replace(/_r$/i, '')
             .replace(/_ida$/i, '')
@@ -78,8 +78,8 @@ window.MovilidadApp = {
         }
       });
     }
-    const key = (r || '').trim().toUpperCase();
-    return (this._dictYoVoy && this._dictYoVoy[key]) || 'Ruta urbana YoVoy SITMA';
+    const key = (r || '').replace(/^(?:SITMA|Ruta)\s+/i, 'RUTA ').trim().toUpperCase();
+    return (this._dictYoVoy && this._dictYoVoy[key]) || 'Ruta urbana YoVoy';
   },
 
   // Genera popup enriquecido para Paradas de Combis con desglose de destinos
@@ -190,24 +190,39 @@ window.MovilidadApp = {
         attributionControl: false
       });
 
-      // Capas Base
-      const cartoLight = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-        maxZoom: 19
+      // Capas Base Oficiales (Google Maps actualizado)
+      const gmapsCalles = L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+        maxZoom: 20,
+        attribution: '&copy; Google Maps'
       }).addTo(this.mapa);
 
+      const gmapsHibrido = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+        maxZoom: 20,
+        attribution: '&copy; Google Maps Satélite'
+      });
+
+      const cartoLight = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        maxZoom: 19,
+        attribution: '&copy; CartoDB'
+      });
+
       const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap'
       });
 
       const esriSat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-        maxZoom: 19
+        maxZoom: 19,
+        attribution: '&copy; Esri World Imagery'
       });
 
       // Control de Capas Base
       L.control.layers({
-        "Mapa Claro": cartoLight,
+        "Google Maps (Calles)": gmapsCalles,
+        "Google Maps (Satélite)": gmapsHibrido,
+        "Mapa Claro (Carto)": cartoLight,
         "Calles OSM": osm,
-        "Satélite": esriSat
+        "Satélite Esri": esriSat
       }, null, { position: 'topright' }).addTo(this.mapa);
 
       // Layer groups
@@ -283,7 +298,7 @@ window.MovilidadApp = {
       });
     }
 
-    // 2. Rutas YoVoy SITMA (Azul Océano)
+    // 2. Rutas de Autobús Urbano YoVoy (Azul Océano)
     if (window.MOVILIDAD_YOVOY && Array.isArray(window.MOVILIDAD_YOVOY)) {
       window.MOVILIDAD_YOVOY.forEach(y => {
         if (!y.coords) return;
@@ -300,7 +315,7 @@ window.MovilidadApp = {
             </div>
             <h4 class="font-bold text-slate-800 text-sm leading-snug">${y.nombre}</h4>
             <div class="text-[11px] text-slate-600">
-              <span class="inline-block px-2 py-0.5 rounded bg-sky-100 text-sky-800 font-semibold mt-1">SITMA Aguascalientes</span>
+              <span class="inline-block px-2 py-0.5 rounded bg-sky-100 text-sky-800 font-semibold mt-1">Ruta Urbana YoVoy</span>
             </div>
           </div>
         `);
@@ -522,43 +537,57 @@ window.MovilidadApp = {
   },
 
   // Obtiene todas las rutas (YoVoy y Combis) que pasan a menos de X metros del punto
-  encontrarRutasEnRadio(plat, plng, radioMetros = 250) {
+  encontrarRutasEnRadio(plat, plng, radioMetros = 300) {
     const rutasCercanasYoVoy = new Set();
     const rutasCercanasCombis = new Set();
 
-    // YoVoy
-    (window.MOVILIDAD_YOVOY || []).forEach(r => {
-      if (!r.coords) return;
-      const pts = r.coords;
+    const verificarPuntos = (pts, radio) => {
+      if (!Array.isArray(pts) || pts.length < 2) return false;
       for (let i = 0; i < pts.length - 1; i++) {
         const a = pts[i];
         const b = pts[i + 1];
-        if (!a || !b) continue;
+        if (!a || !b || a.length < 2 || b.length < 2) continue;
         const res = this.distanciaPuntoASegmento(plat, plng, a[0], a[1], b[0], b[1]);
-        if (res.distancia <= radioMetros) {
-          let nombreLimpio = r.nombre;
-          const match = nombreLimpio.match(/^(SITMA\s+\d+[A-Z]?|Ruta\s+\d+[A-Z]?)/i);
-          if (match) nombreLimpio = match[1];
-          else if (nombreLimpio.length > 22) nombreLimpio = nombreLimpio.substring(0, 22).trim();
-          rutasCercanasYoVoy.add(nombreLimpio);
-          break;
+        if (res.distancia <= radio) return true;
+      }
+      return false;
+    };
+
+    const verificarGeometria = (coords, radio) => {
+      if (!Array.isArray(coords) || coords.length === 0) return false;
+      if (Array.isArray(coords[0]) && Array.isArray(coords[0][0])) {
+        // MultiLineString: arreglo de segmentos
+        for (let s = 0; s < coords.length; s++) {
+          if (verificarPuntos(coords[s], radio)) return true;
         }
+        return false;
+      } else {
+        // LineString: arreglo de [lat, lng]
+        return verificarPuntos(coords, radio);
+      }
+    };
+
+    // YoVoy (Autobuses Urbanos)
+    (window.MOVILIDAD_YOVOY || []).forEach(r => {
+      if (!r.coords) return;
+      if (verificarGeometria(r.coords, radioMetros)) {
+        let nombreLimpio = r.nombre || '';
+        const match = nombreLimpio.match(/^(?:SITMA|Ruta)\s+(\d+[A-Z]?)/i);
+        if (match) {
+          nombreLimpio = 'Ruta ' + match[1];
+        } else {
+          nombreLimpio = nombreLimpio.replace(/^SITMA\s+/i, 'Ruta ');
+          if (nombreLimpio.length > 22) nombreLimpio = nombreLimpio.substring(0, 22).trim();
+        }
+        rutasCercanasYoVoy.add(nombreLimpio);
       }
     });
 
-    // Combis
+    // Combis (Transporte Suburbano)
     (window.MOVILIDAD_COMBIS || []).forEach(cb => {
       if (!cb.coords) return;
-      const pts = cb.coords;
-      for (let i = 0; i < pts.length - 1; i++) {
-        const a = pts[i];
-        const b = pts[i + 1];
-        if (!a || !b) continue;
-        const res = this.distanciaPuntoASegmento(plat, plng, a[0], a[1], b[0], b[1]);
-        if (res.distancia <= radioMetros) {
-          rutasCercanasCombis.add('Ruta ' + cb.ruta);
-          break;
-        }
+      if (verificarGeometria(cb.coords, radioMetros)) {
+        rutasCercanasCombis.add('Ruta ' + cb.ruta);
       }
     });
 
@@ -931,9 +960,13 @@ window.MovilidadApp = {
 
     const item = dataset.find(x => {
       if (tipo === 'yovoy') {
+        const numMatch = nombreRuta.match(/(?:\d+[A-Z]?)/i);
+        const xMatch = (x.nombre || '').match(/(?:\d+[A-Z]?)/i);
+        if (numMatch && xMatch && numMatch[0].toUpperCase() === xMatch[0].toUpperCase()) return true;
         return x.nombre.toLowerCase().includes(nombreRuta.toLowerCase());
       } else {
-        return ('Ruta ' + x.ruta).toLowerCase() === nombreRuta.toLowerCase() || x.ruta.toLowerCase() === nombreRuta.toLowerCase();
+        const cleanRuta = nombreRuta.replace(/^Ruta\s+/i, '').trim().toLowerCase();
+        return x.ruta.toLowerCase() === cleanRuta || ('Ruta ' + x.ruta).toLowerCase() === nombreRuta.toLowerCase();
       }
     });
 
@@ -1074,7 +1107,7 @@ window.MovilidadApp = {
         if (!texto || y.nombre.toLowerCase().includes(texto)) {
           items.push({
             tipo: 'yovoy',
-            badge: 'YoVoy SITMA',
+            badge: 'Ruta YoVoy',
             badgeColor: 'bg-sky-500/10 text-sky-400 border-sky-500/20',
             titulo: y.nombre,
             subtitulo: 'Transporte Urbano Colectivo',
@@ -1257,7 +1290,7 @@ window.MovilidadApp = {
           <div class="p-2 space-y-1 font-sans text-xs min-w-[210px]">
             <div class="font-bold text-sky-700">🚌 Autobús YoVoy</div>
             <div class="text-slate-800 font-semibold">${y.nombre}</div>
-            <div class="text-[11px] text-sky-800">SITMA Aguascalientes</div>
+            <div class="text-[11px] text-sky-800">Ruta Urbana YoVoy</div>
           </div>
         `);
         fg.addLayer(poly);
@@ -1600,6 +1633,124 @@ window.MovilidadApp = {
     try {
       map.fitBounds(L.latLngBounds(pts), { padding: [60, 60], maxZoom: 16 });
     } catch (e) {}
+  },
+
+  // Lugares Emblemáticos preconfigurados para búsqueda directa
+  lugaresEmblematicos: [
+    {
+      nombre: "Parque Rodolfo Landeros Gallegos (Av. José María Chávez)",
+      desc: "Entrada Principal, Paradas YoVoy y Combis sobre Av. José María Chávez",
+      lat: 21.8495,
+      lng: -102.2985,
+      tags: ["parque rodolfo landeros", "rodolfo landeros", "landeros", "heroes mexicanos", "jose maria chavez", "parque"]
+    },
+    {
+      nombre: "Teatro Aguascalientes / INEGI",
+      desc: "Av. José María Chávez esq. Julio Díaz Torre",
+      lat: 21.8522,
+      lng: -102.2988,
+      tags: ["teatro aguascalientes", "teatro", "inegi", "jose maria chavez"]
+    },
+    {
+      nombre: "Complejo Tres Centurias / FFCC",
+      desc: "Av. Manuel Gómez Morín, Antiguos Talleres del Ferrocarril",
+      lat: 21.8926,
+      lng: -102.2825,
+      tags: ["tres centurias", "complejo", "ferrocarril", "gomez morin"]
+    },
+    {
+      nombre: "Plaza de la Patria / Centro Histórico",
+      desc: "Exedra, Catedral y Palacio Municipal",
+      lat: 21.8808,
+      lng: -102.2962,
+      tags: ["plaza de la patria", "centro", "catedral", "exedra", "palacio municipal"]
+    },
+    {
+      nombre: "Isla San Marcos / Expo Plaza",
+      desc: "Av. San Marcos, Foro del Lago y Recinto Ferial",
+      lat: 21.8488,
+      lng: -102.3160,
+      tags: ["isla san marcos", "san marcos", "expo plaza", "feria"]
+    },
+    {
+      nombre: "UAA Campus Central",
+      desc: "Av. Universidad 940",
+      lat: 21.9125,
+      lng: -102.3155,
+      tags: ["uaa", "universidad", "autonoma"]
+    },
+    {
+      nombre: "UAA Campus Sur",
+      desc: "Av. Mahatma Gandhi y Tercer Anillo Sur",
+      lat: 21.8150,
+      lng: -102.2850,
+      tags: ["uaa sur", "campus sur", "universidad sur"]
+    },
+    {
+      nombre: "Estadio Victoria / Necaxa",
+      desc: "Av. Convención 1914 Ote.",
+      lat: 21.8812,
+      lng: -102.2708,
+      tags: ["estadio victoria", "necaxa", "alberto romo chavez"]
+    },
+    {
+      nombre: "Terminal de Combis Pabellón de Arteaga",
+      desc: "Av. 20 de Noviembre y Revolución, Pabellón de Arteaga Centro",
+      lat: 22.1485,
+      lng: -102.2770,
+      tags: ["pabellon", "pabellon de arteaga", "terminal pabellon"]
+    },
+    {
+      nombre: "Terminal de Combis Rincón de Romos",
+      desc: "Av. Morelos e Hidalgo, Rincón de Romos Centro",
+      lat: 22.2315,
+      lng: -102.3215,
+      tags: ["rincon", "rincon de romos", "terminal rincon"]
+    }
+  ],
+
+  buscarLugar(query) {
+    const contenedor = document.getElementById('resBuscarLugarMov');
+    if (!contenedor) return;
+    const q = (query || '').toLowerCase().trim();
+    if (q.length < 2) {
+      contenedor.classList.add('hidden');
+      contenedor.innerHTML = '';
+      return;
+    }
+
+    const matches = this.lugaresEmblematicos.filter(l => {
+      if (l.nombre.toLowerCase().includes(q)) return true;
+      if (l.desc.toLowerCase().includes(q)) return true;
+      return l.tags.some(t => t.includes(q));
+    });
+
+    if (matches.length === 0) {
+      contenedor.innerHTML = `<div class="p-2.5 text-slate-400 text-xs text-center">No se encontraron lugares sugeridos para "${query}"</div>`;
+      contenedor.classList.remove('hidden');
+      return;
+    }
+
+    contenedor.innerHTML = matches.map(m => `
+      <div onclick="MovilidadApp.seleccionarLugar(${m.lat}, ${m.lng}, '${m.nombre.replace(/'/g, "\\'")}')" class="p-2 hover:bg-slate-800 cursor-pointer border-b border-slate-800/80 transition flex items-center justify-between gap-2">
+        <div>
+          <strong class="text-xs text-cyan-300 block">${m.nombre}</strong>
+          <span class="text-[10px] text-slate-400 block">${m.desc}</span>
+        </div>
+        <span class="text-[9px] px-2 py-0.5 rounded bg-cyan-900/60 text-cyan-300 font-bold shrink-0">📍 Ir a Mi Punto</span>
+      </div>
+    `).join('');
+    contenedor.classList.remove('hidden');
+  },
+
+  seleccionarLugar(lat, lng, nombre) {
+    const contenedor = document.getElementById('resBuscarLugarMov');
+    const input = document.getElementById('inputBuscarLugarMov');
+    if (contenedor) contenedor.classList.add('hidden');
+    if (input) input.value = nombre;
+    this.initMapa();
+    this.mapa.setView([lat, lng], 16, { animate: true });
+    this.calcularTransporteMasCercano(lat, lng, nombre);
   }
 };
 

@@ -1722,10 +1722,13 @@
 
           <!-- Selector de Capas Base y Utilidades -->
           <div class="flex flex-wrap items-center gap-2">
-            <!-- Selector de Mapa Base -->
+            <!-- Selector de Mapa Base Oficial -->
             <div class="flex items-center gap-1 bg-slate-800 p-1 rounded-xl border border-slate-700 text-xs font-semibold">
-              <button id="btnVisorCapaCalles" onclick="cambiarCapaVisor('calles')" class="px-2.5 py-1 bg-brand-navy text-white rounded-lg transition cursor-pointer">Calles</button>
-              <button id="btnVisorCapaSat" onclick="cambiarCapaVisor('satelite')" class="px-2.5 py-1 text-slate-300 hover:text-white rounded-lg transition cursor-pointer">Satélite</button>
+              <button id="btnVisorCapaCalles" onclick="cambiarCapaVisor('calles')" class="px-2.5 py-1 bg-brand-navy text-white rounded-lg transition cursor-pointer flex items-center gap-1" title="Vista estándar de Google Maps">
+                <i data-lucide="map" class="w-3 h-3 text-cyan-400"></i>
+                <span>Google Maps</span>
+              </button>
+              <button id="btnVisorCapaSat" onclick="cambiarCapaVisor('satelite')" class="px-2.5 py-1 text-slate-300 hover:text-white rounded-lg transition cursor-pointer" title="Vista satelital híbrida de Google Maps">Satélite</button>
               <button id="btnVisorCapaTopo" onclick="cambiarCapaVisor('topo')" class="px-2.5 py-1 text-slate-300 hover:text-white rounded-lg transition cursor-pointer">Topográfico</button>
               <button id="btnVisorCapaDark" onclick="cambiarCapaVisor('dark')" class="px-2.5 py-1 text-slate-300 hover:text-white rounded-lg transition cursor-pointer">Oscuro</button>
             </div>
@@ -1931,7 +1934,7 @@
                   <input type="checkbox" id="chkCapaYoVoy" onchange="toggleCapaVisor('yovoy', this.checked)" class="rounded text-sky-600 focus:ring-sky-500 cursor-pointer">
                   <div>
                     <span class="font-bold text-slate-900 block flex items-center gap-1.5">
-                      <span>Rutas YoVoy (SITMA)</span>
+                      <span>Rutas de Camión (YoVoy)</span>
                       <span class="text-[9px] px-1.5 py-0.2 bg-sky-600 text-white rounded-full font-bold">92</span>
                     </span>
                     <span class="text-[10px] text-slate-500">Trazado de rutas urbanas colectivas</span>
@@ -2016,7 +2019,7 @@
           <span class="text-xs font-bold uppercase tracking-wider text-cyan-600">Red Multimodal Sustentable</span>
           <h2 class="text-3xl font-extrabold text-slate-900 font-display">Movilidad Urbana y Transporte Público</h2>
           <p class="text-sm text-slate-500 mt-1 max-w-3xl">
-            Trazados oficiales de Ciclovías Municipales, Rutas de Autobús Urbano YoVoy (SITMA) y Transporte Colectivo (Combis).
+            Trazados oficiales de Ciclovías Municipales, Rutas de Autobús Urbano (YoVoy) y Transporte Colectivo (Combis).
             Descubre qué opción de transporte te queda más cerca desde tu ubicación actual o seleccionando un punto en el mapa.
           </p>
         </div>
@@ -2050,14 +2053,14 @@
           <p class="text-[11px] text-slate-400">Total de tramos confinados y preferentes</p>
         </div>
 
-        <!-- Métrica 3: YoVoy SITMA -->
+        <!-- Métrica 3: Rutas de Autobús YoVoy -->
         <div class="p-4 rounded-2xl bg-gradient-to-br from-sky-950/40 via-slate-900 to-slate-950 border border-sky-500/30 shadow-sm space-y-1">
           <div class="flex items-center justify-between text-sky-400">
-            <span class="text-xs font-bold uppercase tracking-wider">Autobuses YoVoy</span>
+            <span class="text-xs font-bold uppercase tracking-wider">Rutas de Camión (YoVoy)</span>
             <i data-lucide="bus" class="w-4 h-4"></i>
           </div>
           <div class="text-2xl lg:text-3xl font-black text-white" id="mov_met_yovoy">92</div>
-          <p class="text-[11px] text-slate-400">Rutas de transporte colectivo urbano (SITMA)</p>
+          <p class="text-[11px] text-slate-400">Rutas de camión y transporte urbano (YoVoy)</p>
         </div>
 
         <!-- Métrica 4: Combis -->
@@ -2113,6 +2116,13 @@
               <span>🚏 Paradas Combis</span>
             </label>
 
+            <!-- Buscador Rápido de Lugares para MI PUNTO -->
+            <div class="relative min-w-[210px] sm:min-w-[250px]">
+              <input type="text" id="inputBuscarLugarMov" oninput="MovilidadApp.buscarLugar(this.value)" placeholder="Buscar lugar (ej. Rodolfo Landeros...)" class="w-full px-2.5 py-1 pl-7 text-xs bg-slate-900 text-white placeholder-slate-400 rounded-lg border border-slate-700 focus:outline-none focus:border-cyan-400 transition">
+              <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-2 top-1.5"></i>
+              <div id="resBuscarLugarMov" class="hidden absolute left-0 right-0 top-full mt-1 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl z-[500] max-h-56 overflow-y-auto"></div>
+            </div>
+
             <!-- Botón Colocar Mi Punto -->
             <button id="btnColocarPuntoMov" onclick="MovilidadApp.activarColocarPunto()" class="px-3 py-1 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold rounded-lg transition flex items-center gap-1.5 cursor-pointer shadow-md">
               <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
@@ -2155,7 +2165,7 @@
           <div class="flex flex-wrap items-center gap-1.5">
             <button onclick="MovilidadApp.setFiltro('todas')" data-filtro="todas" class="btn-filtro-mov px-3 py-1.5 rounded-xl text-xs font-bold bg-cyan-600 text-white shadow-sm transition cursor-pointer">Todas las Redes</button>
             <button onclick="MovilidadApp.setFiltro('ciclovias')" data-filtro="ciclovias" class="btn-filtro-mov px-3 py-1.5 rounded-xl text-xs font-medium text-slate-300 bg-slate-800/80 hover:bg-slate-700/80 hover:text-white transition cursor-pointer">🚲 Ciclovías</button>
-            <button onclick="MovilidadApp.setFiltro('yovoy')" data-filtro="yovoy" class="btn-filtro-mov px-3 py-1.5 rounded-xl text-xs font-medium text-slate-300 bg-slate-800/80 hover:bg-slate-700/80 hover:text-white transition cursor-pointer">🚌 YoVoy (SITMA)</button>
+            <button onclick="MovilidadApp.setFiltro('yovoy')" data-filtro="yovoy" class="btn-filtro-mov px-3 py-1.5 rounded-xl text-xs font-medium text-slate-300 bg-slate-800/80 hover:bg-slate-700/80 hover:text-white transition cursor-pointer">🚌 Rutas de Camión (YoVoy)</button>
             <button onclick="MovilidadApp.setFiltro('combis')" data-filtro="combis" class="btn-filtro-mov px-3 py-1.5 rounded-xl text-xs font-medium text-slate-300 bg-slate-800/80 hover:bg-slate-700/80 hover:text-white transition cursor-pointer">🚐 Combis</button>
           </div>
 
@@ -2579,9 +2589,9 @@
   <script src="assets/js/secciones_data.js?v=20261002_clean"></script>
   <script src="assets/js/servicios_publicos_data.js?v=20261019_v1"></script>
   <script src="assets/js/servicios_publicos.js?v=20261019_v1"></script>
-  <script src="assets/js/movilidad_data.js?v=20261112_v5"></script>
-  <script src="assets/js/movilidad_paradas.js?v=20261112_v5"></script>
-  <script src="assets/js/movilidad.js?v=20261112_v5"></script>
+  <script src="assets/js/movilidad_data.js?v=20261113_v2"></script>
+  <script src="assets/js/movilidad_paradas.js?v=20261113_v2"></script>
+  <script src="assets/js/movilidad.js?v=20261113_v2"></script>
   <script>
     window.createIconsSafe = function() {
       if (window.lucide && typeof window.lucide.createIcons === 'function') {
@@ -3344,7 +3354,7 @@
     const HITOS_URBANOS_AGS = [
       { nombre: "Plaza de la Patria & Exedra", lat: 21.8808, lng: -102.2963, cat: "Patrimonio", icono: "landmark" },
       { nombre: "Complejo Tres Centurias", lat: 21.8926, lng: -102.2825, cat: "Cultura", icono: "train" },
-      { nombre: "Parque Rodolfo Landeros", lat: 21.8475, lng: -102.2885, cat: "Recreación", icono: "trees" },
+      { nombre: "Parque Rodolfo Landeros (Av. José María Chávez)", lat: 21.8495, lng: -102.2985, cat: "Recreación", icono: "trees" },
       { nombre: "Isla San Marcos / Expo", lat: 21.8488, lng: -102.3160, cat: "Eventos", icono: "award" },
       { nombre: "Universidad Autónoma de Ags (UAA)", lat: 21.9125, lng: -102.3150, cat: "Educación", icono: "graduation-cap" },
       { nombre: "Palacio Municipal de Aguascalientes", lat: 21.8812, lng: -102.2970, cat: "Gobierno", icono: "building" }
@@ -3366,16 +3376,15 @@
           fadeAnimation: true
         }).setView([21.8853, -102.2916], 11.5);
 
-        // Capas Base Libres y Profesionales (Alta velocidad CDN y sin marcas de agua)
-        heroCapaCalles = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-          subdomains: 'abcd',
-          maxZoom: 19,
-          attribution: '&copy; CartoDB &bull; IMPLAN Aguascalientes'
+        // Capas Base Oficiales (Google Maps Actualizado)
+        heroCapaCalles = L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+          maxZoom: 20,
+          attribution: '&copy; Google Maps &bull; IMPLAN Aguascalientes'
         });
 
-        heroCapaSatelite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-          maxZoom: 19,
-          attribution: '&copy; Esri, Maxar, Earthstar Geographics'
+        heroCapaSatelite = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+          maxZoom: 20,
+          attribution: '&copy; Google Maps Satélite | IMPLAN'
         });
 
         heroCapaTopo = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
@@ -3615,15 +3624,15 @@
           scrollWheelZoom: true
         }).setView([21.8853, -102.2916], 12);
 
-        // Capas Base Libres y Profesionales (Sin marcas de agua API KEY)
-        visorCapaCalles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          maxZoom: 19,
-          attribution: '&copy; OpenStreetMap contributors | IMPLAN Aguascalientes'
+        // Capas Base Oficiales (Google Maps actualizado)
+        visorCapaCalles = L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+          maxZoom: 20,
+          attribution: '&copy; Google Maps | IMPLAN Aguascalientes'
         });
 
-        visorCapaSatelite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-          maxZoom: 19,
-          attribution: '&copy; Esri, Maxar, Earthstar Geographics'
+        visorCapaSatelite = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+          maxZoom: 20,
+          attribution: '&copy; Google Maps Satélite | IMPLAN'
         });
 
         visorCapaTopo = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
@@ -3721,7 +3730,7 @@
 
         // 4. Parques y Áreas Verdes
         const verdesPuntos = [
-          { nombre: "Parque Rodolfo Landeros Gallegos", lat: 21.8475, lng: -102.2885, sup: "88 Hectáreas" },
+          { nombre: "Parque Rodolfo Landeros Gallegos (Av. José María Chávez)", lat: 21.8495, lng: -102.2985, sup: "88 Hectáreas &bull; Acceso Av. José María Chávez" },
           { nombre: "Parque México & Presa Los Gringos", lat: 21.9050, lng: -102.2680, sup: "35 Hectáreas" },
           { nombre: "Isla San Marcos & Arroyo Los Arellano", lat: 21.8488, lng: -102.3160, sup: "44 Hectáreas" },
           { nombre: "Línea Verde (Parque Lineal)", lat: 21.9100, lng: -102.2420, sup: "12 km longitud" }
@@ -3734,9 +3743,12 @@
             weight: 2,
             fillOpacity: 0.95
           }).addTo(visorCapas.verdes).bindPopup(`
-            <div class="p-1.5 space-y-1 text-xs">
+            <div class="p-2 space-y-1.5 text-xs font-sans min-w-[200px]">
               <span class="font-bold text-slate-900 block">${v.nombre}</span>
-              <span class="text-emerald-700 font-semibold block">${v.sup}</span>
+              <span class="text-emerald-700 font-semibold block text-[11px]">${v.sup}</span>
+              <button onclick="MovilidadApp.ejecutarConsultaMiPuntoVisor(${v.lat}, ${v.lng}, '${v.nombre.replace(/'/g, "\\'")}')" class="mt-1 w-full py-1 px-2 text-center text-[10px] bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold rounded-lg transition shadow-xs cursor-pointer">
+                📍 Consultar transporte cercano (MI PUNTO)
+              </button>
             </div>
           `);
         });
@@ -3890,7 +3902,7 @@
         return;
       }
 
-      // Carga perezosa de las 92 Rutas de Autobús YoVoy (SITMA)
+      // Carga perezosa de las 92 Rutas de Autobús YoVoy
       if (nombreCapa === 'yovoy') {
         if (activo) {
           if (!visorCapas.yovoy && window.MovilidadApp) {
@@ -4322,9 +4334,95 @@
       if (btnLimpiar) btnLimpiar.classList.remove('hidden');
       const q = query.trim().toLowerCase();
       let html = '';
-      let matchCount = 0;
+      // 0. Lugares Emblemáticos y Parques Principales (con acceso directo a MI PUNTO)
+      const LUGARES_BUSQUEDA = [
+        {
+          nombre: "Parque Rodolfo Landeros Gallegos (Av. José María Chávez)",
+          desc: "Acceso Principal, Paradas de Camión y Combis &bull; Av. José María Chávez",
+          lat: 21.8495,
+          lng: -102.2985,
+          tipo: "Parque / Recreación",
+          tags: ["parque rodolfo landeros", "rodolfo landeros", "landeros", "heroes mexicanos", "jose maria chavez", "parque"]
+        },
+        {
+          nombre: "Teatro Aguascalientes / INEGI",
+          desc: "Av. José María Chávez esq. Julio Díaz Torre",
+          lat: 21.8522,
+          lng: -102.2988,
+          tipo: "Cultura / Institución",
+          tags: ["teatro aguascalientes", "teatro", "inegi", "jose maria chavez"]
+        },
+        {
+          nombre: "Complejo Tres Centurias / FFCC",
+          desc: "Av. Manuel Gómez Morín &bull; Talleres del Ferrocarril",
+          lat: 21.8926,
+          lng: -102.2825,
+          tipo: "Cultura / Historia",
+          tags: ["tres centurias", "complejo", "ferrocarril", "gomez morin"]
+        },
+        {
+          nombre: "Plaza de la Patria / Centro Histórico",
+          desc: "Exedra, Catedral y Palacio Municipal",
+          lat: 21.8808,
+          lng: -102.2962,
+          tipo: "Centro Histórico",
+          tags: ["plaza de la patria", "centro", "catedral", "exedra", "palacio municipal"]
+        },
+        {
+          nombre: "Isla San Marcos / Expo Plaza",
+          desc: "Recinto Ferial y Foro del Lago",
+          lat: 21.8488,
+          lng: -102.3160,
+          tipo: "Eventos",
+          tags: ["isla san marcos", "san marcos", "expo plaza", "feria"]
+        },
+        {
+          nombre: "Parque México & Presa Los Gringos",
+          desc: "Av. Alcaldes &bull; 35 Hectáreas",
+          lat: 21.9050,
+          lng: -102.2680,
+          tipo: "Área Verde",
+          tags: ["parque mexico", "presa los gringos", "parque los gringos"]
+        },
+        {
+          nombre: "UAA Campus Central",
+          desc: "Av. Universidad 940",
+          lat: 21.9125,
+          lng: -102.3155,
+          tipo: "Educación",
+          tags: ["uaa", "universidad", "autonoma"]
+        },
+        {
+          nombre: "Estadio Victoria / Necaxa",
+          desc: "Av. Convención 1914 Ote.",
+          lat: 21.8812,
+          lng: -102.2708,
+          tipo: "Deportes",
+          tags: ["estadio victoria", "necaxa", "alberto romo chavez"]
+        }
+      ];
 
-            // 0. Secciones Electorales / Territoriales (505 Secciones)
+      LUGARES_BUSQUEDA.forEach(l => {
+        if (l.nombre.toLowerCase().includes(q) || l.desc.toLowerCase().includes(q) || l.tags.some(t => t.includes(q))) {
+          if (matchCount < 8) {
+            html += `
+              <div onclick="irALugarEmblematicoVisor(${l.lat}, ${l.lng}, '${l.nombre.replace(/'/g, "\\'")}')" class="p-2 hover:bg-white/10 rounded-xl cursor-pointer transition flex items-center justify-between border-b border-white/5 bg-cyan-950/40">
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-cyan-400 flex items-center justify-center text-[8px] text-black font-black">📍</span>
+                  <div>
+                    <strong class="text-xs text-cyan-200 block">${l.nombre}</strong>
+                    <span class="text-[10px] text-slate-300 block">${l.desc}</span>
+                  </div>
+                </div>
+                <span class="text-[9px] px-1.5 py-0.5 bg-cyan-500/30 text-cyan-300 rounded font-bold">${l.tipo}</span>
+              </div>
+            `;
+            matchCount++;
+          }
+        }
+      });
+
+      // 0. Secciones Electorales / Territoriales (505 Secciones)
       if (window.SECCIONES_GEOJSON && Array.isArray(window.SECCIONES_GEOJSON.features)) {
         const isNumOnly = /^\d+$/.test(q);
         for (let i = 0; i < window.SECCIONES_GEOJSON.features.length; i++) {
@@ -4504,6 +4602,15 @@
       if (visorSearchTempMarker && window.mapPimags) {
         window.mapPimags.removeLayer(visorSearchTempMarker);
         visorSearchTempMarker = null;
+      }
+    }
+
+    function irALugarEmblematicoVisor(lat, lng, nombre) {
+      limpiarBuscadorVisor();
+      if (!window.mapPimags) return;
+      window.mapPimags.setView([lat, lng], 16, { animate: true });
+      if (window.MovilidadApp && typeof window.MovilidadApp.ejecutarConsultaMiPuntoVisor === 'function') {
+        window.MovilidadApp.ejecutarConsultaMiPuntoVisor(lat, lng, nombre);
       }
     }
 
