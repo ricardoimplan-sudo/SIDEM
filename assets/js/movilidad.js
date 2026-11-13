@@ -551,6 +551,30 @@ window.MovilidadApp = {
     };
   },
 
+  // Busca el parque o jardín más cercano
+  encontrarParqueMasCercano(plat, plng) {
+    const lista = window.PARQUES_SSP_DATA || window.SERVICIOS_PUBLICOS_PARQUES || [];
+    let mejor = null;
+    let minDist = Infinity;
+
+    for (let i = 0; i < lista.length; i++) {
+      const p = lista[i];
+      if (typeof p.lat === 'number' && typeof p.lng === 'number') {
+        const d = this.distanciaHaversine(plat, plng, p.lat, p.lng);
+        if (d < minDist) {
+          minDist = d;
+          mejor = p;
+        }
+      }
+    }
+
+    return {
+      parque: mejor,
+      distanciaMetros: minDist,
+      coords: mejor ? [mejor.lat, mejor.lng] : null
+    };
+  },
+
   // Busca la ciclovía más cercana (geometría polilínea)
   encontrarCicloviaMasCercana(plat, plng, ciclovias) {
     let mejor = null;
@@ -670,7 +694,10 @@ window.MovilidadApp = {
     // 3. Ciclovía más cercana
     const cicloviaRes = this.encontrarCicloviaMasCercana(lat, lng, window.MOVILIDAD_CICLOVIAS || []);
 
-    // 4. Rutas en radio de 250m
+    // 4. Parque o Jardín más cercano
+    const parqueRes = this.encontrarParqueMasCercano(lat, lng);
+
+    // 5. Rutas en radio de 250m
     const rutasRadio = this.encontrarRutasEnRadio(lat, lng, 250);
 
     this.ultimoResultadoCercania = {
@@ -679,8 +706,18 @@ window.MovilidadApp = {
       paradaCamion: paradaCamionRes,
       paradaCombi: paradaCombiRes,
       ciclovia: cicloviaRes,
+      parque: parqueRes,
       rutasRadio: rutasRadio
     };
+
+    const fmt = (m) => {
+      if (m === Infinity || !m) return { distStr: 'N/D', tiempoMin: 0 };
+      const tiempoMin = Math.max(1, Math.round(m / 80));
+      let distStr = m < 1000 ? `${Math.round(m)} m` : `${(m / 1000).toFixed(2)} km`;
+      return { distStr, tiempoMin };
+    };
+
+    const pFmt = fmt(parqueRes.distanciaMetros);
 
     // Limpiar capa de cercanía previa
     this.capaCercania.clearLayers();
@@ -710,7 +747,7 @@ window.MovilidadApp = {
     if (btnBorrar) btnBorrar.classList.remove('hidden');
 
     this.marcadorUsuario.bindPopup(`
-      <div class="p-2.5 font-sans min-w-[260px] space-y-2">
+      <div class="p-2.5 font-sans min-w-[270px] space-y-2">
         <div class="flex items-center justify-between border-b border-cyan-200 pb-1">
           <span class="font-black text-cyan-800 text-xs flex items-center gap-1">📍 MI PUNTO</span>
           <span class="text-[9px] px-1.5 py-0.2 rounded bg-cyan-600 text-white font-bold">Arrastrable</span>
@@ -736,6 +773,13 @@ window.MovilidadApp = {
               <span class="font-bold text-emerald-700">${fmt(cicloviaRes.distanciaMetros).distStr} (~${fmt(cicloviaRes.distanciaMetros).tiempoMin} min)</span>
             </div>
             <div class="text-[10px] text-slate-600 pl-4">${cicloviaRes.ciclovia ? cicloviaRes.ciclovia.nombre : ''}</div>
+          </div>
+          <div class="text-slate-700">
+            <div class="flex items-center justify-between">
+              <span class="flex items-center gap-1 font-bold text-lime-800">🌳 Parque/Jardín:</span>
+              <span class="font-bold text-lime-700">${pFmt.distStr} (~${pFmt.tiempoMin} min)</span>
+            </div>
+            <div class="text-[10px] text-slate-600 pl-4">${parqueRes.parque ? parqueRes.parque.nombre : 'Área Verde'}</div>
           </div>
         </div>
         <div class="pt-2 border-t border-slate-100 flex items-center justify-between gap-2">
@@ -831,17 +875,46 @@ window.MovilidadApp = {
         `);
     }
 
+    // 4. Línea y marcador a Parque o Jardín (Verde Lima)
+    if (parqueRes.parque && parqueRes.coords) {
+      boundsPoints.push(parqueRes.coords);
+
+      L.polyline([[lat, lng], parqueRes.coords], {
+        color: '#65a30d',
+        weight: 3.5,
+        dashArray: '6,6',
+        opacity: 0.95
+      }).addTo(this.capaCercania);
+
+      const parkIcon = L.divIcon({
+        html: `<div class="w-8 h-8 rounded-full bg-lime-600 border-2 border-white shadow-lg flex items-center justify-center text-xs text-white font-bold">🌳</div>`,
+        className: '',
+        iconSize: [32, 32],
+        iconAnchor: [16, 16]
+      });
+
+      L.marker(parqueRes.coords, { icon: parkIcon }).addTo(this.capaCercania)
+        .bindPopup(`
+          <div class="p-2 text-xs font-sans space-y-1">
+            <span class="font-bold text-lime-700 block">🌳 Parque o Jardín más cercano</span>
+            <div class="font-semibold text-slate-800">${parqueRes.parque.nombre}</div>
+            <div class="text-slate-600">A <b>${pFmt.distStr}</b> (~${pFmt.tiempoMin} min caminando)</div>
+            <div class="text-[10px] text-slate-500">${parqueRes.parque.colonia || parqueRes.parque.tipo || 'Espacio Público'}</div>
+          </div>
+        `);
+    }
+
     // Ajustar zoom para mostrar el punto y sus destinos más cercanos
     if (boundsPoints.length > 1) {
       this.mapa.fitBounds(L.latLngBounds(boundsPoints), { padding: [70, 70], maxZoom: 16 });
     }
 
     // Actualizar el panel interactivo de resultados
-    this.renderPanelResultadosCercania(lat, lng, origenTexto, paradaCamionRes, paradaCombiRes, cicloviaRes, rutasRadio);
+    this.renderPanelResultadosCercania(lat, lng, origenTexto, paradaCamionRes, paradaCombiRes, cicloviaRes, parqueRes, rutasRadio);
   },
 
   // Muestra los resultados en el widget del DOM
-  renderPanelResultadosCercania(lat, lng, origenTexto, paradaCamionRes, paradaCombiRes, cicloviaRes, rutasRadio) {
+  renderPanelResultadosCercania(lat, lng, origenTexto, paradaCamionRes, paradaCombiRes, cicloviaRes, parqueRes, rutasRadio) {
     const contenedor = document.getElementById('mov_panel_cercania');
     if (!contenedor) return;
 
@@ -855,6 +928,7 @@ window.MovilidadApp = {
     const yFmt = fmt(paradaCamionRes.distanciaMetros);
     const cbFmt = fmt(paradaCombiRes.distanciaMetros);
     const cFmt = fmt(cicloviaRes.distanciaMetros);
+    const pFmt = fmt(parqueRes ? parqueRes.distanciaMetros : Infinity);
 
     // Cards con destinos de rutas YoVoy en la parada más cercana
     const rutasYoVoy = (paradaCamionRes.parada && paradaCamionRes.parada.rutas) ? paradaCamionRes.parada.rutas : [];
@@ -915,14 +989,14 @@ window.MovilidadApp = {
           </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
           <!-- Tarjeta 1: Parada YoVoy más cercana -->
           <div class="p-4 rounded-xl bg-sky-950/40 border border-sky-500/30 flex flex-col justify-between space-y-3">
             <div class="space-y-2">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-bold text-sky-400 flex items-center gap-1.5 uppercase tracking-wider">
                   <i data-lucide="bus" class="w-4 h-4"></i>
-                  <span>Parada de Autobús (YoVoy)</span>
+                  <span>Parada Autobús (YoVoy)</span>
                 </span>
                 <span class="px-2.5 py-0.5 rounded-full bg-sky-500/20 text-sky-300 font-bold text-xs font-mono">
                   ${yFmt.distStr}
@@ -1019,6 +1093,38 @@ window.MovilidadApp = {
               </button>
             </div>
           </div>
+
+          <!-- Tarjeta 4: Parque o Jardín más cercano -->
+          <div class="p-4 rounded-xl bg-lime-950/40 border border-lime-500/30 flex flex-col justify-between space-y-3">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-lime-400 flex items-center gap-1.5 uppercase tracking-wider">
+                  <i data-lucide="trees" class="w-4 h-4"></i>
+                  <span>Parque / Jardín más cercano</span>
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full bg-lime-500/20 text-lime-300 font-bold text-xs font-mono">
+                  ${pFmt.distStr}
+                </span>
+              </div>
+              <h5 class="font-bold text-white text-sm leading-snug">
+                ${parqueRes && parqueRes.parque ? parqueRes.parque.nombre : 'No disponible'}
+              </h5>
+              <div class="flex items-center gap-2 text-[11px] text-lime-300">
+                <i data-lucide="footprints" class="w-3.5 h-3.5"></i>
+                <span class="font-semibold">~${pFmt.tiempoMin} min caminando</span>
+              </div>
+              <p class="text-[11px] text-slate-300">
+                ${parqueRes && parqueRes.parque ? (parqueRes.parque.colonia ? `${parqueRes.parque.colonia} • ` : '') + (parqueRes.parque.tipo || 'Área Verde Municipal') : ''}
+              </p>
+            </div>
+            <div class="pt-2 border-t border-lime-500/20 flex items-center justify-between text-xs">
+              <span class="text-[11px] text-slate-400">Espacio público</span>
+              <button onclick="MovilidadApp.centrarPuntoCercano('parque')" class="text-lime-300 hover:text-white font-bold transition flex items-center gap-1 cursor-pointer">
+                <span>Centrar</span>
+                <i data-lucide="crosshair" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </div>
         </div>
 
         <div class="text-center pt-1 border-t border-white/5 flex flex-wrap items-center justify-between text-[11px] text-slate-400 gap-2">
@@ -1092,6 +1198,7 @@ window.MovilidadApp = {
     if (tipo === 'paradaCamion' && res && res.coords) pt = res.coords;
     else if (tipo === 'paradaCombi' && res && res.coords) pt = res.coords;
     else if (tipo === 'ciclovia' && res && res.puntoMasCercano) pt = res.puntoMasCercano;
+    else if (tipo === 'parque' && res && res.coords) pt = res.coords;
 
     if (pt) {
       this.mapa.setView(pt, 16, { animate: true });
@@ -1588,6 +1695,7 @@ window.MovilidadApp = {
     const paradaCamionRes = this.encontrarParadaMasCercana(lat, lng, window.PARADAS_CAMIONES || []);
     const paradaCombiRes = this.encontrarParadaMasCercana(lat, lng, window.PARADAS_COMBIS || []);
     const cicloviaRes = this.encontrarCicloviaMasCercana(lat, lng, window.MOVILIDAD_CICLOVIAS || []);
+    const parqueRes = this.encontrarParqueMasCercano(lat, lng);
 
     const fmt = (m) => {
       if (m === Infinity || !m) return { distStr: 'N/D', tiempoMin: 0 };
@@ -1599,6 +1707,7 @@ window.MovilidadApp = {
     const yFmt = fmt(paradaCamionRes.distanciaMetros);
     const cbFmt = fmt(paradaCombiRes.distanciaMetros);
     const cFmt = fmt(cicloviaRes.distanciaMetros);
+    const pFmt = fmt(parqueRes.distanciaMetros);
 
     // Conector azul a Parada YoVoy
     if (paradaCamionRes.coords) {
@@ -1663,6 +1772,32 @@ window.MovilidadApp = {
         `);
     }
 
+    // Conector verde lima a Parque o Jardín
+    if (parqueRes.coords) {
+      L.polyline([[lat, lng], parqueRes.coords], {
+        color: '#65a30d',
+        weight: 3.5,
+        dashArray: '6,6',
+        opacity: 0.95
+      }).addTo(this.capaVisorMiPunto);
+
+      const parkIcon = L.divIcon({
+        html: `<div class="w-7 h-7 rounded-full bg-lime-600 border-2 border-white shadow-md flex items-center justify-center text-xs text-white font-bold">🌳</div>`,
+        className: '',
+        iconSize: [28, 28],
+        iconAnchor: [14, 14]
+      });
+      L.marker(parqueRes.coords, { icon: parkIcon }).addTo(this.capaVisorMiPunto)
+        .bindPopup(`
+          <div class="p-2 font-sans text-xs space-y-1">
+            <span class="font-bold text-lime-700 block">🌳 Parque o Jardín más cercano</span>
+            <div class="font-semibold text-slate-800">${parqueRes.parque ? parqueRes.parque.nombre : 'Área Verde'}</div>
+            <div class="text-[11px] text-slate-500">${parqueRes.parque ? (parqueRes.parque.colonia || parqueRes.parque.tipo || '') : ''}</div>
+            <div class="text-slate-600">A <b>${pFmt.distStr}</b> (~${pFmt.tiempoMin} min caminando)</div>
+          </div>
+        `);
+    }
+
     // Marcador de Mi Punto arrastrable
     const userIcon = L.divIcon({
       html: `
@@ -1720,6 +1855,18 @@ window.MovilidadApp = {
               <span class="text-[10px] text-slate-500 block">~${cFmt.tiempoMin} min</span>
             </div>
           </div>
+          <!-- Parque o Jardín -->
+          <div class="p-2 rounded-xl bg-lime-50 border border-lime-200 flex items-start justify-between gap-2">
+            <div>
+              <span class="font-bold text-lime-800 text-[11px] block">🌳 Parque o Jardín más cercano:</span>
+              <span class="text-[11px] text-slate-800 font-semibold">${parqueRes.parque ? parqueRes.parque.nombre : 'N/D'}</span>
+              <span class="text-[10px] text-slate-500 block">${parqueRes.parque ? (parqueRes.parque.colonia || parqueRes.parque.tipo || '') : ''}</span>
+            </div>
+            <div class="text-right shrink-0">
+              <span class="font-black text-lime-700 text-xs">${pFmt.distStr}</span>
+              <span class="text-[10px] text-slate-500 block">~${pFmt.tiempoMin} min</span>
+            </div>
+          </div>
         </div>
         <div class="pt-2 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2">
           <button onclick="MovilidadApp.limpiarMiPuntoVisor()" class="text-xs px-2.5 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold border border-rose-200 transition cursor-pointer flex items-center gap-1">
@@ -1746,6 +1893,7 @@ window.MovilidadApp = {
     if (paradaCamionRes.coords) pts.push(paradaCamionRes.coords);
     if (paradaCombiRes.coords) pts.push(paradaCombiRes.coords);
     if (cicloviaRes.puntoMasCercano) pts.push(cicloviaRes.puntoMasCercano);
+    if (parqueRes.coords) pts.push(parqueRes.coords);
     try {
       map.fitBounds(L.latLngBounds(pts), { padding: [60, 60], maxZoom: 16 });
     } catch (e) {}

@@ -205,6 +205,10 @@
           <button onclick="cambiarSeccion('equipamiento')" class="nav-item hover:text-cyan-300 transition py-2" data-target="equipamiento">Equipamiento</button>
           <button onclick="cambiarSeccion('obra')" class="nav-item hover:text-cyan-300 transition py-2" data-target="obra">Obra Pública</button>
           <button onclick="cambiarSeccion('movilidad')" class="nav-item hover:text-cyan-300 transition py-2" data-target="movilidad">Movilidad</button>
+          <button onclick="cambiarSeccion('agua')" class="nav-item hover:text-cyan-300 transition py-2 flex items-center gap-1" data-target="agua">
+            <span>Agua Potable</span>
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+          </button>
           <button onclick="cambiarSeccion('visor')" class="nav-item hover:text-cyan-300 transition py-2" data-target="visor">Visor IDEAgs</button>
           <button onclick="cambiarSeccion('infografias')" class="nav-item hover:text-cyan-300 transition py-2" data-target="infografias">Infografías</button>
           
@@ -250,9 +254,10 @@
         <button onclick="cambiarSeccion('equipamiento')" class="text-left px-3 py-2.5 rounded-lg bg-white/10 hover:bg-white/20 flex items-center gap-2">Equipamiento</button>
         <button onclick="cambiarSeccion('obra')" class="text-left px-3 py-2.5 rounded-lg bg-white/10 hover:bg-white/20 flex items-center gap-2">Obra Pública</button>
         <button onclick="cambiarSeccion('movilidad')" class="text-left px-3 py-2.5 rounded-lg bg-white/10 hover:bg-white/20 flex items-center gap-2">Movilidad</button>
+        <button onclick="cambiarSeccion('agua')" class="text-left px-3 py-2.5 rounded-lg bg-sky-900/80 hover:bg-sky-800 text-sky-200 border border-sky-500/40 font-bold flex items-center gap-2">💧 Agua Potable</button>
         <button onclick="cambiarSeccion('visor')" class="text-left px-3 py-2.5 rounded-lg bg-white/10 hover:bg-white/20 flex items-center gap-2">Visor IDEAgs</button>
         <button onclick="cambiarSeccion('infografias')" class="text-left px-3 py-2.5 rounded-lg bg-white/10 hover:bg-white/20 flex items-center gap-2">Infografías</button>
-        <button onclick="cambiarSeccion('solicitudes')" class="text-left px-3 py-2.5 rounded-lg bg-brand-magenta text-white font-bold flex items-center gap-2">Solicitudes</button>
+        <button onclick="cambiarSeccion('solicitudes')" class="col-span-2 text-left px-3 py-2.5 rounded-lg bg-brand-magenta text-white font-bold flex items-center gap-2">Solicitudes</button>
       </div>
 
       <!-- Perfil de Usuario en Menú Móvil -->
@@ -564,6 +569,36 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="contenedorMetricas">
           <!-- Generado dinámicamente desde data.js -->
+        </div>
+      </div>
+
+      <!-- BANNER DIRECTO: AGUA POTABLE - RENOVACIÓN DE TUBERÍAS MIAA -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div onclick="cambiarSeccion('agua')" class="group relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#031e36] via-[#052849] to-[#041c30] p-6 sm:p-8 border border-sky-500/40 shadow-2xl cursor-pointer hover:border-cyan-400 transition-all duration-300">
+          <div class="absolute right-0 top-0 w-96 h-full bg-cyan-500/10 blur-3xl pointer-events-none group-hover:bg-cyan-500/20 transition duration-500"></div>
+          <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div class="space-y-2 max-w-2xl">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/20 text-sky-300 text-xs font-bold border border-sky-400/30">
+                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                <span>NUEVO MÓDULO • GOBIERNO & OBRAS PÚBLICAS</span>
+              </div>
+              <h3 class="text-xl sm:text-2xl font-black text-white font-display flex items-center gap-2">
+                <span>💧 Diagnóstico y Renovación de Red de Agua Potable</span>
+              </h3>
+              <p class="text-sm text-slate-300 leading-relaxed">
+                Herramienta geoespacial para políticos y tomadores de decisiones: visualiza tuberías de agua por año de instalación, vida útil y semáforo de urgencia (>32 años) con estimación de inversión paramétrica para el Municipio de Aguascalientes (MIAA / IMPLAN).
+              </p>
+            </div>
+            <div class="flex flex-col sm:flex-row items-center gap-3 shrink-0">
+              <span class="px-3 py-1.5 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-300 text-xs font-black">
+                🔴 107 tramos urgentes (7.61 km)
+              </span>
+              <button class="px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black text-xs transition flex items-center gap-2 shadow-lg group-hover:scale-105">
+                <span>Abrir Tablero de Agua Potable</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -2199,6 +2234,226 @@
     </section>
 
     <!-- ========================================== -->
+    <!-- SECCIÓN: AGUA POTABLE - RENOVACIÓN DE RED (MIAA / POLÍTICOS) -->
+    <!-- ========================================== -->
+    <section id="sec-agua" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+      
+      <!-- Encabezado Institucional -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-slate-200 pb-5 gap-4">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 text-sky-800 text-xs font-black uppercase tracking-wider mb-2">
+            <span class="w-2 h-2 rounded-full bg-sky-600 animate-pulse"></span>
+            <span>MIAA • CCAPAMA • IMPLAN Aguascalientes</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-black text-slate-900 font-display tracking-tight flex items-center gap-3">
+            <span>💧 Diagnóstico y Renovación de Red de Agua Potable</span>
+          </h2>
+          <p class="text-sm text-slate-600 max-w-3xl mt-1.5 leading-relaxed">
+            Plataforma ejecutiva y geoespacial diseñada para <strong>tomadores de decisiones, directores de obras públicas y autoridades municipales</strong>. Identifica tramos con vida útil vencida, riesgo de rotura/fugas por cristalización de PVC (>30 años de servicio) y estimación paramétrica de inversión para programas de obra anual.
+          </p>
+        </div>
+        <div class="flex items-center gap-2 shrink-0">
+          <button onclick="AguaPotableApp.imprimirResumenEjecutivo()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-sm cursor-pointer">
+            <i data-lucide="printer" class="w-4 h-4"></i>
+            <span>Imprimir Ficha Ejecutiva</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tarjetas KPI de Alto Impacto para Toma de Decisiones -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <!-- KPI 1: Red Total Evaluada -->
+        <div class="p-5 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 text-white border border-slate-700 shadow-xl space-y-2">
+          <div class="flex items-center justify-between text-xs text-slate-400 font-bold uppercase tracking-wider">
+            <span>Red Mapeada MIAA</span>
+            <i data-lucide="activity" class="w-4 h-4 text-sky-400"></i>
+          </div>
+          <div id="agua_kpi_total_km" class="text-2xl font-black font-display text-white">16.31 km</div>
+          <div class="text-[11px] text-slate-300 flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+            <span>211 tramos analizados en PVC</span>
+          </div>
+        </div>
+
+        <!-- KPI 2: Tramos Críticos / Requieren Cambio Inmediato -->
+        <div class="p-5 rounded-2xl bg-gradient-to-br from-rose-950 via-rose-900 to-rose-950 text-white border border-rose-500/50 shadow-xl space-y-2 relative overflow-hidden">
+          <div class="absolute -right-2 -bottom-2 w-16 h-16 bg-rose-500/10 rounded-full blur-xl pointer-events-none"></div>
+          <div class="flex items-center justify-between text-xs text-rose-300 font-bold uppercase tracking-wider">
+            <span>Urgente: Requiere Cambio</span>
+            <span class="w-2 h-2 rounded-full bg-rose-400 animate-ping"></span>
+          </div>
+          <div id="agua_kpi_criticos_km" class="text-2xl font-black font-display text-rose-200">7.61 km</div>
+          <div id="agua_kpi_criticos_pct" class="text-[11px] font-bold text-rose-300 flex items-center gap-1">
+            <span>46.7% de la red analizada (>32 años)</span>
+          </div>
+        </div>
+
+        <!-- KPI 3: Inversión Requerida Urgente -->
+        <div class="p-5 rounded-2xl bg-gradient-to-br from-amber-950 via-amber-900 to-slate-900 text-white border border-amber-500/40 shadow-xl space-y-2">
+          <div class="flex items-center justify-between text-xs text-amber-300 font-bold uppercase tracking-wider">
+            <span>Inversión Urgente (Fase 1)</span>
+            <i data-lucide="badge-dollar-sign" class="w-4 h-4 text-amber-400"></i>
+          </div>
+          <div id="agua_kpi_inversion_critica" class="text-2xl font-black font-display text-amber-300">$16.85 MDP</div>
+          <div class="text-[11px] text-slate-300">
+            <span>Reemplazo prioritario en tramos 1989-1994</span>
+          </div>
+        </div>
+
+        <!-- KPI 4: Inversión Total Programa -->
+        <div class="p-5 rounded-2xl bg-gradient-to-br from-sky-950 via-sky-900 to-slate-900 text-white border border-sky-500/40 shadow-xl space-y-2">
+          <div class="flex items-center justify-between text-xs text-sky-300 font-bold uppercase tracking-wider">
+            <span>Inversión Total Red</span>
+            <i data-lucide="wallet" class="w-4 h-4 text-sky-400"></i>
+          </div>
+          <div id="agua_kpi_inversion_total" class="text-2xl font-black font-display text-sky-300">$38.12 MDP</div>
+          <div class="text-[11px] text-slate-300">
+            <span>100% de la red a PEAD/PVC RD-26</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Barra de Filtros y Priorización Interactiva -->
+      <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800 shadow-xl space-y-4">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          
+          <!-- Botones de Semáforo / Nivel de Urgencia -->
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400 mr-1">Filtrar por Urgencia:</span>
+            <button onclick="AguaPotableApp.filtrarPorPrioridad('todos')" data-prio="todos" class="btn-filtro-agua px-3 py-1.5 rounded-xl text-xs font-bold bg-cyan-600 text-white border border-cyan-500 transition cursor-pointer shadow-xs">
+              Todas las tuberías (211)
+            </button>
+            <button onclick="AguaPotableApp.filtrarPorPrioridad('criticos')" data-prio="criticos" class="btn-filtro-agua px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800/80 text-rose-300 border border-rose-500/40 hover:bg-rose-950 transition cursor-pointer flex items-center gap-1.5 shadow-xs">
+              <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+              <span>🔴 Urgente / Cambio Inmediato (>32 años) [107]</span>
+            </button>
+            <button onclick="AguaPotableApp.filtrarPorPrioridad('altos')" data-prio="altos" class="btn-filtro-agua px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800/80 text-orange-300 border border-orange-500/40 hover:bg-orange-950 transition cursor-pointer flex items-center gap-1.5 shadow-xs">
+              <span class="w-2 h-2 rounded-full bg-orange-500"></span>
+              <span>🟠 Prioridad Alta (25-31 años) [76]</span>
+            </button>
+            <button onclick="AguaPotableApp.filtrarPorPrioridad('medios')" data-prio="medios" class="btn-filtro-agua px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800/80 text-amber-300 border border-amber-500/40 hover:bg-amber-950 transition cursor-pointer flex items-center gap-1.5 shadow-xs">
+              <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+              <span>🟡 Preventivo (18-24 años) [13]</span>
+            </button>
+            <button onclick="AguaPotableApp.filtrarPorPrioridad('normales')" data-prio="normales" class="btn-filtro-agua px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800/80 text-emerald-300 border border-emerald-500/40 hover:bg-emerald-950 transition cursor-pointer flex items-center gap-1.5 shadow-xs">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span>🟢 Red Operativa (<18 años) [15]</span>
+            </button>
+          </div>
+
+          <!-- Filtro por Diámetro y Búsqueda -->
+          <div class="flex flex-wrap items-center gap-3">
+            <div class="flex items-center gap-2">
+              <label class="text-xs font-bold text-slate-400">Diámetro:</label>
+              <select onchange="AguaPotableApp.filtrarPorDiametro(this.value)" class="bg-slate-800 border border-slate-700 text-white text-xs font-bold rounded-xl px-3 py-1.5 focus:outline-none focus:border-cyan-500">
+                <option value="todos">Todos los diámetros</option>
+                <option value="2">2 pulgadas</option>
+                <option value="3">3 pulgadas</option>
+                <option value="4">4 pulgadas</option>
+                <option value="6">6 pulgadas</option>
+                <option value="8">8 pulgadas</option>
+              </select>
+            </div>
+            <div class="relative min-w-[200px]">
+              <input 
+                type="text" 
+                placeholder="Buscar por ID o año..." 
+                onkeyup="AguaPotableApp.filtrarPorBusqueda(this.value)"
+                class="w-full bg-slate-800 border border-slate-700 text-white placeholder-slate-400 text-xs rounded-xl px-3 py-1.5 pl-8 focus:outline-none focus:border-cyan-500"
+              />
+              <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5"></i>
+            </div>
+          </div>
+
+        </div>
+
+        <div id="agua_conteo_filtrados" class="text-xs text-slate-400 border-t border-slate-800/80 pt-2">
+          <!-- Conteo dinámico -->
+        </div>
+      </div>
+
+      <!-- Contenedor del Geovisor de Agua Potable -->
+      <div class="space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
+            <i data-lucide="map" class="w-4 h-4 text-sky-600"></i>
+            <span>Geovisor Satelital de Tuberías y Puntos Críticos</span>
+          </span>
+          <span class="text-xs text-slate-500 hidden sm:inline-block">
+            Haz clic sobre cualquier línea para ver su costo de reposición y antigüedad exacta
+          </span>
+        </div>
+        <div class="relative w-full h-[540px] rounded-2xl overflow-hidden border border-slate-300 shadow-2xl z-0">
+          <div id="mapaAguaPotable" class="w-full h-full"></div>
+          
+          <!-- Leyenda Flotante -->
+          <div class="absolute bottom-4 left-4 z-[500] bg-slate-900/90 backdrop-blur-md border border-white/15 text-white p-3.5 rounded-xl shadow-2xl space-y-2 text-xs max-w-[260px]">
+            <strong class="block text-[11px] font-black uppercase tracking-wider text-cyan-300 border-b border-white/10 pb-1">
+              Semáforo de Renovación
+            </strong>
+            <div class="space-y-1.5 text-[11px]">
+              <div class="flex items-center gap-2">
+                <span class="w-3.5 h-1.5 rounded-full bg-rose-600 border border-white"></span>
+                <span class="font-bold text-rose-300">Urgente (>32 años)</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-3.5 h-1.5 rounded-full bg-orange-500 border border-white"></span>
+                <span class="text-orange-200">Prioridad Alta (25-31 años)</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-3.5 h-1.5 rounded-full bg-amber-400 border border-white"></span>
+                <span class="text-amber-200">Preventivo (18-24 años)</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-3.5 h-1.5 rounded-full bg-emerald-500 border border-white"></span>
+                <span class="text-emerald-200">Red Operativa (<18 años)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabla Ejecutiva de Priorización de Obras -->
+      <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 shadow-xl space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/10 pb-3">
+          <div>
+            <h3 class="text-lg font-bold text-white flex items-center gap-2">
+              <i data-lucide="list-ordered" class="w-5 h-5 text-cyan-400"></i>
+              <span>Catálogo Priorizado de Obras de Renovación</span>
+            </h3>
+            <p class="text-xs text-slate-400 mt-0.5">Ordenado por nivel de riesgo, antigüedad y costo paramétrico para planeación presupuestal.</p>
+          </div>
+          <button onclick="AguaPotableApp.imprimirResumenEjecutivo()" class="px-3 py-1.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs transition flex items-center gap-1.5 cursor-pointer shadow-xs shrink-0">
+            <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+            <span>Exportar / Imprimir</span>
+          </button>
+        </div>
+
+        <div class="overflow-x-auto max-h-96 overflow-y-auto">
+          <table class="w-full text-left border-collapse">
+            <thead class="bg-slate-950 text-slate-400 text-[11px] uppercase tracking-wider sticky top-0 border-b border-white/10">
+              <tr>
+                <th class="py-2.5 px-3 font-bold">ID</th>
+                <th class="py-2.5 px-3 font-bold">Prioridad</th>
+                <th class="py-2.5 px-3 font-bold">Material / Diámetro</th>
+                <th class="py-2.5 px-3 font-bold">Longitud</th>
+                <th class="py-2.5 px-3 font-bold">Instalación (Edad)</th>
+                <th class="py-2.5 px-3 font-bold">Inversión Estimada</th>
+                <th class="py-2.5 px-3 font-bold text-right">Acción</th>
+              </tr>
+            </thead>
+            <tbody id="tabla_tuberias_body" class="divide-y divide-white/5">
+              <!-- Renderizado dinámicamente desde AguaPotableApp -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
     <!-- SECCIÓN 7: INFOGRAFÍAS -->
     <!-- ========================================== -->
     <section id="sec-infografias" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
@@ -2599,9 +2854,11 @@
   <script src="assets/js/secciones_data.js?v=20261002_clean"></script>
   <script src="assets/js/servicios_publicos_data.js?v=20261019_v1"></script>
   <script src="assets/js/servicios_publicos.js?v=20261019_v1"></script>
-  <script src="assets/js/movilidad_data.js?v=20261113_v3"></script>
-  <script src="assets/js/movilidad_paradas.js?v=20261113_v3"></script>
-  <script src="assets/js/movilidad.js?v=20261113_v3"></script>
+  <script src="assets/js/movilidad_data.js?v=20261113_v4"></script>
+  <script src="assets/js/movilidad_paradas.js?v=20261113_v4"></script>
+  <script src="assets/js/movilidad.js?v=20261113_v4"></script>
+  <script src="assets/js/agua_potable_data.js?v=20261113_v4"></script>
+  <script src="assets/js/agua_potable.js?v=20261113_v4"></script>
   <script>
     window.createIconsSafe = function() {
       if (window.lucide && typeof window.lucide.createIcons === 'function') {
@@ -3206,6 +3463,9 @@
       if (window.MovilidadApp && window.MovilidadApp.mapa) {
         try { window.MovilidadApp.mapa.invalidateSize(); } catch(e){}
       }
+      if (window.AguaPotableApp && window.AguaPotableApp.mapa) {
+        try { window.AguaPotableApp.mapa.invalidateSize(); } catch(e){}
+      }
     }
     window.addEventListener('resize', resizeAllLeafletMaps);
 
@@ -3323,6 +3583,21 @@
           renderizarGraficasCensales(censoFiltroDelegacion);
           lucide.createIcons();
         }, 100);
+      }
+
+      if (seccionId === 'agua') {
+        if (window.AguaPotableApp) {
+          window.AguaPotableApp.init();
+          setTimeout(() => {
+            if (window.AguaPotableApp.mapa) {
+              window.AguaPotableApp.mapa.invalidateSize();
+            }
+            if (window.lucide) lucide.createIcons();
+          }, 150);
+          setTimeout(() => {
+            if (window.AguaPotableApp.mapa) window.AguaPotableApp.mapa.invalidateSize();
+          }, 500);
+        }
       }
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
