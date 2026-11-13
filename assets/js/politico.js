@@ -47,6 +47,25 @@ window.PoliticoApp = {
     if (elPartic) elPartic.innerText = `${m.pct_participacion}% de participación en urnas`;
   },
 
+  normalizarCoords(coords) {
+    if (!coords || !Array.isArray(coords) || coords.length === 0) return null;
+    // Si ya es un arreglo de pares [[lat, lng], [lat, lng], ...]
+    if (Array.isArray(coords[0]) && coords[0].length >= 2) {
+      return coords;
+    }
+    // Si viene como arreglo plano [lat, lng, lat, lng, ...]
+    if (typeof coords[0] === 'number') {
+      const pares = [];
+      for (let i = 0; i < coords.length; i += 2) {
+        if (coords[i + 1] !== undefined) {
+          pares.push([coords[i], coords[i + 1]]);
+        }
+      }
+      return pares.length >= 3 ? pares : null;
+    }
+    return null;
+  },
+
   initMapa() {
     if (this.mapa) return;
 
@@ -161,7 +180,8 @@ window.PoliticoApp = {
     const seccionesFiltradas = this.obtenerSeccionesFiltradas();
 
     seccionesFiltradas.forEach(s => {
-      if (!s.coords || s.coords.length === 0) return;
+      const coords = this.normalizarCoords(s.coords);
+      if (!coords || coords.length === 0) return;
 
       let fillColor = '#2563eb';
       let strokeColor = '#1d4ed8';
@@ -216,7 +236,7 @@ window.PoliticoApp = {
         }
       }
 
-      const polygon = L.polygon(s.coords, {
+      const polygon = L.polygon(coords, {
         color: strokeColor,
         weight: 1.5,
         fillColor: fillColor,
@@ -409,13 +429,15 @@ window.PoliticoApp = {
 
   centrarSeccion(seccNum) {
     const s = this.secciones.find(item => item.seccion === seccNum);
-    if (!s || !s.coords || s.coords.length === 0) return;
+    if (!s) return;
+    const coords = this.normalizarCoords(s.coords);
+    if (!coords || coords.length === 0) return;
 
     if (this.mapa) {
-      const bounds = L.polygon(s.coords).getBounds();
+      const bounds = L.polygon(coords).getBounds();
       this.mapa.fitBounds(bounds, { padding: [80, 80], maxZoom: 16 });
 
-      const highlight = L.polygon(s.coords, {
+      const highlight = L.polygon(coords, {
         color: '#ffffff',
         weight: 6,
         fillColor: '#ffffff',
