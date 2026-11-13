@@ -1708,6 +1708,10 @@
               <i data-lucide="map-pin" class="w-4 h-4 text-cyan-400"></i>
               <span>MI PUNTO</span>
             </button>
+            <button id="btnBorrarMiPuntoVisor" onclick="limpiarMiPuntoEnVisor()" title="Borrar punto y líneas de análisis del mapa" class="hidden text-xs font-bold flex items-center gap-1.5 text-rose-300 hover:text-white bg-rose-950/70 hover:bg-rose-900 px-2.5 py-1.5 rounded-xl border border-rose-700/50 transition cursor-pointer shadow-sm">
+              <i data-lucide="trash-2" class="w-4 h-4 text-rose-400"></i>
+              <span>Borrar Punto</span>
+            </button>
             <div class="h-4 w-px bg-white/20 hidden sm:block"></div>
             <!-- Buscador en el mapa con Autocomplete de Vialidades, Obras y Delegaciones -->
             <div class="relative">
@@ -2127,6 +2131,12 @@
             <button id="btnColocarPuntoMov" onclick="MovilidadApp.activarColocarPunto()" class="px-3 py-1 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold rounded-lg transition flex items-center gap-1.5 cursor-pointer shadow-md">
               <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
               <span>📍 MI PUNTO</span>
+            </button>
+
+            <!-- Botón Borrar Punto Movilidad -->
+            <button id="btnBorrarPuntoMov" onclick="MovilidadApp.limpiarMiPuntoMovilidad()" title="Borrar punto y limpiar resultados" class="hidden px-2.5 py-1 bg-rose-950/70 hover:bg-rose-900 text-rose-300 border border-rose-500/40 font-bold rounded-lg transition flex items-center gap-1 cursor-pointer text-xs shadow-sm">
+              <i data-lucide="trash-2" class="w-3.5 h-3.5 text-rose-400"></i>
+              <span>Borrar Punto</span>
             </button>
 
             <!-- Botón Mi Ubicación GPS -->
@@ -2589,9 +2599,9 @@
   <script src="assets/js/secciones_data.js?v=20261002_clean"></script>
   <script src="assets/js/servicios_publicos_data.js?v=20261019_v1"></script>
   <script src="assets/js/servicios_publicos.js?v=20261019_v1"></script>
-  <script src="assets/js/movilidad_data.js?v=20261113_v2"></script>
-  <script src="assets/js/movilidad_paradas.js?v=20261113_v2"></script>
-  <script src="assets/js/movilidad.js?v=20261113_v2"></script>
+  <script src="assets/js/movilidad_data.js?v=20261113_v3"></script>
+  <script src="assets/js/movilidad_paradas.js?v=20261113_v3"></script>
+  <script src="assets/js/movilidad.js?v=20261113_v3"></script>
   <script>
     window.createIconsSafe = function() {
       if (window.lucide && typeof window.lucide.createIcons === 'function') {
@@ -3778,6 +3788,12 @@
     function activarMiPuntoEnVisor() {
       if (window.MovilidadApp && typeof window.MovilidadApp.activarMiPuntoEnVisor === 'function') {
         window.MovilidadApp.activarMiPuntoEnVisor();
+      }
+    }
+
+    function limpiarMiPuntoEnVisor() {
+      if (window.MovilidadApp && typeof window.MovilidadApp.limpiarMiPuntoVisor === 'function') {
+        window.MovilidadApp.limpiarMiPuntoVisor();
       }
     }
 

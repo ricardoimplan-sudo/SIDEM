@@ -82,6 +82,20 @@ window.MovilidadApp = {
     return (this._dictYoVoy && this._dictYoVoy[key]) || 'Ruta urbana YoVoy';
   },
 
+  // Formatea el nombre de la parada para resaltar el texto de la ruta en color rojo y negritas llamativas
+  formatearNombreParada(nombre) {
+    if (!nombre) return '';
+    return String(nombre).replace(/\(([^)]*Ruta[^)]*)\)/gi, '(<b class="text-red-600 font-black tracking-wide" style="color: #dc2626 !important; font-weight: 900 !important; font-size: 1.05em;">$1</b>)');
+  },
+
+  formatearTextoRutaRoja(texto) {
+    if (!texto) return '';
+    if (/\(([^)]*Ruta[^)]*)\)/i.test(texto)) {
+      return this.formatearNombreParada(texto);
+    }
+    return String(texto).replace(/\b(Ruta\s+[A-Za-z0-9]+(?:\s+[A-Za-z0-9]+)?)\b/gi, '<b class="text-red-600 font-black" style="color: #dc2626 !important; font-weight: 900 !important;">$1</b>');
+  },
+
   // Genera popup enriquecido para Paradas de Combis con desglose de destinos
   crearPopupHtmlParadaCombi(s) {
     const rutasCards = (s.rutas || []).map(r => {
@@ -110,7 +124,7 @@ window.MovilidadApp = {
             ${s.num_rutas} ${s.num_rutas === 1 ? 'ruta' : 'rutas'}
           </span>
         </div>
-        <div class="text-[11px] text-slate-700 font-semibold">${s.nombre}</div>
+        <div class="text-[11px] text-slate-700 font-semibold">${this.formatearNombreParada(s.nombre)}</div>
         <div class="space-y-1.5 pt-1">
           <span class="text-[10px] font-black text-slate-500 uppercase tracking-wider block">¿Para dónde van estas combis? (Destinos):</span>
           <div class="space-y-1.5 max-h-56 overflow-y-auto pr-1">
@@ -154,7 +168,7 @@ window.MovilidadApp = {
             ${s.num_rutas} ${s.num_rutas === 1 ? 'ruta' : 'rutas'}
           </span>
         </div>
-        <div class="text-[11px] text-slate-700 font-semibold">${s.nombre}</div>
+        <div class="text-[11px] text-slate-700 font-semibold">${this.formatearNombreParada(s.nombre)}</div>
         <div class="space-y-1.5 pt-1">
           <span class="text-[10px] font-black text-slate-500 uppercase tracking-wider block">¿Para dónde van estos autobuses? (Destinos):</span>
           <div class="space-y-1.5 max-h-56 overflow-y-auto pr-1">
@@ -407,18 +421,63 @@ window.MovilidadApp = {
     }
   },
 
-  // Activa o coloca el punto del usuario directamente al centro del mapa
+  // Limpia el punto del usuario y oculta el panel de resultados en Movilidad
+  limpiarMiPuntoMovilidad() {
+    if (this.capaCercania) {
+      this.capaCercania.clearLayers();
+    }
+    this.ultimoResultadoCercania = null;
+    this.ubicacionActual = null;
+    const contenedor = document.getElementById('mov_panel_cercania');
+    if (contenedor) contenedor.innerHTML = '';
+    const btnBorrar = document.getElementById('btnBorrarPuntoMov');
+    if (btnBorrar) btnBorrar.classList.add('hidden');
+    this.cancelarColocarPunto();
+  },
+
+  cancelarColocarPunto() {
+    if (this.mapa) {
+      const container = this.mapa.getContainer();
+      if (container) container.style.cursor = '';
+      if (this._onColocarPuntoClick) {
+        this.mapa.off('click', this._onColocarPuntoClick);
+        this._onColocarPuntoClick = null;
+      }
+    }
+    const t = document.getElementById('toastColocarPuntoMov');
+    if (t) t.remove();
+  },
+
+  // Activa el modo para colocar el punto del usuario (limpia el anterior y pide clic en el mapa)
   activarColocarPunto() {
     this.initMapa();
-    const centro = this.mapa.getCenter();
-    this.calcularTransporteMasCercano(centro.lat, centro.lng, 'Mi punto colocado (Arrastrable)');
-    
-    // Notificación en pantalla
-    const notif = document.getElementById('mov_punto_instruccion');
-    if (notif) {
-      notif.classList.remove('hidden');
-      setTimeout(() => { notif.classList.add('hidden'); }, 5000);
-    }
+    if (!this.mapa) return;
+
+    // Limpia el punto anterior para que no se quede congelado
+    this.limpiarMiPuntoMovilidad();
+
+    const container = this.mapa.getContainer();
+    if (container) container.style.cursor = 'crosshair';
+
+    // Notificación flotante de guía
+    const toast = document.createElement('div');
+    toast.id = 'toastColocarPuntoMov';
+    toast.className = 'fixed bottom-8 left-1/2 -translate-x-1/2 z-[9999] px-4 py-2.5 rounded-2xl bg-slate-900/95 text-white text-xs font-bold shadow-2xl border border-cyan-400/50 flex items-center gap-2 animate-bounce';
+    toast.innerHTML = `
+      <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
+      <span>📍 <b>MI PUNTO:</b> Haz clic en cualquier lugar del mapa para colocar tu punto.</span>
+      <button onclick="MovilidadApp.cancelarColocarPunto()" class="ml-2 text-[10px] px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition cursor-pointer">✕ Cancelar</button>
+    `;
+    const old = document.getElementById('toastColocarPuntoMov');
+    if (old) old.remove();
+    document.body.appendChild(toast);
+
+    this._onColocarPuntoClick = (e) => {
+      this.cancelarColocarPunto();
+      this.calcularTransporteMasCercano(e.latlng.lat, e.latlng.lng, 'Punto colocado en el mapa');
+    };
+
+    this.mapa.once('click', this._onColocarPuntoClick);
   },
 
   // =========================================================================
@@ -646,28 +705,46 @@ window.MovilidadApp = {
       draggable: true
     }).addTo(this.capaCercania);
 
+    // Mostrar botón de borrar punto en toolbar
+    const btnBorrar = document.getElementById('btnBorrarPuntoMov');
+    if (btnBorrar) btnBorrar.classList.remove('hidden');
+
     this.marcadorUsuario.bindPopup(`
-      <div class="p-2.5 font-sans min-w-[240px] space-y-2">
+      <div class="p-2.5 font-sans min-w-[260px] space-y-2">
         <div class="flex items-center justify-between border-b border-cyan-200 pb-1">
           <span class="font-black text-cyan-800 text-xs flex items-center gap-1">📍 MI PUNTO</span>
           <span class="text-[9px] px-1.5 py-0.2 rounded bg-cyan-600 text-white font-bold">Arrastrable</span>
         </div>
-        <div class="space-y-1 text-xs">
-          <div class="flex items-center justify-between text-slate-700">
-            <span class="flex items-center gap-1 font-semibold">🚌 Parada YoVoy:</span>
-            <span class="font-bold text-sky-700">${fmt(paradaCamionRes.distanciaMetros).distStr} (~${fmt(paradaCamionRes.distanciaMetros).tiempoMin} min)</span>
+        <div class="space-y-1.5 text-xs">
+          <div class="text-slate-700">
+            <div class="flex items-center justify-between">
+              <span class="flex items-center gap-1 font-bold text-sky-800">🚌 Parada YoVoy:</span>
+              <span class="font-bold text-sky-700">${fmt(paradaCamionRes.distanciaMetros).distStr} (~${fmt(paradaCamionRes.distanciaMetros).tiempoMin} min)</span>
+            </div>
+            <div class="text-[10px] text-slate-600 pl-4">${paradaCamionRes.parada ? this.formatearNombreParada(paradaCamionRes.parada.nombre) : ''}</div>
           </div>
-          <div class="flex items-center justify-between text-slate-700">
-            <span class="flex items-center gap-1 font-semibold">🚐 Parada Combi:</span>
-            <span class="font-bold text-amber-700">${fmt(paradaCombiRes.distanciaMetros).distStr} (~${fmt(paradaCombiRes.distanciaMetros).tiempoMin} min)</span>
+          <div class="text-slate-700">
+            <div class="flex items-center justify-between">
+              <span class="flex items-center gap-1 font-bold text-amber-800">🚐 Parada Combi:</span>
+              <span class="font-bold text-amber-700">${fmt(paradaCombiRes.distanciaMetros).distStr} (~${fmt(paradaCombiRes.distanciaMetros).tiempoMin} min)</span>
+            </div>
+            <div class="text-[10px] text-slate-600 pl-4">${paradaCombiRes.parada ? this.formatearNombreParada(paradaCombiRes.parada.nombre) : ''}</div>
           </div>
-          <div class="flex items-center justify-between text-slate-700">
-            <span class="flex items-center gap-1 font-semibold">🚲 Ciclovía:</span>
-            <span class="font-bold text-emerald-700">${fmt(cicloviaRes.distanciaMetros).distStr} (~${fmt(cicloviaRes.distanciaMetros).tiempoMin} min)</span>
+          <div class="text-slate-700">
+            <div class="flex items-center justify-between">
+              <span class="flex items-center gap-1 font-bold text-emerald-800">🚲 Ciclovía:</span>
+              <span class="font-bold text-emerald-700">${fmt(cicloviaRes.distanciaMetros).distStr} (~${fmt(cicloviaRes.distanciaMetros).tiempoMin} min)</span>
+            </div>
+            <div class="text-[10px] text-slate-600 pl-4">${cicloviaRes.ciclovia ? cicloviaRes.ciclovia.nombre : ''}</div>
           </div>
         </div>
-        <div class="text-[10px] text-slate-400 pt-1 border-t border-slate-100 italic">
-          Arrastra este punto a otra calle para recalcular.
+        <div class="pt-2 border-t border-slate-100 flex items-center justify-between gap-2">
+          <button onclick="MovilidadApp.limpiarMiPuntoMovilidad()" class="text-[11px] px-2.5 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold border border-rose-200 transition cursor-pointer flex items-center gap-1">
+            <span>🗑️ Borrar punto</span>
+          </button>
+          <button onclick="MovilidadApp.activarColocarPunto()" class="text-[11px] px-2.5 py-1 rounded-lg bg-cyan-600 hover:bg-cyan-700 text-white font-bold transition cursor-pointer flex items-center gap-1 shadow-sm">
+            <span>📍 Colocar otro punto</span>
+          </button>
         </div>
       </div>
     `).openPopup();
@@ -826,7 +903,13 @@ window.MovilidadApp = {
             </div>
           </div>
           <div class="flex items-center gap-2 text-xs">
-            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-cyan-300 font-mono text-[11px] border border-white/10">
+            <button onclick="MovilidadApp.activarColocarPunto()" class="px-2.5 py-1 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs transition flex items-center gap-1 cursor-pointer shadow-sm">
+              <span>📍 Colocar otro punto</span>
+            </button>
+            <button onclick="MovilidadApp.limpiarMiPuntoMovilidad()" class="px-2.5 py-1 rounded-lg bg-rose-900/60 hover:bg-rose-700 text-rose-200 border border-rose-500/40 font-bold text-xs transition flex items-center gap-1 cursor-pointer">
+              <span>🗑️ Borrar Punto</span>
+            </button>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-cyan-300 font-mono text-[11px] border border-white/10 hidden sm:inline-block">
               📍 ${lat.toFixed(4)}, ${lng.toFixed(4)}
             </span>
           </div>
@@ -846,7 +929,7 @@ window.MovilidadApp = {
                 </span>
               </div>
               <h5 class="font-bold text-white text-sm leading-snug">
-                ${paradaCamionRes.parada ? paradaCamionRes.parada.nombre : 'No disponible'}
+                ${paradaCamionRes.parada ? this.formatearNombreParada(paradaCamionRes.parada.nombre) : 'No disponible'}
               </h5>
               <div class="flex items-center gap-2 text-[11px] text-sky-300">
                 <i data-lucide="footprints" class="w-3.5 h-3.5"></i>
@@ -882,7 +965,7 @@ window.MovilidadApp = {
                 </span>
               </div>
               <h5 class="font-bold text-white text-sm leading-snug">
-                ${paradaCombiRes.parada ? paradaCombiRes.parada.nombre : 'No disponible'}
+                ${paradaCombiRes.parada ? this.formatearNombreParada(paradaCombiRes.parada.nombre) : 'No disponible'}
               </h5>
               <div class="flex items-center gap-2 text-[11px] text-amber-300">
                 <i data-lucide="footprints" class="w-3.5 h-3.5"></i>
@@ -1425,6 +1508,29 @@ window.MovilidadApp = {
     return fg;
   },
 
+  // Limpia el punto del usuario y líneas del Visor Principal (#sec-visor)
+  limpiarMiPuntoVisor() {
+    if (this.capaVisorMiPunto) {
+      this.capaVisorMiPunto.clearLayers();
+    }
+    const btnBorrar = document.getElementById('btnBorrarMiPuntoVisor');
+    if (btnBorrar) btnBorrar.classList.add('hidden');
+    this.cancelarMiPuntoVisor();
+  },
+
+  cancelarMiPuntoVisor() {
+    if (window.mapPimags) {
+      const container = window.mapPimags.getContainer();
+      if (container) container.style.cursor = '';
+      if (this._onMiPuntoVisorClick) {
+        window.mapPimags.off('click', this._onMiPuntoVisorClick);
+        this._onMiPuntoVisorClick = null;
+      }
+    }
+    const t = document.getElementById('toastMiPuntoVisor');
+    if (t) t.remove();
+  },
+
   // MI PUNTO interactivo para el Visor IDEAgs (#sec-visor)
   activarMiPuntoEnVisor() {
     if (!window.mapPimags) {
@@ -1437,33 +1543,32 @@ window.MovilidadApp = {
       return;
     }
 
+    // 1. Limpia cualquier punto previo para que no se quede pegado
+    this.limpiarMiPuntoVisor();
+
     const map = window.mapPimags;
     const container = map.getContainer();
     if (container) container.style.cursor = 'crosshair';
 
-    // Notificación flotante de ayuda
+    // 2. Notificación flotante de ayuda con botón cancelar
     const toast = document.createElement('div');
     toast.id = 'toastMiPuntoVisor';
     toast.className = 'fixed bottom-8 left-1/2 -translate-x-1/2 z-[9999] px-4 py-2.5 rounded-2xl bg-slate-900/95 text-white text-xs font-bold shadow-2xl border border-cyan-400/50 flex items-center gap-2 animate-bounce';
     toast.innerHTML = `
       <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
-      <span>📍 <b>MODO MI PUNTO ACTIVADO:</b> Haz clic en cualquier lugar del mapa para consultar paradas y destinos cercanos.</span>
+      <span>📍 <b>MODO MI PUNTO ACTIVADO:</b> Haz clic en cualquier lugar del mapa para colocar tu punto.</span>
+      <button onclick="MovilidadApp.cancelarMiPuntoVisor()" class="ml-2 text-[10px] px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition cursor-pointer">✕ Cancelar</button>
     `;
     const oldToast = document.getElementById('toastMiPuntoVisor');
     if (oldToast) oldToast.remove();
     document.body.appendChild(toast);
 
-    const onMapClick = (e) => {
-      const lat = e.latlng.lat;
-      const lng = e.latlng.lng;
-      if (container) container.style.cursor = '';
-      const t = document.getElementById('toastMiPuntoVisor');
-      if (t) t.remove();
-      map.off('click', onMapClick);
-      this.ejecutarConsultaMiPuntoVisor(lat, lng);
+    this._onMiPuntoVisorClick = (e) => {
+      this.cancelarMiPuntoVisor();
+      this.ejecutarConsultaMiPuntoVisor(e.latlng.lat, e.latlng.lng);
     };
 
-    map.once('click', onMapClick);
+    map.once('click', this._onMiPuntoVisorClick);
   },
 
   ejecutarConsultaMiPuntoVisor(lat, lng) {
@@ -1475,6 +1580,10 @@ window.MovilidadApp = {
     } else {
       this.capaVisorMiPunto.clearLayers();
     }
+
+    // Mostrar botón de borrar punto en toolbar del Geovisor
+    const btnBorrar = document.getElementById('btnBorrarMiPuntoVisor');
+    if (btnBorrar) btnBorrar.classList.remove('hidden');
 
     const paradaCamionRes = this.encontrarParadaMasCercana(lat, lng, window.PARADAS_CAMIONES || []);
     const paradaCombiRes = this.encontrarParadaMasCercana(lat, lng, window.PARADAS_COMBIS || []);
@@ -1582,7 +1691,7 @@ window.MovilidadApp = {
           <div class="p-2 rounded-xl bg-sky-50 border border-sky-200 flex items-start justify-between gap-2">
             <div>
               <span class="font-bold text-sky-800 text-[11px] block">🚌 Parada YoVoy más cercana:</span>
-              <span class="text-[11px] text-slate-700 font-medium">${paradaCamionRes.parada ? paradaCamionRes.parada.nombre : 'N/D'}</span>
+              <span class="text-[11px] text-slate-700 font-medium">${paradaCamionRes.parada ? this.formatearNombreParada(paradaCamionRes.parada.nombre) : 'N/D'}</span>
             </div>
             <div class="text-right shrink-0">
               <span class="font-black text-sky-700 text-xs">${yFmt.distStr}</span>
@@ -1593,7 +1702,7 @@ window.MovilidadApp = {
           <div class="p-2 rounded-xl bg-amber-50 border border-amber-200 flex items-start justify-between gap-2">
             <div>
               <span class="font-bold text-amber-800 text-[11px] block">🚐 Parada Combi más cercana:</span>
-              <span class="text-[11px] text-slate-700 font-medium">${paradaCombiRes.parada ? paradaCombiRes.parada.nombre : 'N/D'}</span>
+              <span class="text-[11px] text-slate-700 font-medium">${paradaCombiRes.parada ? this.formatearNombreParada(paradaCombiRes.parada.nombre) : 'N/D'}</span>
             </div>
             <div class="text-right shrink-0">
               <span class="font-black text-amber-700 text-xs">${cbFmt.distStr}</span>
@@ -1612,11 +1721,18 @@ window.MovilidadApp = {
             </div>
           </div>
         </div>
-        <div class="pt-1.5 border-t border-slate-100 flex items-center justify-between gap-2">
-          <span class="text-[10px] text-slate-400">Haz clic en cada parada para ver sus destinos.</span>
-          <button onclick="cambiarSeccion('movilidad')" class="text-[10px] px-2 py-1 rounded-lg bg-cyan-600 hover:bg-cyan-700 text-white font-bold transition">
-            Ver en Movilidad &raquo;
+        <div class="pt-2 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2">
+          <button onclick="MovilidadApp.limpiarMiPuntoVisor()" class="text-xs px-2.5 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold border border-rose-200 transition cursor-pointer flex items-center gap-1">
+            <span>🗑️ Borrar punto</span>
           </button>
+          <div class="flex items-center gap-1.5">
+            <button onclick="MovilidadApp.activarMiPuntoEnVisor()" class="text-xs px-2.5 py-1 rounded-lg bg-cyan-600 hover:bg-cyan-700 text-white font-bold transition cursor-pointer flex items-center gap-1 shadow-sm">
+              <span>📍 Colocar otro punto</span>
+            </button>
+            <button onclick="cambiarSeccion('movilidad')" class="text-xs px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold transition cursor-pointer">
+              <span>Movilidad &raquo;</span>
+            </button>
+          </div>
         </div>
       </div>
     `).openPopup();
