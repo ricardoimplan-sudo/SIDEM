@@ -2564,11 +2564,12 @@
           </h2>
           <p class="text-sm text-slate-600 max-w-3xl mt-1.5 leading-relaxed">
             Tablero de control para <strong>estrategas políticos, directores territoriales y coordinadores de campaña</strong>. 
+            Cobertura del <strong>100% del territorio municipal (505 Secciones Electorales Oficiales divididas en 12 Distritos Locales y 2 Distritos Federales)</strong>. 
             Mapea la aceptación electoral por sección en tres bloques clave: 
             <span class="font-bold text-blue-700">Azul (PAN)</span>, 
             <span class="font-bold text-rose-700">Rojo (MORENA)</span> y 
             <span class="font-bold text-slate-700 bg-slate-200 px-1.5 py-0.5 rounded">Gris (Población no afiliada / Indecisos / No voto)</span>. 
-            Permite focalizar brigadas, obras de cercanía y eventos donde se requiere mayor actividad para ganarse a la gente no definida.
+            Permite focalizar brigadas, obras de cercanía y eventos territoriales donde se requiere mayor actividad para ganarse a la gente no definida.
           </p>
         </div>
         <div class="flex items-center gap-2 shrink-0">
@@ -2588,9 +2589,9 @@
             <span>Simpatía PAN (Azul)</span>
             <span class="w-3 h-3 rounded-full bg-blue-500 shadow-sm shadow-blue-400"></span>
           </div>
-          <div id="pol_kpi_pan" class="text-2xl font-black font-display text-blue-200">176,625 <span class="text-xs font-normal text-blue-300">(43.4%)</span></div>
+          <div id="pol_kpi_pan" class="text-2xl font-black font-display text-blue-200">255,993 <span class="text-xs font-normal text-blue-300">(47.0%)</span></div>
           <div class="text-[11px] text-blue-300 flex items-center gap-1.5 font-bold">
-            <span>215 secciones con ventaja</span>
+            <span>437 secciones con ventaja</span>
           </div>
         </div>
 
@@ -2600,9 +2601,9 @@
             <span>Simpatía MORENA (Rojo)</span>
             <span class="w-3 h-3 rounded-full bg-rose-500 shadow-sm shadow-rose-400"></span>
           </div>
-          <div id="pol_kpi_morena" class="text-2xl font-black font-display text-rose-200">129,455 <span class="text-xs font-normal text-rose-300">(31.8%)</span></div>
+          <div id="pol_kpi_morena" class="text-2xl font-black font-display text-rose-200">179,863 <span class="text-xs font-normal text-rose-300">(33.0%)</span></div>
           <div class="text-[11px] text-rose-300 flex items-center gap-1.5 font-bold">
-            <span>36 secciones con ventaja</span>
+            <span>68 secciones con ventaja</span>
           </div>
         </div>
 
@@ -2613,7 +2614,7 @@
             <span>🎯 No Simpatizan / Voto Gris</span>
             <span class="px-2 py-0.5 rounded-full bg-amber-400 text-slate-950 font-black text-[9px] uppercase animate-pulse">Meta Territorial</span>
           </div>
-          <div id="pol_kpi_gris" class="text-2xl font-black font-display text-amber-300">322,399 <span class="text-xs font-normal text-slate-300">(48.6%)</span></div>
+          <div id="pol_kpi_gris" class="text-2xl font-black font-display text-amber-300">432,758 <span class="text-xs font-normal text-slate-300">(47.4%)</span></div>
           <div class="text-[11px] text-slate-300 font-medium">
             <span>Población clave para ganar terreno</span>
           </div>
@@ -2622,12 +2623,12 @@
         <!-- KPI 4: Lista Nominal y Participación -->
         <div class="p-5 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 text-white border border-slate-700 shadow-xl space-y-2">
           <div class="flex items-center justify-between text-xs text-slate-400 font-bold uppercase tracking-wider">
-            <span>Lista Nominal Municipal</span>
+            <span>Lista Nominal Total (505 Secc.)</span>
             <i data-lucide="users" class="w-4 h-4 text-cyan-400"></i>
           </div>
-          <div id="pol_kpi_total_ln" class="text-2xl font-black font-display text-white">663,828 electores</div>
+          <div id="pol_kpi_total_ln" class="text-2xl font-black font-display text-white">912,189 electores</div>
           <div id="pol_kpi_participacion" class="text-[11px] text-slate-300">
-            <span>61.3% de participación en urnas</span>
+            <span>59.8% de participación en urnas</span>
           </div>
         </div>
 
@@ -2653,19 +2654,39 @@
 
           <!-- Filtros por Distrito, Nivel de Gris y Buscador -->
           <div class="flex flex-wrap items-center gap-2.5">
-            <!-- Distrito Local -->
+            <!-- Distrito Local y Federal -->
             <div class="flex items-center gap-1.5">
               <label class="text-xs font-bold text-slate-400">Distrito:</label>
               <select onchange="PoliticoApp.filtrarPorDistrito(this.value)" class="bg-slate-800 border border-slate-700 text-white text-xs font-bold rounded-xl px-2.5 py-1.5 focus:outline-none focus:border-cyan-500">
-                <option value="todos">Todos los Distritos</option>
-                <option value="5">Distrito 5</option>
-                <option value="9">Distrito 9</option>
-                <option value="12">Distrito 12</option>
-                <option value="13">Distrito 13</option>
-                <option value="14">Distrito 14</option>
-                <option value="15">Distrito 15</option>
-                <option value="16">Distrito 16</option>
-                <option value="18">Distrito 18</option>
+                <option value="todos">Todos los Distritos (505 secc.)</option>
+                <optgroup label="🏛️ Distritos Federales INE">
+                  <option value="fed-2">Distrito Federal 2 (Oriente - 203 secc.)</option>
+                  <option value="fed-3">Distrito Federal 3 (Poniente/Centro - 302 secc.)</option>
+                </optgroup>
+                <optgroup label="📍 Distritos Locales IEE">
+                  <option value="5">Distrito 5 (22 secc. - Nororiente)</option>
+                  <option value="6">Distrito 6 (47 secc. - Norponiente)</option>
+                  <option value="9">Distrito 9 (30 secc. - Oriente)</option>
+                  <option value="10">Distrito 10 (39 secc. - Centro Poniente)</option>
+                  <option value="11">Distrito 11 (78 secc. - Poniente)</option>
+                  <option value="12">Distrito 12 (25 secc. - Centro)</option>
+                  <option value="13">Distrito 13 (35 secc. - Suroriente)</option>
+                  <option value="14">Distrito 14 (45 secc. - Villas Nte)</option>
+                  <option value="15">Distrito 15 (45 secc. - Villas Sur)</option>
+                  <option value="16">Distrito 16 (25 secc. - Sur)</option>
+                  <option value="17">Distrito 17 (79 secc. - Surponiente)</option>
+                  <option value="18">Distrito 18 (35 secc. - Rural Sur)</option>
+                </optgroup>
+              </select>
+            </div>
+
+            <!-- Cobertura / Origen de Datos -->
+            <div class="flex items-center gap-1.5">
+              <label class="text-xs font-bold text-slate-400">Cobertura:</label>
+              <select onchange="PoliticoApp.filtrarPorOrigen(this.value)" class="bg-slate-800 border border-slate-700 text-white text-xs font-bold rounded-xl px-2.5 py-1.5 focus:outline-none focus:border-cyan-500">
+                <option value="todos">Todo el Municipio (505)</option>
+                <option value="vp">📁 Muestra VP (253 secc.)</option>
+                <option value="iee">🗺️ Cobertura IEE (252 secc.)</option>
               </select>
             </div>
 
@@ -2695,7 +2716,7 @@
             <div class="relative min-w-[150px]">
               <input 
                 type="text" 
-                placeholder="Buscar sección (ej. 80)..." 
+                placeholder="Buscar sección o colonia..." 
                 onkeyup="PoliticoApp.filtrarPorBusqueda(this.value)"
                 class="w-full bg-slate-800 border border-slate-700 text-white placeholder-slate-400 text-xs rounded-xl px-2.5 py-1.5 pl-7 focus:outline-none focus:border-cyan-500"
               />

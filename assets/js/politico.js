@@ -1,7 +1,8 @@
 /**
  * PIMAgs 2026 - Módulo de Preferencia Electoral y Simpatía Política
  * Análisis Territorial de Preferencias y Zonas de Voto No Afiliado (Gris)
- * Municipio de Aguascalientes - 253 Secciones Electorales Mapeadas
+ * Municipio de Aguascalientes - Cobertura Total de 505 Secciones Electorales
+ * 12 Distritos Locales (5, 6, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18) y 2 Distritos Federales (2 y 3)
  */
 
 window.PoliticoApp = {
@@ -14,6 +15,7 @@ window.PoliticoApp = {
   filtroGanador: 'todos',
   filtroSemaforo: 'todos',
   filtroNivelGris: 'todos',
+  filtroOrigen: 'todos', // 'todos', 'vp', 'iee'
   busquedaTexto: '',
   seccionSeleccionada: null,
 
@@ -105,9 +107,21 @@ window.PoliticoApp = {
 
   obtenerSeccionesFiltradas() {
     return this.secciones.filter(s => {
-      // Filtro Distrito
+      // Filtro Distrito (Local o Federal)
       if (this.filtroDistrito !== 'todos') {
-        if (s.distrito_l !== parseInt(this.filtroDistrito)) return false;
+        if (this.filtroDistrito.startsWith('fed-')) {
+          const fedNum = parseInt(this.filtroDistrito.replace('fed-', ''));
+          if (s.distrito_f !== fedNum) return false;
+        } else {
+          if (s.distrito_l !== parseInt(this.filtroDistrito)) return false;
+        }
+      }
+
+      // Filtro Origen de Datos
+      if (this.filtroOrigen === 'vp') {
+        if (!s.es_muestra_vp) return false;
+      } else if (this.filtroOrigen === 'iee') {
+        if (s.es_muestra_vp) return false;
       }
 
       // Filtro Ganador
@@ -126,12 +140,14 @@ window.PoliticoApp = {
         if (s.pct_no_voto < threshold) return false;
       }
 
-      // Filtro Texto
+      // Filtro Texto (Sección, Colonia o Distrito)
       if (this.busquedaTexto) {
         const q = this.busquedaTexto.toLowerCase();
         const seccStr = String(s.seccion);
         const distStr = `distrito ${s.distrito_l}`;
-        if (!seccStr.includes(q) && !distStr.includes(q)) return false;
+        const desStr = (s.desarrollo || '').toLowerCase();
+        const delStr = (s.deleg || '').toLowerCase();
+        if (!seccStr.includes(q) && !distStr.includes(q) && !desStr.includes(q) && !delStr.includes(q)) return false;
       }
 
       return true;
@@ -168,7 +184,7 @@ window.PoliticoApp = {
       } else if (this.modoVisualizacion === 'indecisos') {
         // Enfoque en No Simpatizantes / Voto Gris (>50%, >60%, >70%)
         if (s.pct_no_voto >= 65) {
-          fillColor = '#475569'; // Gris oscuro intenso (máxima abstención/indecisión)
+          fillColor = '#475569'; // Gris oscuro intenso
           strokeColor = '#0f172a';
           fillOpacity = 0.85;
         } else if (s.pct_no_voto >= 50) {
@@ -202,15 +218,17 @@ window.PoliticoApp = {
 
       const polygon = L.polygon(s.coords, {
         color: strokeColor,
-        weight: 2,
+        weight: 1.5,
         fillColor: fillColor,
         fillOpacity: fillOpacity
       }).addTo(this.capaPoligonos);
 
       // Tooltip rápido al pasar el cursor
+      const desCorto = s.desarrollo ? (s.desarrollo.length > 35 ? s.desarrollo.substring(0, 35) + '...' : s.desarrollo) : 'Zona Urbana';
       polygon.bindTooltip(`
         <div class="font-sans text-xs font-bold">
-          Sección ${s.seccion} (Distrito ${s.distrito_l})<br>
+          Sección ${s.seccion} &bull; Distrito Local ${s.distrito_l} (Fed. ${s.distrito_f})<br>
+          <span class="text-slate-500 font-normal text-[10px]">${desCorto}</span><br>
           <span style="color:#2563eb">🔵 PAN: ${s.pct_pan}%</span> &bull; 
           <span style="color:#dc2626">🔴 MORENA: ${s.pct_morena}%</span><br>
           <span style="color:#64748b">⚪ No simpatizan: ${s.pct_no_voto}% (${s.no_voto.toLocaleString('es-MX')} pers.)</span>
@@ -221,10 +239,10 @@ window.PoliticoApp = {
       polygon.bindPopup(() => this.crearPopupSeccionHtml(s));
 
       polygon.on('mouseover', function () {
-        this.setStyle({ weight: 4, fillOpacity: 0.95, color: '#ffffff' });
+        this.setStyle({ weight: 3.5, fillOpacity: 0.95, color: '#ffffff' });
       });
       polygon.on('mouseout', function () {
-        this.setStyle({ weight: 2, fillOpacity: fillOpacity, color: strokeColor });
+        this.setStyle({ weight: 1.5, fillOpacity: fillOpacity, color: strokeColor });
       });
     });
 
@@ -234,7 +252,9 @@ window.PoliticoApp = {
       const sumLn = seccionesFiltradas.reduce((acc, s) => acc + s.ln, 0);
       const sumNoVoto = seccionesFiltradas.reduce((acc, s) => acc + s.no_voto, 0);
       const pctGris = sumLn > 0 ? ((sumNoVoto / sumLn) * 100).toFixed(1) : 0;
-      elConteo.innerHTML = `Mostrando <b>${seccionesFiltradas.length} secciones</b> electorales &bull; Lista Nominal: <b>${sumLn.toLocaleString('es-MX')}</b> electores &bull; Personas no simpatizantes / voto flotante (Gris): <b class="text-amber-300">${sumNoVoto.toLocaleString('es-MX')} (${pctGris}%)</b>`;
+      const countVp = seccionesFiltradas.filter(s => s.es_muestra_vp).length;
+      const countIee = seccionesFiltradas.length - countVp;
+      elConteo.innerHTML = `Mostrando <b>${seccionesFiltradas.length} secciones</b> de 505 electorales &bull; Lista Nominal: <b>${sumLn.toLocaleString('es-MX')}</b> electores &bull; No simpatizantes / voto flotante (Gris): <b class="text-amber-300">${sumNoVoto.toLocaleString('es-MX')} (${pctGris}%)</b> &bull; <span class="text-slate-400 text-[11px]">(Muestra VP: ${countVp} | Cobertura IEE: ${countIee})</span>`;
     }
 
     this.renderTablaSecciones();
@@ -245,19 +265,29 @@ window.PoliticoApp = {
     const isMor = s.ganador === 'MORENA';
 
     const semaforoBadge = s.semaforo.includes('ALTO')
-      ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-rose-600 text-white">🔴 RIESGO ALTO</span>'
+      ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-rose-600 text-white shadow-xs">🔴 RIESGO ALTO</span>'
       : (s.semaforo.includes('MEDIANO')
-          ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500 text-slate-900">🟡 MEDIANO RIESGO</span>'
-          : '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-600 text-white">🟢 BAJO RIESGO</span>');
+          ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500 text-slate-900 shadow-xs">🟡 MEDIANO RIESGO</span>'
+          : '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-600 text-white shadow-xs">🟢 BAJO RIESGO</span>');
+
+    const badgeOrigen = s.es_muestra_vp
+      ? '<span class="px-2 py-0.5 rounded-md text-[9px] font-bold bg-blue-100 text-blue-900 border border-blue-300 inline-flex items-center gap-1">📁 Base de Datos VP</span>'
+      : '<span class="px-2 py-0.5 rounded-md text-[9px] font-bold bg-purple-100 text-purple-900 border border-purple-300 inline-flex items-center gap-1">🗺️ Cartografía Oficial IEE / Proy.</span>';
 
     return `
-      <div class="p-3 font-sans text-xs min-w-[300px] max-w-[350px] space-y-3">
+      <div class="p-3 font-sans text-xs min-w-[310px] max-w-[360px] space-y-3">
         
         <!-- Encabezado -->
-        <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+        <div class="flex items-start justify-between border-b border-slate-200 pb-2">
           <div>
-            <span class="font-black text-slate-900 text-base">🗳️ Sección ${s.seccion}</span>
-            <span class="text-[11px] text-slate-500 block">Distrito Local ${s.distrito_l} &bull; Aguascalientes</span>
+            <div class="flex items-center gap-2">
+              <span class="font-black text-slate-900 text-base">🗳️ Sección ${s.seccion}</span>
+              ${badgeOrigen}
+            </div>
+            <span class="text-[11px] font-bold text-slate-700 block mt-0.5">
+              Distrito Local ${s.distrito_l} &bull; Distrito Federal ${s.distrito_f}
+            </span>
+            ${s.desarrollo ? `<span class="text-[10px] text-slate-500 block truncate max-w-[240px] font-medium" title="${s.desarrollo}">📍 ${s.desarrollo}</span>` : ''}
           </div>
           ${semaforoBadge}
         </div>
@@ -307,10 +337,18 @@ window.PoliticoApp = {
               <div class="h-full bg-slate-600 rounded-full" style="width: ${Math.min(100, s.pct_no_voto)}%"></div>
             </div>
             <span class="text-[10px] text-slate-500 block leading-tight">
-              Población de la Lista Nominal que no participó o aún no tiene partido definido.
+              Población de la Lista Nominal que no votó o aún no tiene partido definido.
             </span>
           </div>
 
+        </div>
+
+        <!-- Otros Partidos (PRI, MC, PRD, PVEM, PT) -->
+        <div class="grid grid-cols-4 gap-1 p-2 rounded-lg bg-slate-50 border border-slate-200 text-[10px]">
+          <div><span class="text-slate-400 block font-bold">MC:</span><span class="font-bold text-amber-700">${s.mc || 0}</span></div>
+          <div><span class="text-slate-400 block font-bold">PRI:</span><span class="font-bold text-red-700">${s.pri || 0}</span></div>
+          <div><span class="text-slate-400 block font-bold">PVEM:</span><span class="font-bold text-emerald-700">${s.pvem || 0}</span></div>
+          <div><span class="text-slate-400 block font-bold">PT:</span><span class="font-bold text-rose-800">${s.pt || 0}</span></div>
         </div>
 
         <!-- Datos Clave -->
@@ -341,6 +379,11 @@ window.PoliticoApp = {
 
   filtrarPorDistrito(dist) {
     this.filtroDistrito = dist;
+    this.aplicarFiltrosYRenderizar();
+  },
+
+  filtrarPorOrigen(orig) {
+    this.filtroOrigen = orig;
     this.aplicarFiltrosYRenderizar();
   },
 
@@ -418,20 +461,23 @@ window.PoliticoApp = {
             ? '<span class="px-2 py-0.5 rounded-full text-[9px] font-bold bg-amber-500/30 text-amber-300">🟡 Medio</span>'
             : '<span class="px-2 py-0.5 rounded-full text-[9px] font-bold bg-emerald-500/30 text-emerald-300">🟢 Bajo</span>');
 
+      const colName = s.desarrollo ? (s.desarrollo.length > 25 ? s.desarrollo.substring(0, 25) + '...' : s.desarrollo) : '';
+
       return `
         <tr class="hover:bg-white/5 transition border-b border-white/5 text-xs text-slate-300">
           <td class="py-2.5 px-3 font-mono font-bold text-white">
             <span>Secc. ${s.seccion}</span>
-            <span class="text-[10px] text-slate-400 block">Distrito ${s.distrito_l}</span>
+            <span class="text-[10px] text-cyan-400 block font-sans">Distrito ${s.distrito_l} (Fed. ${s.distrito_f})</span>
+            ${colName ? `<span class="text-[10px] text-slate-400 block font-normal truncate max-w-[140px]" title="${s.desarrollo}">${colName}</span>` : ''}
           </td>
           <td class="py-2.5 px-3">${badgeGanador}</td>
           <td class="py-2.5 px-3 font-mono">
             <span class="font-bold text-blue-400">${s.pan.toLocaleString('es-MX')}</span>
-            <span class="text-[10px] text-slate-400">(${s.pct_pan}%)</span>
+            <span class="text-[10px] text-slate-400 block">(${s.pct_pan}%)</span>
           </td>
           <td class="py-2.5 px-3 font-mono">
             <span class="font-bold text-rose-400">${s.morena.toLocaleString('es-MX')}</span>
-            <span class="text-[10px] text-slate-400">(${s.pct_morena}%)</span>
+            <span class="text-[10px] text-slate-400 block">(${s.pct_morena}%)</span>
           </td>
           <td class="py-2.5 px-3 font-mono">
             <span class="font-bold text-slate-200 bg-slate-800 px-2 py-0.5 rounded-md border border-slate-700">
