@@ -10,11 +10,11 @@ window.AguaPotableApp = {
   capaTuberias: null,
   capaCalorFugas: null,
   mostrarCalorFugas: true,
-  opacidadCalorFugas: 0.65,
+  opacidadCalorFugas: 0.50,
   canvasRenderer: null,
   tramos: [],
   metricas: null,
-  filtroPrioridad: 'criticos',
+  filtroPrioridad: 'todos',
   filtroDelegacion: 'todas',
   filtroMaterial: 'todos',
   filtroDiametro: 'todos',
@@ -67,8 +67,21 @@ window.AguaPotableApp = {
       preferCanvas: true
     });
 
-    // Renderer Canvas de alto rendimiento
-    this.canvasRenderer = L.canvas({ padding: 0.5, tolerance: 6 });
+    // 1. Pane de Calor de Fugas (Raster térmico de fondo, zIndex 350, no interactivo)
+    if (!this.mapa.getPane('fugasPane')) {
+      this.mapa.createPane('fugasPane');
+      this.mapa.getPane('fugasPane').style.zIndex = 350;
+      this.mapa.getPane('fugasPane').style.pointerEvents = 'none';
+    }
+
+    // 2. Pane de Red de Tuberías (Líneas vectoriales en primer plano absoluto, zIndex 450)
+    if (!this.mapa.getPane('tuberiasPane')) {
+      this.mapa.createPane('tuberiasPane');
+      this.mapa.getPane('tuberiasPane').style.zIndex = 450;
+    }
+
+    // Renderer Canvas de alto rendimiento asignado estrictamente al pane superior de tuberías
+    this.canvasRenderer = L.canvas({ padding: 0.5, tolerance: 8, pane: 'tuberiasPane' });
 
     // Capas Base
     const googleHybrid = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
@@ -88,13 +101,13 @@ window.AguaPotableApp = {
 
     googleHybrid.addTo(this.mapa);
 
-    // Capa de Mapa de Calor de Fugas (Raster Georreferenciado)
+    // Capa de Mapa de Calor de Fugas (Raster Georreferenciado en fugasPane)
     if (this.metricas && this.metricas.heatmap_fugas) {
       const hInfo = this.metricas.heatmap_fugas;
       this.capaCalorFugas = L.imageOverlay(hInfo.url, hInfo.bounds, {
         opacity: this.opacidadCalorFugas,
-        interactive: false,
-        zIndex: 250
+        pane: 'fugasPane',
+        interactive: false
       });
       if (this.mostrarCalorFugas) {
         this.capaCalorFugas.addTo(this.mapa);
@@ -224,21 +237,33 @@ window.AguaPotableApp = {
       const isAlta = tramo.prioridad === 'ALTA';
       const isMedia = tramo.prioridad === 'MEDIA';
 
-      // Semáforo de colores
-      let color = '#10b981'; // Normal
-      if (isCritico) color = '#dc2626'; // Rojo
-      else if (isAlta) color = '#ea580c'; // Naranja
-      else if (isMedia) color = '#eab308'; // Amarillo
-
-      const weight = isCritico ? 4.5 : (isAlta ? 3.5 : 2.5);
+      // Semáforo de colores de alto contraste sobre el mapa de calor
+      let color = '#10b981'; // Operativa / Normal
+      let weight = 2.6;
+      let opac = 0.9;
+      if (isCritico) {
+        color = '#ef4444'; // Rojo intenso brillante (Urgente / Desgaste crítico)
+        weight = 4.8;
+        opac = 1.0;
+      } else if (isAlta) {
+        color = '#f97316'; // Naranja brillante (Prioridad Alta)
+        weight = 3.8;
+        opac = 1.0;
+      } else if (isMedia) {
+        color = '#eab308'; // Amarillo oro (Preventivo)
+        weight = 3.2;
+        opac = 0.95;
+      }
 
       const polyline = L.polyline(coords, {
         renderer: this.canvasRenderer,
+        pane: 'tuberiasPane',
         color: color,
         weight: weight,
-        opacity: isCritico ? 0.95 : 0.8,
-        dashArray: isCritico ? '6,3' : null,
-        lineCap: 'round'
+        opacity: opac,
+        dashArray: null,
+        lineCap: 'round',
+        lineJoin: 'round'
       }).addTo(this.capaTuberias);
 
       // Tooltip flotante rápido
@@ -264,7 +289,7 @@ window.AguaPotableApp = {
         this.setStyle({ weight: weight + 3, opacity: 1 });
       });
       polyline.on('mouseout', function () {
-        this.setStyle({ weight: weight, opacity: isCritico ? 0.95 : 0.8 });
+        this.setStyle({ weight: weight, opacity: opac });
       });
     });
 

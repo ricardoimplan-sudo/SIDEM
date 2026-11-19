@@ -1118,7 +1118,7 @@
               <span>Régimen / Sector</span>
             </label>
             <select id="eqFiltroRegimen" onchange="EquipamientoApp.cambiarFiltroRegimen(this.value)" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-cyan transition font-medium">
-              <option value="todos">Todos los Régimenes</option>
+              <option value="todos">Todos los Regímenes</option>
               <option value="publico">Público (Gobierno / Municipal / Estatal)</option>
               <option value="privado">Privado</option>
               <option value="social">Social / Religioso</option>
@@ -2378,7 +2378,10 @@
           <!-- Botones de Semáforo / Nivel de Urgencia -->
           <div class="flex flex-wrap items-center gap-2">
             <span class="text-xs font-bold uppercase tracking-wider text-slate-400 mr-1">Filtrar por Urgencia:</span>
-            <button onclick="AguaPotableApp.filtrarPorPrioridad('criticos')" data-prio="criticos" class="btn-filtro-agua px-3 py-1.5 rounded-xl text-xs font-bold bg-cyan-600 text-white border border-cyan-500 transition cursor-pointer flex items-center gap-1.5 shadow-xs">
+            <button onclick="AguaPotableApp.filtrarPorPrioridad('todos')" data-prio="todos" class="btn-filtro-agua px-3 py-1.5 rounded-xl text-xs font-bold bg-cyan-600 text-white border border-cyan-500 hover:bg-cyan-500 transition cursor-pointer shadow-xs">
+              Todas las tuberías (37,384)
+            </button>
+            <button onclick="AguaPotableApp.filtrarPorPrioridad('criticos')" data-prio="criticos" class="btn-filtro-agua px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800/80 text-rose-300 border border-rose-500/40 hover:bg-rose-950 transition cursor-pointer flex items-center gap-1.5 shadow-xs">
               <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
               <span>🔴 Urgente / Vida Útil Vencida (>32 años) [20,247]</span>
             </button>
@@ -2393,9 +2396,6 @@
             <button onclick="AguaPotableApp.filtrarPorPrioridad('normales')" data-prio="normales" class="btn-filtro-agua px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800/80 text-emerald-300 border border-emerald-500/40 hover:bg-emerald-950 transition cursor-pointer flex items-center gap-1.5 shadow-xs">
               <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
               <span>🟢 Red Operativa (<20 años) [9,378]</span>
-            </button>
-            <button onclick="AguaPotableApp.filtrarPorPrioridad('todos')" data-prio="todos" class="btn-filtro-agua px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800/80 text-slate-300 border border-slate-700 hover:bg-slate-700 transition cursor-pointer shadow-xs">
-              Todas las tuberías (37,384)
             </button>
           </div>
 
@@ -2493,8 +2493,8 @@
         <div class="flex items-center gap-4 shrink-0">
           <div class="flex items-center gap-2">
             <span class="text-[11px] font-bold text-slate-300">Opacidad Calor:</span>
-            <input type="range" min="0.1" max="1.0" step="0.05" value="0.65" oninput="AguaPotableApp.cambiarOpacidadCalor(this.value)" class="w-24 accent-rose-500 cursor-pointer" />
-            <span id="lblOpacidadFugas" class="text-[11px] font-mono text-rose-300 font-bold">65%</span>
+            <input type="range" min="0.1" max="1.0" step="0.05" value="0.50" oninput="AguaPotableApp.cambiarOpacidadCalor(this.value)" class="w-24 accent-rose-500 cursor-pointer" />
+            <span id="lblOpacidadFugas" class="text-[11px] font-mono text-rose-300 font-bold">50%</span>
           </div>
           <div class="flex items-center gap-1.5 text-[10px] text-slate-300 font-bold bg-black/50 px-3 py-1.5 rounded-xl border border-white/10">
             <span>Baja</span>
@@ -3251,8 +3251,8 @@
   <!-- SCRIPTS Y CONTROL -->
   <script src="assets/js/censo_data.js?v=20261006_censo16del_completo"></script>
   <script src="assets/js/data.js?v=20261002_infografias_13"></script>
-  <script src="assets/js/equipamiento_data.js?v=20261002_clean"></script>
-  <script src="assets/js/equipamiento.js?v=20261006_filterfix"></script>
+  <script src="assets/js/equipamiento_data.js?v=20261119_v5_solid_lines"></script>
+  <script src="assets/js/equipamiento.js?v=20261119_v5_solid_lines"></script>
   <script src="assets/js/obras_data.js?v=20261016_378_v11"></script>
   <script src="assets/js/obras.js?v=20261016_378_v11"></script>
   <script src="assets/js/vialidades_data.js?v=20261002_vialidades_fixed"></script>
@@ -3262,8 +3262,8 @@
   <script src="assets/js/movilidad_data.js?v=20261113_v4"></script>
   <script src="assets/js/movilidad_paradas.js?v=20261113_v4"></script>
   <script src="assets/js/movilidad.js?v=20261113_v4"></script>
-  <script src="assets/js/agua_potable_data.js?v=20261119_v3_fixed"></script>
-  <script src="assets/js/agua_potable.js?v=20261119_v3_fixed"></script>
+  <script src="assets/js/agua_potable_data.js?v=20261119_v5_solid_lines"></script>
+  <script src="assets/js/agua_potable.js?v=20261119_v5_solid_lines"></script>
   <script src="assets/js/politico_data.js?v=20261113_v2_fixed"></script>
   <script src="assets/js/politico.js?v=20261113_v2_fixed"></script>
   <script>
@@ -4120,31 +4120,6 @@
           radius: 13500
         }).addTo(mapHero).bindPopup('<b>Municipio de Aguascalientes</b><br>Territorio Municipal &bull; IMPLAN');
 
-        // Anillos Perifericos de Referencia
-        L.circle([21.8853, -102.2916], {
-          color: '#E11482',
-          weight: 1.5,
-          dashArray: '4, 4',
-          fill: false,
-          radius: 2800
-        }).addTo(mapHero).bindPopup('<b>1er Anillo (Av. Convención)</b><br>Circuito Interior');
-
-        L.circle([21.8853, -102.2916], {
-          color: '#F5A800',
-          weight: 1.5,
-          dashArray: '4, 4',
-          fill: false,
-          radius: 5200
-        }).addTo(mapHero).bindPopup('<b>2do Anillo (Av. Aguascalientes)</b><br>Circuito Intermedio');
-
-        L.circle([21.8853, -102.2916], {
-          color: '#72B626',
-          weight: 1.5,
-          dashArray: '4, 4',
-          fill: false,
-          radius: 8800
-        }).addTo(mapHero).bindPopup('<b>3er Anillo (Av. Siglo XXI)</b><br>Circuito Exterior');
-
         // Marcadores de Delegaciones
         DELEGACIONES_AGS.forEach(d => {
           const pobStr = (typeof CENSO_DELEGACIONES !== 'undefined' && CENSO_DELEGACIONES[d.id] && CENSO_DELEGACIONES[d.id].pobtot)
@@ -4434,10 +4409,7 @@
           });
         }
 
-        // 3. Vías y Anillos
-        L.circle([21.8853, -102.2916], { color: '#E11482', weight: 2, fill: false, dashArray: '5,5', radius: 2800 }).addTo(visorCapas.vias).bindPopup('<b>1er Anillo (Av. Convención)</b>');
-        L.circle([21.8853, -102.2916], { color: '#F5A800', weight: 2, fill: false, dashArray: '5,5', radius: 5200 }).addTo(visorCapas.vias).bindPopup('<b>2do Anillo (Av. Aguascalientes)</b>');
-        L.circle([21.8853, -102.2916], { color: '#72B626', weight: 2, fill: false, dashArray: '5,5', radius: 8800 }).addTo(visorCapas.vias).bindPopup('<b>3er Anillo (Av. Siglo XXI)</b>');
+        // 3. Vías Oficiales (La red vial municipal se carga de forma precisa e interactiva)
 
         // 4. Parques y Áreas Verdes
         const verdesPuntos = [

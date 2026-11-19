@@ -56,6 +56,66 @@ const EquipamientoApp = {
     this.inicializado = true;
   },
 
+  corregirOrtografia(str) {
+    if (!str || typeof str !== 'string') return str || '';
+    let s = str;
+    const dicc = [
+      [/\bMUJERES ULUSTRES\b/gi, 'Mujeres Ilustres'],
+      [/\bULUSTRES\b/gi, 'Ilustres'],
+      [/\bEDUCACION\b/gi, 'Educación'],
+      [/\bEDUCACIÓN\b/g, 'Educación'],
+      [/\bADMINISTRACION PUBLICA\b/gi, 'Administración Pública'],
+      [/\bADMINISTRACION\b/gi, 'Administración'],
+      [/\bADMINISTRACIÓN\b/g, 'Administración'],
+      [/\bMEDICO\b/gi, 'Médico'],
+      [/\bMEDICA\b/gi, 'Médica'],
+      [/\bJARDIN\b/gi, 'Jardín'],
+      [/\bNINOS\b/gi, 'Niños'],
+      [/\bNINAS\b/gi, 'Niñas'],
+      [/\bRECREACION\b/gi, 'Recreación'],
+      [/\bDIRECCION\b/gi, 'Dirección'],
+      [/\bDELEGACION\b/gi, 'Delegación'],
+      [/\bPOBLACION\b/gi, 'Población'],
+      [/\bTELEFONO\b/gi, 'Teléfono'],
+      [/\bPUBLICO\b/gi, 'Público'],
+      [/\bPUBLICA\b/gi, 'Pública'],
+      [/\bCLINICA\b/gi, 'Clínica'],
+      [/\bBASICA\b/gi, 'Básica'],
+      [/\bTECNICA\b/gi, 'Técnica'],
+      [/\bTECNICO\b/gi, 'Técnico'],
+      [/\bASOCIACION\b/gi, 'Asociación'],
+      [/\bINSTITUCION\b/gi, 'Institución'],
+      [/\bASISTENCIA\b/gi, 'Asistencia'],
+      [/\bVEHICULOS\b/gi, 'Vehículos'],
+      [/\bPERIFERICO\b/gi, 'Periférico'],
+      [/\bPERIFERICOS\b/gi, 'Periféricos'],
+      [/\bAREA\b/gi, 'Área'],
+      [/\bAREAS\b/gi, 'Áreas'],
+      [/\bGRAFICO\b/gi, 'Gráfico'],
+      [/\bGRAFICOS\b/gi, 'Gráficos'],
+      [/\bNUMERO\b/gi, 'Número'],
+      [/\bCOLONIA\b/gi, 'Colonia'],
+      [/\bFRACCIONAMIENTO\b/gi, 'Fraccionamiento'],
+      [/\bAVENIDA\b/gi, 'Avenida']
+    ];
+
+    dicc.forEach(([regex, rep]) => {
+      s = s.replace(regex, rep);
+    });
+
+    return s;
+  },
+
+  formatearNombre(nombre) {
+    if (!nombre) return 'Sin nombre';
+    let n = this.corregirOrtografia(nombre);
+    if (n === n.toUpperCase() && n.length > 3) {
+      n = n.toLowerCase().replace(/(^|\s|["'])([a-záéíóúñ])/g, (m, p1, p2) => p1 + p2.toUpperCase());
+      n = n.replace(/\b(Imss|Issste|Inea|Uaa|Itesa|Conalep|Cbtis|Cecytea|Dae|Cenidet|Implan|Miaa|Dif|Ccapama|Oxxo|Bara|Sat|Cfe|Sep)\b/gi, (m) => m.toUpperCase());
+    }
+    return n;
+  },
+
   poblarSelectores() {
     const selCat = document.getElementById('eqFiltroCategoria');
     const selDel = document.getElementById('eqFiltroDelegacion');
@@ -66,7 +126,8 @@ const EquipamientoApp = {
       
       let html = '<option value="todas">Todas las Categorías (33 clasificaciones)</option>';
       sortedCats.forEach(c => {
-        html += `<option value="${c.nombre}">${c.nombre} (${c.total.toLocaleString('es-MX')})</option>`;
+        const nomCat = this.corregirOrtografia(c.nombre);
+        html += `<option value="${c.nombre}">${nomCat} (${c.total.toLocaleString('es-MX')})</option>`;
       });
       selCat.innerHTML = html;
     }
@@ -77,7 +138,8 @@ const EquipamientoApp = {
 
       let html = '<option value="todas">Todas las Delegaciones (Municipio)</option>';
       sortedDels.forEach(d => {
-        html += `<option value="${d.nombre}">${d.nombre} (${d.total.toLocaleString('es-MX')})</option>`;
+        const nomDel = this.formatearNombre(d.nombre);
+        html += `<option value="${d.nombre}">${nomDel} (${d.total.toLocaleString('es-MX')})</option>`;
       });
       selDel.innerHTML = html;
     }
@@ -553,15 +615,15 @@ const EquipamientoApp = {
       `;
     } else {
       tbody.innerHTML = itemsPagina.map(it => {
-        const nombre = it.nombre || it.n || 'Sin nombre';
-        const subtipo = it.subtipo || it.sc || '';
-        const cat = it.categoria || it.c || 'Equipamiento';
-        const macro = it.macroCategoria || it.m || '';
-        const reg = it.regimen || it.p || 'Privado';
-        const delegacion = it.delegacion || it.d || 'Aguascalientes';
+        const nombre = this.formatearNombre(it.nombre || it.n || 'Sin nombre');
+        const subtipo = this.formatearNombre(it.subtipo || it.sc || '');
+        const cat = this.corregirOrtografia(it.categoria || it.c || 'Equipamiento');
+        const macro = this.corregirOrtografia(it.macroCategoria || it.m || '');
+        const reg = this.corregirOrtografia(it.regimen || it.p || 'Privado');
+        const delegacion = this.formatearNombre(it.delegacion || it.d || 'Aguascalientes');
         const zufo = it.zufo || it.z || '-';
-        const domicilio = it.domicilio || it.a || '';
-        const colonia = it.asentamiento || it.col || 'Aguascalientes';
+        const domicilio = this.formatearNombre(it.domicilio || it.a || '');
+        const colonia = this.formatearNombre(it.asentamiento || it.col || 'Aguascalientes');
 
         const isPub = reg.toLowerCase().includes('público') || reg.toLowerCase().includes('publico');
         const badgeReg = isPub
@@ -799,15 +861,15 @@ const EquipamientoApp = {
     const cont = document.getElementById('modalFichaContenido');
     if (!modal || !cont) return;
 
-    const nombre = it.nombre || it.n || 'Equipamiento';
-    const cat = it.categoria || it.c || 'Equipamiento';
-    const macro = it.macroCategoria || it.m || 'Equipamiento Urbano';
-    const subtipo = it.subtipo || it.sc || '';
-    const delegacion = it.delegacion || it.d || 'Aguascalientes';
-    const domicilio = it.domicilio || it.a || 'Sin especificar';
-    const colonia = it.asentamiento || it.col || 'Municipio de Aguascalientes';
+    const nombre = this.formatearNombre(it.nombre || it.n || 'Equipamiento');
+    const cat = this.corregirOrtografia(it.categoria || it.c || 'Equipamiento');
+    const macro = this.corregirOrtografia(it.macroCategoria || it.m || 'Equipamiento Urbano');
+    const subtipo = this.formatearNombre(it.subtipo || it.sc || '');
+    const delegacion = this.formatearNombre(it.delegacion || it.d || 'Aguascalientes');
+    const domicilio = this.formatearNombre(it.domicilio || it.a || 'Sin especificar');
+    const colonia = this.formatearNombre(it.asentamiento || it.col || 'Municipio de Aguascalientes');
     const tel = it.telefono || it.tel || '';
-    const reg = it.regimen || it.p || 'Privado';
+    const reg = this.corregirOrtografia(it.regimen || it.p || 'Privado');
     const zufo = it.zufo || it.z || '';
 
     const isPub = reg.toLowerCase().includes('público') || reg.toLowerCase().includes('publico');
