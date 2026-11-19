@@ -1,24 +1,28 @@
 /**
  * PIMAgs 2026 - Módulo de Diagnóstico y Renovación de Red de Agua Potable
  * Municipio de Aguascalientes - MIAA / IMPLAN / CCAPAMA
- * Tablero de Control y Priorización para Políticos y Tomadores de Decisiones
- * Cobertura Completa Municipal: 37,384 Tramos (3,074 km)
+ * Tablero de Control y Priorización Territorial para Cabildo y Tomadores de Decisiones
+ * Cobertura Completa: 37,382 Tramos con Calles Oficiales, Colonias y Mapa de Calor de Fugas
  */
 
 window.AguaPotableApp = {
   mapa: null,
   capaTuberias: null,
+  capaCalorFugas: null,
+  mostrarCalorFugas: true,
+  opacidadCalorFugas: 0.65,
   canvasRenderer: null,
   tramos: [],
   metricas: null,
-  filtroPrioridad: 'criticos', // Iniciar enfocado en los críticos urgentes para impacto inmediato
+  filtroPrioridad: 'criticos',
   filtroDelegacion: 'todas',
   filtroMaterial: 'todos',
   filtroDiametro: 'todos',
+  filtroFugas: 'todos',
   busquedaTexto: '',
   tramoSeleccionado: null,
   paginaActual: 1,
-  filasPorPagina: 50,
+  filasPorPagina: 100,
 
   init() {
     this.tramos = window.AGUA_POTABLE_TUBERIAS || [];
@@ -63,7 +67,7 @@ window.AguaPotableApp = {
       preferCanvas: true
     });
 
-    // Renderer Canvas de alto rendimiento para miles de vectores simultáneos
+    // Renderer Canvas de alto rendimiento
     this.canvasRenderer = L.canvas({ padding: 0.5, tolerance: 6 });
 
     // Capas Base
@@ -82,8 +86,22 @@ window.AguaPotableApp = {
       attribution: '© CartoDB'
     });
 
-    // Google Híbrido por defecto
     googleHybrid.addTo(this.mapa);
+
+    // Capa de Mapa de Calor de Fugas (Raster Georreferenciado)
+    if (this.metricas && this.metricas.heatmap_fugas) {
+      const hInfo = this.metricas.heatmap_fugas;
+      this.capaCalorFugas = L.imageOverlay(hInfo.url, hInfo.bounds, {
+        opacity: this.opacidadCalorFugas,
+        interactive: false,
+        zIndex: 250
+      });
+      if (this.mostrarCalorFugas) {
+        this.capaCalorFugas.addTo(this.mapa);
+      }
+    }
+
+    this.capaTuberias = L.featureGroup().addTo(this.mapa);
 
     const baseMaps = {
       "Google Satélite e Híbrido": googleHybrid,
@@ -91,9 +109,55 @@ window.AguaPotableApp = {
       "Contraste Nocturno": cartoDark
     };
 
-    L.control.layers(baseMaps, null, { position: 'topright' }).addTo(this.mapa);
+    const overlayMaps = {};
+    if (this.capaCalorFugas) {
+      overlayMaps["🔥 Mapa de Calor: Incidencias de Fugas"] = this.capaCalorFugas;
+    }
+    overlayMaps["💧 Red de Tuberías"] = this.capaTuberias;
 
-    this.capaTuberias = L.featureGroup().addTo(this.mapa);
+    L.control.layers(baseMaps, overlayMaps, { position: 'topright' }).addTo(this.mapa);
+  },
+
+  toggleMapaCalor(activo) {
+    if (activo !== undefined) {
+      this.mostrarCalorFugas = !!activo;
+    } else {
+      this.mostrarCalorFugas = !this.mostrarCalorFugas;
+    }
+
+    if (this.capaCalorFugas && this.mapa) {
+      if (this.mostrarCalorFugas) {
+        if (!this.mapa.hasLayer(this.capaCalorFugas)) {
+          this.capaCalorFugas.addTo(this.mapa);
+        }
+      } else {
+        if (this.mapa.hasLayer(this.capaCalorFugas)) {
+          this.mapa.removeLayer(this.capaCalorFugas);
+        }
+      }
+    }
+
+    const btn = document.getElementById('btnToggleCalorFugas');
+    if (btn) {
+      if (this.mostrarCalorFugas) {
+        btn.classList.add('bg-rose-600', 'text-white', 'border-rose-500');
+        btn.classList.remove('bg-slate-800/80', 'text-slate-300', 'border-slate-700');
+      } else {
+        btn.classList.remove('bg-rose-600', 'text-white', 'border-rose-500');
+        btn.classList.add('bg-slate-800/80', 'text-slate-300', 'border-slate-700');
+      }
+    }
+  },
+
+  cambiarOpacidadCalor(val) {
+    this.opacidadCalorFugas = parseFloat(val);
+    if (this.capaCalorFugas) {
+      this.capaCalorFugas.setOpacity(this.opacidadCalorFugas);
+    }
+    const lbl = document.getElementById('lblOpacidadFugas');
+    if (lbl) {
+      lbl.innerText = `${Math.round(this.opacidadCalorFugas * 100)}%`;
+    }
   },
 
   obtenerTramosFiltrados() {
@@ -121,14 +185,23 @@ window.AguaPotableApp = {
         if (Math.abs(t.diametro - diamTarget) > 0.4) return false;
       }
 
-      // Filtro por Texto
+      // Filtro de Incidencia de Fugas
+      if (this.filtroFugas !== 'todos') {
+        if (this.filtroFugas === 'critica' && t.fuga_nivel !== 'CRÍTICA') return false;
+        if (this.filtroFugas === 'alta' && t.fuga_nivel !== 'ALTA' && t.fuga_nivel !== 'CRÍTICA') return false;
+        if (this.filtroFugas === 'media' && t.fuga_nivel !== 'MEDIA') return false;
+      }
+
+      // Filtro por Búsqueda de Texto (Calle, Colonia, ID, Delegación, Año, Material)
       if (this.busquedaTexto) {
         const q = this.busquedaTexto.toLowerCase();
         const codigo = (t.codigo || '').toLowerCase();
+        const calle = (t.calle || '').toLowerCase();
+        const colonia = (t.colonia || '').toLowerCase();
         const mat = (t.material || '').toLowerCase();
         const del = (t.delegacion || '').toLowerCase();
         const anio = String(t.anio || t.anio_instalacion || '');
-        if (!codigo.includes(q) && !mat.includes(q) && !del.includes(q) && !anio.includes(q)) {
+        if (!codigo.includes(q) && !calle.includes(q) && !colonia.includes(q) && !mat.includes(q) && !del.includes(q) && !anio.includes(q)) {
           return false;
         }
       }
@@ -143,7 +216,6 @@ window.AguaPotableApp = {
 
     const tramosFiltrados = this.obtenerTramosFiltrados();
 
-    // Renderizar con Canvas
     tramosFiltrados.forEach(tramo => {
       const coords = tramo.coords || tramo.coordenadas;
       if (!coords || coords.length === 0) return;
@@ -152,7 +224,7 @@ window.AguaPotableApp = {
       const isAlta = tramo.prioridad === 'ALTA';
       const isMedia = tramo.prioridad === 'MEDIA';
 
-      // Color por semáforo
+      // Semáforo de colores
       let color = '#10b981'; // Normal
       if (isCritico) color = '#dc2626'; // Rojo
       else if (isAlta) color = '#ea580c'; // Naranja
@@ -169,6 +241,23 @@ window.AguaPotableApp = {
         lineCap: 'round'
       }).addTo(this.capaTuberias);
 
+      // Tooltip flotante rápido
+      const fugaEmoji = tramo.fuga_nivel === 'CRÍTICA' ? '🔴' : (tramo.fuga_nivel === 'ALTA' ? '🟠' : (tramo.fuga_nivel === 'MEDIA' ? '🟡' : '🟢'));
+      polyline.bindTooltip(`
+        <div class="font-sans text-xs">
+          <div class="font-black text-slate-900 flex items-center gap-1">
+            <span>💧 Tramo ${tramo.codigo}</span>
+            <span class="text-[10px] font-normal text-slate-500">• ${tramo.material} ${tramo.diametro}"</span>
+          </div>
+          <div class="font-bold text-sky-700 text-[11px] truncate max-w-[220px]">📍 ${tramo.calle || 'Calle Local'}</div>
+          <div class="text-[10px] text-slate-600 truncate max-w-[220px]">Col. ${tramo.colonia || 'Zona Urbana'}</div>
+          <div class="text-[10px] text-slate-700 mt-0.5 pt-0.5 border-t border-slate-200 flex items-center gap-1">
+            <span>${fugaEmoji} Fugas: <b>${tramo.fuga_nivel}</b> (${tramo.fuga_val || '1.0'})</span>
+          </div>
+        </div>
+      `, { sticky: true, opacity: 0.96 });
+
+      // Popup completo al hacer clic
       polyline.bindPopup(() => this.crearPopupTramoHtml(tramo));
 
       polyline.on('mouseover', function () {
@@ -179,12 +268,15 @@ window.AguaPotableApp = {
       });
     });
 
-    // Actualizar indicador de conteo en la barra
+    // Actualizar indicador de conteo
     const elConteo = document.getElementById('agua_conteo_filtrados');
     if (elConteo) {
       const sumMetros = tramosFiltrados.reduce((acc, t) => acc + (t.longitud_m || 0), 0);
-      const sumInv = tramosFiltrados.reduce((acc, t) => acc + (t.inversion || t.inversion_estimada_mxn || 0), 0);
-      elConteo.innerHTML = `Mostrando <b>${tramosFiltrados.length.toLocaleString('es-MX')} tramos</b> (${(sumMetros/1000).toLocaleString('es-MX', {maximumFractionDigits:1})} km de red) • Inversión estimada requerida: <b class="text-cyan-300">$${(sumInv/1000000).toLocaleString('es-MX', {maximumFractionDigits:1})} MDP</b>`;
+      const sumInv = tramosFiltrados.reduce((acc, t) => acc + (t.inversion || 0), 0);
+      const countCrit = tramosFiltrados.filter(t => t.prioridad === 'CRITICA').length;
+      const countFugasAltas = tramosFiltrados.filter(t => t.fuga_nivel === 'CRÍTICA' || t.fuga_nivel === 'ALTA').length;
+
+      elConteo.innerHTML = `Mostrando <b>${tramosFiltrados.length.toLocaleString('es-MX')} tramos</b> (${(sumMetros/1000).toLocaleString('es-MX', {maximumFractionDigits:1})} km de red) • Inversión requerida: <b class="text-cyan-300">$${(sumInv/1000000).toLocaleString('es-MX', {maximumFractionDigits:1})} MDP</b> • <span class="text-rose-400 font-bold">${countCrit.toLocaleString('es-MX')} tramos críticos</span> • <span class="text-amber-300 font-bold">${countFugasAltas.toLocaleString('es-MX')} en alta incidencia de fugas</span>`;
     }
 
     this.paginaActual = 1;
@@ -205,49 +297,90 @@ window.AguaPotableApp = {
               : '<span class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-600 text-white">🟢 Red Operativa</span>'));
 
     const fmtMoney = (val) => new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 }).format(val);
-    const inversion = t.inversion || t.inversion_estimada_mxn || 0;
-    const antiguedad = t.antiguedad || t.antiguedad_anios || (2026 - (t.anio || 1993));
-    const anio = t.anio || t.anio_instalacion || 1993;
+    const inversion = t.inversion || 0;
+    const antiguedad = t.antiguedad || (2026 - (t.anio || 1993));
+    const anio = t.anio || 1993;
     const codigo = t.codigo || `#${t.id}`;
     const delegacion = t.delegacion || 'Municipio de Aguascalientes';
+    const calle = t.calle || 'Calle Local';
+    const colonia = t.colonia || 'Zona Urbana';
+
+    const badgeFuga = t.fuga_nivel === 'CRÍTICA'
+      ? '<span class="px-2 py-0.5 rounded-md text-[10px] font-black bg-rose-600 text-white shadow-xs animate-pulse">🔴 CRÍTICA / ALTA REINCIDENCIA</span>'
+      : (t.fuga_nivel === 'ALTA'
+          ? '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-orange-600 text-white">🟠 ALTA DENSIDAD</span>'
+          : (t.fuga_nivel === 'MEDIA'
+              ? '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-500 text-slate-900">🟡 DENSIDAD MEDIA</span>'
+              : '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-emerald-600 text-white">🟢 BAJA INCIDENCIA</span>'));
+
+    const correlacionTexto = (t.fuga_nivel === 'CRÍTICA' || t.fuga_nivel === 'ALTA')
+      ? (antiguedad >= 30
+          ? `⚠️ <strong>Correlación Crítica Directa:</strong> Esta tubería con <b>${antiguedad} años de servicio</b> se encuentra en una zona de <b>${t.fuga_nivel} incidencia de fugas</b> (${t.fuga_val} / 3.0). La fatiga y cristalización del material provocan rupturas frecuentes bajo presión. Su sustitución es de máxima urgencia para evitar socavones y desperdicio de agua.`
+          : `🔍 <strong>Zona de Alta Incidencia de Fugas (${t.fuga_val} / 3.0):</strong> Se detecta alta reincidencia de fugas en esta calle. Se recomienda sectorización hidrométrica y reemplazo de tomas domiciliarias.`)
+      : (antiguedad >= 30
+          ? `⏳ <strong>Vida Útil Superada (${antiguedad} años):</strong> Aunque la zona tiene incidencia moderada/baja (${t.fuga_val || '1.0'}), el material ha cumplido su ciclo de vida útil paramétrico y presenta alto riesgo de colapso repentino.`
+          : `✅ <strong>Red en Buen Estado:</strong> Tramo operativo (${antiguedad} años) en zona de baja incidencia de fugas (${t.fuga_val || '1.0'}).`);
 
     return `
-      <div class="p-3 font-sans text-xs min-w-[270px] max-w-[320px] space-y-2.5">
-        <div class="flex items-center justify-between border-b border-slate-200 pb-2">
-          <span class="font-black text-slate-800 text-sm">💧 Tramo ${codigo}</span>
-          ${prioBadge}
+      <div class="p-3 font-sans text-xs min-w-[290px] max-w-[340px] space-y-3">
+        
+        <!-- Encabezado con Calle y Colonia -->
+        <div class="border-b border-slate-200 pb-2">
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <span class="font-black text-slate-900 text-sm block">💧 Tramo ${codigo}</span>
+              <div class="text-[12px] font-black text-sky-800 flex items-center gap-1 mt-0.5">
+                <span>📍 ${calle}</span>
+              </div>
+              <div class="text-[10px] font-bold text-slate-600">
+                Colonia: <span class="text-slate-900 font-extrabold">${colonia}</span>
+              </div>
+            </div>
+            <div class="shrink-0 text-right">
+              ${prioBadge}
+            </div>
+          </div>
+          <div class="text-[10px] text-slate-400 mt-1">
+            Demarcación: <span class="text-slate-700 font-medium">${delegacion}</span>
+          </div>
         </div>
 
-        <div class="space-y-1.5 text-slate-700">
-          <div class="flex items-center justify-between">
-            <span class="text-slate-500">Demarcación:</span>
-            <span class="font-bold text-slate-800">${delegacion}</span>
-          </div>
+        <!-- Atributos Técnicos -->
+        <div class="space-y-1.5 text-slate-700 bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-[11px]">
           <div class="flex items-center justify-between">
             <span class="text-slate-500">Material y Diámetro:</span>
-            <span class="font-bold text-slate-900">${t.material} &bull; ${t.diametro}"</span>
+            <span class="font-bold text-slate-900">${t.material} &bull; ${t.diametro}" (${Math.round(t.diametro * 25.4)} mm)</span>
           </div>
           <div class="flex items-center justify-between">
             <span class="text-slate-500">Longitud del Tramo:</span>
-            <span class="font-bold font-mono text-slate-900">${t.longitud_m} m</span>
+            <span class="font-bold font-mono text-slate-900">${t.longitud_m} m lineales</span>
           </div>
           <div class="flex items-center justify-between">
             <span class="text-slate-500">Año de Instalación:</span>
-            <span class="font-bold font-mono ${isCritico ? 'text-rose-600' : 'text-slate-900'}">${anio} (${antiguedad} años de servicio)</span>
+            <span class="font-bold font-mono ${isCritico ? 'text-rose-700 font-black' : 'text-slate-900'}">${anio} (${antiguedad} años de antigüedad)</span>
           </div>
         </div>
 
-        <div class="p-2.5 rounded-xl bg-slate-900 text-white space-y-1">
-          <div class="text-[10px] uppercase tracking-wider text-cyan-300 font-bold">Costo Paramétrico de Renovación:</div>
+        <!-- Incidencia de Fugas y Correlación de Desgaste (Para Cabildo) -->
+        <div class="p-2.5 rounded-xl bg-slate-900 text-white space-y-1.5 border border-slate-800">
+          <div class="flex items-center justify-between border-b border-white/10 pb-1.5">
+            <span class="text-[10px] uppercase font-bold text-rose-300 flex items-center gap-1">
+              <span>🔥 Incidencia de Fugas:</span>
+            </span>
+            ${badgeFuga}
+          </div>
+          <p class="text-[11px] text-slate-300 leading-snug">
+            ${correlacionTexto}
+          </p>
+        </div>
+
+        <!-- Costo Paramétrico de Obra -->
+        <div class="p-2.5 rounded-xl bg-cyan-950 text-white space-y-1 border border-cyan-800">
+          <div class="text-[10px] uppercase tracking-wider text-cyan-300 font-bold">Inversión Estimada de Renovación:</div>
           <div class="text-base font-black text-white font-mono">${fmtMoney(inversion)}</div>
-          <div class="text-[10px] text-slate-400">Incluye excavación, cama de arena, tubería PEAD/PVC, atraques y pavimentación.</div>
+          <div class="text-[9px] text-slate-400">Incluye excavación, cama de asiento, tubería PEAD/PVC, reposición de tomas domiciliarias y bacheo asfáltico/concreto.</div>
         </div>
 
-        ${isCritico ? `
-          <div class="p-2 rounded-lg bg-rose-50 border border-rose-200 text-[11px] text-rose-800 leading-tight">
-            ⚠️ <strong>Recomendación para Cabildo / Directores:</strong> Se sugiere programar sustitución inmediata en el próximo paquete de obra pública para mitigar fugas y socavones.
-          </div>
-        ` : ''}
       </div>
     `;
   },
@@ -261,7 +394,7 @@ window.AguaPotableApp = {
         btn.classList.remove('bg-slate-800/80', 'text-slate-300');
       } else {
         btn.classList.remove('bg-cyan-600', 'text-white', 'border-cyan-500');
-        btn.classList.add('bg-slate-800/80');
+        btn.classList.add('bg-slate-800/80', 'text-slate-300');
       }
     });
 
@@ -283,6 +416,11 @@ window.AguaPotableApp = {
     this.aplicarFiltrosYRenderizar();
   },
 
+  filtrarPorFugas(fuga) {
+    this.filtroFugas = fuga;
+    this.aplicarFiltrosYRenderizar();
+  },
+
   filtrarPorBusqueda(txt) {
     this.busquedaTexto = txt.trim();
     this.aplicarFiltrosYRenderizar();
@@ -298,10 +436,10 @@ window.AguaPotableApp = {
       const bounds = L.latLngBounds(coords);
       this.mapa.fitBounds(bounds, { padding: [100, 100], maxZoom: 18 });
 
-      // Resaltar en blanco
+      // Resaltar en blanco brillante
       const highlight = L.polyline(coords, {
         color: '#ffffff',
-        weight: 8,
+        weight: 9,
         opacity: 0.95
       }).addTo(this.mapa);
 
@@ -318,21 +456,22 @@ window.AguaPotableApp = {
     if (!tbody) return;
 
     const tramosFiltrados = this.obtenerTramosFiltrados();
-    // Ordenar: primero CRITICA, luego ALTA, luego MEDIA, luego por antigüedad descendente
+
+    // Ordenar: primero CRITICA, luego ALTA, luego MEDIA, luego por mayor antigüedad
     const sorted = [...tramosFiltrados].sort((a, b) => {
       const pOrder = { 'CRITICA': 1, 'ALTA': 2, 'MEDIA': 3, 'NORMAL': 4 };
       if (pOrder[a.prioridad] !== pOrder[b.prioridad]) {
         return pOrder[a.prioridad] - pOrder[b.prioridad];
       }
-      const ageA = a.antiguedad || a.antiguedad_anios || 0;
-      const ageB = b.antiguedad || b.antiguedad_anios || 0;
+      const ageA = a.antiguedad || 0;
+      const ageB = b.antiguedad || 0;
       return ageB - ageA;
     });
 
     if (sorted.length === 0) {
       tbody.innerHTML = `
         <tr>
-          <td colspan="7" class="py-8 text-center text-slate-400">
+          <td colspan="8" class="py-8 text-center text-slate-400">
             No se encontraron tramos de tubería con los filtros seleccionados.
           </td>
         </tr>
@@ -342,7 +481,7 @@ window.AguaPotableApp = {
 
     const fmtMoney = (val) => new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 }).format(val);
 
-    // Paginación o primeros 100 tramos más urgentes
+    // Primeros 150 tramos para fluidez óptima
     const topTramos = sorted.slice(0, 150);
 
     tbody.innerHTML = topTramos.map(t => {
@@ -354,24 +493,36 @@ window.AguaPotableApp = {
                 ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">🟡 Preventivo</span>'
                 : '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">🟢 Operativa</span>'));
 
+      const badgeFuga = t.fuga_nivel === 'CRÍTICA'
+        ? '<span class="px-2 py-0.5 rounded-md text-[10px] font-black bg-rose-950 text-rose-300 border border-rose-500/40 inline-flex items-center gap-1">🔴 Crítica (${t.fuga_val || '2.5'})</span>'
+        : (t.fuga_nivel === 'ALTA'
+            ? '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-orange-950 text-orange-300 border border-orange-500/40 inline-flex items-center gap-1">🟠 Alta (${t.fuga_val || '1.8'})</span>'
+            : (t.fuga_nivel === 'MEDIA'
+                ? '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-950 text-amber-300 border border-amber-500/40 inline-flex items-center gap-1">🟡 Media (${t.fuga_val || '1.4'})</span>'
+                : '<span class="px-2 py-0.5 rounded-md text-[10px] font-medium bg-emerald-950 text-emerald-300 border border-emerald-500/30 inline-flex items-center gap-1">🟢 Baja</span>'));
+
       const codigo = t.codigo || `#${t.id}`;
-      const anio = t.anio || t.anio_instalacion || 1993;
-      const antiguedad = t.antiguedad || t.antiguedad_anios || (2026 - anio);
-      const inv = t.inversion || t.inversion_estimada_mxn || 0;
-      const del = t.delegacion || 'Aguascalientes';
+      const anio = t.anio || 1993;
+      const antiguedad = t.antiguedad || (2026 - anio);
+      const inv = t.inversion || 0;
+      const calle = t.calle || 'Calle Local';
+      const colonia = t.colonia || 'Zona Urbana';
 
       return `
         <tr class="hover:bg-white/5 transition border-b border-white/5 text-xs text-slate-300">
-          <td class="py-2.5 px-3 font-mono font-bold text-white">
-            <div>${codigo}</div>
-            <div class="text-[10px] text-slate-400">${del}</div>
+          <td class="py-2.5 px-3">
+            <div class="font-mono font-bold text-white text-xs">${codigo}</div>
+            <div class="text-[11px] font-bold text-cyan-300 flex items-center gap-1 mt-0.5">
+              <span>📍 ${calle}</span>
+            </div>
+            <div class="text-[10px] text-slate-400">Col. ${colonia}</div>
           </td>
           <td class="py-2.5 px-3">${badgePrio}</td>
+          <td class="py-2.5 px-3">${badgeFuga}</td>
           <td class="py-2.5 px-3"><span class="font-bold text-white">${t.material}</span> (${t.diametro}")</td>
           <td class="py-2.5 px-3 font-mono">${t.longitud_m} m</td>
-          <td class="py-2.5 px-3">
-            <span class="font-bold text-white">${anio}</span> 
-            <span class="text-[10px] text-slate-400">(${antiguedad} años)</span>
+          <td class="py-2.5 px-3 font-mono font-bold text-white">
+            ${anio} <span class="text-[10px] font-normal text-slate-400">(${antiguedad} a)</span>
           </td>
           <td class="py-2.5 px-3 font-mono font-bold text-cyan-300">${fmtMoney(inv)}</td>
           <td class="py-2.5 px-3 text-right">

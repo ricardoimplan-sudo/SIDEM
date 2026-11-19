@@ -2449,11 +2449,22 @@
               </select>
             </div>
 
+            <!-- Filtro de Incidencia de Fugas -->
+            <div class="flex items-center gap-1.5">
+              <label class="text-xs font-bold text-rose-300">🔥 Fugas:</label>
+              <select onchange="AguaPotableApp.filtrarPorFugas(this.value)" class="bg-slate-800 border border-rose-500/40 text-white text-xs font-bold rounded-xl px-2.5 py-1.5 focus:outline-none focus:border-rose-400">
+                <option value="todos">Cualquier nivel de fuga</option>
+                <option value="critica">🔴 Fugas Críticas (>2.1)</option>
+                <option value="alta">🟠 Fugas Altas (>1.6)</option>
+                <option value="media">🟡 Fugas Medias</option>
+              </select>
+            </div>
+
             <!-- Buscador -->
-            <div class="relative min-w-[160px]">
+            <div class="relative min-w-[200px]">
               <input 
                 type="text" 
-                placeholder="Buscar por ID, delegación o año..." 
+                placeholder="Buscar por calle, colonia, ID o año..." 
                 onkeyup="AguaPotableApp.filtrarPorBusqueda(this.value)"
                 class="w-full bg-slate-800 border border-slate-700 text-white placeholder-slate-400 text-xs rounded-xl px-2.5 py-1.5 pl-7 focus:outline-none focus:border-cyan-500"
               />
@@ -2468,41 +2479,81 @@
         </div>
       </div>
 
+      <!-- Barra de Control del Mapa de Calor de Incidencia de Fugas (Para Cabildo y Tomadores de Decisiones) -->
+      <div class="p-4 rounded-2xl bg-gradient-to-r from-slate-900 via-rose-950/80 to-slate-900 border border-rose-500/40 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <button id="btnToggleCalorFugas" onclick="AguaPotableApp.toggleMapaCalor()" class="px-4 py-2 rounded-xl text-xs font-black bg-rose-600 text-white border border-rose-500 shadow-md hover:bg-rose-500 transition cursor-pointer flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-white animate-pulse"></span>
+            <span>🔥 Capa Mapa de Calor: Incidencias de Fugas</span>
+          </button>
+          <div class="text-xs text-slate-300 hidden md:block">
+            <span class="font-bold text-rose-300">Evidencia para Cabildo:</span> Contraste entre zonas de alta rotura recurrente y tuberías con vida útil agotada (>30 años).
+          </div>
+        </div>
+        <div class="flex items-center gap-4 shrink-0">
+          <div class="flex items-center gap-2">
+            <span class="text-[11px] font-bold text-slate-300">Opacidad Calor:</span>
+            <input type="range" min="0.1" max="1.0" step="0.05" value="0.65" oninput="AguaPotableApp.cambiarOpacidadCalor(this.value)" class="w-24 accent-rose-500 cursor-pointer" />
+            <span id="lblOpacidadFugas" class="text-[11px] font-mono text-rose-300 font-bold">65%</span>
+          </div>
+          <div class="flex items-center gap-1.5 text-[10px] text-slate-300 font-bold bg-black/50 px-3 py-1.5 rounded-xl border border-white/10">
+            <span>Baja</span>
+            <div class="w-20 h-2 rounded-full bg-gradient-to-r from-blue-500 via-emerald-400 via-yellow-400 to-rose-600"></div>
+            <span class="text-rose-400">Crítica</span>
+          </div>
+        </div>
+      </div>
+
       <!-- Contenedor del Geovisor de Agua Potable -->
       <div class="space-y-3">
         <div class="flex items-center justify-between">
           <span class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
             <i data-lucide="map" class="w-4 h-4 text-sky-600"></i>
-            <span>Geovisor Satelital de Tuberías y Puntos Críticos</span>
+            <span>Geovisor Satelital de Red Municipal y Foco de Fugas</span>
           </span>
           <span class="text-xs text-slate-500 hidden sm:inline-block">
-            Haz clic sobre cualquier línea para ver su costo de reposición y antigüedad exacta
+            Haz clic sobre cualquier tubería para ver su calle, colonia, costo de reposición y nivel de fuga
           </span>
         </div>
-        <div class="relative w-full h-[540px] rounded-2xl overflow-hidden border border-slate-300 shadow-2xl z-0">
+        <div class="relative w-full h-[580px] rounded-2xl overflow-hidden border border-slate-300 shadow-2xl z-0">
           <div id="mapaAguaPotable" class="w-full h-full"></div>
           
-          <!-- Leyenda Flotante -->
-          <div class="absolute bottom-4 left-4 z-[500] bg-slate-900/90 backdrop-blur-md border border-white/15 text-white p-3.5 rounded-xl shadow-2xl space-y-2 text-xs max-w-[260px]">
-            <strong class="block text-[11px] font-black uppercase tracking-wider text-cyan-300 border-b border-white/10 pb-1">
-              Semáforo de Renovación
-            </strong>
-            <div class="space-y-1.5 text-[11px]">
-              <div class="flex items-center gap-2">
-                <span class="w-3.5 h-1.5 rounded-full bg-rose-600 border border-white"></span>
-                <span class="font-bold text-rose-300">Urgente (>32 años)</span>
+          <!-- Leyenda Flotante Combinada -->
+          <div class="absolute bottom-4 left-4 z-[500] bg-slate-900/95 backdrop-blur-md border border-white/15 text-white p-3.5 rounded-xl shadow-2xl space-y-3 text-xs max-w-[280px]">
+            <div>
+              <strong class="block text-[11px] font-black uppercase tracking-wider text-cyan-300 border-b border-white/10 pb-1 mb-1.5">
+                Semáforo de Renovación
+              </strong>
+              <div class="space-y-1 text-[11px]">
+                <div class="flex items-center gap-2">
+                  <span class="w-3.5 h-1.5 rounded-full bg-rose-600 border border-white"></span>
+                  <span class="font-bold text-rose-300">Urgente (>32 años / FoFo / AC)</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-3.5 h-1.5 rounded-full bg-orange-500 border border-white"></span>
+                  <span class="text-orange-200">Prioridad Alta (27-31 años)</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-3.5 h-1.5 rounded-full bg-amber-400 border border-white"></span>
+                  <span class="text-amber-200">Preventivo (20-26 años)</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-3.5 h-1.5 rounded-full bg-emerald-500 border border-white"></span>
+                  <span class="text-emerald-200">Red Operativa (<20 años)</span>
+                </div>
               </div>
-              <div class="flex items-center gap-2">
-                <span class="w-3.5 h-1.5 rounded-full bg-orange-500 border border-white"></span>
-                <span class="text-orange-200">Prioridad Alta (25-31 años)</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="w-3.5 h-1.5 rounded-full bg-amber-400 border border-white"></span>
-                <span class="text-amber-200">Preventivo (18-24 años)</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="w-3.5 h-1.5 rounded-full bg-emerald-500 border border-white"></span>
-                <span class="text-emerald-200">Red Operativa (<18 años)</span>
+            </div>
+
+            <div class="border-t border-white/10 pt-2">
+              <strong class="block text-[11px] font-black uppercase tracking-wider text-rose-300 mb-1 flex items-center justify-between">
+                <span>🔥 Densidad de Fugas</span>
+                <span class="text-[9px] font-normal text-slate-400">Raster MIAA</span>
+              </strong>
+              <div class="h-2 w-full rounded-full bg-gradient-to-r from-blue-500 via-emerald-400 via-yellow-400 to-rose-600 mb-1"></div>
+              <div class="flex justify-between text-[9px] text-slate-300 font-bold">
+                <span>Baja</span>
+                <span>Media</span>
+                <span class="text-rose-400">Crítica</span>
               </div>
             </div>
           </div>
@@ -2529,8 +2580,9 @@
           <table class="w-full text-left border-collapse">
             <thead class="bg-slate-950 text-slate-400 text-[11px] uppercase tracking-wider sticky top-0 border-b border-white/10">
               <tr>
-                <th class="py-2.5 px-3 font-bold">ID</th>
-                <th class="py-2.5 px-3 font-bold">Prioridad</th>
+                <th class="py-2.5 px-3 font-bold">Tramo & Ubicación</th>
+                <th class="py-2.5 px-3 font-bold">Prioridad Red</th>
+                <th class="py-2.5 px-3 font-bold">Incidencia Fugas</th>
                 <th class="py-2.5 px-3 font-bold">Material / Diámetro</th>
                 <th class="py-2.5 px-3 font-bold">Longitud</th>
                 <th class="py-2.5 px-3 font-bold">Instalación (Edad)</th>
@@ -3210,8 +3262,8 @@
   <script src="assets/js/movilidad_data.js?v=20261113_v4"></script>
   <script src="assets/js/movilidad_paradas.js?v=20261113_v4"></script>
   <script src="assets/js/movilidad.js?v=20261113_v4"></script>
-  <script src="assets/js/agua_potable_data.js?v=20261113_v5_municipal"></script>
-  <script src="assets/js/agua_potable.js?v=20261113_v5_municipal"></script>
+  <script src="assets/js/agua_potable_data.js?v=20261119_fugas_calle"></script>
+  <script src="assets/js/agua_potable.js?v=20261119_fugas_calle"></script>
   <script src="assets/js/politico_data.js?v=20261113_v2_fixed"></script>
   <script src="assets/js/politico.js?v=20261113_v2_fixed"></script>
   <script>
