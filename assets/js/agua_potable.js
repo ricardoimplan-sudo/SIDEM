@@ -493,13 +493,14 @@ window.AguaPotableApp = {
                 ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">🟡 Preventivo</span>'
                 : '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">🟢 Operativa</span>'));
 
+      const fVal = t.fuga_val || 1.0;
       const badgeFuga = t.fuga_nivel === 'CRÍTICA'
-        ? '<span class="px-2 py-0.5 rounded-md text-[10px] font-black bg-rose-950 text-rose-300 border border-rose-500/40 inline-flex items-center gap-1">🔴 Crítica (${t.fuga_val || '2.5'})</span>'
+        ? `<span class="px-2 py-0.5 rounded-md text-[10px] font-black bg-rose-950 text-rose-300 border border-rose-500/40 inline-flex items-center gap-1">🔴 Crítica (${fVal})</span>`
         : (t.fuga_nivel === 'ALTA'
-            ? '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-orange-950 text-orange-300 border border-orange-500/40 inline-flex items-center gap-1">🟠 Alta (${t.fuga_val || '1.8'})</span>'
+            ? `<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-orange-950 text-orange-300 border border-orange-500/40 inline-flex items-center gap-1">🟠 Alta (${fVal})</span>`
             : (t.fuga_nivel === 'MEDIA'
-                ? '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-950 text-amber-300 border border-amber-500/40 inline-flex items-center gap-1">🟡 Media (${t.fuga_val || '1.4'})</span>'
-                : '<span class="px-2 py-0.5 rounded-md text-[10px] font-medium bg-emerald-950 text-emerald-300 border border-emerald-500/30 inline-flex items-center gap-1">🟢 Baja</span>'));
+                ? `<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-950 text-amber-300 border border-amber-500/40 inline-flex items-center gap-1">🟡 Media (${fVal})</span>`
+                : `<span class="px-2 py-0.5 rounded-md text-[10px] font-medium bg-emerald-950 text-emerald-300 border border-emerald-500/30 inline-flex items-center gap-1">🟢 Baja</span>`));
 
       const codigo = t.codigo || `#${t.id}`;
       const anio = t.anio || 1993;
